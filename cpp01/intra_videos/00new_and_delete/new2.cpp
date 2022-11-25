@@ -31,7 +31,7 @@ public:
 
 int	main() {
 
-	Student*	students = new Student;  ///[42]; // allocate 42 Student objects contiguously on heap
+	Student*	students = new Student[42]; // allocate 42 Student objects contiguously on heap
 
 	//Do some stuff here
 

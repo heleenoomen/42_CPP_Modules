@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:18:19 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/25 17:36:09 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/25 18:07:20 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,12 @@
 
 int	main( ) {
 
-	Zombie	zombie1( "Karl" );
-	Zombie*	zombie2;
+	Zombie *zombies;
 
-	zombie1.announce();
+	zombies = zombieHorde( 42, "Francine" );
 
-	zombie2 = newZombie( "Ziggy" );
-	zombie2->announce();
+	delete [] zombies;
 
-	randomChump( "Bernd" );
-
-	delete zombie2;
-
+	system("leaks zombie");
 	return 0;
 }

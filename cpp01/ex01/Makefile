@@ -6,13 +6,13 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 17:24:38 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/25 17:29:25 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/25 17:49:27 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=		zombie
 
-SRC			=		main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+SRC			=		main.cpp Zombie.cpp zombieHorde.cpp 
 
 HDR			=		Zombie.hpp
 
