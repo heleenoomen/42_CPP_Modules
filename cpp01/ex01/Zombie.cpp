@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 16:43:31 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/25 17:59:55 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/25 19:01:16 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 Zombie::Zombie() {
 
+	std::cout << "A zombie was created" << std::endl;
 }
 
 
