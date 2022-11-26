@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 21:46:22 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/26 23:35:43 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/26 23:47:27 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	Harl::complain( std::string level ) {
 };
 
 
-void	Harl::_debug( ) {
+void	Harl::_debug( ) const {
 
 	std::cout <<  "I love having extra tofu for my \
 7XL-double-cheese-triple-pickle-specialketchup burger. \
@@ -53,7 +53,7 @@ I really do!" << std::endl;
 	return ;
 };
 
-void	Harl::_info( ) {
+void	Harl::_info( ) const {
 
 	std::cout << "I cannot believe adding extra tofu costs more money. \
 You didn’t put enough tofu in my burger! If you did, I wouldn’t \
@@ -61,7 +61,7 @@ be asking for more!" << std::endl;
 	return ;
 };
 
-void	Harl::_warning( ) {
+void	Harl::_warning( ) const {
 
 	std::cout <<  "I think I deserve to have some extra tofu for free. \
 I’ve been coming for years whereas you started working here since \
@@ -69,7 +69,7 @@ last month." << std::endl;
 	return ;
 };
 
-void	Harl::_error( )  {
+void	Harl::_error( ) const {
 
 	std::cout << "This is unacceptable! I want to speak to the manager \
 now." << std::endl;
