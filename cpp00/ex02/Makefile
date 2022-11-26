@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 15:52:14 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/23 21:49:57 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/26 20:30:41 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CPPFLAGS	=		-Wall -Werror -Wextra
 all: $(NAME)
 
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(HDR)
 	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
 

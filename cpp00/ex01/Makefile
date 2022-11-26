@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 16:23:23 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/22 17:31:57 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/26 20:29:59 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,10 +58,10 @@ CPPFLAGS	=	-Wall -Wextra -Werror  -std=c++98
 
 all : $(NAME)
 
-$(NAME) : $(OBJ) 
+$(NAME) : $(OBJ) $(HDR)
 	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
-obj/%.o: %.cpp $(HDR) | obj
+obj/%.o: %.cpp | obj
 	$(CPP) -c $(CPPFLAGS) $< -o $@
 
 # obj/%.o: %.cpp $(HDR) | obj

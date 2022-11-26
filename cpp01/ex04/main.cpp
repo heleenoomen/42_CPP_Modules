@@ -6,12 +6,44 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:44:27 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/26 13:57:53 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/26 20:24:41 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
+#include <istream>
+
+void	replace(char **argv, std::ifstream& ifs, std::ofstream& ofs) {
+
+	std::string	word(argv[2]);
+	std::string	replace_word(argv[3]);
+
+	std::string	line;
+
+	size_t	pos;
+
+	while ( !ifs.eof() ) {
+		getline( ifs, line );
+		while ( true ) {
+			pos = line.find( word );
+			if ( pos >= line.length() )
+			{
+				ofs << line;
+				break ;
+			}
+			else
+			{
+				ofs << line.substr(0, pos);
+				line = line.substr(pos + word.length());//, line.length());
+				ofs << replace_word;
+			}
+		}
+		if (ifs.peek() != EOF)
+			ofs << std::endl;
+	}
+}
+
 
 int	main(int argc, char **argv) {
 
@@ -28,7 +60,18 @@ int	main(int argc, char **argv) {
 		return 2;
 	}
 
-	(void)argv[2];
-	(void)argv[3];
+	std::string		ofname(argv[1]);
+	std::ofstream	ofs(ofname += ".replace", std::ofstream::out);
+	if (ofs.fail()) {
+		std::cerr << "Error: Cannot open " << ofname << std::endl;
+		return 2;
+	}
+
+	replace(argv, ifs, ofs);
+
+
 	return 0;
 }
+
+// NB: open filestreams are automatically closed when the object is destroyed
+// https://cplusplus.com/reference/fstream/ifstream/close/
