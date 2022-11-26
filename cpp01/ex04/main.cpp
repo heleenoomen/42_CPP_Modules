@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:44:27 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/26 20:24:41 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/26 20:33:05 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	replace(char **argv, std::ifstream& ifs, std::ofstream& ofs) {
 			else
 			{
 				ofs << line.substr(0, pos);
-				line = line.substr(pos + word.length());//, line.length());
+				line = line.substr(pos + word.length());
 				ofs << replace_word;
 			}
 		}
