@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 20:04:10 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/25 20:45:58 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/25 20:49:52 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	main( ) {
 
-	{
+	{ // these brackets are like a function in a function, with its own scope
 		Weapon club = Weapon("crude spiked club");
 		HumanA bob("Bob", club);
 		bob.attack();

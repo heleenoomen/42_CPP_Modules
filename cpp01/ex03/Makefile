@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 20:00:04 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/25 20:14:35 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/26 12:07:40 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ fclean : clean
 
 re : fclean all
 
-run :
+run : $(NAME)
 	@./unnecessary_violence
 
 .PHONY : all clean fclean re run
