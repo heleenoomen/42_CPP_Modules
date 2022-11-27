@@ -6,11 +6,11 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/26 23:33:24 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/27 15:48:39 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	Harl
+NAME		=	harlFilter
 
 SRC			=	Harl.cpp main.cpp
 

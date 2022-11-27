@@ -6,13 +6,14 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 13:44:27 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/26 20:33:05 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/27 15:49:48 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
 #include <istream>
+#include <string>
 
 void	replace(char **argv, std::ifstream& ifs, std::ofstream& ofs) {
 

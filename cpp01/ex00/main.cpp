@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 17:18:19 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/25 17:36:09 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/27 15:43:54 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 int	main( ) {
 
-	Zombie	zombie1( "Karl" );
+	Zombie	zombie1( "Weird" );
 	Zombie*	zombie2;
 
 	zombie1.announce();
@@ -25,7 +25,7 @@ int	main( ) {
 	zombie2 = newZombie( "Ziggy" );
 	zombie2->announce();
 
-	randomChump( "Bernd" );
+	randomChump( "Gilly" );
 
 	delete zombie2;
 
