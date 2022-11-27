@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/26 21:40:12 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/27 12:40:49 by hoomen           ###   ########.fr       */
+/*   Created: 2022/11/26 21:45:03 by hoomen            #+#    #+#             */
+/*   Updated: 2022/11/27 12:53:02 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HARL_H
-# define HARL_H
+#include "Harl.hpp"
+#include <iostream>
 
-# include <string>
+int	main(int argc, char **argv) {
+	
+	if (argc != 2) {
 
-class Harl {
+		std::cerr << "Error: Wrong arguments" << std::endl;
+		return 1;
+	}
+	
+	Harl				harl;
+	std::string const	arg(argv[1]);
 
-public:
+	harl.complain(arg);
 
-	Harl( );
-	~Harl( );
-
-	void	complain( std::string level );
-
-private:
-
-	typedef struct lookup {
-		std::string	key;
-		void (Harl::*f)(void) const;
-	} lookup;
-
-
-	void	_debug( ) const;
-	void	_info( ) const;
-	void	_warning( ) const;
-	void	_error( ) const;
-
-	lookup	_lookup[4];
-};
-
-
-#endif
+}

@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 21:40:12 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/27 12:40:49 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/27 12:42:55 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,15 @@ public:
 	Harl( );
 	~Harl( );
 
-	void	complain( std::string level );
+	void	complain( std::string level ) const;
 
 private:
-
-	typedef struct lookup {
-		std::string	key;
-		void (Harl::*f)(void) const;
-	} lookup;
-
 
 	void	_debug( ) const;
 	void	_info( ) const;
 	void	_warning( ) const;
 	void	_error( ) const;
 
-	lookup	_lookup[4];
 };
 
 

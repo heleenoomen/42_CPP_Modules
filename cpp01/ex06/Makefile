@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/27 12:19:12 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/26 23:33:24 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,13 +31,11 @@ $(NAME) : $(OBJ) $(HDR)
 obj/%.o : %.cpp | obj
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
-
 obj :
 	mkdir obj
 
 clean :
 	rm -drf obj
-	rm -drf dep
 
 fclean : clean
 	rm -f $(NAME)
@@ -48,4 +46,3 @@ run : $(NAME)
 	./$(NAME)
 
 .PHONY : all clean fclean re run
-
