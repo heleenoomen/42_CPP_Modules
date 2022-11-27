@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 20:24:36 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/23 13:36:47 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/27 15:34:50 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,39 +33,39 @@ Contact::~Contact( ) {
 
 void	Contact::setFirstName( const std::string& s ) {   //try to make s by reference &  AND make s const reference (it only needs to read and copy)
 
-	_FirstName = s ;
+	_firstName = s ;
 };
 
 
 void	Contact::setLastName( const std::string& s ) {
 	
-	_LastName = s ;
+	_lastName = s ;
 };
 
 
 void	Contact::setNickName( const std::string& s ) {
 
-	_NickName = s ;
+	_nickName = s ;
 };
 
 void	Contact::setPhoneNumber( const std::string& s ) {
 
-	_PhoneNumber = s ;
+	_phoneNumber = s ;
 };
 
 void	Contact::setDarkestSecret( const std::string& s ) {
 
-	_DarkestSecret = s ;
+	_darkestSecret = s ;
 };
 
 
 void	Contact::printContact( ) const {
 	
-	std::cout << "First name: " << _FirstName << std::endl;
-	std::cout << "Last name: " << _LastName << std::endl;
-	std::cout << "Nick name: " << _NickName << std::endl;
-	std::cout << "Phone number: " << _PhoneNumber << std::endl;
-	std::cout << "Darkest secret: " << _DarkestSecret << std::endl;
+	std::cout << "First name: " << _firstName << std::endl;
+	std::cout << "Last name: " << _lastName << std::endl;
+	std::cout << "Nick name: " << _nickName << std::endl;
+	std::cout << "Phone number: " << _phoneNumber << std::endl;
+	std::cout << "Darkest secret: " << _darkestSecret << std::endl;
 }
 
 
@@ -80,8 +80,8 @@ void	Contact::_printField( const std::string& field ) const {
 
 void	Contact::printContactTable( void ) const {
 
-	_printField( _FirstName );
-	_printField( _LastName );
-	_printField( _NickName );
+	_printField( _firstName );
+	_printField( _lastName );
+	_printField( _nickName );
 }
 

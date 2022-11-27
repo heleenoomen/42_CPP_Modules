@@ -6,45 +6,15 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 16:26:45 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/26 20:27:29 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/27 15:36:13 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <cctype>
-
-
-int	SkipLeadingSpaces(char *s) {
-	int	j;
-
-	j = 0;
-
-	while ( std::isspace(s[j]) )
-		j++;
-
-	return j;
-
-}
-
-
-bool	TrailingSpaces( char *s , int j ) {
-
-	while (s[j] != '\0')
-	{
-		if ( !std::isspace(s[j]))
-			return false;
-		j++;
-	}
-
-	return true;
-
-}
-
+#include <string>
 
 int	main(int argc, char **argv) {
-
-	int	i;
-	int	j;
 
 
 	if (argc == 1)
@@ -53,19 +23,16 @@ int	main(int argc, char **argv) {
 		return 0;
 	}
 
-
-	i = 1;
+	std::string	arg;
+	std::string::const_iterator it;
+	
+	int	i = 1;
 	while (argv[i] != NULL)
 	{
-		j = SkipLeadingSpaces(argv[i]);
-		while ( argv[i][j] != '\0' )
-		{
-			if (TrailingSpaces(argv[i], j))
-				break ;
-			std::cout << ( char )std::toupper( argv[i][j] );
-			j++;
+		arg = argv[i];
+		for (it = arg.begin() ; it != arg.end() ; ++it) {
+			std::cout << (char) std::toupper((int) *it);
 		}
-		std::cout << " ";
 		i++;
 	}
 	std::cout << std::endl;
