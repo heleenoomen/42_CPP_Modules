@@ -6,43 +6,49 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 20:00:04 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/26 12:07:40 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/28 16:56:02 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	unnecessary_violence
+NAME		:=	unnecessaryViolence
+
+CXX			:=	c++
+CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
+
+DEPFLAGS	=	-MT @ -MMD -MP -MF $(DDIR)/$*.d
 
 SRC			=	HumanA.cpp HumanB.cpp main.cpp Weapon.cpp
 
-OBJ			=	$(addprefix obj/,$(SRC:.cpp=.o))
+ODIR		=	obj
+OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)
 
-HDR			=	HumanA.hpp HumanB.hpp Weapon.hpp
+DDIR		=	$(ODIR)/.deps
+DEP			=	$(SRC:%.cpp=$(DDIR)/%.d)
 
-CPP			=	c++
 
-CPPFLAGS	=	-Wall -Werror -Wextra
+.PHONY : all clean fclean re
 
+$(NAME) : $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $@
+
+$(ODIR)/%.o : %.cpp $(DDIR)/%.d | $(ODIR) $(DDIR)
+	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
+
+$(ODIR) :
+	mkdir $@
+
+$(DDIR) :
+	mkdir $@
 
 all : $(NAME)
 
-$(NAME) : $(OBJ) $(HDR)
-	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
-
-obj/%.o : %.cpp | obj
-	$(CPP) -c $(CPPFLAGS) $< -o $@
-
-obj :
-	mkdir obj
-
 clean :
-	rm -drf obj
+	$(RM) -r $(DDIR) $(ODIR)
 
 fclean : clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re : fclean all
 
-run : $(NAME)
-	@./unnecessary_violence
-
-.PHONY : all clean fclean re run
+$(DEP):
+-include $(DEP)

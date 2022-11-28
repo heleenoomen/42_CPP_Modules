@@ -6,50 +6,57 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 17:24:38 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/27 16:18:50 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/28 12:42:13 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=		zombie
+NAME        := zombie
 
-SRC			=		main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+CXX         := c++
+CXXFLAGS    := -Wall -Wextra -Werror -std=c++98
 
-HDR			=		Zombie.hpp
+CPPFLAGS    :=
+DEPFLAGS     = -MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
-DEP			=		$(addprefix obj/,$(SRC:.cpp=.d))
+LDFLAGS     :=
+LDLIBS      :=
 
-OBJ			=		$(addprefix obj/,$(SRC:.cpp=.o))
+VPATH       := ./ src/
+SRCS        := main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
 
-CPP			=		c++
+ODIR        := obj
+OBJS        := $(SRCS:%.cpp=$(ODIR)/%.o)
 
-CPPFLAGS	=		-Wall -Werror -Wextra
+DDIR        := $(ODIR)/.deps
+DEPS        := $(SRCS:%.cpp=$(DDIR)/%.d)
 
+# **************************************************************************** #
+#   RULES                                                                      #
+# **************************************************************************** #
 
+.PHONY: all clean fclean re
 
-all : $(NAME)
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJS) -o $@ $(LDLIBS)
 
+$(ODIR)/%.o: %.cpp $(DDIR)/%.d | $(ODIR) $(DDIR)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $(DEPFLAGS) -c $< -o $@
 
-$(NAME) : $(OBJ) $(HDR)
-	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
+$(ODIR):
+	mkdir -p $@
 
-# .cpp.o:
-obj/%.o : %.cpp | obj
-	${CPP} ${CPPFLAGS} -MMD -MP -c $< -o $(addprefix obj/${<:.cpp=.o})
+$(DDIR):
+	mkdir -p $@
 
-#obj/%.o : %.cpp | obj
-#$(CPP) -c $(CPPFLAGS) -M -MD $< -o $@
+all: $(NAME)
 
-obj :
-	mkdir obj
+clean:
+	$(RM) -r $(DDIR) $(ODIR)
 
-clean :
-	rm -drf obj
+fclean: clean
+	$(RM) $(NAME)
 
-fclean : clean
-	rm -f $(NAME)
+re: fclean all
 
-re : fclean all
-
--include $(DEP)
-
-.PHONY : all clean fclean re
+$(DEPS):
+-include $(DEPS)

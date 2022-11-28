@@ -6,43 +6,56 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 17:24:38 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/25 18:59:39 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/28 12:42:36 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=		zombies
+NAME		:= zombies
 
-SRC			=		main.cpp Zombie.cpp zombieHorde.cpp 
-
-HDR			=		Zombie.hpp
-
-OBJ			=		$(addprefix obj/,$(SRC:.cpp=.o))
-
-CPP			=		c++
-
-CPPFLAGS	=		-Wall -Werror -Wextra
+CXX			:= c++
+CXXFLAGS	:= -Wall -Wextra -Werror -std=c++98
 
 
+DEPFLAGS	 = -MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
-all : $(NAME)
+SRCS		:= main.cpp Zombie.cpp zombieHorde.cpp
 
+ODIR		:= obj
+OBJ			:= $(SRCS:%.cpp=$(ODIR)/%.o)
 
-$(NAME) : $(OBJ) $(HDR)
-	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
+DDIR		:= $(ODIR)/.deps
+DEP			:= $(SRCS:%.cpp=$(DDIR)/%.d)
 
-obj/%.o : %.cpp | obj
-	$(CPP) -c $(CPPFLAGS) $< -o $@
+# **************************************************************************** #
+#   RULES                                                                      #
+# **************************************************************************** #
 
-obj :
-	mkdir obj
+.PHONY: all clean fclean re run
 
-clean :
-	rm -drf obj
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $@
 
-fclean : clean
-	rm -f $(NAME)
+$(ODIR)/%.o: %.cpp $(DDIR)/%.d | $(ODIR) $(DDIR)
+	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
 
-re : fclean all
+$(ODIR):
+	mkdir $@
 
+$(DDIR):
+	mkdir $@
 
-.PHONY : all clean fclean re
+all: $(NAME)
+
+clean:
+	$(RM) -r $(DDIR) $(ODIR)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+run: $(NAME)
+	./$(NAME)
+
+$(DEP):
+-include $(DEP)

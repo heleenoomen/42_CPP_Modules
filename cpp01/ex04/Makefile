@@ -6,44 +6,49 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 20:02:20 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/26 20:29:41 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/28 16:55:37 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+NAME		:=	replaceAll
+
+CXX			:=	c++
+CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
+
+DEPFLAGS	=	-MT @ -MMD -MP -MF $(DDIR)/$*.d
+
 SRC			=	main.cpp
 
-OBJ			=	$(addprefix obj/,$(SRC:.cpp=.o))
+ODIR		=	obj
+OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)
 
-CPP			=	c++
+DDIR		=	$(ODIR)/.deps
+DEP			=	$(SRC:%.cpp=$(DDIR)/%.d)
 
-CPPFLAGS	=	-Wall -Werror -Wextra
 
-NAME		=	sed_is_for_losers
+.PHONY : all clean fclean re
 
+$(NAME) : $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $@
+
+$(ODIR)/%.o : %.cpp $(DDIR)/%.d | $(ODIR) $(DDIR)
+	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
+
+$(ODIR) :
+	mkdir $@
+
+$(DDIR) :
+	mkdir $@
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
-	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
-
-obj/%.o : %.cpp | obj
-	$(CPP) $(CPPFLAGS) -c $< -o $@
-
-obj :
-	mkdir obj
-
 clean :
-	rm -drf obj
+	$(RM) -r $(DDIR) $(ODIR)
 
 fclean : clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re : fclean all
 
-run : $(NAME)
-	./$(NAME) main.cpp std Elephant
-
-rmf :
-	rm *.replace
-
-.PHONY : all clean fclean re run rmf
+$(DEP):
+-include $(DEP)

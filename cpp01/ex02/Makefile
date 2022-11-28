@@ -6,41 +6,53 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 19:09:34 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/25 19:22:54 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/28 12:34:57 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=		brain
+NAME		:=		brain
 
-SRC			=		main.cpp
+CXX			:=		c++
+CXXFLAGS	:=		-Wall -Wextra -Werror -std=c++98
 
-OBJ			=		$(addprefix obj/,$(SRC:.cpp=.o))
+DEPFLAGS	=		-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
-CPP			=		c++
+SRC			:=		main.cpp
 
-CPPFLAGS	=		-Wall -Werror -Wextra
+ODIR		:=		obj
+OBJ			:=		$(SRC:%.cpp=$(ODIR)/%.o)
 
+DDIR		:=		$(ODIR)/.deps
+DEP			:=		$(SRC:%.cpp=$(DDIR)/%.d)
+
+
+# **************************************************************************** #
+#   RULES                                                                      #
+# **************************************************************************** #
+
+.PHONY : all clean fclean re
+
+$(NAME) : $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $@
+
+$(ODIR)/%.o : %.cpp $(DDIR)/%.d | $(ODIR) $(DDIR)
+	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
+
+$(ODIR):
+	mkdir $@
+
+$(DDIR):
+	mkdir $@
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
-	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
-
-obj/%.o : %.cpp | obj
-	$(CPP) -c $(CPPFLAGS) $< -o $@
-
-obj :
-	mkdir obj
-
 clean :
-	rm -drf obj
+	$(RM) -r $(DDIR) $(ODIR)
 
 fclean : clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re : fclean all
 
-run : $(NAME)
-	@./brain
-
-.PHONY : all clean fclean re run
+$(DEP):
+-include $(DEP)

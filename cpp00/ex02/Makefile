@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 15:52:14 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/26 20:30:41 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/28 11:51:53 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,20 +18,20 @@ OBJ			=		$(addprefix obj/,$(SRC:%.cpp=%.o))
 
 HDR			=		Account.hpp
 
-CPP			=		c++
+CXX			=		c++
 
-CPPFLAGS	=		-Wall -Werror -Wextra
+CXXFLAGS	=		-Wall -Werror -Wextra -std=c++98
 
 
 all: $(NAME)
 
 
 $(NAME) : $(OBJ) $(HDR)
-	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 
 obj/%.o : %.cpp | obj
-	$(CPP) -c $(CPPFLAGS) $< -o $@
+	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 
 obj :

@@ -6,43 +6,53 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/27 15:48:39 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/28 16:55:52 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	harlFilter
+NAME		:=	harlFilter
+
+CXX			:=	c++
+CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
+
+DEPFLAGS	=	-MT @ -MMD -MP -MF $(DDIR)/$*.d
 
 SRC			=	Harl.cpp main.cpp
 
-OBJ			=	$(addprefix obj/,$(SRC:.cpp=.o))
+ODIR		=	obj
+OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)
 
-HDR			=	Harl.hpp
+DDIR		=	$(ODIR)/.deps
+DEP			=	$(SRC:%.cpp=$(DDIR)/%.d)
 
-CPP			=	c++
 
-CPPFLAGS	=	-Wall -Werror -Wextra
+.PHONY : all clean fclean re run
 
+$(NAME) : $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $@
+
+$(ODIR)/%.o : %.cpp $(DDIR)/%.d | $(ODIR) $(DDIR)
+	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
+
+$(ODIR) :
+	mkdir $@
+
+$(DDIR) :
+	mkdir $@
 
 all : $(NAME)
 
-$(NAME) : $(OBJ) $(HDR)
-	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
-
-obj/%.o : %.cpp | obj
-	$(CPP) $(CPPFLAGS) -c $< -o $@
-
-obj :
-	mkdir obj
-
 clean :
-	rm -drf obj
+	$(RM) -r $(DDIR) $(ODIR)
 
 fclean : clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re : fclean all
 
 run : $(NAME)
-	./$(NAME)
+	./$(NAME) lala
 
-.PHONY : all clean fclean re run
+$(DEP):
+-include $(DEP)
+

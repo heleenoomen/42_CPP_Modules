@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/20 16:23:23 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/27 13:18:04 by hoomen           ###   ########.fr        #
+#    Updated: 2022/11/28 11:51:43 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,14 +42,14 @@ OBJ		=		$(addprefix obj/,$(SRC:%.cpp=%.o))
 # COMPILER                                                                     #
 # **************************************************************************** #
 
-CPP		=		c++
+CXX		=		c++
 
 
 # **************************************************************************** #
 # COMPILER FLAGS                                                               #
 # **************************************************************************** #
 
-CPPFLAGS	=	-Wall -Wextra -Werror  -std=c++98
+CXXFLAGS	=	-Wall -Wextra -Werror  -std=c++98
 
 
 # **************************************************************************** #
@@ -59,10 +59,10 @@ CPPFLAGS	=	-Wall -Wextra -Werror  -std=c++98
 all : $(NAME)
 
 $(NAME) : $(OBJ) $(HDR)
-	$(CPP) $(CPPFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 obj/%.o: %.cpp | obj
-	$(CPP) -c $(CPPFLAGS) $< -o $@
+	$(CXX) -c $(CXXFLAGS) $< -o $@
 
 obj :
 	mkdir obj
