@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:58:01 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/29 11:48:09 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/29 12:40:07 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,29 +133,38 @@ Fixed &		Fixed::operator++( ) {
 
 Fixed	Fixed::operator+( Fixed const & rhs ) {
 
-	return Fixed( toFloat() + rhs.toFloat() );
+	Fixed	tmp;
+
+	tmp.setRawBits(_rawBits + rhs.getRawBits());
+	return Fixed(tmp);
 }
 
 
 Fixed	Fixed::operator-( Fixed const & rhs ) {
 
-	return Fixed( toFloat() - rhs.toFloat() );
+	Fixed	tmp;
+
+	tmp.setRawBits(_rawBits - rhs.getRawBits());
+	return Fixed(tmp);
 }
 
 
 Fixed	Fixed::operator*( Fixed const & rhs ) {
 
-	// std::cout << "Multiplication overload called, toFloat() = "; 
-	// std::cout << toFloat(); 
-	// std::cout << ", rhs.toFloat() = ";
-	// std::cout << rhs.toFloat() << std::endl;
-	return Fixed( toFloat() * rhs.toFloat() );
+
+	Fixed tmp;
+
+	tmp.setRawBits((_rawBits * rhs.getRawBits()) >> 8);
+	return Fixed(tmp);
 }
 
 
 Fixed	Fixed::operator/( Fixed const & rhs ) {
 
-	return Fixed( toFloat() / rhs.toFloat() );
+	Fixed	tmp;
+
+	tmp.setRawBits((_rawBits << 8) / (rhs.getRawBits()));
+	return Fixed(tmp);
 }
 
 
