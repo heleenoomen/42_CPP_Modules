@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:04:45 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/29 12:40:34 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:04:39 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main( ) {
 	std::cout << a++ << std::endl;
 	std::cout << a << std::endl;
 	std::cout << b << std::endl;
-	std::cout << Fixed::max( a, b ) << std::endl;
-
+	std::cout << Fixed::min( a, b ) << std::endl;
+	
 	return 0;
 }

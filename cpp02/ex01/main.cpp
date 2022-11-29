@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:04:45 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/28 21:08:31 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:59:01 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int	main( ) {
 
 	Fixed a;
-	Fixed const b( 10 );
+	Fixed const b( -10 );
 	Fixed const c( 42.42f );
 	Fixed const d( b );
 

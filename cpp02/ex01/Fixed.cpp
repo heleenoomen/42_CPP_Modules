@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:58:01 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/28 21:08:03 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/29 16:00:17 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iostream>
 #include <cmath>
 
-Fixed::Fixed( ) : _value( 0 ) {
+Fixed::Fixed( ) : _rawBits( 0 ) {
 
 	std::cout << "Default constructor called" << std::endl;
 	return ;
@@ -38,10 +38,10 @@ Fixed::Fixed( int const i ) {
 	if (i < 0)
 	{
 		j = (i * -1) - 1;
-		_value = ~j << _fract;
+		_rawBits = ~j << _fractBits;
 	}
 	else
-		_value = i << _fract;
+		_rawBits = i << _fractBits;
 
 	std::cout << "Int constructor called" << std::endl;
 
@@ -51,9 +51,7 @@ Fixed::Fixed( int const i ) {
 
 Fixed::Fixed( float f ) {
 
-	int		bitshift_factor = pow((float)2, (float)_fract);
-
-	_value = (int) ( f * bitshift_factor );
+	_rawBits = (int) roundf( f * (1 << _fractBits) );
 
 	std::cout << "Float constructor called" << std::endl;
 
@@ -71,7 +69,7 @@ Fixed::~Fixed( ) {
 Fixed &	Fixed::operator=( Fixed const & rhs ) {
 
 	std::cout << "Copy assignment operator called" << std::endl;
-	_value = rhs.getRawBits();
+	_rawBits = rhs.getRawBits();
 
 	return *this;
 };
@@ -80,45 +78,36 @@ Fixed &	Fixed::operator=( Fixed const & rhs ) {
 int		Fixed::getRawBits( void ) const {
 
 	std::cout << "getRawBits member function called" << std::endl;
-	return _value;
+	return _rawBits;
 };
 
 
 void	Fixed::setRawBits( int const raw ) {
 
 	std::cout << "setRawBits member function called" << std::endl;
-	_value = raw;
+	_rawBits = raw;
 
 	return;
 };
 
 float	Fixed::toFloat( void ) const {
 	
-	int				raw;
-	float			bitshift_factor;
-	float			f;
-
-	bitshift_factor = pow((float)2, (float)_fract);
-	raw = _value;
-	f = (float) raw / bitshift_factor; 
-	return f;
+	return ((float)_rawBits) / (1 << _fractBits);
 };
 
 int		Fixed::toInt( void ) const {
 
-	int				raw;
 	unsigned int	conv;
 	int				ret;
 
-	raw = _value;
-	if (raw & (1 << 31))
+	if (_rawBits & (1 << 31))
 	{
-		conv = (~raw) + 1;
+		conv = (~_rawBits) + 1;
 		ret = conv >> 8;
-		ret *= -1; 
+		ret *= -1;
 	}
 	else
-		ret = raw >> 8;
+		ret = _rawBits >> 8;
 	
 	return ret ;
 };

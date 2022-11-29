@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:51:54 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/28 20:41:08 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:54:14 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ public:
 
 private:
 
-	int					_value;
-	static int const	_fract = 8;
+	int					_rawBits;
+	static int const	_fractBits = 8;
 };
 
 std::ostream &	operator<<( std::ostream & o, Fixed const & i );

@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:58:01 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/29 12:40:07 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/29 15:56:02 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ Fixed::Fixed( int const i ) {
 	if (i < 0)
 	{
 		j = (i * -1) - 1;
-		_rawBits = ~j << _fract;
+		_rawBits = ~j << _fractBits;
 	}
 	else
-		_rawBits = i << _fract;
+		_rawBits = i << _fractBits;
 
 	// std::cout << "Int constructor called" << std::endl;
 
@@ -57,11 +57,7 @@ Fixed::Fixed( int const i ) {
 /* Float constructor */
 Fixed::Fixed( float f ) {
 
-	int		bitshift_factor = pow((float)2, (float)_fract);
-
-	_rawBits = (int) ( f * bitshift_factor );
-
-	// std::cout << "Float constructor called" << std::endl;
+	_rawBits = (int) roundf( f * (1 << _fractBits) );
 
 	return ;
 }
@@ -111,13 +107,15 @@ Fixed &	Fixed::operator=( Fixed const & rhs ) {
 
 
 /* ************************************************************************** */
-/* PRE & POST INCREMENT OPERATORS                                             */
+/* PRE & POST INCREMENT/DECREMENTS OPERATORS                                  */
 /* ************************************************************************** */
 
-Fixed &		Fixed::operator++(int){
+Fixed		Fixed::operator++(int) {
 
+	Fixed ret;
+	ret.setRawBits(_rawBits);
 	_rawBits++;
-	return *this;
+	return Fixed(ret);
 }
 
 Fixed &		Fixed::operator++( ) {
@@ -126,6 +124,19 @@ Fixed &		Fixed::operator++( ) {
 	return *this;
 }
 
+Fixed		Fixed::operator--(int) {
+
+	Fixed ret;
+	ret.setRawBits(_rawBits);
+	_rawBits--;
+	return Fixed(ret);
+}
+
+Fixed &		Fixed::operator--( ) {
+
+	--_rawBits;
+	return *this;
+}
 
 /* ************************************************************************** */
 /* ARITHMETIC OPERATORS                                                       */
@@ -198,7 +209,10 @@ bool	Fixed::operator>( Fixed const & rhs ) {
 
 bool	Fixed::operator<( Fixed const & rhs ) {
 
+	//std::cout << "toFloat() = " << toFloat() << std::endl;
+	//std::cout << "rhs.toFloat() = " << rhs.toFloat() << std::endl;
 	return _rawBits < rhs.getRawBits();
+	//return toFloat() < rhs.toFloat();
 }
 
 /* ************************************************************************** */
@@ -207,14 +221,7 @@ bool	Fixed::operator<( Fixed const & rhs ) {
 
 float	Fixed::toFloat( void ) const {
 	
-	int				raw;
-	float			bitshift_factor;
-	float			f;
-
-	bitshift_factor = pow((float)2, (float)_fract);
-	raw = _rawBits;
-	f = (float) raw / bitshift_factor; 
-	return f;
+	return ((float) _rawBits) / (1 << _fractBits); 
 };
 
 int		Fixed::toInt( void ) const {
