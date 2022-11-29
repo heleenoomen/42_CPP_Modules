@@ -6,41 +6,38 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:51:54 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/29 15:54:14 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/29 18:38:37 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
-# define FIXED_HPP
+#define FIXED_HPP
 
-# include <iostream>
-# include <cmath>
+#include <cmath>
+#include <iostream>
 
 class Fixed {
+ public:
+  Fixed();
+  Fixed(Fixed const& src);
+  Fixed(int const fixpt);
+  Fixed(float f);
 
-public:
+  ~Fixed();
 
-	Fixed( );
-	Fixed( Fixed const & src );
-	Fixed( int const fixpt );
-	Fixed( float f );
+  Fixed& operator=(Fixed const& rhs);
 
-	~Fixed( );
-	
-	Fixed &	operator=( Fixed const & rhs );
+  int getRawBits(void) const;
+  void setRawBits(int const raw);
 
-	int	getRawBits( void ) const;
-	void	setRawBits( int const raw );
+  float toFloat(void) const;
+  int toInt(void) const;
 
-	float	toFloat( void ) const;
-	int		toInt( void ) const;
-
-private:
-
-	int					_rawBits;
-	static int const	_fractBits = 8;
+ private:
+  int _rawBits;
+  static int const _fractBits = 8;
 };
 
-std::ostream &	operator<<( std::ostream & o, Fixed const & i );
+std::ostream& operator<<(std::ostream& o, Fixed const& i);
 
 #endif

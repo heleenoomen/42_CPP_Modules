@@ -6,25 +6,24 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:04:45 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/28 19:06:37 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/29 18:40:37 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Fixed.hpp"
-
 #include <iostream>
 
-int	main( ) {
+#include "Fixed.hpp"
 
-	Fixed	a;
-	Fixed	b( a );
-	Fixed	c;
+int main() {
+  Fixed a;
+  Fixed b(a);
+  Fixed c;
 
-	c = b;
+  c = b;
 
-	std::cout << a.getRawBits() << std::endl;
-	std::cout << b.getRawBits() << std::endl;
-	std::cout << c.getRawBits() << std::endl;
+  std::cout << a.getRawBits() << std::endl;
+  std::cout << b.getRawBits() << std::endl;
+  std::cout << c.getRawBits() << std::endl;
 
-	return 0;
+  return 0;
 }
