@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:51:54 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/29 18:42:51 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/29 20:30:35 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ class Fixed {
   Fixed& operator--();
 
   Fixed operator+(Fixed const& rhs);
-  Fixed operator-(Fixed const& rhs);
-  Fixed operator*(Fixed const& rhs);
+  Fixed operator-(Fixed const& rhs) const;
+  Fixed operator*(Fixed const& rhs) const;
   Fixed operator/(Fixed const& rhs);
 
   bool operator==(Fixed const& rhs);

@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:58:01 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/29 19:02:31 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/11/29 20:30:41 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,14 +130,14 @@ Fixed Fixed::operator+(Fixed const& rhs) {
   return Fixed(tmp);
 }
 
-Fixed Fixed::operator-(Fixed const& rhs) {
+Fixed Fixed::operator-(Fixed const& rhs) const {
   Fixed tmp;
 
   tmp.setRawBits(_rawBits - rhs.getRawBits());
   return Fixed(tmp);
 }
 
-Fixed Fixed::operator*(Fixed const& rhs) {
+Fixed Fixed::operator*(Fixed const& rhs) const {
   Fixed tmp;
 
   tmp.setRawBits((_rawBits * rhs.getRawBits()) >> _fractBits);
