@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:23:39 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/01 16:20:31 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/02 10:24:43 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ class ClapTrap {
   void attack(std::string const& target);
   void takeDamage(unsigned int amount);
   void beRepaired(unsigned int amount);
-
-  static unsigned int const attack_damage;
 
  private:
   std::string _name;
