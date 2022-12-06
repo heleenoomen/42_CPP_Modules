@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:31:32 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/06 08:42:38 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/06 10:15:31 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /* CONSTRUCTORS                                                               */
 /* ************************************************************************** */
 
-ClapTrap::ClapTrap() : _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+ClapTrap::ClapTrap() : _name(NULL), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
   std::cout << "ClapTrap default constructor called" << std::endl;
   return ;
 }
@@ -46,7 +46,6 @@ _name(name) , _hitPoints(hitPoints) , _energyPoints(energyPoints), _attackDamage
 
 ClapTrap& ClapTrap::operator=(ClapTrap const& rhs) {
   std::cout << "ClapTrap Assignment operator overload called" << std::endl;
-  _name = rhs.getName();
   _hitPoints = rhs.getHitPoints();
   _energyPoints = rhs.getEnergyPoints();
   _attackDamage = rhs.getAttackDamage();
@@ -88,9 +87,22 @@ int ClapTrap::getAttackDamage() const {
 /* setters                                                                    */
 /* ************************************************************************** */
 
-void ClapTrap::setEnergyPoints() {
+void ClapTrap::decrEnergyPoints() {
   _energyPoints--;
 }
+
+void ClapTrap::setHitPoints(int value) {
+  _hitPoints = value;
+}
+
+void ClapTrap::setEnergyPoints(int value) {
+  _energyPoints = value;
+}
+
+void ClapTrap::setAttackDamage(int value) {
+  _attackDamage = value;
+}
+
 
 /* ************************************************************************** */
 /* ACTIONS                                                                    */
@@ -131,7 +143,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
     return ;
   }
   _hitPoints+=amount;
-  _energyPoints-=1;
+  _energyPoints--;
   std::cout<<"ClapTrap "<<_name<<" is being repaired with "<<amount;
   if (amount == 1)
     std::cout<<" hit point.";
