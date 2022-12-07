@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/28 16:55:52 by hoomen           ###   ########.fr        #
+#    Updated: 2022/12/07 12:48:57 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		:=	harlFilter
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 
-DEPFLAGS	=	-MT @ -MMD -MP -MF $(DDIR)/$*.d
+DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
 SRC			=	Harl.cpp main.cpp
 

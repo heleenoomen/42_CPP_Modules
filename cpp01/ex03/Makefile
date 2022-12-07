@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/25 20:00:04 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/28 16:56:02 by hoomen           ###   ########.fr        #
+#    Updated: 2022/12/07 12:49:13 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		:=	unnecessaryViolence
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 
-DEPFLAGS	=	-MT @ -MMD -MP -MF $(DDIR)/$*.d
+DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
 SRC			=	HumanA.cpp HumanB.cpp main.cpp Weapon.cpp
 
