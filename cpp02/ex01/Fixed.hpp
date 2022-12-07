@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:51:54 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/29 18:38:37 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/07 17:22:02 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class Fixed {
   Fixed();
   Fixed(Fixed const& src);
   Fixed(int const fixpt);
-  Fixed(float f);
+  Fixed(float const f);
 
   ~Fixed();
 

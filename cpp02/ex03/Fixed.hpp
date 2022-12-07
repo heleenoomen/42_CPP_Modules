@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 18:51:54 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/29 20:30:35 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/07 16:52:48 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,28 @@ class Fixed {
   Fixed();
   Fixed(Fixed const& src);
   Fixed(int const fixpt);
-  Fixed(float f);
+  Fixed(float const f);
 
   ~Fixed();
 
+  /* NB to discern post- and pre, post gets a dummy int parameter */
   Fixed& operator=(Fixed const& rhs);
-  Fixed operator++(
-      int);  // to discern post- and pre, post gets a dummy int parameter
+  Fixed operator++(int);
   Fixed& operator++();
   Fixed operator--(int);
   Fixed& operator--();
 
-  Fixed operator+(Fixed const& rhs);
+  Fixed operator+(Fixed const& rhs) const;
   Fixed operator-(Fixed const& rhs) const;
   Fixed operator*(Fixed const& rhs) const;
-  Fixed operator/(Fixed const& rhs);
+  Fixed operator/(Fixed const& rhs) const;
 
-  bool operator==(Fixed const& rhs);
-  bool operator!=(Fixed const& rhs);
-  bool operator<=(Fixed const& rhs);
-  bool operator>=(Fixed const& rhs);
-  bool operator>(Fixed const& rhs);
-  bool operator<(Fixed const& rhs);
+  bool operator==(Fixed const& rhs) const;
+  bool operator!=(Fixed const& rhs) const;
+  bool operator<=(Fixed const& rhs) const;
+  bool operator>=(Fixed const& rhs) const;
+  bool operator>(Fixed const& rhs) const;
+  bool operator<(Fixed const& rhs) const;
 
   static Fixed& min(Fixed& one, Fixed& two);
   static Fixed const& min(Fixed const& one, Fixed const& two);

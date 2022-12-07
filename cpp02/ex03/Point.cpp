@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:19:00 by hoomen            #+#    #+#             */
-/*   Updated: 2022/11/29 20:34:18 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/07 17:25:22 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,22 @@
 /* CONSTRUCTORS                                                               */
 /* ************************************************************************** */
 
+/* Default constructor */
 Point::Point() : _x(0), _y(0) { return; }
 
-Point::Point(Fixed const x, Fixed const y) : _x(x), _y(y) { return; }
+/* Fixed point constructor */
+Point::Point(Fixed const& x, Fixed const& y) : _x(x), _y(y) { return; }
 
-Point::Point(float const x, float const y) :_x(x), _y(y) { return; }
+/* Copy constructor */
+Point::Point(Point const& src) : _x(src.getX()), _y(src.getY()) { return; }
 
-Point::Point(Point const &src) : _x(src.getX()), _y(src.getY()) { return; }
+/* ************************************************************************** */
+/* COPY ASSIGNMENT OPERATOR                                                   */
+/* ************************************************************************** */
+Point& Point::operator=(Point const& rhs) {
+  (void)rhs;
+  return *this;
+}
 
 /* ************************************************************************** */
 /* DECONSTRUCTOR                                                              */
@@ -33,14 +42,6 @@ Point::~Point() { return; }
 /* ************************************************************************** */
 /* GETTERS                                                               */
 /* ************************************************************************** */
-
-float Point::getXFloat() const { return _x.toFloat(); }
-
-float Point::getFloat() const { return _y.toFloat(); }
-
-int Point::getXraw() const { return _x.getRawBits(); }
-
-int Point::getYraw() const { return _y.getRawBits(); }
 
 Fixed const& Point::getX() const { return _x; }
 
