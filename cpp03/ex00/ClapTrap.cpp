@@ -6,13 +6,13 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:31:32 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/06 11:04:19 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/08 09:16:00 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
-#include <iostream>
 
+#include <iostream>
 
 /* ************************************************************************** */
 /* CONSTRUCTORS                                                               */
@@ -21,20 +21,20 @@
 ClapTrap::ClapTrap() : 
 _name("default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
   std::cout << "Default constructor called" << std::endl;
-  return ;
+  return;
 }
 
 ClapTrap::ClapTrap(ClapTrap const& src) {
   std::cout << "Copy constructor called" << std::endl;
   *this = src;
-  return ;
+  return;
 }
 
-ClapTrap::ClapTrap(std::string const& name) : _name(name) , _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+ClapTrap::ClapTrap(std::string const& name)
+    : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
   std::cout << "String constructor called" << std::endl;
-  return ;
+  return;
 }
-
 
 /* ************************************************************************** */
 /* ASSIGNMENT OPERATOR                                                        */
@@ -49,36 +49,23 @@ ClapTrap& ClapTrap::operator=(ClapTrap const& rhs) {
   return *this;
 }
 
-
 /* ************************************************************************** */
 /* DESTRUCTOR                                                                 */
 /* ************************************************************************** */
 
-ClapTrap::~ClapTrap() {
-	std::cout << "Destructor called" << std::endl;
-}
-
+ClapTrap::~ClapTrap() { std::cout << "Destructor called" << std::endl; }
 
 /* ************************************************************************** */
 /* getters                                                                    */
 /* ************************************************************************** */
 
-std::string const& ClapTrap::getName() const {
-	return _name;
-}
+std::string const& ClapTrap::getName() const { return _name; }
 
-int ClapTrap::getHitPoints() const {
-	return _hitPoints;
-}
+int ClapTrap::getHitPoints() const { return _hitPoints; }
 
-int ClapTrap::getEnergyPoints() const {
-	return _energyPoints;
-}
+int ClapTrap::getEnergyPoints() const { return _energyPoints; }
 
-int ClapTrap::getAttackDamage() const {
-	return _attackDamage;
-}
-
+int ClapTrap::getAttackDamage() const { return _attackDamage; }
 
 /* ************************************************************************** */
 /* ACTIONS                                                                    */
@@ -117,8 +104,10 @@ void ClapTrap::beRepaired(unsigned int amount) {
     return ;
   }
   if (_hitPoints + amount > 10) {
-    std::cout<<"ClapTrap "<<_name<<" cannot be repaired to have more than 10 hit points."<<std::endl;
-    return ;
+    std::cout << "ClapTrap " << _name
+              << " cannot be repaired to have more than 10 hit points."
+              << std::endl;
+    return;
   }
   _hitPoints+=amount;
   _energyPoints-=1;

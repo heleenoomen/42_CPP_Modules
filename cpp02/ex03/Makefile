@@ -6,16 +6,16 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2022/11/29 18:11:24 by hoomen           ###   ########.fr        #
+#    Updated: 2022/12/07 19:51:22 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	Fixed
+NAME		:=	Bsp
 
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 
-DEPFLAGS	=	-MT @ -MMD -MP -MF $(DDIR)/$*.d
+DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
 SRC			=	Fixed.cpp main.cpp Point.cpp bsp.cpp
 
