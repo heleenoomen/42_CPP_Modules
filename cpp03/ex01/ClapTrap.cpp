@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:31:32 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/02 15:44:08 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/06 12:04:38 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,28 @@
 /* CONSTRUCTORS                                                               */
 /* ************************************************************************** */
 
-ClapTrap::ClapTrap() : _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-  std::cout << "ClapTrap default constructor called" << std::endl;
+ClapTrap::ClapTrap() : 
+_name("default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+  std::cout<<"ClapTrap default constructor called for "<<_name<<std::endl;
   return ;
 }
 
 ClapTrap::ClapTrap(ClapTrap const& src) {
-  std::cout << "ClapTrap copy constructor called" << std::endl;
+  std::cout << "ClapTrap copy constructor called for "<<src.getName()<< std::endl;
   *this = src;
   return ;
 }
 
-ClapTrap::ClapTrap(std::string const& name) : _name(name) , _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-  std::cout << "ClapTrap string constructor called" << std::endl;
+ClapTrap::ClapTrap(std::string const& name) :
+ _name(name) , _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+  std::cout << "ClapTrap string constructor called for "<<_name<< std::endl;
   return ;
 }
 
-ClapTrap::ClapTrap(std::string const& name, int hitPoints, int energyPoints, int attackDamage) :\
-_name(name) , _hitPoints(hitPoints) , _energyPoints(energyPoints), _attackDamage(attackDamage) {
-	std::cout << "ClapTrap string + triple int constructor called" << std::endl;
+ClapTrap::ClapTrap(std::string const& name, int hitPoints, int energyPoints, int attackDamage) :
+ _name(name), _hitPoints(hitPoints), _energyPoints(energyPoints), _attackDamage(attackDamage) {
+  std::cout<<"ClapTrap parametric constructor called (string + int + int + int) for "<<_name<<std::endl;
+  return ;
 }
 
 
@@ -45,7 +48,7 @@ _name(name) , _hitPoints(hitPoints) , _energyPoints(energyPoints), _attackDamage
 /* ************************************************************************** */
 
 ClapTrap& ClapTrap::operator=(ClapTrap const& rhs) {
-  std::cout << "ClapTrap Assignment operator overload called" << std::endl;
+  std::cout << "ClapTrap assignment operator overload called" << std::endl;
   _name = rhs.getName();
   _hitPoints = rhs.getHitPoints();
   _energyPoints = rhs.getEnergyPoints();
@@ -59,7 +62,7 @@ ClapTrap& ClapTrap::operator=(ClapTrap const& rhs) {
 /* ************************************************************************** */
 
 ClapTrap::~ClapTrap() {
-	std::cout << "ClapTrap destructor called" << std::endl;
+	std::cout << "ClapTrap destructor called for "<<_name<<std::endl;
 }
 
 
@@ -68,27 +71,26 @@ ClapTrap::~ClapTrap() {
 /* ************************************************************************** */
 
 std::string const& ClapTrap::getName() const {
-	return _name;
+  return _name;
 }
 
 int ClapTrap::getHitPoints() const {
-	return _hitPoints;
+  return _hitPoints;
 }
 
 int ClapTrap::getEnergyPoints() const {
-	return _energyPoints;
+  return _energyPoints;
 }
 
 int ClapTrap::getAttackDamage() const {
-	return _attackDamage;
+  return _attackDamage;
 }
 
-
 /* ************************************************************************** */
-/* setters                                                                    */
+/* getters                                                                    */
 /* ************************************************************************** */
 
-void ClapTrap::setEnergyPoints() {
+void ClapTrap::decrEnergyPoints() {
   _energyPoints--;
 }
 
@@ -99,37 +101,33 @@ void ClapTrap::setEnergyPoints() {
 void ClapTrap::attack(std::string const& target) {
   if (_energyPoints == 0 || _hitPoints == 0) {
     std::cout<<"ClapTrap "<<_name<<" is unable to attack: ";
-    if (_energyPoints == 0)
-      std::cout<<"No energy points left!"<<std::endl;
-    else
-      std::cout<<"No hit points left!"<<std::endl;
+    noPointsLeft();
     return;
   }
-  std::cout<<"ClapTrap "<<_name<<" attacks "<<target<<", causing "\
-  <<_attackDamage<<" points of damage!";
+  std::cout<<"ClapTrap "<<_name<<" attacks "<<target<<", causing "<<_attackDamage;
+  printPoints(_attackDamage);
+  std::cout<<" of damage!";
   _energyPoints--;
-  std::cout<<" ClapTrap "<<_name<<" has now "<<_energyPoints<<" energy points left."<<std::endl;
+  std::cout<<" ClapTrap "<<_name<<" has "<<_energyPoints<<" energy";
+  printPoints(_energyPoints);
+  std::cout<<" left."<<std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-  std::cout<<"ClapTrap "<<_name<<" takes damage, losing "<<amount;
-  if (amount == 1)
-    std::cout<<" hit point!";
-  else
-	std::cout<<" hit points!";
+  std::cout<<"ClapTrap "<<_name<<" takes damage, losing "<<amount<<" hit";
+  printPoints(amount);
   _hitPoints-= amount;
   if(_hitPoints < 0)
     _hitPoints = 0;
-  std::cout<<" ClapTrap "<<_name<<" has now "<<_hitPoints<<" hit points left."<<std::endl;
+  std::cout<<" ClapTrap "<<_name<<" has "<<_hitPoints<<" hit";
+  printPoints(_hitPoints);
+  std::cout<<" left."<<std::endl;
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
   if (_energyPoints == 0 || _hitPoints == 0) {
     std::cout<<"Alas! ClapTrap "<<_name<<" cannot be repaired: ";
-      if (_energyPoints == 0)
-        std::cout<<"no energy points left!"<<std::endl;
-      else
-        std::cout<<"no hit points left!"<<std::endl;
+    noPointsLeft();
     return ;
   }
   if (_hitPoints + amount > 10) {
@@ -138,11 +136,30 @@ void ClapTrap::beRepaired(unsigned int amount) {
   }
   _hitPoints+=amount;
   _energyPoints-=1;
-  std::cout<<"ClapTrap "<<_name<<" is being repaired with "<<amount;
-  if (amount == 1)
-    std::cout<<" hit point.";
-else
-    std::cout<<" hit points.";
-  std::cout<<" ClapTrap "<<_name<<" has now "<<_hitPoints<<" hit points and "\
-  <<_energyPoints<<" energy points!"<<std::endl;
+  std::cout<<"ClapTrap "<<_name<<" is being repaired with "<<amount<<" hit";
+  printPoints(amount);
+  std::cout<<". ClapTrap "<<_name<<" has now "<<_hitPoints<<" hit";
+  printPoints(_hitPoints);
+  std::cout<<" and "<<_energyPoints<<" energy";
+  printPoints(_energyPoints);
+  std::cout<<" left!"<<std::endl;
 }
+
+/* ************************************************************************** */
+/* HELPERS                                                                    */
+/* ************************************************************************** */
+
+void ClapTrap::noPointsLeft() const {
+  if (getHitPoints() == 0)
+    std::cout<<"No hit points left!"<<std::endl;
+  else
+    std::cout<<"No energy points left!"<<std::endl;
+}
+
+void ClapTrap::printPoints(unsigned int amount) const {
+  if (amount == 1)
+    std::cout<<" point";
+  else
+    std::cout<<" points";
+}
+
