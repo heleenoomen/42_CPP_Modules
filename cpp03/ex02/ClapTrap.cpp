@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:31:32 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/06 10:29:58 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/08 12:36:36 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 /* CONSTRUCTORS                                                               */
 /* ************************************************************************** */
 
-ClapTrap::ClapTrap() : _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-  std::cout << "ClapTrap default constructor called" << std::endl;
+ClapTrap::ClapTrap() : _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+  std::cout << "ClapTrap default constructor called"<< std::endl;
   return ;
 }
 
 ClapTrap::ClapTrap(ClapTrap const& src) {
-  std::cout << "ClapTrap copy constructor called for "<<_name<< std::endl;
+  std::cout << "ClapTrap copy constructor called for "<<src.getName()<< std::endl;
   *this = src;
   return ;
 }
@@ -45,7 +45,7 @@ _name(name) , _hitPoints(hitPoints) , _energyPoints(energyPoints), _attackDamage
 /* ************************************************************************** */
 
 ClapTrap& ClapTrap::operator=(ClapTrap const& rhs) {
-  std::cout << "ClapTrap Assignment operator overload called" << std::endl;
+  std::cout << "ClapTrap Assignment operator overload called for "<<rhs.getName() << std::endl;
   _name = rhs.getName();
   _hitPoints = rhs.getHitPoints();
   _energyPoints = rhs.getEnergyPoints();

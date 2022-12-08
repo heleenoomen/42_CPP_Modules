@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:12:11 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/05 15:39:23 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/08 12:35:22 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <iostream>
 
 FragTrap::FragTrap::FragTrap() : ClapTrap() {
-  std::cout<<"FragTrap default constructor called for "<<getName()<<std::endl;
+  std::cout<<"FragTrap default constructor called" << std::endl;
   return;
 }
 
@@ -23,7 +23,7 @@ FragTrap::FragTrap::FragTrap(std::string const& name) : ClapTrap(name, 100, 100,
   return;
 }
 
-FragTrap::FragTrap(FragTrap const& src) : ClapTrap(src) {
+FragTrap::FragTrap(FragTrap const& src) {
   std::cout<<"FragTrap copy constructor called for "<<src.getName()<<std::endl;
   *this = src;
   return;
