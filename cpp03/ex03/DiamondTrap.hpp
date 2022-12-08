@@ -1,7 +1,8 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   DiamondTrap.hpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                       :+:      :+:    :+:
+ */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,11 +12,11 @@
 /* ************************************************************************** */
 
 #ifndef DIAMONDTRAP_HPP
-# define DIAMONDTRAP_HPP
+#define DIAMONDTRAP_HPP
 
-# include "ClapTrap.hpp"
-# include "ScavTrap.hpp"
-# include "FragTrap.hpp"
+#include "ClapTrap.hpp"
+#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
 class DiamondTrap : public ScavTrap, public FragTrap {
  private:

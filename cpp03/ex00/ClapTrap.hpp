@@ -6,14 +6,14 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:23:39 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/06 10:43:13 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/08 16:06:29 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLAPTRAP_HPP
-# define CLAPTRAP_HPP
+#define CLAPTRAP_HPP
 
-# include<string>
+#include <string>
 
 class ClapTrap {
  public:

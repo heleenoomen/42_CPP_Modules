@@ -6,14 +6,14 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:12:11 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/06 08:44:03 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/08 16:55:57 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
+#define FRAGTRAP_HPP
 
-# include "ClapTrap.hpp"
+#include "ClapTrap.hpp"
 
 class FragTrap : virtual public ClapTrap {
  public:
