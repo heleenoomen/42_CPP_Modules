@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:12:11 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 17:44:29 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/08 20:29:52 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ FragTrap::FragTrap() {
   std::cout << "FragTrap default constructor called" << std::endl;
   setHitPoints(100);
   if (getEnergyPoints() == 10) setEnergyPoints(100);
-  setAttackDamage(30); 
+  setAttackDamage(30);
   return;
 }
 

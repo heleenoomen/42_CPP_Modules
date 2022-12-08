@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 16:43:21 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 17:35:08 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/08 20:25:06 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 #include <iostream>
 
-DiamondTrap::DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap() {
+DiamondTrap::DiamondTrap::DiamondTrap() : ClapTrap("default_clap_name") {
   std::cout << "DiamondTrap default constructor called" << std::endl;
+  DiamondTrap::_name = "default";
   return;
 }
 
 DiamondTrap::DiamondTrap::DiamondTrap(std::string const& name)
-    : ClapTrap(name + "_clap_name"), ScavTrap(), FragTrap() {
+    : ClapTrap(name + "_clap_name") {
   DiamondTrap::_name = name;
   setHitPoints(FragTrap::getHitPoints());
   setEnergyPoints(ScavTrap::getEnergyPoints());
@@ -42,7 +43,7 @@ DiamondTrap::DiamondTrap(DiamondTrap const& src)
 }
 
 DiamondTrap& DiamondTrap::operator=(DiamondTrap const& rhs) {
-  std::cout << "DiamondTrap assignment operator overload called for "
+  std::cout << "DiamondTrap copy assignment operator called for "
             << rhs.DiamondTrap::_name << std::endl;
   ClapTrap::operator=(rhs);
   _name = rhs.DiamondTrap::_name;

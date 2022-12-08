@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:06:42 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 16:20:36 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/08 20:17:44 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int main() {
     std::cout << "\033[1;33m ---Tests FragTrap a---\033[0m" << std::endl;
     a.highFiveGuys();
     a.attack("an innocent bystander");
-    a.takeDamage(200);
-    a.takeDamage(1);
+    a.takeDamage(90);
+    a.takeDamage(11);
     a.attack("a giant robot");
     std::cout << "\033[1;33m ---Tests FragTrap b---\033[0m" << std::endl;
     b.highFiveGuys();

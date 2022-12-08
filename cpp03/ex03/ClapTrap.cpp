@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:31:32 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 17:27:51 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/08 20:29:06 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ ClapTrap::ClapTrap(std::string const& name)
 
 ClapTrap::ClapTrap(int hitPoints, int energyPoints, int attackDamage)
     : _name("Default"),
-    _hitPoints(hitPoints),
-    _energyPoints(energyPoints),
-    _attackDamage(attackDamage) {
+      _hitPoints(hitPoints),
+      _energyPoints(energyPoints),
+      _attackDamage(attackDamage) {
   std::cout << "ClapTrap int constructor called" << std::endl;
 }
 
@@ -97,18 +97,15 @@ int ClapTrap::getAttackDamage() const { return _attackDamage; }
 void ClapTrap::decrEnergyPoints() { _energyPoints--; }
 
 void ClapTrap::setEnergyPoints(int amount) {
-  if (amount >= 0)
-    _energyPoints = amount;
+  if (amount >= 0) _energyPoints = amount;
 }
 
 void ClapTrap::setHitPoints(int amount) {
-  if (amount >= 0)
-    _hitPoints = amount;
+  if (amount >= 0) _hitPoints = amount;
 }
 
 void ClapTrap::setAttackDamage(int amount) {
-  if (amount >= 0)
-    _attackDamage = amount;
+  if (amount >= 0) _attackDamage = amount;
 }
 
 /* ************************************************************************** */

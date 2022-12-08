@@ -6,13 +6,13 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:12:11 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 17:44:02 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/08 20:30:37 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-
 #include "ScavTrap.hpp"
+
+#include <iostream>
 
 ScavTrap::ScavTrap::ScavTrap() {
   std::cout << "ScavTrap default constructor called" << std::endl;
