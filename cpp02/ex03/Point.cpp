@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:19:00 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/07 17:25:22 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/09 13:09:55 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ Point::Point(Point const& src) : _x(src.getX()), _y(src.getY()) { return; }
 /* ************************************************************************** */
 /* COPY ASSIGNMENT OPERATOR                                                   */
 /* ************************************************************************** */
-Point& Point::operator=(Point const& rhs) {
-  (void)rhs;
-  return *this;
-}
+// Point& Point::operator=(Point const& rhs) {
+//   (void)rhs;
+//   return *this;
+// }
 
 /* ************************************************************************** */
 /* DECONSTRUCTOR                                                              */

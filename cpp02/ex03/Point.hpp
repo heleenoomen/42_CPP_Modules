@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:07:20 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/07 15:30:41 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/09 13:12:26 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ class Point {
   ~Point();
 
   Point& operator=(Point const& rhs);
+  /* NB: this copy assignment operator is useless, since _x and _y are const
+     in c++11 you would say here:
+          Point& operator=(Point const& rhs) = delete;
+     to prohibit assignment by definition.
+  */
 
   Fixed const& getX() const;
   Fixed const& getY() const;
