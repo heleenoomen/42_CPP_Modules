@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:44:48 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 11:11:30 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/09 18:17:41 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,21 @@ Animal& Animal::operator=(Animal const& rhs) {
 /* Destructor */
 Animal::~Animal() { std::cout << "Animal destructor called" << std::endl; }
 
-/* Getter */
+/* Getters */
 std::string const& Animal::getType() const { return _type; }
+
+std::string const& Animal::getIdea(int i) const {
+  (void)i;
+  return _type;
+}
+
+/* Setter */
+void Animal::setIdea(int i, std::string const& idea) {
+  (void)i;
+  (void)idea;
+}
 
 /* Public method */
 void Animal::makeSound() const { std::cout << "???" << std::endl; }
+
+void Animal::printIdeas() const { std::cout << "???" << std::endl; }

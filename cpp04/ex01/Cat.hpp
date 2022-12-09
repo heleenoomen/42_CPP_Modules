@@ -20,7 +20,6 @@
 
 class Cat : public Animal {
  private:
-  std::string _type;
   Brain* _brain;
 
  public:
@@ -37,10 +36,14 @@ class Cat : public Animal {
   virtual ~Cat();
 
   /* getters */
-  std::string const& getType() const;
   std::string const& getIdea(int index) const;
 
+  /* setter */
+  void setIdea(int index, std::string const& idea);
+
+  /* public methods */
   virtual void makeSound() const;
+  void printIdeas() const;
 };
 
 #endif

@@ -22,7 +22,7 @@ Dog::Dog() {
 
 /* Copy constructor */
 Dog::Dog(Dog const& src) : Animal(src) {
-  std::cout << "Dog copy constructor called" << std::endl;
+  std::cout << "Dog copy constructor called, type is " << _type << std::endl;
 }
 
 /* Copy assignment operator */
@@ -34,9 +34,6 @@ Dog& Dog::operator=(Dog const& rhs) {
 
 /* Destructor */
 Dog::~Dog() { std::cout << "Dog destructor called" << std::endl; }
-
-/* Getter */
-std::string const& Dog::getType() const { return _type; }
 
 /* Public methods */
 void Dog::makeSound() const { std::cout << "Woof!" << std::endl; }

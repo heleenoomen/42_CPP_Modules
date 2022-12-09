@@ -18,9 +18,6 @@
 #include "Animal.hpp"
 
 class Cat : public Animal {
- protected:
-  std::string _type;
-
  public:
   /* default constructor */
   Cat();
@@ -33,9 +30,6 @@ class Cat : public Animal {
 
   /* destructor */
   virtual ~Cat();
-
-  /* getter */
-  std::string const& getType() const;
 
   virtual void makeSound() const;
 };

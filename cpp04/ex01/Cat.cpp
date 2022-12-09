@@ -19,33 +19,43 @@ Cat::Cat() {
   std::cout << "Cat default constructor called" << std::endl;
   _type = "Cat";
   _brain = new Brain;
-  // for (int i = 0; i < 100; i++)
-  //   _brain
+  for (int i = 0; i < 100; i++)
+    setIdea(i, "");
 }
 
 /* Copy constructor */
 Cat::Cat(Cat const& src) : Animal(src) {
   std::cout << "Cat copy constructor called" << std::endl;
-  _brain = NULL;
-  *this = src;
+  _brain = new Brain;
+  *_brain = *src._brain;
 }
 
 /* Copy assignment operator */
 Cat& Cat::operator=(Cat const& rhs) {
   std::cout << "Cat copy assignment operator called" << std::endl;
   Animal::operator=(rhs);
-  delete _brain;
-  _brain = new Brain;
-  for (int i = 0; i < 100; i++)
-    _brain[i] = rhs._brain[i];
+  *_brain = *rhs._brain;
   return *this;
 }
 
 /* Destructor */
-Cat::~Cat() { std::cout << "Cat destructor called" << std::endl; }
+Cat::~Cat() { 
+  std::cout << "Cat destructor called" << std::endl;
+  delete _brain;
+  }
 
-/* Getter */
-std::string const& Cat::getType() const { return _type; }
+/* Getters */
+std::string const& Cat::getIdea(int i) const { return _brain->getIdea(i); }
 
-/* Public method */
+/* Setter */
+void Cat::setIdea(int index, std::string const& idea) { _brain->setIdea(index, idea); }
+
+/* Public methods */
 void Cat::makeSound() const { std::cout << "Meow" << std::endl; }
+
+void Cat::printIdeas() const {
+  for (int i = 0; i < 100; i++) {
+    if (getIdea(i) != "")
+      std::cout << "Idea " << i << ": " << getIdea(i) << std::endl;
+  }
+}

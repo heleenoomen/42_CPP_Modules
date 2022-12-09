@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:14:25 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 13:30:11 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/09 17:00:53 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ Brain::Brain() {
 
 /* Copy constructor */
 Brain::Brain(Brain const& src) {
-  std::cout << "Brain copy constructor called";
+  std::cout << "Brain copy constructor called" << std::endl;
   *this = src;
 }
 
 /* Copy assignment operator */
 Brain& Brain::operator=(Brain const& src) {
+  std::cout << "Brain copy assignment operator called" << std::endl;
   for (int i = 0; i < 100; i++) {
     _ideas[i] = src.getIdea(i);
   }

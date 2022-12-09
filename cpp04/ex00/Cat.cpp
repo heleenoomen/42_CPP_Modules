@@ -23,7 +23,6 @@ Cat::Cat() {
 /* Copy constructor */
 Cat::Cat(Cat const& src) : Animal(src) {
   std::cout << "Cat copy constructor called" << std::endl;
-  *this = src;
 }
 
 /* Copy assignment operator */
@@ -35,9 +34,6 @@ Cat& Cat::operator=(Cat const& rhs) {
 
 /* Destructor */
 Cat::~Cat() { std::cout << "Cat destructor called" << std::endl; }
-
-/* Getter */
-std::string const& Cat::getType() const { return _type; }
 
 /* Public method */
 void Cat::makeSound() const { std::cout << "Meow" << std::endl; }
