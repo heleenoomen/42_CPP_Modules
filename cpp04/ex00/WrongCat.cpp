@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.cpp                                         :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:44:48 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 09:54:16 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/09 11:13:54 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<iostream>
-
 #include "WrongCat.hpp"
+
+#include <iostream>
 
 /* Default constructor */
 WrongCat::WrongCat() : _type("WrongCat") {
@@ -41,6 +41,4 @@ WrongCat::~WrongCat() {
 std::string const& WrongCat::getType() const { return _type; }
 
 /* Public method */
-void WrongCat::makeSound() const {
-  std::cout << "Meow" << std::endl;
-}
+void WrongCat::makeSound() const { std::cout << "Meow" << std::endl; }

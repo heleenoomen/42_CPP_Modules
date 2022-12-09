@@ -6,14 +6,14 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:40:26 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 10:57:37 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/09 11:11:36 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP
 
-#include<string>
+#include <string>
 
 class Animal {
  protected:

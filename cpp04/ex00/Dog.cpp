@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<iostream>
-
 #include "Dog.hpp"
+
+#include <iostream>
 
 /* Default constructor */
 Dog::Dog() {
@@ -33,14 +33,10 @@ Dog& Dog::operator=(Dog const& rhs) {
 }
 
 /* Destructor */
-Dog::~Dog() {
-  std::cout << "Dog destructor called" << std::endl;
-}
+Dog::~Dog() { std::cout << "Dog destructor called" << std::endl; }
 
 /* Getter */
 std::string const& Dog::getType() const { return _type; }
 
 /* Public methods */
-void Dog::makeSound() const {
-  std::cout << "Woof!" << std::endl;
-}
+void Dog::makeSound() const { std::cout << "Woof!" << std::endl; }

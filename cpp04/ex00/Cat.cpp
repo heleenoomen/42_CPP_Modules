@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<iostream>
-
 #include "Cat.hpp"
+
+#include <iostream>
 
 /* Default constructor */
 Cat::Cat() {
@@ -34,14 +34,10 @@ Cat& Cat::operator=(Cat const& rhs) {
 }
 
 /* Destructor */
-Cat::~Cat() {
-  std::cout << "Cat destructor called" << std::endl;
-}
+Cat::~Cat() { std::cout << "Cat destructor called" << std::endl; }
 
 /* Getter */
 std::string const& Cat::getType() const { return _type; }
 
 /* Public method */
-void Cat::makeSound() const {
-  std::cout << "Meow" << std::endl;
-}
+void Cat::makeSound() const { std::cout << "Meow" << std::endl; }

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.hpp                                         :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:40:26 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 09:54:23 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/09 11:14:02 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WRONGCAT_HPP
 #define WRONGCAT_HPP
 
-#include "WrongAnimal.hpp"
-
 #include <string>
+
+#include "WrongAnimal.hpp"
 
 class WrongCat : public WrongAnimal {
  protected:

@@ -6,13 +6,13 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:44:48 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 10:03:59 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/09 11:11:30 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<iostream>
-
 #include "Animal.hpp"
+
+#include <iostream>
 
 /* Default constructor */
 Animal::Animal() : _type("") {
@@ -33,14 +33,10 @@ Animal& Animal::operator=(Animal const& rhs) {
 }
 
 /* Destructor */
-Animal::~Animal() {
-  std::cout << "Animal destructor called" << std::endl;
-}
+Animal::~Animal() { std::cout << "Animal destructor called" << std::endl; }
 
 /* Getter */
 std::string const& Animal::getType() const { return _type; }
 
 /* Public method */
-void Animal::makeSound() const {
-  std::cout << "???" << std::endl;
-}
+void Animal::makeSound() const { std::cout << "???" << std::endl; }

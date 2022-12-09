@@ -1,7 +1,8 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongAnimal.cpp                                         :+:      :+:    :+:   */
+/*   WrongAnimal.cpp                                         :+:      :+:    :+:
+ */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +11,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<iostream>
-
 #include "WrongAnimal.hpp"
+
+#include <iostream>
 
 /* Default constructor */
 WrongAnimal::WrongAnimal() : _type("") {
@@ -41,6 +42,4 @@ WrongAnimal::~WrongAnimal() {
 std::string const& WrongAnimal::getType() const { return _type; }
 
 /* Public method */
-void WrongAnimal::makeSound() const {
-  std::cout << "???" << std::endl;
-}
+void WrongAnimal::makeSound() const { std::cout << "???" << std::endl; }

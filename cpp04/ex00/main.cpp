@@ -6,9 +6,11 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 10:01:09 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 11:08:49 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/09 11:13:17 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <iostream>
 
 #include "Animal.hpp"
 #include "Cat.hpp"
@@ -16,11 +18,10 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
-#include <iostream>
-
 int main() {
-
-  std::cout << "\033[48:5:208m -----### TEST ANIMAL INHERITANCE (RIGHT CLASSES) ###-----\033[0m" << std::endl;
+  std::cout << "\033[48:5:208m -----### TEST ANIMAL INHERITANCE (RIGHT "
+               "CLASSES) ###-----\033[0m"
+            << std::endl;
   {
     const Animal* meta = new Animal();
     const Animal* j = new Dog();
@@ -37,7 +38,9 @@ int main() {
     delete i;
   }
   std::cout << std::endl;
-  std::cout << "\033[48:5:208m -----### TEST ANIMAL INHERITANCE (WRONG CLASSES) ###-----\033[0m" << std::endl;
+  std::cout << "\033[48:5:208m -----### TEST ANIMAL INHERITANCE (WRONG "
+               "CLASSES) ###-----\033[0m"
+            << std::endl;
   {
     const WrongAnimal* wrongMeta = new WrongAnimal();
     const WrongAnimal* wrongCat = new WrongCat();
@@ -46,8 +49,8 @@ int main() {
     wrongCat->makeSound();
     wrongMeta->makeSound();
 
-   delete wrongMeta;
-   delete wrongCat;
+    delete wrongMeta;
+    delete wrongCat;
   }
   std::cout << std::endl;
   system("leaks animals");
