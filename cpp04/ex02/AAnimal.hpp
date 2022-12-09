@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AAnimal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,27 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef AANIMAL_HPP
+#define AANIMAL_HPP
 
 #include <string>
 
-class Animal {
+class AAnimal {
  protected:
   std::string _type;
 
  public:
   /* default constructor */
-  Animal();
+  AAnimal();
 
   /* copy constructor */
-  Animal(Animal const& src);
+  AAnimal(AAnimal const& src);
 
   /* copy assignment operator */
-  virtual Animal& operator=(Animal const& rhs);
+  virtual AAnimal& operator=(AAnimal const& rhs);
 
   /* destructor */
-  virtual ~Animal();
+  virtual ~AAnimal();
 
   /* getters */
   std::string const& getType() const;

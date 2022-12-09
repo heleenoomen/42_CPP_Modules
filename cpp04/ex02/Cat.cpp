@@ -24,7 +24,7 @@ Cat::Cat() {
 }
 
 /* Copy constructor */
-Cat::Cat(Cat const& src) : Animal(src) {
+Cat::Cat(Cat const& src) : AAnimal(src) {
   std::cout << "Cat copy constructor called" << std::endl;
   _brain = new Brain;
   *_brain = *src._brain;
@@ -33,7 +33,7 @@ Cat::Cat(Cat const& src) : Animal(src) {
 /* Copy assignment operator */
 Cat& Cat::operator=(Cat const& rhs) {
   std::cout << "Cat copy assignment operator called" << std::endl;
-  Animal::operator=(rhs);
+  AAnimal::operator=(rhs);
   *_brain = *rhs._brain;
   return *this;
 }

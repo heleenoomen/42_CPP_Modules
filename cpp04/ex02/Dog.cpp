@@ -25,7 +25,7 @@ Dog::Dog() {
 }
 
 /* Copy constructor */
-Dog::Dog(Dog const& src) : Animal(src) {
+Dog::Dog(Dog const& src) : AAnimal(src) {
   std::cout << "Dog copy constructor called" << std::endl;
   _brain = new Brain;
   *_brain = *src._brain;

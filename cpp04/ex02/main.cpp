@@ -6,19 +6,19 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 10:01:09 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 18:48:49 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/09 18:57:35 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
-void test(Animal const& animal) {
+void test(AAnimal const& animal) {
   std::cout << "Type: " << animal.getType() << ", sound: ";
   animal.makeSound();
 }
@@ -30,9 +30,9 @@ int main() {
                "CLASSES) ###-----\033[0m"
             << std::endl;
   {
-    // const Animal* meta = new Animal();
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
+    // const AAnimal* meta = new AAnimal();
+    const AAnimal* j = new Dog();
+    const AAnimal* i = new Cat();
 
     std::cout << j->getType() << " " << std::endl;
     std::cout << i->getType() << " " << std::endl;
@@ -79,13 +79,13 @@ int main() {
   }
   std::cout << "\033[48:5:208m -----### TESTS FROM EX01 WITH ABSTRACT ANIMAL CLASS ###-----\033[0m"
             << std::endl;
-  /* Test correct deletion Cat/Dog instances via pointer of parent class Animal */
+  /* Test correct deletion Cat/Dog instances via pointer of parent class AAnimal */
   std::cout << "\033[48:5:208m -----### TEST CORRECT DELETION CAT/DOG VIA "
                "POINTERS TO ANIMAL) ###-----\033[0m"
             << std::endl;
   {
     std::cout << "\033[1;33m ---Declare array of Aninmal pointers---\033[0m" << std::endl;
-    const Animal* animalArray[6];
+    const AAnimal* animalArray[6];
 
     std::cout << "\033[1;33m ---Construct Dogs and Cats---\033[0m" << std::endl;
     for (int i = 0; i < 3; i++)
