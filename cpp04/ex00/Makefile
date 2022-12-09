@@ -6,18 +6,18 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2022/12/09 10:00:50 by hoomen           ###   ########.fr        #
+#    Updated: 2022/12/09 11:01:01 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	ClapTrap
+NAME		:=	animals
 
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 
 DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
-SRC			=	ClapTrap.cpp main.cpp
+SRC			=	Cat.cpp Dog.cpp Animal.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
 
 ODIR		=	obj
 OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)
