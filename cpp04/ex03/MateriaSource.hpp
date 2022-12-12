@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 21:05:45 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 21:15:51 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/12 12:30:07 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@
 
 class MateriaSource : public IMateriaSource {
  private:
-  AMateria* _materias[4];
+  static int const _maxNbrOfMaterias = 4;
+  AMateria* _materias[MateriaSource::_maxNbrOfMaterias];
   int _nbrOfAmaterias;
-  void _initMaterias();
+
+  /*private helpers */
+  void _setAllMateriasToNull();
+  void _deleteAllMaterias();
 
  public:
   /* constructor */
@@ -38,8 +42,8 @@ class MateriaSource : public IMateriaSource {
   virtual ~MateriaSource();
 
   /* public methods*/
-  virtual void learnMateria(AMateria*) = 0;
-  virtual AMateria* createMateria(std::string const& type) = 0;
+  virtual void learnMateria(AMateria*);
+  virtual AMateria* createMateria(std::string const& type);
 };
 
 #endif

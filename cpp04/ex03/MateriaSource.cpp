@@ -16,46 +16,54 @@
 
 MateriaSource::MateriaSource() : _nbrOfAmaterias(0) {
   std::cout << "MateriaSource default constructor called" << std::endl;
-  _initMaterias();
+  _setAllMateriasToNull();
 }
 
 MateriaSource::MateriaSource(MateriaSource const& src) {
   std::cout << "MateriaSource copy constructor called" << std::endl;
-  _initMaterias();
+  _setAllMateriasToNull();
   *this = src;
 }
 
 MateriaSource& MateriaSource::operator=(MateriaSource const& src) {
-  for (int i = 0; i < 4; i++)
-    delete _materias[i];
-  for (int i = 0; i < 4; i++)
+  _deleteAllMaterias();
+  for (int i = 0; i < src._nbrOfAmaterias; ++i)
     _materias[i] = src._materias[i]->clone();
+  _nbrOfAmaterias = src._nbrOfAmaterias;
   return *this;
 }
 
 MateriaSource::~MateriaSource() {
   std::cout << "MateriaSource destructor called" << std::endl;
-  for (int i = 0; i < 4; i++)
-    delete _materias[i];
+  _deleteAllMaterias();
 }
 
 void MateriaSource::learnMateria(AMateria* m) {
-  for (int i; i < 4; i++) {
+  for (int i = 0; i < MateriaSource::_maxNbrOfMaterias; ++i) {
     if (_materias[i] == NULL) {
-      _materias[i] = m->clone();
-      _nbrOfAmaterias++;
+      _materias[i] = m;
+      ++_nbrOfAmaterias;
       break;
     }
   }
 }
 
 AMateria* MateriaSource::createMateria(std::string const& type) {
-  for (int i; i < 4; i++) {
+  for (int i = 0; i < MateriaSource::_maxNbrOfMaterias; ++i) {
     if (_materias[i]->getType() == type)
       return _materias[i]->clone();
   }
   return NULL;
 }
 
+void MateriaSource::_setAllMateriasToNull() {
+  for (int i = 0; i < MateriaSource::_maxNbrOfMaterias; ++i)
+    _materias[i] = NULL;
+}
 
-
+void MateriaSource::_deleteAllMaterias() {
+  for (int i = 0; i < MateriaSource::_maxNbrOfMaterias; ++i) {
+    delete _materias[i];
+    _materias[i] = NULL;
+  }
+}

@@ -6,19 +6,19 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2022/12/09 18:57:05 by hoomen           ###   ########.fr        #
+#    Updated: 2022/12/12 14:47:55 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	animals
+NAME		:=	materia
 
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 
 DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
-SRC			=	Cat.cpp Dog.cpp AAnimal.cpp WrongAnimal.cpp WrongCat.cpp main.cpp\
-					Brain.cpp
+SRC			=	AMateria.cpp Character.cpp Cure.cpp Ice.cpp ICharacter.cpp\
+					IMateriaSource.cpp MateriaSource.cpp main.cpp
 
 ODIR		=	obj
 OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)

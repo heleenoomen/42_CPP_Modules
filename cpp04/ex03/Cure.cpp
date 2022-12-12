@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.cpp                                            :+:      :+:    :+:   */
+/*   Cure.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:56:26 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/12 15:01:40 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/09 20:12:41 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Ice.hpp"
+#include "Cure.hpp"
 
 #include <iostream>
 
-Ice::Ice() : AMateria("ice") {
-  std::cout << "Ice default constructor called" << std::endl;
+Cure::Cure() : AMateria("cure") {
+  std::cout << "Cure default constructor called" << std::endl;
 }
 
-Ice::Ice(Ice const& src) : AMateria(src) {
-  std::cout << "Ice copy constructor called" << std::endl;
+Cure::Cure(Cure const& src) : AMateria(src) {
+  std::cout << "Cure copy constructor called" << std::endl;
 }
 
-Ice& Ice::operator=(Ice const&) {
-  std::cout << "Ice copy assignment operator called" << std::endl;
+Cure& Cure::operator=(Cure const&) {
+  std::cout << "Cure copy assignment operator called" << std::endl;
   return *this;
 }
 
-Ice::~Ice() {
-  std::cout << "Ice destructor called" << std::endl;
+Cure::~Cure() {
+  std::cout << "Cure destructor called" << std::endl;
 }
 
-AMateria* Ice::clone() const {
-  AMateria* clone = new Ice();
+AMateria* Cure::clone() const {
+  AMateria* clone = new Cure();
   return clone;
 }
 
-void Ice::use(ICharacter& target) {
-  std::cout << "* shoots an ice bolt at " << target.getName() << " *\n";
+void Cure::use(ICharacter& target) {
+  std::cout << "* heals " << target.getName() << "\'s wounds *" << "\n";
 }

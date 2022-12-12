@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:16:06 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 20:19:47 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/12 13:00:39 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ ICharacter::ICharacter() {
 
 ICharacter::ICharacter(ICharacter const& src) {
   std::cout << "ICharacter copy constructor called" << std::endl;
+  *this = src;
 }
 
-ICharacter& ICharacter::operator=(ICharacter const& rhs) {
+ICharacter& ICharacter::operator=(ICharacter const&) {
   std::cout << "ICharacter copy assignment operator called" << std::endl;
+  return *this;
 }
 
 ICharacter::~ICharacter() {

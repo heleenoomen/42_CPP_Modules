@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:42:19 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 20:04:57 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/12 12:12:00 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ class Ice : public AMateria {
   ~Ice();
 
   virtual AMateria* clone() const;
+  virtual void use(ICharacter& target);
 };
 
 #endif

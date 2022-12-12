@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:25:38 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 20:44:33 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/12 16:02:13 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,27 @@
 #define CHARACTER_HPP
 
 #include "ICharacter.hpp"
+#include "AMateria.hpp"
+
+#include <string>
 
 class Character : public ICharacter {
  private:
-  std::string const& _name;
-  AMateria *_materias[4];
+  static int const _maxNbrOfMaterias = 4;
+
+  /* private attributes */
+  std::string _name;
+  AMateria* _materias[Character::_maxNbrOfMaterias];
   int _nbrOfMaterias;
-  void _initMaterias();
+
+  /* private helpers */
+  void _setAllMateriasToNull();
+  bool _inventoryIsFull() const;
+  void _insertMateriaInFirstFreeSlot(AMateria* m);
+  int _findFirstFreeSlot() const;
+  bool _materiasIndexOutOfRange(int index) const;
+  void _deleteExistingMaterias();
+  bool _materiaTypeDoesNotExist(AMateria *m);
 
  public:
   /* Constructors */
@@ -35,10 +49,14 @@ class Character : public ICharacter {
 
   /* Destructor */
   ~Character();
+  
+  /* Getter */
+  std::string const& getName() const;
 
   /* Public methods */
-  virtual AMateria* clone() const;
-  virtual void use(ICharacter& target);
+  virtual void equip(AMateria* m);
+  virtual void unequip(int idx);
+  virtual void use(int idx, ICharacter& target);
 };
 
 #endif

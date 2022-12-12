@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:58:09 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 21:05:30 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/12 13:02:37 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ IMateriaSource::IMateriaSource(IMateriaSource const& src) {
   *this = src;
 }
 
-IMateriaSource& IMateriaSource::operator=(IMateriaSource const& src) {
+IMateriaSource& IMateriaSource::operator=(IMateriaSource const&) {
   return *this;
 }
 
