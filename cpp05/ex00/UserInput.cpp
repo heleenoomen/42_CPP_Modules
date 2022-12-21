@@ -73,13 +73,16 @@ bool UserInput::IsValid() const {
 void UserInput::getIntValue() {
   char c;
   std::cin >> c;
-  if (c == quitSymbol) {
-    quit = true;
-    return ;
-  }
   if (std::cin.eof()) {
     quit = true;
     std::cin.clear();
+    return ;
+  }
+  if (std::cin.fail()) {
+    std::cin.clear();
+  }
+  else if (c == quitSymbol) {
+    quit = true;
     return ;
   }
   std::cin.putback(c);
