@@ -18,8 +18,6 @@
 class Layout {
  public:
 
-  //std::string formatString_;
-
   /* prefix / suffix */
   static char const* PREFIX;
   static char const* SUFFIX;
@@ -63,8 +61,8 @@ class Layout {
   // std::string const& getFormatString() const;
 
   // /* public methods */
-  // void set(std::string const& color, std::string const& rendition);
-  // void reset();
+  void set(std::ostream& o, std::string const& color, std::string const& rendition) const;
+  void reset(std::ostream& o) const;
   // Layout& end();
 };
 

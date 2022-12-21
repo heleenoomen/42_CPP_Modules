@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   OCF.hpp                                            :+:      :+:    :+:   */
+/*   Coplien.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/12 20:54:05 by hoomen           ###   ########.fr       */
+/*   Updated: 2022/12/21 17:49:46 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CNAME_HPP
-#define CNAME_HPP
+#ifndef COPLIEN_HPP
+#define COPLIEN_HPP
 
 // #include <string>
 // #include <iostream>
 
-class CName {
+class Coplien {
  //private:
 
  //protected:
 
  public:
   /* default constructor */
-  CName();
+  Coplien();
 
   /* copy constructor */
-  CName(CName const& src);
+  Coplien(Coplien const& src);
 
   /* copy assignment operator */
-  CName& operator=(CName const& rhs);
+  Coplien& operator=(Coplien const& rhs);
 
   /* default destructor */
-  ~CName();
+  ~Coplien();
 
   /* getters */
 
@@ -40,6 +40,6 @@ class CName {
 };
 
 /* insertion operator */
-// std::ostream& operator<<(std::ostream& o, CName const& cname);
+// std::ostream& operator<<(std::ostream& o, Coplien const& cname);
 
 #endif

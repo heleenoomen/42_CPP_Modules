@@ -66,15 +66,14 @@ Layout::~Layout() {
 /* Public methods                                                             */
 /* ************************************************************************** */
 
-// void Layout::set(std::string const& color, std::string const& 
-//     rendition) {
-//   formatString_ = Layout::PREFIX + color + ";" + rendition + Layout::SUFFIX
-//   ;
-// }
+void Layout::set(std::ostream& o, std::string const& color, std::string const& 
+    rendition) const {
+  o << Layout::PREFIX + color + ";" + rendition + Layout::SUFFIX;
+}
 
-// void Layout::reset() {
-//   formatString_ = Layout::PREFIX + Layout::RESET + Layout::SUFFIX;
-// }
+void Layout::reset(std::ostream& o) const {
+  o << Layout::PREFIX + static_cast<std::string>(Layout::RESET) + Layout::SUFFIX;
+}
 
 // Layout& Layout::end() {
 //   reset();

@@ -1,5 +1,5 @@
 
-#include "CName.hpp"
+#include "Coplien.hpp"
 #include <iostream>
 
 /* ************************************************************************** */
@@ -7,26 +7,26 @@
 /* ************************************************************************** */
 
 /* Default constructor */
-CName::CName() {
-  std::cout << "\033[0;2m" << "CName default constructor called\033[0m\n";
+Coplien::Coplien() {
+  std::cout << "\033[0;2m" << "Coplien default constructor called\033[0m\n";
 }
 
 /* Copy constructor */
-CName::CName(CName const& src) {
-  std::cout << "\033[0;2m" << "CName copy constructor called\033[0m\n";
+Coplien::Coplien(Coplien const& src) {
+  std::cout << "\033[0;2m" << "Coplien copy constructor called\033[0m\n";
   *this = src;
 }
 
 /* Copy assignment operator */
-CName& CName::operator=(CName const& rhs) {
-  std::cout << "\033[0;2m" << "CName copy assignment operator called\033[0m\n";
+Coplien& Coplien::operator=(Coplien const& rhs) {
+  std::cout << "\033[0;2m" << "Coplien copy assignment operator called\033[0m\n";
   /* assign values here */
   return *this;
 }
 
 /* Destructor */
-CName::~CName() {
-  std::cout << "\033[0;2m" << "CName destructor called\033[0m\n";
+Coplien::~Coplien() {
+  std::cout << "\033[0;2m" << "Coplien destructor called\033[0m\n";
 }
 
 /* ************************************************************************** */
@@ -48,7 +48,7 @@ CName::~CName() {
 /* Insertion operator                                                         */
 /* ************************************************************************** */
 
-std::ostream& operator<<(std::ostream& o, CName const& cname) {
+std::ostream& operator<<(std::ostream& o, Coplien const& cname) {
   o << "\033[0;32m"
     // << some info here
     << "\033[0m";
