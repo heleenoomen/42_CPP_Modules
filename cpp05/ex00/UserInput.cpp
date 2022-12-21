@@ -70,7 +70,7 @@ bool UserInput::IsValid() const {
 /* Public                                                                     */
 /* ************************************************************************** */
 
-void UserInput::getIntValue() {
+void UserInput::getIntValue() { // TODO: handle std::cin.bad() (throw exception for serious errors)
   char c;
   std::cin >> c;
   if (std::cin.eof()) {

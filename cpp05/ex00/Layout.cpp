@@ -7,7 +7,7 @@
 /* ************************************************************************** */
 
 char const* Layout::RESET = "0";
-char const* Layout::NORMAL = "0";
+char const* Layout::NORMAL = "0"; // this does not work yet! (for colored letters that are not bold/italic/...)
 char const* Layout::BOLD = "1";
 char const* Layout::FAINT = "2";
 char const* Layout::ITALIC = "3";
