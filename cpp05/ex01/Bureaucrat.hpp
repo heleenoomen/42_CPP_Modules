@@ -6,22 +6,22 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:17:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/02 13:34:02 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/02 14:42:09 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_H
 #define BUREAUCRAT_H
 
+#include "Form.hpp"
 #include <string>
+
+class Form;
 
 class Bureaucrat {
  private:
   std::string const name_;
   int grade_;
-
-  /* private methods*/
-  void checkGrade() const;
 
  public:
   /* default constructor */
@@ -63,8 +63,11 @@ class Bureaucrat {
   };
 
   /* symbolic constants */
-  static int const minimumGrade = 150;
   static int const maximumGrade = 1;
+  static int const minimumGrade = 150;
+
+  /* public methods */
+  void signForm(Form& form) const;
 };
 
 

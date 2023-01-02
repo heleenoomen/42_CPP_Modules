@@ -1,51 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*   Form.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/12 16:17:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/02 13:34:02 by hoomen           ###   ########.fr       */
+/*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
+/*   Updated: 2022/12/21 17:49:46 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUREAUCRAT_H
-#define BUREAUCRAT_H
+#ifndef FORM_HPP
+#define FORM_HPP
 
+#include "Bureaucrat.hpp"
 #include <string>
+#include <iostream>
 
-class Bureaucrat {
+class Bureaucrat;
+
+class Form {
  private:
   std::string const name_;
-  int grade_;
+  bool signed_;
+  int const gradeRequiredToSign_;
+  int const gradeRequiredToExecute_;
 
-  /* private methods*/
-  void checkGrade() const;
+  bool oneOrBothGradesTooLow() const;
+  bool oneOrBothGradesTooHigh() const;
+  void gradeCheck() const;
+  bool gradeHighEnoughTooSign(Bureaucrat const& b) const;
 
  public:
   /* default constructor */
-  Bureaucrat();
-
-  /* parametric constructor */
-  Bureaucrat(std::string const& name, int grade_);
+  Form();
+  Form(std::string const& name, int gradeToSign, int gradeToExecute);
 
   /* copy constructor */
-  Bureaucrat(Bureaucrat const& src);
+  Form(Form const& src);
 
   /* copy assignment operator */
-  Bureaucrat& operator=(Bureaucrat const& rhs);
+  Form& operator=(Form const& rhs);
 
-  /* destructor */
-  ~Bureaucrat();
+  /* default destructor */
+  ~Form();
 
   /* getters */
-  int getGrade() const;
   std::string const& getName() const;
+  bool isSigned() const;
+  int getGradeRequiredToSign() const;
+  int getGradeRequiredToExecute() const;
 
   /* setters */
-  void promote();
-  void degrade();
+  void beSigned(Bureaucrat const& b);
 
   /* exception classes */
   class GradeTooHighException : public std::exception {
@@ -61,16 +68,9 @@ class Bureaucrat {
     ~GradeTooLowException() throw();
     virtual const char* what() const throw();
   };
-
-  /* symbolic constants */
-  static int const minimumGrade = 150;
-  static int const maximumGrade = 1;
 };
 
-
-std::ostream& operator<<(std::ostream& o, Bureaucrat const& Bureaucrat);
+/* insertion operator */
+std::ostream& operator<<(std::ostream& o, Form const& cname);
 
 #endif
-
-/* NB: throw() means that a function will never throw exceptions 
- https://en.cppreference.com/w/cpp/language/noexcept_spec */

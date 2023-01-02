@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 18:54:45 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/12 20:42:08 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/02 13:49:38 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,11 @@ void testInsertionOverload() {
 /* Test Promotions & Degradations: Printing utils                             */
 /* ************************************************************************** */
 
-void printInfoBefore(Bureaucrat& bureaucrat, std::string action, int grades) 
+void printInfoBefore(Bureaucrat& bureaucrat, std::string action) 
 {
-  std::cout << "This is our bureaucrat at the start\n\n";
+  std::cout << "This is our bureaucrat at the start:\n\n";
   std::cout << "\t" << bureaucrat << "\n\n";
-  std::cout << "We will try to " << action << " " << bureaucrat.getName()
-            << " by " << grades << " grades, calling bureaucrat." << action
-            << "():\n";
+  std::cout << "Try to " << action << " " << bureaucrat.getName() << ":\n";
 }
 
 void printInfoAfter(Bureaucrat& bureaucrat) {
@@ -56,26 +54,28 @@ void printInfoAfter(Bureaucrat& bureaucrat) {
 /*  Test Promotions & degradations: General test frames                       */
 /* ************************************************************************** */
 
-void testPromotions(std::string name, int actualGrade, int gradesUp)
+void testPromotions(std::string name, int actualGrade)
 {
   Bureaucrat bureaucrat(name, actualGrade);
-  printInfoBefore(bureaucrat, "promote", gradesUp);
+  printInfoBefore(bureaucrat, "promote");
   try {
-    bureaucrat.promote(gradesUp); }
+    bureaucrat.promote(); }
   catch(std::exception& e) {
-      std::cerr << "\033[1;31m" << e.what() << "\033[0m\n";
+      std::cerr << "\033[1;31m" << "Standard exception: "
+                << e.what() << "\033[0m\n";
     }
   printInfoAfter(bureaucrat);
 }
 
-void testDegradations(std::string name, int actualGrade, int gradesDown)
+void testDegradations(std::string name, int actualGrade)
 {
   Bureaucrat bureaucrat(name, actualGrade);
-  printInfoBefore(bureaucrat, "degrade", gradesDown);
+  printInfoBefore(bureaucrat, "degrade");
   try {
-    bureaucrat.degrade(gradesDown); }
+    bureaucrat.degrade(); }
   catch(std::exception& e) {
-    std::cerr << "\033[1;31m" << e.what() << "\033[0m\n";
+    std::cerr << "\033[1;31m" << "Standard exception: "
+              << e.what() << "\033[0m\n";
   }
   printInfoAfter(bureaucrat);
 }
@@ -86,42 +86,59 @@ void testDegradations(std::string name, int actualGrade, int gradesDown)
 
 void testValidPromotion() {
   printTestHeader("Test valid promotion");
-  testPromotions("Barry", 140, 100);
+  testPromotions("Barry", 140);
 }
 
 void testInvalidPromotion() {
   printTestHeader("Test invalid promotion");
-  testPromotions("Barry", 140, 200);
+  testPromotions("Barry", 1);
 }
 
 void testValidDegradation() {
   printTestHeader("Test valid degradation");
-  testDegradations("Barry", 140, 5);
+  testDegradations("Barry", 140);
 }
 
 void testInvalidDegradation() {
   printTestHeader("Test invalid degradation");
-  testDegradations("Barry", 140, 200);
+  testDegradations("Barry", 150);
 }
 
 void testMaximumPromotion() {
   printTestHeader("Test maximum promotion");
-  testPromotions("Kaitlin", 20, 19);
+  testPromotions("Kaitlin", 2);
 }
 
 void testMaximumDegradation() {
   printTestHeader("Test maximum degradation");
-  testDegradations("Kaitlin", 20, 130);
+  testDegradations("Kaitlin", 149);
 }
 
-void testPromoteOneGradeTooMuch() {
-  printTestHeader("Test promoting one grade too many");
-  testPromotions("Kaitlin", 20, 20);
-}
-
-void testDegradeOneGradeTooMuch() {
-  printTestHeader("Test degrading one grade too many much");
-  testDegradations("Kaitlin", 30, 131);
+void testCreateBureaucratWithInvalidGrade() {
+  printTestHeader("Test creating a bureaucrat with invalid initial grade (1)");
+  try {
+    std::cout << "We will try to create a bureaucrat named Barry, with the invalid "
+              << "initial grade of 151:\n";
+    Bureaucrat b("Barry", 151);
+  }
+  catch(std::exception& e) {
+    std::cerr << "\033[31;1m" << "Standard exception: "
+              << e.what() << '\n'
+              << "\033[0m";
+  }
+  std::cout << '\n';
+  printTestHeader("Test creating a bureaucrat with invalid initial grade (2)");
+  try {
+    std::cout << "We will try to create a bureaucrat named Barry, with the invalid "
+              << "initial grade of -16:\n";
+    Bureaucrat b("Barry", -16);
+  }
+  catch(std::exception& e) {
+    std::cerr << "\033[31;1m" << "Standard exception: "
+              << e.what() << '\n'
+              << "\033[0m";
+  }
+  
 }
 
 /* ************************************************************************** */
@@ -139,7 +156,7 @@ void testCopyConstructor() {
   printTestStep("barry2 to std::cout");
   std::cout << barry2 << "\n";
   printTestStep("promote barry by 1 grade");
-  barry.promote(1);
+  barry.promote();
   printTestStep("copy constructor for barry3");
   Bureaucrat barry3(barry);
   printTestStep("barry 3 to std::cout");
@@ -163,7 +180,7 @@ void testCopyAssignmentOperator() {
   printTestStep("barry2 to std::cout");
   std::cout << barry2 << "\n";
   printTestStep("promote barry by 1 grade");
-  barry.promote(1);
+  barry.promote();
   printTestStep("Default constructor for barry3");
   Bureaucrat barry3;
   printTestStep("Assign barry to barry3");
@@ -192,8 +209,5 @@ int main() {
   std::cout << "\n";
   testMaximumDegradation();
   std::cout << "\n";
-  testPromoteOneGradeTooMuch();
-  std::cout << "\n";
-  testDegradeOneGradeTooMuch();
-  std::cout << "\n";
+  testCreateBureaucratWithInvalidGrade();
 }

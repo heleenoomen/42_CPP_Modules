@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:26:22 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/02 13:44:10 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/02 15:06:58 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,45 @@
 
 #include <iostream>
 
+  #ifndef to_file
+  static char const* greenBold = "\033[32;1m";
+  static char const* redBold = "\033[31;1m";
+  static char const* resetLayout = "\033[0m";
+  static char const* grey = "\033[0;2m";
+  #else
+  static char const* greenBold = "";
+  static char const* redBold = "";
+  static char const* resetLayout = "";
+  static char const* grey = "";
+  #endif
+
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
 /* ************************************************************************** */
 
 Bureaucrat::Bureaucrat() : name_("Unnamed"), grade_(150) {
-  std::cout << "\033[0;2mBureaucrat default constructor called\033[0;22m\n";
-  checkGrade();
+  std::cout << grey << "Bureaucrat default constructor called\n" << resetLayout;
 }
 
 Bureaucrat::Bureaucrat(std::string const& name, int grade)
     : name_(name),
       grade_(grade) {
-  std::cout << "\033[0;2mBureaucrat parametric constructor called\033[0;22m\n";
-  checkGrade();
+  std::cout << grey << "Bureaucrat parametric constructor called\n" << resetLayout;
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const& src) : name_(src.getName()) {
-  std::cout << "\033[0;2mBureaucrat copy constructor called\033[0;22m\n";
+  std::cout << grey << "Bureaucrat copy constructor called\n" << resetLayout;
   *this = src;
 }
 
 Bureaucrat& Bureaucrat::operator=(Bureaucrat const& rhs) {
-  std::cout << "\033[0;2mBureaucrat copy assignment operator called\033[0;22m\n";
+  std::cout << grey << "Bureaucrat copy assignment operator called\n" << resetLayout;
   grade_ = rhs.getGrade();
   return *this;
 }
 
 Bureaucrat::~Bureaucrat() {
-  std::cout << "\033[0;2mBureaucrat destructor called\033[0;22m\n";
+  std::cout << grey << "Bureaucrat destructor called\n" << resetLayout;
 }
 
 /* ************************************************************************** */
@@ -63,25 +73,16 @@ int Bureaucrat::getGrade() const {
 
 void Bureaucrat::promote() {
   if (grade_ == maximumGrade)
-    throw(GradeTooHighException());
-  --grade_;
+    throw GradeTooHighException();
+  else
+    --grade_;
 }
 
 void Bureaucrat::degrade() {
   if (grade_ == minimumGrade)
-    throw(GradeTooLowException());
-  ++grade_;
-}
-
-/* ************************************************************************** */
-/* Private methods                                                            */
-/* ************************************************************************** */
-
-void Bureaucrat::checkGrade() const {
-  if (grade_ < maximumGrade)
-    throw(GradeTooHighException());
-  if (grade_ > minimumGrade)
-    throw(GradeTooLowException());
+    throw GradeTooLowException();
+  else
+    ++grade_;
 }
 
 /* ************************************************************************** */
@@ -89,31 +90,50 @@ void Bureaucrat::checkGrade() const {
 /* ************************************************************************** */
 
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
-  return "Grade is too high";
+  return "Promotion not possible: resulting grade is too high";
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
-  return "Grade is too low";
+  return "Degradation not possible: resulting grade is too low";
 }
 
 Bureaucrat::GradeTooHighException::GradeTooHighException() {
-  std::cout << "\033[0;2mBureaucrat::GradeTooHighException default constructor" 
-            << "called\033[0m\n";
+  std::cout << grey << "Bureaucrat::GradeTooHighException default constructor\n" 
+            << resetLayout;
 }
 
 Bureaucrat::GradeTooHighException::~GradeTooHighException() throw() {
-  std::cout << "\033[0;2mBureaucrat::GradeTooHighException default destructor"
-            << "called\033[0m\n";
+  std::cout << grey << "Bureaucrat::GradeTooHighException default destructor\n"
+            << resetLayout;
 }
 
 Bureaucrat::GradeTooLowException::GradeTooLowException() {
-  std::cout << "\033[0;2mBureaucrat::GradeTooLowException default constructor"
-            << "called\033[0m\n";
+  std::cout << grey << "Bureaucrat::GradeTooLowException default constructor\n"
+            << resetLayout;
 }
 
 Bureaucrat::GradeTooLowException::~GradeTooLowException() throw() {
-  std::cout << "\033[0;2mBureaucrat::GradeTooLowException default destructor"
-            << "called\033[0m\n";
+  std::cout << grey << "Bureaucrat::GradeTooLowException default destructor\n"
+            << resetLayout;
+}
+
+/* ************************************************************************** */
+/* Public methods                                                             */
+/* ************************************************************************** */
+
+void Bureaucrat::signForm(Form& form) const {
+  try {
+    form.beSigned(*this);
+    std::cout << greenBold
+              << name_ << " signed " << form.getName() << '\n'
+              << resetLayout;
+  }
+  catch (std::exception &e) {
+    std::cout << redBold
+              << name_ << " couldn't sign " << form.getName() << " because: "
+              << e.what() << '\n'
+              << resetLayout;
+  }
 }
 
 /* ************************************************************************** */
@@ -121,8 +141,8 @@ Bureaucrat::GradeTooLowException::~GradeTooLowException() throw() {
 /* ************************************************************************** */
 
 std::ostream& operator<<(std::ostream& o, Bureaucrat const& bureaucrat) {
-  o << "\033[0;32m"
+  o << greenBold
     << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade()
-    << "\033[0m";
+    << resetLayout;
   return o;
 }
