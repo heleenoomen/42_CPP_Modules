@@ -6,13 +6,17 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:26:22 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/02 15:06:58 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/03 21:03:27 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
 #include <iostream>
+
+// #ifndef to_file
+// #define to_file
+// #endif
 
   #ifndef to_file
   static char const* greenBold = "\033[32;1m";
@@ -47,6 +51,8 @@ Bureaucrat::Bureaucrat(Bureaucrat const& src) : name_(src.getName()) {
 
 Bureaucrat& Bureaucrat::operator=(Bureaucrat const& rhs) {
   std::cout << grey << "Bureaucrat copy assignment operator called\n" << resetLayout;
+  if (this == &rhs)
+    return *this;
   grade_ = rhs.getGrade();
   return *this;
 }

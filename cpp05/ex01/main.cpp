@@ -11,6 +11,10 @@
 
 static int const testHeaderWidth = 56;
 
+// #ifndef to_file
+// #define to_file
+// #endif
+
 #ifndef to_file
 static char const* redBold = "\033[31;1m";
 static char const* resetLayout = "\033[0m";

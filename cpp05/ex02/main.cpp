@@ -117,32 +117,7 @@ void testExecuteForm(Bureaucrat const& b, AForm& f) {
 // /* Tests                                                                      */
 // /* ************************************************************************** */
 
-
-// void constructFormWithValidGrades() {
-//   printTestHeader("Test construct form with valid grades");
-//   tryToConstructForm("Regulation 1a", 100, 20);
-//   printTestTrailer();
-// }
-
-// void constructFormWithInvalidGrades() {
-//   printTestHeader("Test construct form with invalid grades");
-//   tryToConstructForm("Regulation 1b", -3, 20);
-//   printTestTrailer();
-// }
-
-// void signWithRequiredGrade() {
-//   printTestHeader("Test sign form by bureaucrat with adequate grade");
-//   tryToSignForm("Andrea", 19, "Regulation 18b", 20, 40);
-//   printTestTrailer();
-// }
-
-// void signWithoutRequiredGrade() {
-//   printTestHeader("Test sign form by bureaucrat with inadequate grade");
-//   tryToSignForm("Andrea", 19, "Regulation 18b", 10, 5);
-//   printTestTrailer();
-// }
-
-void shrubberyExecuteCorrectly() {
+void testShrubbery() {
   printTestHeader("Execute Shrubbery Creation Form correctly");
   try {
     Bureaucrat benji("Benji", ShrubberyCreationForm::gradeRequiredToExecute);
@@ -151,6 +126,7 @@ void shrubberyExecuteCorrectly() {
     testInsertionOverloadBureaucrat("Bureaucrat Benji's secretary created. ", benjisSecretary);
     ShrubberyCreationForm newShrubForm("Shrubbery Plan 13b", "City Park 789");
     testInsertionOverloadForm("Shrubbery Plan 13b created. ", newShrubForm);
+    testExecuteForm(benji, newShrubForm);
     testSignForm(benjisSecretary, newShrubForm);
     testExecuteForm(benji, newShrubForm);
     testExecuteForm(benji, newShrubForm);
@@ -160,9 +136,13 @@ void shrubberyExecuteCorrectly() {
     std::cerr << redBold
               << "Standard exception: "
               << e.what()
+              << '\n'
               << resetLayout;
   }
 }
+
+// void test
+
 
 /* ************************************************************************** */
 /* Main                                                                       */
@@ -170,7 +150,7 @@ void shrubberyExecuteCorrectly() {
 
 int main() {
 
-  shrubberyExecuteCorrectly();
+  testShrubbery();
   // constructFormWithValidGrades();
   // constructFormWithInvalidGrades();
   // signWithRequiredGrade();

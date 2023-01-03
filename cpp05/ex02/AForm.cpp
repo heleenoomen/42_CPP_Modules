@@ -84,8 +84,6 @@ void AForm::beSigned(Bureaucrat const& b) {
     throw(GradeTooLowException());
 }
 
-// void AForm::setGradeRequiredToExecute(int grade) {}
-
 /* ************************************************************************** */
 /* Public methods                                                             */
 /* ************************************************************************** */

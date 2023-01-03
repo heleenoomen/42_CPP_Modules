@@ -20,6 +20,8 @@ Coplien::Coplien(Coplien const& src) {
 /* Copy assignment operator */
 Coplien& Coplien::operator=(Coplien const& rhs) {
   std::cout << "\033[0;2m" << "Coplien copy assignment operator called\033[0m\n";
+  if (this == &rhs)
+    return *this;
   /* assign values here */
   return *this;
 }
@@ -40,7 +42,12 @@ Coplien::~Coplien() {
 
 
 /* ************************************************************************** */
-/* Public                                                                     */
+/* Public methods                                                             */
+/* ************************************************************************** */
+
+
+/* ************************************************************************** */
+/* Private methods                                                            */
 /* ************************************************************************** */
 
 

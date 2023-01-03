@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:26:22 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/03 12:59:13 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/03 16:47:06 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void Bureaucrat::executeForm(AForm const& form) const {
               << name_ << " executed " << form.getName() << " succesfully\n"
               << resetLayout;
   }
-  catch (std::exception &e) {
+  catch (std::exception& e) {
     std::cout << redBold
               << name_ << " couldn't execute " << form.getName() << " because: "
               << e.what() << '\n'

@@ -2,6 +2,10 @@
 #include "Form.hpp"
 #include <iostream>
 
+// #ifndef to_file
+// #define to_file
+// #endif
+
 
 #ifndef to_file
 static char const* greenBold = "\033[32;1m";
