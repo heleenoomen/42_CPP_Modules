@@ -102,7 +102,7 @@ void ShrubberyCreationForm::openTargetFile(std::ofstream& targetFile) const {
 
 std::string ShrubberyCreationForm::pickRandomTreeFileName() const {
   int treeNbr(std::rand() % nbrOfTrees);
-  return "./trees/tree" + toString(treeNbr);
+  return "./src/trees/tree" + toString(treeNbr);
 }
 
 void ShrubberyCreationForm::copyTreeFileToTargetFile(std::ifstream& treeFile, std::ofstream& targetFile) const {

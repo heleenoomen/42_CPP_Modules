@@ -16,7 +16,7 @@
 static int const testHeaderWidth = 56;
 static int const newLinesBeforeFirstTest = 1;
 
-void printNewlinesBeforeTests() {
+void printUnitTestHeader() {
   for (int i = 0; i < newLinesBeforeFirstTest; ++i)
     std::cout << '\n';
 }
@@ -80,10 +80,6 @@ void testExecuteForm(Bureaucrat const& b, AForm& f) {
   b.executeForm(f);
 }
 
-/* ************************************************************************** */
-/* Tests                                                                      */
-/* ************************************************************************** */
-
 void standardExceptionHandler(std::exception& e) {
     std::cerr << Layout::redBold
               << "Standard exception: "
@@ -92,9 +88,11 @@ void standardExceptionHandler(std::exception& e) {
               << Layout::reset;
 }
 
-void testShrubbery() {
-  printTestHeader("Execute Shrubbery Creation Form");
-  try {
+/* ************************************************************************** */
+/* Unit Tests                                                                 */
+/* ************************************************************************** */
+
+void shrubberyTests() {
     Bureaucrat benji("Benji", ShrubberyCreationForm::gradeRequiredToExecute);
     testInsertionOverloadBureaucrat("Bureaucrat Benji created. ", benji);
     Bureaucrat benjisSecretary("Benji's secretary", ShrubberyCreationForm::gradeRequiredToSign);
@@ -106,16 +104,9 @@ void testShrubbery() {
     testExecuteForm(benji, newShrubForm);
     testExecuteForm(benji, newShrubForm);
     testExecuteForm(benjisSecretary, newShrubForm);
-  }
-  catch (std::exception& e) {
-    standardExceptionHandler(e);
-  }
-  printTestTrailer();
 }
 
-void testRobotomy() {
-  printTestHeader("Execute Robotomy Form");
-  try {
+void robotomyTests() {
     Bureaucrat joleen("Joleen", RobotomyRequestForm::gradeRequiredToExecute);
     testInsertionOverloadBureaucrat("Bureaucrat Joleen has been created. ", joleen);
     Bureaucrat chris("Chris", RobotomyRequestForm::gradeRequiredToSign - 3);
@@ -127,16 +118,9 @@ void testRobotomy() {
     for (int i = 0; i < 10; ++i)
       testExecuteForm(joleen, robotizeForm);
     testExecuteForm(chris, robotizeForm);
-  }
-  catch (std::exception& e) {
-    standardExceptionHandler(e);
-  }
-  printTestTrailer();
 }
 
-void testPresidentialPardon() {
-  printTestHeader("Presidential Pardon");
-  try {
+void presidentialPardonTests() {
     Bureaucrat undersec1("Undersecretary Gustav", PresidentialPardonForm::gradeRequiredToExecute - 1);
     testInsertionOverloadBureaucrat("Undersecretary Gustav created. ", undersec1);
     Bureaucrat technocrat("Technocrat Claude", PresidentialPardonForm::gradeRequiredToSign - 2);
@@ -147,21 +131,33 @@ void testPresidentialPardon() {
     testSignForm(technocrat, pardonForm);
     testExecuteForm(technocrat, pardonForm);
     testExecuteForm(undersec1, pardonForm);
-  }
-  catch (std::exception& e) {
-    standardExceptionHandler(e);
-  }
-  printTestTrailer();
 }
 
 /* ************************************************************************** */
 /* Main                                                                       */
 /* ************************************************************************** */
 
+typedef void (*unitTest)();
+
+void runTests(unitTest tests) {
+  try {
+    tests();
+  }
+  catch (std::exception &e) {
+    standardExceptionHandler(e);
+  }
+}
+
+void testUnit(unitTest tests, char const* testHeader) {
+  printTestHeader(testHeader);
+  runTests(tests);
+  printTestTrailer();
+}
+
 int main() {
-  printNewlinesBeforeTests();
-  testShrubbery();
-  testRobotomy();
-  testPresidentialPardon();
+  printUnitTestHeader();
+  testUnit(&shrubberyTests, "Test Execute Shrubbery Creation Form");
+  testUnit(&robotomyTests, "Test Execute Robotomy Form");
+  testUnit(&presidentialPardonTests, "Test Execute Presidential Pardon Form");
   return 0;
 }
