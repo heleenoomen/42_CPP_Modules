@@ -2,6 +2,7 @@
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 #include "Layout.hpp"
 
 #include <iomanip>
@@ -79,9 +80,9 @@ void testExecuteForm(Bureaucrat const& b, AForm& f) {
   b.executeForm(f);
 }
 
-// /* ************************************************************************** */
-// /* Tests                                                                      */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/* Tests                                                                      */
+/* ************************************************************************** */
 
 void standardExceptionHandler(std::exception& e) {
     std::cerr << Layout::redBold
@@ -133,6 +134,25 @@ void testRobotomy() {
   printTestTrailer();
 }
 
+void testPresidentialPardon() {
+  printTestHeader("Presidential Pardon");
+  try {
+    Bureaucrat undersec1("Undersecretary Gustav", PresidentialPardonForm::gradeRequiredToExecute - 1);
+    testInsertionOverloadBureaucrat("Undersecretary Gustav created. ", undersec1);
+    Bureaucrat technocrat("Technocrat Claude", PresidentialPardonForm::gradeRequiredToSign - 2);
+    testInsertionOverloadBureaucrat("Technocrat Claude created. ", technocrat);
+    PresidentialPardonForm pardonForm("Case 43b: J. DeLuny", "Jacob DeLuny");
+    testInsertionOverloadForm("Presidential Pardon Form created. ", pardonForm);
+    testExecuteForm(undersec1, pardonForm);
+    testSignForm(technocrat, pardonForm);
+    testExecuteForm(technocrat, pardonForm);
+    testExecuteForm(undersec1, pardonForm);
+  }
+  catch (std::exception& e) {
+    standardExceptionHandler(e);
+  }
+  printTestTrailer();
+}
 
 /* ************************************************************************** */
 /* Main                                                                       */
@@ -142,9 +162,6 @@ int main() {
   printNewlinesBeforeTests();
   testShrubbery();
   testRobotomy();
-  // constructFormWithValidGrades();
-  // constructFormWithInvalidGrades();
-  // signWithRequiredGrade();
-  // signWithoutRequiredGrade();
+  testPresidentialPardon();
   return 0;
 }

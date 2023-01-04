@@ -176,7 +176,7 @@ const char* AForm::FormNotSignedException::what() const throw() {
 
 std::ostream& operator<<(std::ostream& o, AForm const& f) {
   o << insertionOverloadLayout
-    << "Form: " << f.getName() << ", "
+    << "Form: \"" << f.getName() << "\", "
     << "Signed: ";
   f.isSigned()? o << "yes\n": o << "no\n";
   o << "Grade required to sign: " << f.getGradeRequiredToSign() << ","

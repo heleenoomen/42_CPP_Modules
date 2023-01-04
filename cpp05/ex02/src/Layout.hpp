@@ -49,6 +49,8 @@ class Layout {
   static char const* yellowBold;
   static char const* yellow;
 
+  static char const* brightYellow;
+
   static char const* redBold;
 
   static char const* magentaBold;

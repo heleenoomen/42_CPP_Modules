@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/01/04 12:49:36 by hoomen           ###   ########.fr        #
+#    Updated: 2023/01/04 13:03:59 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 VPATH		= src
 
 SRC			=	Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp\
-					main.cpp Layout.cpp
+					PresidentialPardonForm.cpp main.cpp Layout.cpp
 
 ODIR		=	obj
 OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)

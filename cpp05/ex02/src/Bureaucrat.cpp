@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:26:22 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/04 12:23:44 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/04 13:20:16 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,12 @@ void Bureaucrat::signForm(AForm& form) const {
   try {
     form.beSigned(*this);
     std::cout << Layout::greenBold
-              << name_ << " signed " << form.getName() << " succesfully\n"
+              << name_ << " signed \"" << form.getName() << "\"\n"
               << Layout::reset;
   }
   catch (std::exception &e) {
     std::cout << Layout::redBold
-              << name_ << " couldn't sign " << form.getName() << " because: "
+              << name_ << " couldn't sign \"" << form.getName() << "\" because: "
               << e.what() << '\n'
               << Layout::reset;
   }
@@ -129,12 +129,12 @@ void Bureaucrat::executeForm(AForm const& form) const {
   try {
     form.execute(*this);
     std::cout << Layout::greenBold
-              << name_ << " executed " << form.getName() << "\n"
+              << name_ << " executed \"" << form.getName() << "\"\n"
               << Layout::reset;
   }
   catch (std::exception& e) {
     std::cout << Layout::redBold
-              << name_ << " couldn't execute " << form.getName() << " because: "
+              << name_ << " couldn't execute \"" << form.getName() << "\" because: "
               << e.what() << '\n'
               << Layout::reset;
   }
