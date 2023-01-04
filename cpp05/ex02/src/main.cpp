@@ -47,12 +47,12 @@ void printTestTrailer() {
 /* ************************************************************************** */
 
 void testInsertionOverloadForm(char const* message, AForm const& f) {
-    std::cout << Layout::cyanItalic
-              << message
-              << "Print form:\n"
-              << Layout::reset
-              << f 
-              << '\n';
+  std::cout << Layout::cyanItalic
+            << message
+            << "Print form:\n"
+            << Layout::reset
+            << f 
+            << '\n';
 }
 
 void testInsertionOverloadBureaucrat(char const* message, Bureaucrat const& b) {
@@ -65,11 +65,11 @@ void testInsertionOverloadBureaucrat(char const* message, Bureaucrat const& b) {
 }
 
 void testSignForm(Bureaucrat const& b, AForm& f) {
-    std::cout << Layout::cyanItalic
-              << "Let bureaucrat " << b.getName()
-              << " try to sign " << f.getName() << ":\n"
-              << Layout::reset;
-    b.signForm(f);
+  std::cout << Layout::cyanItalic
+            << "Let bureaucrat " << b.getName()
+            << " try to sign " << f.getName() << ":\n"
+            << Layout::reset;
+  b.signForm(f);
 }
 
 void testExecuteForm(Bureaucrat const& b, AForm& f) {
@@ -81,15 +81,15 @@ void testExecuteForm(Bureaucrat const& b, AForm& f) {
 }
 
 void standardExceptionHandler(std::exception& e) {
-    std::cerr << Layout::redBold
-              << "Standard exception: "
-              << e.what()
-              << '\n'
-              << Layout::reset;
+  std::cerr << Layout::redBold
+            << "Standard exception: "
+            << e.what()
+            << '\n'
+            << Layout::reset;
 }
 
 /* ************************************************************************** */
-/* Unit Tests                                                                 */
+/* Unit Tests                                                                      */
 /* ************************************************************************** */
 
 void shrubberyTests() {
