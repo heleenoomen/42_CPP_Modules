@@ -89,7 +89,7 @@ void standardExceptionHandler(std::exception& e) {
 }
 
 /* ************************************************************************** */
-/* Unit Tests                                                                      */
+/* Unit Tests                                                                 */
 /* ************************************************************************** */
 
 void shrubberyTests() {
@@ -137,9 +137,9 @@ void presidentialPardonTests() {
 /* Main                                                                       */
 /* ************************************************************************** */
 
-typedef void (*unitTest)();
+typedef void (*unitTests)();
 
-void runTests(unitTest tests) {
+void runTests(unitTests tests) {
   try {
     tests();
   }
@@ -148,7 +148,7 @@ void runTests(unitTest tests) {
   }
 }
 
-void testUnit(unitTest tests, char const* testHeader) {
+void testUnit(unitTests tests, char const* testHeader) {
   printTestHeader(testHeader);
   runTests(tests);
   printTestTrailer();
