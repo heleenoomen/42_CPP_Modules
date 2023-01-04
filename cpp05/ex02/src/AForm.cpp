@@ -1,19 +1,9 @@
 
 #include "AForm.hpp"
+#include "Layout.hpp"
 #include <iostream>
 
-
-#ifndef to_file
-static char const* greenBold = "\033[32;1m";
-static char const* resetLayout = "\033[0m";
-static char const* grey = "\033[0;2m";
-#else
-static char const* greenBold = "";
-static char const* resetLayout = "";
-static char const* grey = "";
-#endif
-
-static char const* insertionOverloadLayout = greenBold;
+static char const* insertionOverloadLayout = Layout::greenBold;
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -25,7 +15,7 @@ AForm::AForm()
     signed_(false),
     gradeRequiredToSign_(1),
     gradeRequiredToExecute_(1) {
-  std::cout << grey << "AForm default constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "AForm default constructor called\n" << Layout::reset;
   checkGrade();
 }
 
@@ -34,7 +24,7 @@ AForm::AForm(std::string const& name, int gradeToSign, int gradeToExecute)
     signed_(false),
     gradeRequiredToSign_(gradeToSign),
     gradeRequiredToExecute_(gradeToExecute) {
-  std::cout << grey << "AForm parametric constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "AForm parametric constructor called\n" << Layout::reset;
   checkGrade();
 }
 
@@ -43,13 +33,13 @@ AForm::AForm(AForm const& src)
   : name_(src.getName()),
     gradeRequiredToSign_(src.getGradeRequiredToSign()),
     gradeRequiredToExecute_(src.getGradeRequiredToExecute()) {
-  std::cout << grey << "AForm copy constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "AForm copy constructor called\n" << Layout::reset;
   *this = src;
 }
 
 /* Copy assignment operator */
 AForm& AForm::operator=(AForm const& rhs) {
-  std::cout << grey << "AForm copy assignment operator called\n" << resetLayout;
+  std::cout << Layout::grey << "AForm copy assignment operator called\n" << Layout::reset;
   if (this == &rhs)
     return *this;
   signed_ = rhs.isSigned();
@@ -58,7 +48,7 @@ AForm& AForm::operator=(AForm const& rhs) {
 
 /* Destructor */
 AForm::~AForm() {
-  std::cout << grey << "AForm destructor called\n" << resetLayout;
+  std::cout << Layout::grey << "AForm destructor called\n" << Layout::reset;
 }
 
 /* ************************************************************************** */
@@ -147,33 +137,33 @@ const char* AForm::GradeTooLowException::what() const throw() {
 }
 
 AForm::GradeTooHighException::GradeTooHighException() {
-  std::cout << grey << "AForm::GradeTooHighException default constructor\n" 
-            << " called\n" << resetLayout;
+  std::cout << Layout::grey << "AForm::GradeTooHighException default constructor\n" 
+            << " called\n" << Layout::reset;
 }
 
 AForm::GradeTooHighException::~GradeTooHighException() throw() {
-  std::cout << grey << "AForm::GradeTooHighException destructor"
-            << " called\n" << resetLayout;
+  std::cout << Layout::grey << "AForm::GradeTooHighException destructor"
+            << " called\n" << Layout::reset;
 }
 
 AForm::GradeTooLowException::GradeTooLowException() {
-  std::cout << grey << "AForm::GradeTooLowException default constructor"
-            << " called\n" << resetLayout;
+  std::cout << Layout::grey << "AForm::GradeTooLowException default constructor"
+            << " called\n" << Layout::reset;
 }
 
 AForm::GradeTooLowException::~GradeTooLowException() throw() {
-  std::cout << grey << "AForm::GradeTooLowException destructor"
-            << " called\n" << resetLayout;
+  std::cout << Layout::grey << "AForm::GradeTooLowException destructor"
+            << " called\n" << Layout::reset;
 }
 
 AForm::FormNotSignedException::FormNotSignedException() {
-  std::cout << grey << "AForm::GradeTooLowException default constructor"
-            << " called\n" << resetLayout;
+  std::cout << Layout::grey << "AForm::GradeTooLowException default constructor"
+            << " called\n" << Layout::reset;
 
 }
 AForm::FormNotSignedException::~FormNotSignedException() throw() {
-  std::cout << grey << "AForm::GradeTooLowException destructor"
-            << " called\n" << resetLayout;
+  std::cout << Layout::grey << "AForm::GradeTooLowException destructor"
+            << " called\n" << Layout::reset;
 }
 
 const char* AForm::FormNotSignedException::what() const throw() {
@@ -191,6 +181,6 @@ std::ostream& operator<<(std::ostream& o, AForm const& f) {
   f.isSigned()? o << "yes\n": o << "no\n";
   o << "Grade required to sign: " << f.getGradeRequiredToSign() << ","
     << " Grade required to execute: " << f.getGradeRequiredToExecute()
-    << resetLayout;
+    << Layout::reset;
   return o;
 }

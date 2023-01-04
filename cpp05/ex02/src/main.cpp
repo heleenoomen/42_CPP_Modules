@@ -1,6 +1,8 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "Layout.hpp"
 
 #include <iomanip>
 #include <iostream>
@@ -11,38 +13,32 @@
 /* ************************************************************************** */
 
 static int const testHeaderWidth = 56;
+static int const newLinesBeforeFirstTest = 1;
 
-#ifndef to_file
-static char const* redBold = "\033[31;1m";
-static char const* resetLayout = "\033[0m";
-static char const* cyanBold = "\033[36;1m";
-static char const* cyanItalic = "\033[36;3m";
-#else
-static char const* redBold = "";
-static char const* resetLayout = "";
-static char const* cyanBold = "";
-static char const* cyanItalic = "";
-#endif
+void printNewlinesBeforeTests() {
+  for (int i = 0; i < newLinesBeforeFirstTest; ++i)
+    std::cout << '\n';
+}
 
 void printStars() {
   for (int i = 0; i < testHeaderWidth; ++i)
-    std::cout << "*";
+    std::cout << '*';
 }
 
 void printTestHeader(char const* testname) {
-  std::cout << cyanBold;
+  std::cout << Layout::cyanBold;
   printStars();
   std::cout << "\n";
   std::cout << "* " << std::left << std::setw(testHeaderWidth - 3)
             << testname << "*\n";
   printStars();
-  std::cout << "\n" << resetLayout;
+  std::cout << "\n" << Layout::reset;
 }
 
 void printTestTrailer() {
-  std::cout << cyanBold;
+  std::cout << Layout::cyanBold;
   printStars();
-  std::cout << "\n\n\n" << resetLayout;
+  std::cout << "\n\n\n" << Layout::reset;
 }
 
 /* ************************************************************************** */
@@ -50,75 +46,53 @@ void printTestTrailer() {
 /* ************************************************************************** */
 
 void testInsertionOverloadForm(char const* message, AForm const& f) {
-    std::cout << cyanItalic
+    std::cout << Layout::cyanItalic
               << message
               << "Print form:\n"
-              << resetLayout
+              << Layout::reset
               << f 
               << '\n';
 }
 
 void testInsertionOverloadBureaucrat(char const* message, Bureaucrat const& b) {
-  std::cout << cyanItalic
+  std::cout << Layout::cyanItalic
             << message
             << "Print bureaucrat:\n"
-            << resetLayout
+            << Layout::reset
             << b 
             << '\n';
 }
 
 void testSignForm(Bureaucrat const& b, AForm& f) {
-    std::cout << cyanItalic
+    std::cout << Layout::cyanItalic
               << "Let bureaucrat " << b.getName()
               << " try to sign " << f.getName() << ":\n"
-              << resetLayout;
+              << Layout::reset;
     b.signForm(f);
 }
 
 void testExecuteForm(Bureaucrat const& b, AForm& f) {
-  std::cout << cyanItalic
+  std::cout << Layout::cyanItalic
             << "Let bureaucrat " << b.getName()
             << " try to execute " << f.getName() << ":\n"
-            << resetLayout;
+            << Layout::reset;
   b.executeForm(f);
 }
-
-// void tryToConstructForm(char const* name, int gradeToExecute,
-// int gradeToSign) {
-//   try {
-//     AForm f(name, gradeToExecute, gradeToSign);
-//     testInsertionOverloadForm("Form created. ", f);
-//   }     
-//   catch(std::exception &e) {
-//     std::cerr << redBold
-//               << "Standard exception: " << e.what() << '\n'
-//               << resetLayout;
-//   }
-// }
-
-// void tryToSignForm(char const* bureacratName, int bureacratGrade,
-// char const* formName, int gradeToSign, int gradeToExecute) {
-//   try {
-//     Bureaucrat b(bureacratName, bureacratGrade);
-//     testInsertionOverloadBureaucrat("Bureaucrat created. ", b);
-//     AForm f(formName, gradeToSign, gradeToExecute);
-//     testInsertionOverloadForm("Form created. ", f);
-//     testSignForm(b, f);
-//     testInsertionOverloadForm("", f);
-//   }
-//   catch(std::exception &e) {
-//     std::cerr << redBold
-//               << "Standard exception: " << e.what() << '\n'
-//               << resetLayout;
-//   }
-// }
 
 // /* ************************************************************************** */
 // /* Tests                                                                      */
 // /* ************************************************************************** */
 
+void standardExceptionHandler(std::exception& e) {
+    std::cerr << Layout::redBold
+              << "Standard exception: "
+              << e.what()
+              << '\n'
+              << Layout::reset;
+}
+
 void testShrubbery() {
-  printTestHeader("Execute Shrubbery Creation Form correctly");
+  printTestHeader("Execute Shrubbery Creation Form");
   try {
     Bureaucrat benji("Benji", ShrubberyCreationForm::gradeRequiredToExecute);
     testInsertionOverloadBureaucrat("Bureaucrat Benji created. ", benji);
@@ -133,15 +107,31 @@ void testShrubbery() {
     testExecuteForm(benjisSecretary, newShrubForm);
   }
   catch (std::exception& e) {
-    std::cerr << redBold
-              << "Standard exception: "
-              << e.what()
-              << '\n'
-              << resetLayout;
+    standardExceptionHandler(e);
   }
+  printTestTrailer();
 }
 
-// void test
+void testRobotomy() {
+  printTestHeader("Execute Robotomy Form");
+  try {
+    Bureaucrat joleen("Joleen", RobotomyRequestForm::gradeRequiredToExecute);
+    testInsertionOverloadBureaucrat("Bureaucrat Joleen has been created. ", joleen);
+    Bureaucrat chris("Chris", RobotomyRequestForm::gradeRequiredToSign - 3);
+    testInsertionOverloadBureaucrat("Bureaucrat Chris has been creacted. ", chris);
+    RobotomyRequestForm robotizeForm("Robotomy 17Qa", "Android Prototype 07");
+    testInsertionOverloadForm("RobotomyRequestForm has been created", robotizeForm);
+    testExecuteForm(joleen, robotizeForm);
+    testSignForm(chris, robotizeForm);
+    for (int i = 0; i < 10; ++i)
+      testExecuteForm(joleen, robotizeForm);
+    testExecuteForm(chris, robotizeForm);
+  }
+  catch (std::exception& e) {
+    standardExceptionHandler(e);
+  }
+  printTestTrailer();
+}
 
 
 /* ************************************************************************** */
@@ -149,8 +139,9 @@ void testShrubbery() {
 /* ************************************************************************** */
 
 int main() {
-
+  printNewlinesBeforeTests();
   testShrubbery();
+  testRobotomy();
   // constructFormWithValidGrades();
   // constructFormWithInvalidGrades();
   // signWithRequiredGrade();

@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/01/03 17:08:52 by hoomen           ###   ########.fr        #
+#    Updated: 2023/01/04 12:49:36 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,10 @@ CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 
 DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
+VPATH		= src
+
 SRC			=	Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp\
-					main.cpp
+					main.cpp Layout.cpp
 
 ODIR		=	obj
 OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)

@@ -1,21 +1,10 @@
 #include "RobotomyRequestForm.hpp"
+#include "Layout.hpp"
 #include <cstdlib>
 #include <climits>
 #include <fstream>
 
-#ifndef to_file
-static char const* greenBold = "\033[32;1m";
-static char const* yellowBold = "\033[33;1m";
-static char const* resetLayout = "\033[0m";
-static char const* grey = "\033[0;2m";
-#else
-static char const* greenBold = "";
-static char const* yellowBold = "";
-static char const* resetLayout = "";
-static char const* grey = "";
-#endif
-
-static char const* insertionOverloadLayout = greenBold;
+static char const* insertionOverloadLayout = Layout::greenBold;
 static int const nbrOfTrees = 10;
 
 /* ************************************************************************** */
@@ -26,7 +15,7 @@ static int const nbrOfTrees = 10;
 RobotomyRequestForm::RobotomyRequestForm()
     : AForm("Default", gradeRequiredToSign, gradeRequiredToExecute),
       target_("default") {
-  std::cout << grey << "RobotomyRequestForm default constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "RobotomyRequestForm default constructor called\n" << Layout::reset;
   checkGrade();
 }
 
@@ -34,14 +23,14 @@ RobotomyRequestForm::RobotomyRequestForm()
 RobotomyRequestForm::RobotomyRequestForm(std::string const& name)
     : AForm(name, gradeRequiredToSign, gradeRequiredToExecute),
       target_("default") {
-  std::cout << grey << "RobotomyRequestForm parametric constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "RobotomyRequestForm parametric constructor called\n" << Layout::reset;
   checkGrade();
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string const& name, std::string const& target)
     : AForm(name, gradeRequiredToSign, gradeRequiredToExecute),
       target_(target) {
-  std::cout << grey << "RobotomyRequestForm parametric constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "RobotomyRequestForm parametric constructor called\n" << Layout::reset;
   checkGrade();
 }
 
@@ -49,13 +38,13 @@ RobotomyRequestForm::RobotomyRequestForm(std::string const& name, std::string co
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const& src)
     : AForm(src.getName(), gradeRequiredToSign, gradeRequiredToExecute),
       target_(src.target_) {
-  std::cout << grey << "RobotomyRequestForm copy constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "RobotomyRequestForm copy constructor called\n" << Layout::reset;
   *this = src;
 }
 
 /* Copy assignment operator */
 RobotomyRequestForm& RobotomyRequestForm::operator=(RobotomyRequestForm const& rhs) {
-  std::cout << grey << "RobotomyRequestForm copy assignment operator called\n" << resetLayout;
+  std::cout << Layout::grey << "RobotomyRequestForm copy assignment operator called\n" << Layout::reset;
   if (this == &rhs)
     return *this;
   AForm::operator=(rhs);
@@ -64,7 +53,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(RobotomyRequestForm const& r
 
 /* Destructor */
 RobotomyRequestForm::~RobotomyRequestForm() {
-  std::cout << grey << "RobotomyRequestForm destructor called\n" << resetLayout;
+  std::cout << Layout::grey << "RobotomyRequestForm destructor called\n" << Layout::reset;
 }
 
 /* ************************************************************************** */
@@ -80,11 +69,18 @@ void RobotomyRequestForm::execute(Bureaucrat const& b) const {
 /* Private                                                                    */
 /* ************************************************************************** */
 
+/* std::rand() is a poor quality PRNG. In c++11, the best option would be to 
+   use the mersenne twister and seed it with the system clock */
 void RobotomyRequestForm::executeRobotomyRequestForm() const {
+  std::cout << Layout::magenta << "Robotomy of " << target_ << " in process... Random drilling noises: "
+            << " #$%&((^$@!@@##$&\n"
+            << Layout::reset;
   if (std::rand() % 2)
-    std::cout << greenBold << target_ << " has been robotomized succesfully\n"
-              << resetLayout;
+    std::cout << Layout::emojiRobot << " "
+              << Layout::green << target_ << " has been robotomized succesfully\n"
+              << Layout::reset;
   else
-    std::cout << yellowBold << "Robotomy of " << target_ << "failed\n"
-              << resetLayout;
+    std::cout << Layout::emojiSkull << " "
+              << Layout::yellow << "Robotomy of " << target_ << " failed\n"
+              << Layout::reset;
 }

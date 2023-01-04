@@ -6,53 +6,42 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:26:22 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/03 16:47:06 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/04 12:23:44 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "Layout.hpp"
 
 #include <iostream>
-
-  #ifndef to_file
-  static char const* greenBold = "\033[32;1m";
-  static char const* redBold = "\033[31;1m";
-  static char const* resetLayout = "\033[0m";
-  static char const* grey = "\033[0;2m";
-  #else
-  static char const* greenBold = "";
-  static char const* redBold = "";
-  static char const* resetLayout = "";
-  static char const* grey = "";
-  #endif
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
 /* ************************************************************************** */
 
 Bureaucrat::Bureaucrat() : name_("Unnamed"), grade_(150) {
-  std::cout << grey << "Bureaucrat default constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "Bureaucrat default constructor called\n" << Layout::reset;
 }
 
 Bureaucrat::Bureaucrat(std::string const& name, int grade)
     : name_(name),
       grade_(grade) {
-  std::cout << grey << "Bureaucrat parametric constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "Bureaucrat parametric constructor called\n" << Layout::reset;
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const& src) : name_(src.getName()) {
-  std::cout << grey << "Bureaucrat copy constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "Bureaucrat copy constructor called\n" << Layout::reset;
   *this = src;
 }
 
 Bureaucrat& Bureaucrat::operator=(Bureaucrat const& rhs) {
-  std::cout << grey << "Bureaucrat copy assignment operator called\n" << resetLayout;
+  std::cout << Layout::grey << "Bureaucrat copy assignment operator called\n" << Layout::reset;
   grade_ = rhs.getGrade();
   return *this;
 }
 
 Bureaucrat::~Bureaucrat() {
-  std::cout << grey << "Bureaucrat destructor called\n" << resetLayout;
+  std::cout << Layout::grey << "Bureaucrat destructor called\n" << Layout::reset;
 }
 
 /* ************************************************************************** */
@@ -98,23 +87,23 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
 }
 
 Bureaucrat::GradeTooHighException::GradeTooHighException() {
-  std::cout << grey << "Bureaucrat::GradeTooHighException default constructor\n" 
-            << resetLayout;
+  std::cout << Layout::grey << "Bureaucrat::GradeTooHighException default constructor\n" 
+            << Layout::reset;
 }
 
 Bureaucrat::GradeTooHighException::~GradeTooHighException() throw() {
-  std::cout << grey << "Bureaucrat::GradeTooHighException default destructor\n"
-            << resetLayout;
+  std::cout << Layout::grey << "Bureaucrat::GradeTooHighException default destructor\n"
+            << Layout::reset;
 }
 
 Bureaucrat::GradeTooLowException::GradeTooLowException() {
-  std::cout << grey << "Bureaucrat::GradeTooLowException default constructor\n"
-            << resetLayout;
+  std::cout << Layout::grey << "Bureaucrat::GradeTooLowException default constructor\n"
+            << Layout::reset;
 }
 
 Bureaucrat::GradeTooLowException::~GradeTooLowException() throw() {
-  std::cout << grey << "Bureaucrat::GradeTooLowException default destructor\n"
-            << resetLayout;
+  std::cout << Layout::grey << "Bureaucrat::GradeTooLowException default destructor\n"
+            << Layout::reset;
 }
 
 /* ************************************************************************** */
@@ -124,30 +113,30 @@ Bureaucrat::GradeTooLowException::~GradeTooLowException() throw() {
 void Bureaucrat::signForm(AForm& form) const {
   try {
     form.beSigned(*this);
-    std::cout << greenBold
+    std::cout << Layout::greenBold
               << name_ << " signed " << form.getName() << " succesfully\n"
-              << resetLayout;
+              << Layout::reset;
   }
   catch (std::exception &e) {
-    std::cout << redBold
+    std::cout << Layout::redBold
               << name_ << " couldn't sign " << form.getName() << " because: "
               << e.what() << '\n'
-              << resetLayout;
+              << Layout::reset;
   }
 }
 
 void Bureaucrat::executeForm(AForm const& form) const {
   try {
     form.execute(*this);
-    std::cout << greenBold
-              << name_ << " executed " << form.getName() << " succesfully\n"
-              << resetLayout;
+    std::cout << Layout::greenBold
+              << name_ << " executed " << form.getName() << "\n"
+              << Layout::reset;
   }
   catch (std::exception& e) {
-    std::cout << redBold
+    std::cout << Layout::redBold
               << name_ << " couldn't execute " << form.getName() << " because: "
               << e.what() << '\n'
-              << resetLayout;
+              << Layout::reset;
   }
 }
 
@@ -156,8 +145,8 @@ void Bureaucrat::executeForm(AForm const& form) const {
 /* ************************************************************************** */
 
 std::ostream& operator<<(std::ostream& o, Bureaucrat const& bureaucrat) {
-  o << greenBold
+  o << Layout::greenBold
     << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade()
-    << resetLayout;
+    << Layout::reset;
   return o;
 }
