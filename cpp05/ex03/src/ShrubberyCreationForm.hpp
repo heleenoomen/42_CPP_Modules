@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                          :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/03 13:01:25 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/05 19:00:18 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-#define PRESIDENTIALPARDONFORM_HPP
+#ifndef SHRUBBERYCREATIONFORM_HPP
+#define SHRUBBERYCREATIONFORM_HPP
 
 #include "AForm.hpp"
 
@@ -19,35 +19,46 @@
 #include <iostream>
 #include <fstream>
 
-class PresidentialPardonForm : public AForm {
+class ShrubberyCreationForm : public AForm {
  private:
   std::string const target_;
 
  /* private methods */
-  void executePresidentialPardonForm() const;
+    /* a) helpers */
+  std::string toString(int value) const;
+  std::string pickRandomTreeFileName() const;
+
+    /* b) private methods */
+  void openTargetFile(std::ofstream& targetFile) const;
+  void openTreeFile(std::ifstream& treeFile) const;
+  void copyTreeFileToTargetFile(std::ifstream& treeFile, std::ofstream& targetFile) const;
+  void executeShrubberyCreationForm() const;
+
+    /* c) return copy */
+  AForm* newForm() const;
 
  public:
   /* default constructor */
-  PresidentialPardonForm();
+  ShrubberyCreationForm();
   /* parametric constructor */
-  PresidentialPardonForm(std::string const& target);
-  PresidentialPardonForm(std::string const& name, std::string const& target);
+  ShrubberyCreationForm(std::string const& name);
 
   /* copy constructor */
-  PresidentialPardonForm(PresidentialPardonForm const& src);
+  ShrubberyCreationForm(ShrubberyCreationForm const& src);
 
   /* copy assignment operator */
-  PresidentialPardonForm& operator=(PresidentialPardonForm const& rhs);
+  ShrubberyCreationForm& operator=(ShrubberyCreationForm const& rhs);
 
   /* default destructor */
-  ~PresidentialPardonForm();
+  ~ShrubberyCreationForm();
 
   /* public methods */
   virtual void execute(Bureaucrat const& b) const;
 
   /* symbolic constants */
-  static int const gradeRequiredToSign = 25;
-  static int const gradeRequiredToExecute = 5;
+  static int const gradeRequiredToSign = 145;
+  static int const gradeRequiredToExecute = 137;
+  static std::string const formName;
 };
 
 #endif

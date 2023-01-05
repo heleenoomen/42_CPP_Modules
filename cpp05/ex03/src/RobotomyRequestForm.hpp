@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-#define PRESIDENTIALPARDONFORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+#define ROBOTOMYREQUESTFORM_HPP
 
 #include "AForm.hpp"
 
@@ -19,35 +19,36 @@
 #include <iostream>
 #include <fstream>
 
-class PresidentialPardonForm : public AForm {
+class RobotomyRequestForm : public AForm {
  private:
   std::string const target_;
 
  /* private methods */
-  void executePresidentialPardonForm() const;
+  AForm* newForm() const;
+  void executeRobotomyRequestForm() const;
 
  public:
   /* default constructor */
-  PresidentialPardonForm();
+  RobotomyRequestForm();
   /* parametric constructor */
-  PresidentialPardonForm(std::string const& target);
-  PresidentialPardonForm(std::string const& name, std::string const& target);
+  RobotomyRequestForm(std::string const& name);
 
   /* copy constructor */
-  PresidentialPardonForm(PresidentialPardonForm const& src);
+  RobotomyRequestForm(RobotomyRequestForm const& src);
 
   /* copy assignment operator */
-  PresidentialPardonForm& operator=(PresidentialPardonForm const& rhs);
+  RobotomyRequestForm& operator=(RobotomyRequestForm const& rhs);
 
   /* default destructor */
-  ~PresidentialPardonForm();
+  ~RobotomyRequestForm();
 
   /* public methods */
   virtual void execute(Bureaucrat const& b) const;
 
   /* symbolic constants */
-  static int const gradeRequiredToSign = 25;
-  static int const gradeRequiredToExecute = 5;
+  static int const gradeRequiredToSign = 72;
+  static int const gradeRequiredToExecute = 45;
+  static std::string const formName;
 };
 
 #endif

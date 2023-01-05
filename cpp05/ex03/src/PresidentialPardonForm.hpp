@@ -25,13 +25,13 @@ class PresidentialPardonForm : public AForm {
 
  /* private methods */
   void executePresidentialPardonForm() const;
+  AForm* newForm() const;
 
  public:
   /* default constructor */
   PresidentialPardonForm();
   /* parametric constructor */
-  PresidentialPardonForm(std::string const& target);
-  PresidentialPardonForm(std::string const& name, std::string const& target);
+  PresidentialPardonForm(std::string const& name);
 
   /* copy constructor */
   PresidentialPardonForm(PresidentialPardonForm const& src);
@@ -48,6 +48,7 @@ class PresidentialPardonForm : public AForm {
   /* symbolic constants */
   static int const gradeRequiredToSign = 25;
   static int const gradeRequiredToExecute = 5;
+  static std::string const formName;
 };
 
 #endif

@@ -62,6 +62,11 @@ void ShrubberyCreationForm::execute(Bureaucrat const& b) const {
 /* Private                                                                    */
 /* ************************************************************************** */
 
+AForm* ShrubberyCreationForm::newForm() const {
+  ShrubberyCreationForm* newForm = new ShrubberyCreationForm(*this);
+  return newForm;
+}
+
 /* Unfortunately, we are not allowed to use std::to_string(), because it is
    part of c++11. Therefore, we created this simple imitation.
 */

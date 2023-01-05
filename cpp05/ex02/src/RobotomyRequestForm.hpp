@@ -24,22 +24,13 @@ class RobotomyRequestForm : public AForm {
   std::string const target_;
 
  /* private methods */
-    /* a) helpers */
-  std::string toString(int value) const;
-  std::string pickRandomTreeFileName() const;
-
-    /* b) private methods */
-  void openTargetFile(std::ofstream& targetFile) const;
-  void openTreeFile(std::ifstream& treeFile) const;
-  void copyTreeFileToTargetFile(std::ifstream& treeFile, std::ofstream& targetFile) const;
   void executeRobotomyRequestForm() const;
 
  public:
   /* default constructor */
   RobotomyRequestForm();
   /* parametric constructor */
-  RobotomyRequestForm(std::string const& name);
-  RobotomyRequestForm(std::string const& name, std::string const& target);
+  RobotomyRequestForm(std::string const& target);
 
   /* copy constructor */
   RobotomyRequestForm(RobotomyRequestForm const& src);
@@ -56,6 +47,7 @@ class RobotomyRequestForm : public AForm {
   /* symbolic constants */
   static int const gradeRequiredToSign = 72;
   static int const gradeRequiredToExecute = 45;
+  static std::string const formName;
 };
 
 #endif

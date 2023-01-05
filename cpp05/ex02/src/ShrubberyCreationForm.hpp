@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/03 13:01:25 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/05 17:55:35 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,10 @@
 class ShrubberyCreationForm : public AForm {
  private:
   std::string const target_;
-
+  
  /* private methods */
-    /* a) helpers */
   std::string toString(int value) const;
   std::string pickRandomTreeFileName() const;
-
-    /* b) private methods */
   void openTargetFile(std::ofstream& targetFile) const;
   void openTreeFile(std::ifstream& treeFile) const;
   void copyTreeFileToTargetFile(std::ifstream& treeFile, std::ofstream& targetFile) const;
@@ -56,6 +53,8 @@ class ShrubberyCreationForm : public AForm {
   /* symbolic constants */
   static int const gradeRequiredToSign = 145;
   static int const gradeRequiredToExecute = 137;
+  static std::string const formName;
+
 };
 
 #endif

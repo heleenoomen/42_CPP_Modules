@@ -4,21 +4,23 @@
 #include <climits>
 #include <fstream>
 
+std::string const PresidentialPardonForm::formName = "Presidential Pardon";
+
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
 /* ************************************************************************** */
 
 /* Default constructor */
 PresidentialPardonForm::PresidentialPardonForm()
-    : AForm("Default", gradeRequiredToSign, gradeRequiredToExecute),
+    : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_("default") {
   std::cout << Layout::grey << "PresidentialPardonForm default constructor called\n" << Layout::reset;
   checkGrade();
 }
 
-/* Parametric constructor */
+/* Parametric constructors */
 PresidentialPardonForm::PresidentialPardonForm(std::string const& target)
-    : AForm("Presidential Pardon Form", gradeRequiredToSign, gradeRequiredToExecute),
+    : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_(target) {
   std::cout << Layout::grey << "PresidentialPardonForm parametric constructor called\n" << Layout::reset;
   checkGrade();
@@ -63,4 +65,9 @@ void PresidentialPardonForm::executePresidentialPardonForm() const {
   std::cout << Layout::brightYellow
             << target_ << " has been pardoned by Zaphod Beeblebrox\n"
             << Layout::reset;
+}
+
+AForm* PresidentialPardonForm::newForm() const {
+  PresidentialPardonForm* newForm = new PresidentialPardonForm(*this);
+  return newForm;
 }

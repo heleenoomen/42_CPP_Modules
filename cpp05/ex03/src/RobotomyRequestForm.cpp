@@ -10,14 +10,15 @@ std::string const RobotomyRequestForm::formName = "Robotomy Request";
 /* Orthodox canonical form                                                    */
 /* ************************************************************************** */
 
-/* Parametric constructors */
+/* Default constructor */
 RobotomyRequestForm::RobotomyRequestForm()
     : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
-      target_("Default") {
-  std::cout << Layout::grey << "RobotomyRequestForm parametric constructor called\n" << Layout::reset;
+      target_("default") {
+  std::cout << Layout::grey << "RobotomyRequestForm default constructor called\n" << Layout::reset;
   checkGrade();
 }
 
+/* Parametric constructors */
 RobotomyRequestForm::RobotomyRequestForm(std::string const& target)
     : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_(target) {
@@ -59,6 +60,11 @@ void RobotomyRequestForm::execute(Bureaucrat const& b) const {
 /* ************************************************************************** */
 /* Private                                                                    */
 /* ************************************************************************** */
+
+AForm* RobotomyRequestForm::newForm() const {
+  RobotomyRequestForm* newForm = new RobotomyRequestForm(*this);
+  return newForm;
+}
 
 /* std::rand() is a poor quality PRNG. In c++11, the best option would be to 
    use the mersenne twister and seed it with the system clock */
