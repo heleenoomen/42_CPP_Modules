@@ -3,6 +3,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 #include "Layout.hpp"
 
 #include <iomanip>
@@ -39,16 +40,16 @@ void printTestHeader(char const* testname) {
 void printTestTrailer() {
   std::cout << Layout::cyanBold;
   printStars();
-  std::cout << "\n\n\n" << Layout::reset;
+  std::cout << "\n\n\n" 
+            << Layout::reset;
 }
 
 /* ************************************************************************** */
 /* Test utils                                                                 */
 /* ************************************************************************** */
 
-void testInsertionOverloadForm(char const* message, AForm const& f) {
+void testInsertionOverloadForm(AForm const& f) {
   std::cout << Layout::cyanItalic
-            << message
             << "Print form:\n"
             << Layout::reset
             << f 
@@ -80,6 +81,19 @@ void testExecuteForm(Bureaucrat const& b, AForm& f) {
   b.executeForm(f);
 }
 
+AForm* testInternCreateForm(std::string const& formName,
+std::string const& target) {
+  Intern i;
+  std::cout << Layout::cyanItalic
+            << "An intern was created. "
+            << "Let intern try to create form \"" << formName << "\""
+            << " with target " << target << ":\n"
+            << Layout::reset;
+  AForm* form = i.makeForm(formName, target);
+  testInsertionOverloadForm(*form);
+  return form;
+}
+
 void standardExceptionHandler(std::exception& e) {
   std::cerr << Layout::redBold
             << "Standard exception: "
@@ -89,48 +103,35 @@ void standardExceptionHandler(std::exception& e) {
 }
 
 /* ************************************************************************** */
-/* Unit Tests                                                                      */
+/* Unit Tests                                                                 */
 /* ************************************************************************** */
 
-void shrubberyTests() {
-    Bureaucrat benji("Benji", ShrubberyCreationForm::gradeRequiredToExecute);
+void testFormsWithIntern(std::string const& formName, std::string const& target) {
+    Bureaucrat benji("Benji", 1);
     testInsertionOverloadBureaucrat("Bureaucrat Benji created. ", benji);
-    Bureaucrat benjisSecretary("Benji's secretary", ShrubberyCreationForm::gradeRequiredToSign);
+    Bureaucrat benjisSecretary("Benji's secretary", 3);
     testInsertionOverloadBureaucrat("Bureaucrat Benji's secretary created. ", benjisSecretary);
-    ShrubberyCreationForm newShrubForm("City Park 789");
-    testInsertionOverloadForm("Shrubbery Plan 13b created. ", newShrubForm);
-    testExecuteForm(benji, newShrubForm);
-    testSignForm(benjisSecretary, newShrubForm);
-    testExecuteForm(benji, newShrubForm);
-    testExecuteForm(benji, newShrubForm);
-    testExecuteForm(benjisSecretary, newShrubForm);
+    AForm* form = testInternCreateForm(formName, target);
+    testExecuteForm(benji, *form);
+    testSignForm(benjisSecretary, *form);
+    testExecuteForm(benji, *form);
+    delete form;
 }
 
-void robotomyTests() {
-    Bureaucrat joleen("Joleen", RobotomyRequestForm::gradeRequiredToExecute);
-    testInsertionOverloadBureaucrat("Bureaucrat Joleen has been created. ", joleen);
-    Bureaucrat chris("Chris", RobotomyRequestForm::gradeRequiredToSign - 3);
-    testInsertionOverloadBureaucrat("Bureaucrat Chris has been creacted. ", chris);
-    RobotomyRequestForm robotizeForm("Android Prototype 07");
-    testInsertionOverloadForm("RobotomyRequestForm has been created", robotizeForm);
-    testExecuteForm(joleen, robotizeForm);
-    testSignForm(chris, robotizeForm);
-    for (int i = 0; i < 10; ++i)
-      testExecuteForm(joleen, robotizeForm);
-    testExecuteForm(chris, robotizeForm);
+void shrubberyTestsWithIntern() {
+  testFormsWithIntern(ShrubberyCreationForm::formName, "Green area 42b");
 }
 
-void presidentialPardonTests() {
-    Bureaucrat undersec1("Undersecretary Gustav", PresidentialPardonForm::gradeRequiredToExecute - 1);
-    testInsertionOverloadBureaucrat("Undersecretary Gustav created. ", undersec1);
-    Bureaucrat technocrat("Technocrat Claude", PresidentialPardonForm::gradeRequiredToSign - 2);
-    testInsertionOverloadBureaucrat("Technocrat Claude created. ", technocrat);
-    PresidentialPardonForm pardonForm("Jacob DeLuny");
-    testInsertionOverloadForm("Presidential Pardon Form created. ", pardonForm);
-    testExecuteForm(undersec1, pardonForm);
-    testSignForm(technocrat, pardonForm);
-    testExecuteForm(technocrat, pardonForm);
-    testExecuteForm(undersec1, pardonForm);
+void robotomyTestsWithIntern() {
+  testFormsWithIntern(RobotomyRequestForm::formName, "Prototyp sed14a.1");
+}
+
+void pardonTestsWithIntern() {
+  testFormsWithIntern(PresidentialPardonForm::formName, "Ilias Barnaby");
+}
+
+void nonExistingFormTest() {
+  testFormsWithIntern("Some Misspelled Form Name", "Jojo 994b");
 }
 
 /* ************************************************************************** */
@@ -156,8 +157,11 @@ void testUnit(unitTest tests, char const* testHeader) {
 
 int main() {
   printUnitTestHeader();
-  testUnit(&shrubberyTests, "Test Execute Shrubbery Creation Form");
-  testUnit(&robotomyTests, "Test Execute Robotomy Form");
-  testUnit(&presidentialPardonTests, "Test Execute Presidential Pardon Form");
+  testUnit(&shrubberyTestsWithIntern, "Test Shrubbery Creation Form With Intern");
+  testUnit(&robotomyTestsWithIntern, "Test Robotomy Form With Intern");
+  testUnit(&pardonTestsWithIntern, "Test Presidential Pardon Form With Intern");
+  testUnit(&nonExistingFormTest, "Test Non Existing Form With Intern");
+  std::cout << Layout::reset;
+  system("leaks bureaucrats");
   return 0;
 }
