@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:12:11 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/06 17:39:24 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 19:25:58 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ FragTrap::FragTrap(FragTrap const& src) : ClapTrap(src) {
 }
 
 FragTrap& FragTrap::operator=(FragTrap const& rhs) {
-  std::cout << "FragTrap copy assignment operator called, assigning " << rhs.getName()
-            << '\n';
+  std::cout << "FragTrap copy assignment operator called, assigning "
+            << rhs.getName() << '\n';
   ClapTrap::operator=(rhs);
   return *this;
 }

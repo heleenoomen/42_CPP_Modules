@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:12:11 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 16:12:40 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 19:24:56 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,25 @@
 #include <iostream>
 
 ScavTrap::ScavTrap::ScavTrap() : ClapTrap("default", 100, 50, 20) {
-  std::cout << "ScavTrap default constructor called" << std::endl;
+  std::cout << "ScavTrap default constructor called\n";
   return;
 }
 
 ScavTrap::ScavTrap::ScavTrap(std::string const& name)
     : ClapTrap(name, 100, 50, 20) {
   std::cout << "ScavTrap parametric constructor called for " << getName()
-            << std::endl;
+            << '\n';
   return;
 }
 
 ScavTrap::ScavTrap(ScavTrap const& src) : ClapTrap(src) {
-  std::cout << "ScavTrap copy constructor called for " << getName()
-            << std::endl;
+  std::cout << "ScavTrap copy constructor called for " << getName() << '\n';
   return;
 }
 
 ScavTrap& ScavTrap::operator=(ScavTrap const& rhs) {
   std::cout << "ScavTrap assignment operator overload called for "
-            << rhs.getName() << std::endl;
+            << rhs.getName() << '\n';
   ClapTrap::operator=(rhs);
   return *this;
 }
@@ -44,8 +43,7 @@ ScavTrap::~ScavTrap() {
 }
 
 void ScavTrap::guardGate() const {
-  std::cout << "ScavTrap " << getName() << " is now in gatekeeper mode."
-            << std::endl;
+  std::cout << "ScavTrap " << getName() << " is now in gatekeeper mode.\n";
   return;
 }
 
@@ -62,5 +60,5 @@ void ScavTrap::attack(std::string const& target) {
   std::cout << " of damage! ScavTrap " << getName() << " has "
             << getEnergyPoints() << " energy";
   printPoints(getEnergyPoints());
-  std::cout << " left." << std::endl;
+  std::cout << " left.\n";
 }

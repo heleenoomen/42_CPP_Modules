@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:31:32 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/06 17:26:49 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 19:25:35 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ ClapTrap::ClapTrap()
   return;
 }
 
+ClapTrap::ClapTrap(std::string const& name)
+    : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+  std::cout << "ClapTrap string constructor called for " << _name << '\n';
+  return;
+}
+
 ClapTrap::ClapTrap(ClapTrap const& src) {
   std::cout << "ClapTrap copy constructor called, copying " << src.getName()
             << '\n';
@@ -31,11 +37,9 @@ ClapTrap::ClapTrap(ClapTrap const& src) {
   return;
 }
 
-ClapTrap::ClapTrap(std::string const& name)
-    : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-  std::cout << "ClapTrap string constructor called for " << _name << '\n';
-  return;
-}
+/* ************************************************************************** */
+/* PROTECTED CONSTRUCTOR (FOR DERIVED CLASSES ONLY)                           */
+/* ************************************************************************** */
 
 ClapTrap::ClapTrap(std::string const& name, int hitPoints, int energyPoints,
                    int attackDamage)
@@ -44,7 +48,8 @@ ClapTrap::ClapTrap(std::string const& name, int hitPoints, int energyPoints,
       _energyPoints(energyPoints),
       _attackDamage(attackDamage) {
   std::cout << "ClapTrap parametric constructor called (string + int + int + "
-               "int) for " << _name << '\n';
+               "int) for "
+            << _name << '\n';
   return;
 }
 

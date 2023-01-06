@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:31:32 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/06 17:19:05 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 19:23:13 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,7 @@
 
 ClapTrap::ClapTrap()
     : _name("default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-  std::cout << "ClapTrap default constructor called for " << _name << '\n';
-  return;
-}
-
-ClapTrap::ClapTrap(ClapTrap const& src) {
-  std::cout << "ClapTrap copy constructor called for " << src.getName() << '\n';
-  *this = src;
+  std::cout << "ClapTrap default constructor called\n";
   return;
 }
 
@@ -48,15 +42,21 @@ ClapTrap::ClapTrap(std::string const& name, int hitPoints, int energyPoints,
   return;
 }
 
+ClapTrap::ClapTrap(ClapTrap const& src) {
+  std::cout << "ClapTrap copy constructor called, copying " << src.getName()
+            << '\n';
+  *this = src;
+  return;
+}
+
 /* ************************************************************************** */
 /* ASSIGNMENT OPERATOR                                                        */
 /* ************************************************************************** */
 
 ClapTrap& ClapTrap::operator=(ClapTrap const& rhs) {
-  std::cout << "ClapTrap assignment operator overload called, assigning " 
+  std::cout << "ClapTrap assignment operator overload called, assigning "
             << rhs.getName() << '\n';
-  if (this == &rhs)
-    return *this;
+  if (this == &rhs) return *this;
   _name = rhs.getName();
   _hitPoints = rhs.getHitPoints();
   _energyPoints = rhs.getEnergyPoints();
@@ -118,7 +118,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
   if (_hitPoints < 0) _hitPoints = 0;
   std::cout << ". ClapTrap " << _name << " has " << _hitPoints << " hit";
   printPoints(_hitPoints);
-  std::cout << " left." << '\n';
+  std::cout << " left.\n";
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {

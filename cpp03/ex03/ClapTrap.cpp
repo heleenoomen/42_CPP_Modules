@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:31:32 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/06 15:46:42 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 19:47:05 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ ClapTrap::ClapTrap()
 }
 
 ClapTrap::ClapTrap(ClapTrap const& src) {
-  std::cout << "ClapTrap copy constructor called, copying " << src.getName() << '\n';
+  std::cout << "ClapTrap copy constructor called, copying " << src.getName()
+            << '\n';
   *this = src;
   return;
 }
@@ -36,14 +37,6 @@ ClapTrap::ClapTrap(std::string const& name)
   return;
 }
 
-ClapTrap::ClapTrap(int hitPoints, int energyPoints, int attackDamage)
-    : _name("Default"),
-      _hitPoints(hitPoints),
-      _energyPoints(energyPoints),
-      _attackDamage(attackDamage) {
-  std::cout << "ClapTrap int constructor called for " << _name << '\n';
-}
-
 ClapTrap::ClapTrap(std::string const& name, int hitPoints, int energyPoints,
                    int attackDamage)
     : _name(name),
@@ -51,7 +44,8 @@ ClapTrap::ClapTrap(std::string const& name, int hitPoints, int energyPoints,
       _energyPoints(energyPoints),
       _attackDamage(attackDamage) {
   std::cout << "ClapTrap parametric constructor called (string + int + int + "
-               "int) for " << _name << '\n';
+               "int) for "
+            << _name << '\n';
   return;
 }
 
@@ -62,8 +56,7 @@ ClapTrap::ClapTrap(std::string const& name, int hitPoints, int energyPoints,
 ClapTrap& ClapTrap::operator=(ClapTrap const& rhs) {
   std::cout << "ClapTrap copy assignment operator called, assigning "
             << rhs.getName() << '\n';
-  if (this == &rhs)
-    return *this;
+  if (this == &rhs) return *this;
   _name = rhs.getName();
   _hitPoints = rhs.getHitPoints();
   _energyPoints = rhs.getEnergyPoints();
@@ -148,8 +141,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
   }
   if (_hitPoints + amount > 10) {
     std::cout << "ClapTrap " << _name
-              << " cannot be repaired to have more than 10 hit points."
-              << std::endl;
+              << " cannot be repaired to have more than 10 hit points.\n";
     return;
   }
   _hitPoints += amount;
@@ -161,7 +153,7 @@ void ClapTrap::beRepaired(unsigned int amount) {
   printPoints(_hitPoints);
   std::cout << " and " << _energyPoints << " energy";
   printPoints(_energyPoints);
-  std::cout << " left!" << std::endl;
+  std::cout << " left!\n";
 }
 
 /* ************************************************************************** */

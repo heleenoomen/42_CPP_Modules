@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:12:11 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/06 17:55:46 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 19:45:16 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,18 @@ FragTrap::FragTrap() {
   setHitPoints(FragTrap::_hitPoints);
   setEnergyPoints(FragTrap::_energyPoints);
   setAttackDamage(FragTrap::_attackDamage);
-  // setHitPoints(100);
-  // if (getEnergyPoints() == 10) setEnergyPoints(100);
-  // setAttackDamage(30);
   return;
 }
 
 FragTrap::FragTrap(std::string const& name) : ClapTrap(name) {
+  std::cout << "FragTrap parametric constructor called for " << getName()
+            << '\n';
   FragTrap::_hitPoints = 100;
   FragTrap::_energyPoints = 100;
   FragTrap::_attackDamage = 30;
   setHitPoints(FragTrap::_hitPoints);
   setEnergyPoints(FragTrap::_energyPoints);
   setAttackDamage(FragTrap::_attackDamage);
-  // setHitPoints(100);
-  // if (getEnergyPoints() == 10) setEnergyPoints(100);
-  // setAttackDamage(30);
-  std::cout << "FragTrap parametric constructor called for " << getName()
-            << '\n';
   return;
 }
 
@@ -52,8 +46,7 @@ FragTrap::FragTrap(FragTrap const& src) : ClapTrap(src) {
 FragTrap& FragTrap::operator=(FragTrap const& rhs) {
   std::cout << "FragTrap copy assignment operator called, assigning "
             << rhs.getName() << '\n';
-  if (this == &rhs)
-    return *this;
+  if (this == &rhs) return *this;
   ClapTrap::operator=(rhs);
   FragTrap::_hitPoints = rhs.FragTrap::_hitPoints;
   FragTrap::_energyPoints = rhs.FragTrap::_energyPoints;

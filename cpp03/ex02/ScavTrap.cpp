@@ -6,31 +6,34 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:12:11 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/06 17:36:02 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 19:26:44 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
+
 #include <iostream>
 
 ScavTrap::ScavTrap::ScavTrap() : ClapTrap("default", 100, 50, 20) {
-  std::cout << "ScavTrap default constructor called for "<< getName() << '\n';
+  std::cout << "ScavTrap default constructor called for " << getName() << '\n';
   return;
 }
 
-ScavTrap::ScavTrap::ScavTrap(std::string const& name) : ClapTrap(name, 100, 50, 20) {
-  std::cout << "ScavTrap parametric constructor called for " << getName() << '\n';
+ScavTrap::ScavTrap::ScavTrap(std::string const& name)
+    : ClapTrap(name, 100, 50, 20) {
+  std::cout << "ScavTrap parametric constructor called for " << getName()
+            << '\n';
   return;
 }
 
 ScavTrap::ScavTrap(ScavTrap const& src) : ClapTrap(src) {
-  std::cout << "ScavTrap copy constructor called for "<< getName() << '\n';
+  std::cout << "ScavTrap copy constructor called for " << getName() << '\n';
   return;
 }
 
 ScavTrap& ScavTrap::operator=(ScavTrap const& rhs) {
-  std::cout << "ScavTrap assignment operator overload called for " << rhs.getName()
-            << '\n';
+  std::cout << "ScavTrap assignment operator overload called for "
+            << rhs.getName() << '\n';
   ClapTrap::operator=(rhs);
   return *this;
 }
@@ -40,7 +43,7 @@ ScavTrap::~ScavTrap() {
 }
 
 void ScavTrap::guardGate() const {
-  std::cout<< "ScavTrap " << getName() << " is now in gatekeeper mode." << '\n';
+  std::cout << "ScavTrap " << getName() << " is now in gatekeeper mode.\n";
   return;
 }
 
@@ -48,12 +51,14 @@ void ScavTrap::attack(std::string const& target) {
   if (getHitPoints() == 0 || getEnergyPoints() == 0) {
     std::cout << "ScavTrap " << getName() << " cannot attack: ";
     noPointsLeft();
-    return ;
-    }
+    return;
+  }
   decrEnergyPoints();
-  std::cout << "ScavTrap "<<getName()<<" attacks "<< target <<", causing "<<getAttackDamage();
+  std::cout << "ScavTrap " << getName() << " attacks " << target << ", causing "
+            << getAttackDamage();
   printPoints(getAttackDamage());
-  std::cout << " of damage! ScavTrap " << getName() << " has " << getEnergyPoints() << " energy";
+  std::cout << " of damage! ScavTrap " << getName() << " has "
+            << getEnergyPoints() << " energy";
   printPoints(getEnergyPoints());
   std::cout << " left.\n";
 }
