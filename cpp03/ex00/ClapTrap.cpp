@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:31:32 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 16:10:08 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 17:07:07 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@
 
 ClapTrap::ClapTrap()
     : _name("default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-  std::cout << "Default constructor called" << std::endl;
+  std::cout << "Default constructor called for " << _name << '\n';
   return;
 }
 
 ClapTrap::ClapTrap(ClapTrap const& src) {
-  std::cout << "Copy constructor called" << std::endl;
+  std::cout << "Copy constructor called, copying " << src.getName() << '\n';
   *this = src;
   return;
 }
 
 ClapTrap::ClapTrap(std::string const& name)
     : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
-  std::cout << "String constructor called" << std::endl;
+  std::cout << "String constructor called for " << _name << '\n';
   return;
 }
 
@@ -41,7 +41,10 @@ ClapTrap::ClapTrap(std::string const& name)
 /* ************************************************************************** */
 
 ClapTrap& ClapTrap::operator=(ClapTrap const& rhs) {
-  std::cout << "Assignment operator overload called" << std::endl;
+  std::cout << "Assignment operator overload called, assigning "
+            << rhs.getName() << '\n';
+  if (this == &rhs)
+    return *this;
   _name = rhs.getName();
   _hitPoints = rhs.getHitPoints();
   _energyPoints = rhs.getEnergyPoints();
@@ -53,7 +56,9 @@ ClapTrap& ClapTrap::operator=(ClapTrap const& rhs) {
 /* DESTRUCTOR                                                                 */
 /* ************************************************************************** */
 
-ClapTrap::~ClapTrap() { std::cout << "Destructor called" << std::endl; }
+ClapTrap::~ClapTrap() {
+  std::cout << "Destructor called for " << _name << '\n';
+}
 
 /* ************************************************************************** */
 /* GETTERS                                                                    */

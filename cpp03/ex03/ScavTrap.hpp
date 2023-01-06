@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:12:11 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 17:05:07 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 18:02:53 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include "ClapTrap.hpp"
 
 class ScavTrap : virtual public ClapTrap {
+ protected:
+  int _hitPoints;
+  int _attackDamage;
+  int _energyPoints;
+
  public:
   ScavTrap();
   ScavTrap(std::string const& name);

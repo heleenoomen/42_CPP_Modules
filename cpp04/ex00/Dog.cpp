@@ -16,24 +16,24 @@
 
 /* Default constructor */
 Dog::Dog() {
-  std::cout << "Dog default constructor called" << std::endl;
+  std::cout << "Dog default constructor called\n";
   _type = "Dog";
 }
 
 /* Copy constructor */
 Dog::Dog(Dog const& src) : Animal(src) {
-  std::cout << "Dog copy constructor called, type is " << _type << std::endl;
+  std::cout << "Dog copy constructor called, type is " << _type << '\n';
 }
 
 /* Copy assignment operator */
 Dog& Dog::operator=(Dog const& rhs) {
-  std::cout << "Dog copy assignment operator called" << std::endl;
+  std::cout << "Dog copy assignment operator called\n";
   Animal::operator=(rhs);
   return *this;
 }
 
 /* Destructor */
-Dog::~Dog() { std::cout << "Dog destructor called" << std::endl; }
+Dog::~Dog() { std::cout << "Dog destructor called\n"; }
 
 /* Public methods */
-void Dog::makeSound() const { std::cout << "Woof!" << std::endl; }
+void Dog::makeSound() const { std::cout << "Woof!\n"; }
