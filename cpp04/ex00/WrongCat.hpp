@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:40:26 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 11:14:02 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/08 16:44:16 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 class WrongCat : public WrongAnimal {
  protected:
-  std::string _type;
+  std::string type_;
 
  public:
   /* default constructor */

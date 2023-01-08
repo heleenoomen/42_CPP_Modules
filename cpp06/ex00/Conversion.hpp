@@ -1,41 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Conversion.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 09:40:26 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/08 16:42:43 by hoomen           ###   ########.fr       */
+/*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
+/*   Updated: 2022/12/21 17:49:46 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef CONVERSION_HPP
+#define CONVERSION_HPP
 
 #include <string>
+// #include <iostream>
 
-class Animal {
- protected:
-  std::string type_;
+class Conversion {
+ //private:
+  std::string const input_;
+  std::string const inputType;
+
+ //protected:
 
  public:
   /* default constructor */
-  Animal();
+  Conversion();
+  Conversion(std::string const& input);
 
   /* copy constructor */
-  Animal(Animal const& src);
+  Conversion(Conversion const& src);
 
   /* copy assignment operator */
-  Animal& operator=(Animal const& rhs);
+  Conversion& operator=(Conversion const& rhs);
 
-  /* destructor */
-  virtual ~Animal();
+  /* default destructor */
+  ~Conversion();
 
-  /* getter */
-  virtual std::string const& getType() const;
+  /* getters */
+  std::string const& getInput() const;
 
-  virtual void makeSound() const;
+  /* setters */
 };
+
+/* insertion operator */
+// std::ostream& operator<<(std::ostream& o, Conversion const& cname);
 
 #endif

@@ -17,7 +17,7 @@
 /* Default constructor */
 Cat::Cat() {
   std::cout << "Cat default constructor called\n";
-  _type = "Cat";
+  type_ = "Cat";
 }
 
 /* Copy constructor */
@@ -36,4 +36,4 @@ Cat& Cat::operator=(Cat const& rhs) {
 Cat::~Cat() { std::cout << "Cat destructor called\n"; }
 
 /* Public method */
-void Cat::makeSound() const { std::cout << "Meow\n";}
+void Cat::makeSound() const { std::cout << "Meow\n"; }

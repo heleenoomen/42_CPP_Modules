@@ -17,12 +17,12 @@
 /* Default constructor */
 Dog::Dog() {
   std::cout << "Dog default constructor called\n";
-  _type = "Dog";
+  type_ = "Dog";
 }
 
 /* Copy constructor */
 Dog::Dog(Dog const& src) : Animal(src) {
-  std::cout << "Dog copy constructor called, type is " << _type << '\n';
+  std::cout << "Dog copy constructor called, type is " << type_ << '\n';
 }
 
 /* Copy assignment operator */
