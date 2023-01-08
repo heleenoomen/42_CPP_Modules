@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AAnimal.hpp                                         :+:      :+:    :+:   */
+/*   AAnimal.hpp                                         :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:40:26 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 18:39:08 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/08 17:26:47 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class AAnimal {
  protected:
-  std::string _type;
+  std::string type_;
 
  public:
   /* default constructor */
@@ -34,6 +34,10 @@ class AAnimal {
 
   /* getters */
   std::string const& getType() const;
+  virtual std::string const& getIdea(int index) const;
+
+  /* setter */
+  virtual void setIdea(int index, std::string const& idea);
 
   /* public method */
   virtual void makeSound() const = 0;
