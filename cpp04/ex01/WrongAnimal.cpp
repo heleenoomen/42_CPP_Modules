@@ -16,7 +16,7 @@
 #include <iostream>
 
 /* Default constructor */
-WrongAnimal::WrongAnimal() : _type("") {
+WrongAnimal::WrongAnimal() : type_("") {
   std::cout << "WrongAnimal default constructor called" << std::endl;
 }
 
@@ -29,7 +29,7 @@ WrongAnimal::WrongAnimal(WrongAnimal const& src) {
 /* Copy assignment operator */
 WrongAnimal& WrongAnimal::operator=(WrongAnimal const& rhs) {
   std::cout << "WrongAnimal copy assignment operator called" << std::endl;
-  _type = rhs.getType();
+  type_ = rhs.getType();
   return *this;
 }
 
@@ -39,7 +39,7 @@ WrongAnimal::~WrongAnimal() {
 }
 
 /* Getter */
-std::string const& WrongAnimal::getType() const { return _type; }
+std::string const& WrongAnimal::getType() const { return type_; }
 
 /* Public method */
 void WrongAnimal::makeSound() const { std::cout << "???" << std::endl; }

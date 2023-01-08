@@ -20,7 +20,7 @@
 
 class Cat : public Animal {
  private:
-  Brain* _brain;
+  Brain* brain_;
 
  public:
   /* default constructor */

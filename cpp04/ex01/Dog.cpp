@@ -17,46 +17,39 @@
 /* Default constructor */
 Dog::Dog() {
   std::cout << "Dog default constructor called" << std::endl;
-  _type = "Dog";
-  _brain = new Brain;
-  for (int i = 0; i < 100; i++) {
-    setIdea(i, "");
-  }
+  type_ = "Dog";
+  brain_ = new Brain;
 }
 
 /* Copy constructor */
 Dog::Dog(Dog const& src) : Animal(src) {
   std::cout << "Dog copy constructor called" << std::endl;
-  _brain = new Brain;
-  *_brain = *src._brain;
+  brain_ = new Brain;
+  *brain_ = *src.brain_;
 }
 
 /* Copy assignment operator */
 Dog& Dog::operator=(Dog const& rhs) {
   std::cout << "Dog copy assignment operator called" << std::endl;
-  _type = rhs.getType();
-  *_brain = *rhs._brain;
+  if (this == &rhs) return *this;
+  type_ = rhs.getType();
+  *brain_ = *rhs.brain_;
   return *this;
 }
 
 /* Destructor */
 Dog::~Dog() {
   std::cout << "Dog destructor called" << std::endl;
-  delete _brain;
-  }
+  delete brain_;
+}
 
 /* Getters */
-std::string const& Dog::getIdea(int i) const { return _brain->getIdea(i); }
+std::string const& Dog::getIdea(int i) const { return brain_->getIdea(i); }
 
 /* Set idea */
-void Dog::setIdea(int i, std::string const& idea) { _brain->setIdea(i, idea); }
+void Dog::setIdea(int i, std::string const& idea) { brain_->setIdea(i, idea); }
 
 /* Public methods */
 void Dog::makeSound() const { std::cout << "Woof!" << std::endl; }
 
-void Dog::printIdeas() const {
-  for (int i = 0; i < 100; i++) {
-    if (getIdea(i) != "")
-      std::cout << "Idea " << i << ": " << getIdea(i) << std::endl;
-  }
-}
+void Dog::printIdeas() const { brain_->printIdeas(); }
