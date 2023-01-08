@@ -11,16 +11,19 @@
 /* ************************************************************************** */
 
 #include "MateriaSource.hpp"
+#include "Layout.hpp"
 
 #include <iostream>
 
 MateriaSource::MateriaSource() : _nbrOfAmaterias(0) {
-  std::cout << "MateriaSource default constructor called" << std::endl;
+  std::cout << Layout::grey << "MateriaSource default constructor called\n"
+            << Layout::reset;
   _setAllMateriasToNull();
 }
 
 MateriaSource::MateriaSource(MateriaSource const& src) {
-  std::cout << "MateriaSource copy constructor called" << std::endl;
+  std::cout << Layout::grey << "MateriaSource copy constructor called\n"
+            << Layout::reset;
   _setAllMateriasToNull();
   *this = src;
 }
@@ -34,7 +37,8 @@ MateriaSource& MateriaSource::operator=(MateriaSource const& src) {
 }
 
 MateriaSource::~MateriaSource() {
-  std::cout << "MateriaSource destructor called" << std::endl;
+  std::cout << Layout::grey << "MateriaSource destructor called\n"
+            << Layout::reset;
   _deleteAllMaterias();
 }
 

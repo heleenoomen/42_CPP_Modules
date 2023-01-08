@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:35:43 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/12 12:46:31 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/08 19:46:16 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class ICharacter;
 
 class AMateria {
  protected:
-  std::string _type;
+  std::string type_;
 
  public:
   /* constructors */
@@ -39,7 +39,7 @@ class AMateria {
 
   /* getter */
   std::string const & getType() const;
-  bool _typeDoesNotExist() const;
+  bool typeDoesNotExist() const;
 
   /* methods */
   virtual AMateria* clone() const = 0;
