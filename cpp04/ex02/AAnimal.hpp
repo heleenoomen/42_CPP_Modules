@@ -13,8 +13,8 @@
 #ifndef AANIMAL_HPP
 #define AANIMAL_HPP
 
-#include <string>
 #include <iostream>
+#include <string>
 
 class AAnimal {
  protected:

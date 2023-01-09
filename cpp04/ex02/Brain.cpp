@@ -6,14 +6,15 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:14:25 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 16:23:28 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 17:52:10 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Brain.hpp"
-#include "Layout.hpp"
 
 #include <iostream>
+
+#include "Layout.hpp"
 
 /* Default constructor */
 Brain::Brain() { std::cout << "Brain default constructor called" << std::endl; }

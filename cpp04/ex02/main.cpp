@@ -6,19 +6,19 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 10:01:09 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 17:03:30 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 17:47:34 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
 #include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "Layout.hpp"
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
-#include "Layout.hpp"
 
 /* ************************************************************************** */
 /* Print utils                                                                */
@@ -40,9 +40,7 @@ void printTestHeader(char const* testname) {
   std::cout << "\n" << Layout::reset;
 }
 
-void printTestTrailer() {
-  std::cout << "\n";
-}
+void printTestTrailer() { std::cout << "\n"; }
 
 void printTestStep(std::string const& message) {
   std::cout << Layout::cyanItalic << message << ":\n" << Layout::reset;
@@ -51,6 +49,123 @@ void printTestStep(std::string const& message) {
 void printTestStepName(std::string const& message, std::string const& name) {
   std::cout << Layout::cyanItalic << message << " " << name << ":\n"
             << Layout::reset;
+}
+
+/* ************************************************************************** */
+/* Test utils animal                                                          */
+/* ************************************************************************** */
+
+/* Delete Animal */
+void testDeleteAnimal(AAnimal& a, char const* varName) {
+  printTestStepName("Delete", varName);
+  delete &a;
+}
+
+/* Print Animal */
+void testPrintAnimal(AAnimal& a, char const* varName) {
+  printTestStepName("Print", varName);
+  std::cout << a;
+}
+
+/* ************************************************************************** */
+/* Test utils cat                                                             */
+/* ************************************************************************** */
+
+/* Default Constructor Cat */
+Cat* testDefaultConstructorCat(char const* varName) {
+  printTestStepName("Default constructor for", varName);
+  return new Cat;
+}
+
+/* Copy Constructor Cat */
+Cat* testCopyConstructorCat(Cat& src, char const* varName) {
+  printTestStepName("Copy constructor for", varName);
+  return new Cat(src);
+}
+
+/* Copy Assignment Cat */
+void testCopyAssignmentCat(Cat& c, Cat& src, char const* varName,
+                           char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Copy assignment: " << varName << " = "
+            << varNameSrc << "\n"
+            << Layout::reset;
+  c = src;
+}
+/* Cat Brain */
+void setIdeasCat(Cat& cat) {
+  printTestStep("cat1 is getting some ideas...");
+  cat.setIdea(0, "Meeeow, I am a beautiful cat");
+  cat.setIdea(1, "Meeeow, gotta sleep");
+  cat.setIdea(
+      2, "Seems like my hoooooman left the kitchen, gotta steal cheese now");
+  cat.setIdea(3, "Caught a mouse for my hooman");
+  cat.setIdea(4,
+              "Let's be honest: hooooomans are pretty stupid, but you got "
+              "to love them");
+  cat.setIdea(5, "More food please!");
+}
+
+/* Print Ideas Cat*/
+void testCatPrintIdeas(Cat& c, char const* varName) {
+  printTestStepName("Print ideas of", varName);
+  c.printIdeas();
+}
+
+/* Print Ideas Cat after Deletion of Source */
+void testCatPrintIdeasAfterDeletionSrc(Cat& c, char const* varName,
+                                       char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Print ideas " << varName
+            << " after deletion of " << varNameSrc << "\n"
+            << Layout::reset;
+  c.printIdeas();
+}
+
+/* ************************************************************************** */
+/* Test utils dog                                                             */
+/* ************************************************************************** */
+/* Default Constructor Dog */
+Dog* testDefaultConstructorDog(char const* varName) {
+  printTestStepName("Default constructor for", varName);
+  return new Dog;
+}
+
+/* Copy Constructor Dog */
+Dog* testCopyConstructorDog(Dog& src, char const* varName) {
+  printTestStepName("Copy constructor for", varName);
+  return new Dog(src);
+}
+
+/* Copy Assignment Dog */
+void testCopyAssignmentDog(Dog& d, Dog& src, char const* varName,
+                           char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Copy assignment: " << varName << " = "
+            << varNameSrc << "\n"
+            << Layout::reset;
+  d = src;
+}
+/* Dog Brain */
+void setIdeasDog(Dog& d) {
+  printTestStep("Plant ideas in the brain of dog1");
+  d.setIdea(0, "I would really like a walk in the park");
+  d.setIdea(1, "Gotta sniff this");
+  d.setIdea(2, "Gotta catch that dove!");
+  d.setIdea(3, "I love my owner");
+  d.setIdea(4, "They trew a stick! This is great, run!");
+}
+
+/* Print Ideas Dog*/
+void testDogPrintIdeas(Dog& d, char const* varName) {
+  printTestStepName("Print ideas of", varName);
+  d.printIdeas();
+}
+
+/* Print Ideas Dog after Deletion of Source */
+void testDogPrintIdeasAfterDeletionSrc(Dog& d, char const* varName,
+                                       char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Print ideas " << varName
+            << " after deletion of " << varNameSrc << "\n"
+            << Layout::reset;
+  d.printIdeas();
 }
 
 /* ************************************************************************** */
@@ -102,93 +217,36 @@ void testCopying() {
 }
 
 void testDeletionCatDogViaPointerToAnimal() {
-  printTestStep("Construct an array of 6 animals: const AAnimal* animalArray[6]");
+  printTestStep(
+      "Construct an array of 6 animals: const AAnimal* animalArray[6]");
   const AAnimal* animalArray[6];
   printTestStep("Fill array with half Dogs, half Cats");
   for (int i = 0; i < 2; ++i) animalArray[i] = new Dog;
   for (int i = 2; i < 4; ++i) animalArray[i] = new Cat;
   printTestStep("Print animals in array");
-  for (int i = 0; i < 4; ++i) { std::cout << *animalArray[i]; }
+  for (int i = 0; i < 4; ++i) {
+    std::cout << *animalArray[i];
+  }
   printTestStep("Destroy Cat and Dog objects in array");
-  for (int i = 0; i < 4; ++i) { delete animalArray[i]; }
+  for (int i = 0; i < 4; ++i) {
+    delete animalArray[i];
+  }
 }
 
 void testDeepCopiesDog() {
-  printTestStep("Default constructor for dog1");
-  Dog* dog1 = new Dog;
-  printTestStep("Print *dog1");
-  std::cout << *dog1;
-  printTestStep("Plant ideas in the brain of dog1");
-  dog1->setIdea(0, "I would really like a walk in the park");
-  dog1->setIdea(1, "Gotta sniff this");
-  dog1->setIdea(2, "Gotta catch that dove!");
-  dog1->setIdea(3, "I love my owner");
-  dog1->setIdea(4, "They trew a stick! This is great, run!");
-  printTestStep("Print ideas of dog1");
-  dog1->printIdeas();
-  printTestStep("Default constructor for dog2");
-  Dog* dog2 = new Dog;
-  printTestStep("Copy assignment: *dog2 = *dog1");
-  *dog2 = *dog1;
-  printTestStep("Print dog2");
-  std::cout << *dog2;
-  printTestStep("Delete dog1");
-  delete dog1;
-  printTestStep("Print ideas dog2 after deletion of dog1");
-  dog2->printIdeas();
-  printTestStep("Copy constructor for dog3, copy from dog2");
-  Dog* dog3 = new Dog(*dog2);
-  printTestStep("Delete dog2");
-  delete dog2;
-  printTestStep("Print ideas of dog3 after deletion of dog2");
-  dog3->printIdeas();
-  printTestStep("Delete dog3");
-  delete dog3;
-}
-
-void setIdeasCat(Cat& cat) {
-  printTestStep("cat1 is getting some ideas...");
-  cat.setIdea(0, "Meeeow, I am a beautiful cat");
-  cat.setIdea(1, "Meeeow, gotta sleep");
-  cat.setIdea(2, "Seems like my hoooooman left the kitchen, gotta steal cheese now");
-  cat.setIdea(3, "Caught a mouse for my hooman");
-  cat.setIdea(4,
-            "Let's be honest: hooooomans are pretty stupid, but you got "
-            "to love them");
-  cat.setIdea(5, "More food please!");
-}
-
-Cat* testDefaultConstructorCat(char const *varName) {
-  printTestStepName("Default constructor for", varName);
-  return new Cat;
-}
-
-void testPrintAnimal(AAnimal& a, char const* varName) {
-  printTestStepName("Print", varName);
-  std::cout << a;
-}
-
-void testCatPrintIdeas(Cat& c, char const* varName) {
-  printTestStepName("Print ideas of", varName);
-  c.printIdeas();
-}
-
-void testCopyAssignmentCat(Cat& c, Cat& src, char const* varName, char const* varNameSrc) {
-  std::cout << Layout::cyanItalic
-            << "Copy assignment: " << varName << " = " << varNameSrc
-            << "\n" << Layout::reset;
-  c = src;
-}
-void testDeleteAnimal(AAnimal& a, char const* varName) {
-  printTestStepName("Delete", varName);
-  delete &a;
-}
-
-void testCatPrintIdeasAfterDeletionSrc(Cat& c, char const* varName, char const* varNameSrc) {
-  std::cout << Layout::cyanItalic
-            << "Print ideas " << varName << " after deletion of " << varNameSrc
-            << "\n" << Layout::reset;
-  c.printIdeas();
+  Dog* dog1 = testDefaultConstructorDog("dog1");
+  testPrintAnimal(*dog1, "dog1");
+  setIdeasDog(*dog1);
+  testDogPrintIdeas(*dog1, "dog1");
+  Dog* dog2 = testDefaultConstructorDog("dog2");
+  testCopyAssignmentDog(*dog2, *dog1, "dog2", "dog1");
+  testPrintAnimal(*dog2, "dog2");
+  testDeleteAnimal(*dog1, "dog1");
+  testDogPrintIdeasAfterDeletionSrc(*dog2, "dog2", "dog1");
+  Dog* dog3 = testCopyConstructorDog(*dog2, "dog3");
+  testDeleteAnimal(*dog2, "dog2");
+  testDogPrintIdeasAfterDeletionSrc(*dog3, "dog3", "dog2");
+  testDeleteAnimal(*dog3, "dog3");
 }
 
 void testDeepCopiesCat() {
@@ -201,15 +259,10 @@ void testDeepCopiesCat() {
   testPrintAnimal(*cat2, "cat2");
   testDeleteAnimal(*cat1, "cat1");
   testCatPrintIdeasAfterDeletionSrc(*cat2, "cat2", "cat1");
-  printTestStep("Copy constructor for cat3, copy from cat2");
-  Cat* cat3 = new Cat(*cat2);
-  printTestStep("Delete cat2");
-  delete cat2;
-  printTestStep("Print ideas of cat3 after deletion of cat2");
-  cat3->printIdeas();
-  printTestStep("Delete cat3 via a pointer to AAnimal object");
-  AAnimal* pointer = cat3;
-  delete pointer;
+  Cat* cat3 = testCopyConstructorCat(*cat2, "cat3");
+  testDeleteAnimal(*cat2, "cat2");
+  testCatPrintIdeasAfterDeletionSrc(*cat3, "cat3", "cat2");
+  testDeleteAnimal(*cat3, "cat3");
 }
 
 void checkLeaks() {
@@ -226,10 +279,13 @@ void testUnit(test t, char const* testHeader) {
 }
 
 int main() {
-  testUnit(&testAnimalInheritance, "Test AAnimal Class Inheritance (Correct Classes)");
-  testUnit(&testAnimalInheritanceWrongClasses, "Test Wrong Animal Class Inheritance");
+  testUnit(&testAnimalInheritance,
+           "Test AAnimal Class Inheritance (Correct Classes)");
+  testUnit(&testAnimalInheritanceWrongClasses,
+           "Test Wrong Animal Class Inheritance");
   testUnit(&testCopying, "Test Copying");
-  testUnit(&testDeletionCatDogViaPointerToAnimal, "Test Deletion Cat/Dog Via Pointer To Animal");
+  testUnit(&testDeletionCatDogViaPointerToAnimal,
+           "Test Deletion Cat/Dog Via Pointer To Animal");
   testUnit(&testDeepCopiesDog, "Test Deep Copies Dog Class");
   testUnit(&testDeepCopiesCat, "Test Deep Copies Cat Class");
   testUnit(&checkLeaks, "Check leaks");

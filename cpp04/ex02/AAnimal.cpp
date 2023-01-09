@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "AAnimal.hpp"
-#include "Layout.hpp"
 
 #include <iostream>
+
+#include "Layout.hpp"
 
 /* Default constructor */
 AAnimal::AAnimal() : type_("") {
@@ -54,14 +55,12 @@ void AAnimal::setIdea(int i, std::string const& idea) {
 /* Public method */
 void AAnimal::makeSound() const { std::cout << "???" << '\n'; }
 
-
 /* ************************************************************************** */
 /* Insertion operator                                                         */
 /* ************************************************************************** */
 
 std::ostream& operator<<(std::ostream& o, AAnimal const& a) {
-  o << Layout::green
-    << "Type: " << a.getType() << ", sound: ";
+  o << Layout::green << "Type: " << a.getType() << ", sound: ";
   a.makeSound();
   o << Layout::reset;
   return o;
