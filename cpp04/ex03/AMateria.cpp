@@ -6,14 +6,15 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:43:31 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/08 20:06:41 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:00:30 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
-#include "Layout.hpp"
 
 #include <iostream>
+
+#include "Layout.hpp"
 
 /* Default constructor */
 AMateria::AMateria() {
@@ -38,8 +39,7 @@ AMateria::AMateria(AMateria const& src) {
 AMateria& AMateria::operator=(AMateria const& rhs) {
   std::cout << Layout::grey << "AMateria copy assignment operator called\n"
             << Layout::reset;
-  if (this == &rhs)
-    return *this;
+  if (this == &rhs) return *this;
   type_ = rhs.getType();
   return *this;
 }
@@ -50,16 +50,13 @@ AMateria::~AMateria() {
 }
 
 /* Getter */
-std::string const& AMateria::getType() const {
-  return type_;
-}
+std::string const& AMateria::getType() const { return type_; }
 
 /* Public methods */
 void AMateria::use(ICharacter&) { return; }
 
 /* Private helpers */
 bool AMateria::typeDoesNotExist() const {
-  if (type_ != "ice" && type_ != "cure")
-    return true;
+  if (type_ != "ice" && type_ != "cure") return true;
   return false;
 }

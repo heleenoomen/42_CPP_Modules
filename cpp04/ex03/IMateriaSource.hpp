@@ -6,17 +6,16 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:58:28 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 11:07:19 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:03:14 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef IMATERIASRC_HPP
 #define IMATERIASRC_HPP
 
-#include "ICharacter.hpp"
-
 #include <string>
+
+#include "ICharacter.hpp"
 
 class ICharacter;
 

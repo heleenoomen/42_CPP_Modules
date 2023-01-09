@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:42:19 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/12 12:10:35 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:01:28 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class Cure : public AMateria {
  public:
   /* constructors */
   Cure();
-  
+
   /* copy constructor */
   Cure(Cure const& src);
 

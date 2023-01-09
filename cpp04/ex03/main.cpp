@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 12:27:49 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 13:22:13 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:04:38 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ void printTestHeader(char const* testname) {
   std::cout << "\n" << Layout::reset;
 }
 
-void printTestTrailer() {
-  std::cout << "\n";
-}
+void printTestTrailer() { std::cout << "\n"; }
 
 void printTestStep(std::string const& message) {
   std::cout << Layout::cyanItalic << message << ":\n" << Layout::reset;
@@ -217,8 +215,7 @@ void testOverequipping(Character& me) {
   testEquipCharacter(me, *(new Ice));
   testEquipCharacter(me, *(new Ice));
   testCharacterPrintInventory(me);
-  printTestStep(
-      "Create one more materia");
+  printTestStep("Create one more materia");
   Cure* cure = new Cure;
   testEquipCharacter(me, *cure);
   testCharacterPrintInventory(me);
@@ -230,8 +227,8 @@ void testOverequipping(Character& me) {
 
 void testUnequipping(Character& c) {
   printTestHeader("Test unequipping");
-  std::cout << Layout::cyanItalic
-            << c.getName() << " leaves materia " << 1 << " on the floor:\n"
+  std::cout << Layout::cyanItalic << c.getName() << " leaves materia " << 1
+            << " on the floor:\n"
             << Layout::reset;
   c.unequip(1);
   c.printInventory();

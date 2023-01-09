@@ -6,18 +6,18 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:25:38 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 12:58:12 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:01:06 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include "ICharacter.hpp"
-#include "AMateria.hpp"
-
-#include <string>
 #include <iostream>
+#include <string>
+
+#include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 class Character : public ICharacter {
  private:
@@ -51,7 +51,7 @@ class Character : public ICharacter {
 
   /* Destructor */
   ~Character();
-  
+
   /* Getter */
   std::string const& getName() const;
 

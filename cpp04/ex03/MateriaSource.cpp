@@ -46,8 +46,7 @@ MateriaSource::MateriaSource(MateriaSource const& src) {
 
 /* copy assignment operator */
 MateriaSource& MateriaSource::operator=(MateriaSource const& src) {
-  if (this == &src)
-    return *this;
+  if (this == &src) return *this;
   _deleteAllMaterias();
   for (int i = 0; i < src.nbrOfMaterias_; ++i)
     materias_[i] = src.materias_[i]->clone();
@@ -92,7 +91,8 @@ AMateria* MateriaSource::createMateria(std::string const& type) const {
 void MateriaSource::printMaterias() const {
   for (int i = 0; i < MateriaSource::maxNbrOfMaterias_; ++i) {
     if (materias_[i] != NULL)
-      std::cout << "Materia nbr " << i << ": " << materias_[i]->getType() << '\n';
+      std::cout << "Materia nbr " << i << ": " << materias_[i]->getType()
+                << '\n';
   }
 }
 
@@ -117,8 +117,7 @@ void MateriaSource::_deleteAllMaterias() {
 /* ************************************************************************** */
 
 std::ostream& operator<<(std::ostream& o, MateriaSource const& m) {
-  o << Layout::greenBold
-    << "Name: " << m.getName() << "\n"
+  o << Layout::greenBold << "Name: " << m.getName() << "\n"
     << "Materias learned:\n";
   m.printMaterias();
   o << '\n' << Layout::reset;
