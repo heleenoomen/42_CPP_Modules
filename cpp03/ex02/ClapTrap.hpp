@@ -6,14 +6,14 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:23:39 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 17:39:44 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 19:25:47 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLAPTRAP_HPP
-# define CLAPTRAP_HPP
+#define CLAPTRAP_HPP
 
-# include<string>
+#include <string>
 
 class ClapTrap {
  private:
@@ -25,17 +25,18 @@ class ClapTrap {
  protected:
   void noPointsLeft() const;
   void printPoints(unsigned int amount) const;
+  ClapTrap(std::string const& name, int hitPoints, int energyPoints,
+           int attackDamage);
 
  public:
   /* Constructors */
   ClapTrap();
-  ClapTrap(ClapTrap const& src);
   ClapTrap(std::string const& name);
-  ClapTrap(std::string const& name, int hitPoints, int energyPoints, int attackDamage);
-  
+  ClapTrap(ClapTrap const& src);
+
   /* Assginment operator overload */
   ClapTrap& operator=(ClapTrap const& rhs);
-  
+
   /* Destructor */
   virtual ~ClapTrap();
 
@@ -47,7 +48,7 @@ class ClapTrap {
 
   /* Setters */
   void decrEnergyPoints();
-  
+
   /* Public methods */
   void attack(std::string const& target);
   void takeDamage(unsigned int amount);

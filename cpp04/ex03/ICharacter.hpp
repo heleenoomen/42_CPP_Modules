@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:40:10 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/12 13:01:27 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/08 18:05:02 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class ICharacter
   virtual ~ICharacter();
 
   /* getter */
-  virtual std::string const & getName() const = 0;
+  virtual std::string const& getName() const = 0;
 
   /* public methods */
   virtual void equip(AMateria* m) = 0;

@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:12:11 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 20:30:37 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 19:46:25 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,42 +15,48 @@
 #include <iostream>
 
 ScavTrap::ScavTrap::ScavTrap() {
-  std::cout << "ScavTrap default constructor called" << std::endl;
-  setHitPoints(100);
-  setEnergyPoints(50);
-  setAttackDamage(20);
+  std::cout << "ScavTrap default constructor called for " << getName() << '\n';
+  ScavTrap::_hitPoints = 100;
+  ScavTrap::_energyPoints = 50;
+  ScavTrap::_attackDamage = 20;
+  setHitPoints(ScavTrap::_hitPoints);
+  setEnergyPoints(ScavTrap::_energyPoints);
+  setAttackDamage(ScavTrap::_attackDamage);
   return;
 }
 
 ScavTrap::ScavTrap::ScavTrap(std::string const& name) : ClapTrap(name) {
   std::cout << "ScavTrap parametric constructor called for " << getName()
-            << std::endl;
-  setHitPoints(100);
-  setEnergyPoints(50);
-  setAttackDamage(20);
+            << '\n';
+  ScavTrap::_hitPoints = 100;
+  ScavTrap::_energyPoints = 50;
+  ScavTrap::_attackDamage = 20;
+  setHitPoints(ScavTrap::_hitPoints);
+  setEnergyPoints(ScavTrap::_energyPoints);
+  setAttackDamage(ScavTrap::_attackDamage);
   return;
 }
 
 ScavTrap::ScavTrap(ScavTrap const& src) : ClapTrap(src) {
-  std::cout << "ScavTrap copy constructor called for " << getName()
-            << std::endl;
+  std::cout << "ScavTrap copy constructor called, copying " << getName()
+            << '\n';
   return;
 }
 
 ScavTrap& ScavTrap::operator=(ScavTrap const& rhs) {
-  std::cout << "ScavTrap assignment operator overload called for "
-            << rhs.getName() << std::endl;
+  std::cout << "ScavTrap assignment operator overload called, assigning "
+            << rhs.getName() << '\n';
   ClapTrap::operator=(rhs);
   return *this;
 }
 
 ScavTrap::~ScavTrap() {
-  std::cout << "ScavTrap destructor called for " << getName() << std::endl;
+  std::cout << "ScavTrap destructor called for " << getName() << '\n';
 }
 
 void ScavTrap::guardGate() const {
   std::cout << "ScavTrap " << getName() << " is now in gatekeeper mode."
-            << std::endl;
+            << '\n';
   return;
 }
 
@@ -63,6 +69,5 @@ void ScavTrap::attack(std::string const& target) {
   decrEnergyPoints();
   std::cout << "ScavTrap " << getName() << " attacks " << target << ", causing "
             << getAttackDamage() << " point of damage! ScavTrap " << getName()
-            << " has " << getEnergyPoints() << " energy points left."
-            << std::endl;
+            << " has " << getEnergyPoints() << " energy points left." << '\n';
 }

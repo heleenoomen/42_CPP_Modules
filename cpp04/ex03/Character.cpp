@@ -6,24 +6,33 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:20:04 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/12 16:07:12 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/08 19:53:41 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
+#include "Layout.hpp"
 
 #include <iostream>
 
+static int const empty = 0;
+
+/* ************************************************************************** */
+/* Orthodox canonical form                                                    */
+/* ************************************************************************** */
+
 /* Default constructor */
-Character::Character() : _name("Default"), _nbrOfMaterias(0) { 
-  std::cout << "Character default constructor called" << std::endl;
-  _setAllMateriasToNull();
+Character::Character() : name_("Default"), inventorySize_(empty) { 
+  std::cout << Layout::grey << "Character default constructor called\n"
+            << Layout::reset;
+  initializeInventory_();
 }
 
 /* Parametric constructor */
-Character::Character(std::string const& name) : _name(name), _nbrOfMaterias(0) {
-  std::cout << "Character parametric constructor called" << std::endl;
-  _setAllMateriasToNull();
+Character::Character(std::string const& name) : name_(name), inventorySize_(empty) {
+  std::cout << Layout::grey << "Character parametric constructor called\n"
+            << Layout::reset;
+  initializeInventory_();
 }
 
 /* Copy constructor */
@@ -33,81 +42,98 @@ Character::Character(Character const& src) {
 
 /* Copy assignment operator */
 Character& Character::operator=(Character const& rhs) {
-  std::cout << "Character copy assignment operator called" << std::endl;
-  _name = rhs._name;
-  _nbrOfMaterias = rhs._nbrOfMaterias;
-  _deleteExistingMaterias();
-  for (int i = 0; i < rhs._nbrOfMaterias; ++i)
-    _materias[i] = rhs._materias[i]->clone();
+  std::cout << Layout::grey << "Character copy assignment operator called\n"
+            << Layout::reset;
+  if (this == &rhs)
+    return *this;
+  name_ = rhs.name_;
+  inventorySize_ = rhs.inventorySize_;
+  deepCopyInventory_(rhs);
   return *this;
 }
 
 /* Destructor */
 Character::~Character() {
-  std::cout << "Character destructor called" << std::endl;
-  for (int i = 0; i < 4; i++)
-    delete _materias[i];
+  std::cout << Layout::grey << "Character destructor called\n" << Layout::reset;
+  emptyInventory();
 }
 
-/* Public methods */
+/* ************************************************************************** */
+/* Getters                                                                    */
+/* ************************************************************************** */
+
+std::string const& Character::getName() const { return name_; }
+
+/* ************************************************************************** */
+/* Public methods                                                             */
+/* ************************************************************************** */
+
 void Character::equip(AMateria* m) {
-  if (m->_typeDoesNotExist() || _inventoryIsFull())
+  if (m->typeDoesNotExist() || inventoryFull_())
     return ;
-  _insertMateriaInFirstFreeSlot(m);
-  ++_nbrOfMaterias;
+  insertMateriaInFirstFreeSlot_(m);
+  ++inventorySize_;
 }
 
 void Character::unequip(int idx) {
-  if (_materiasIndexOutOfRange(idx))
+  if (indexOutOfRangeForInventory_(idx))
     return ;
-  _materias[idx] = NULL;
-  --_nbrOfMaterias;
+  inventory_[idx] = NULL;
+  --inventorySize_;
 }
 
 void Character::use(int idx, ICharacter& target) {
-  if (_materiasIndexOutOfRange(idx) || _materias[idx] == NULL)
+  if (indexOutOfRangeForInventory_(idx) || inventory_[idx] == NULL)
     return ;
-  _materias[idx]->use(target);
+  inventory_[idx]->use(target);
 }
 
-/* getter */
-std::string const& Character::getName() const {
-  return _name;
+/* ************************************************************************** */
+/* Private methods                                                            */
+/* ************************************************************************** */
+
+void Character::initializeInventory_() {
+  for (int i = 0; i < Character::inventoryMaxSize_; ++i)
+    inventory_[i] = NULL;
 }
 
-/* private helpers */
-void Character::_setAllMateriasToNull() {
-  for (int i = 0; i < Character::_maxNbrOfMaterias; ++i)
-    _materias[i] = NULL;
+void Character::emptyInventory() {
+  for (int i = 0; i < inventoryMaxSize_; ++i) {
+    delete inventory_[i];
+    inventory_[i] = NULL;
+  }
 }
 
-bool Character::_inventoryIsFull() const {
-  return _nbrOfMaterias >= Character::_maxNbrOfMaterias;
+void Character::copyIndividualMaterias(Character const& src) {
+  for (int i = 0; i < inventoryMaxSize_; ++i)
+    inventory_[i] = src.inventory_[i]->clone();
 }
 
-/* Only use if _intventoryIsFull returned false! */
-void Character::_insertMateriaInFirstFreeSlot(AMateria* m) {
-  _materias[_findFirstFreeSlot()] = m;
+void Character::deepCopyInventory_(Character const& src) {
+  emptyInventory();
+  copyIndividualMaterias(src);
 }
 
-/* Only use if _intenvtoryIsFull returned false! */
-int Character::_findFirstFreeSlot() const {
-  for (int i = 0; i < Character::_maxNbrOfMaterias; ++i) {
-    if (_materias[i] == NULL)
+bool Character::inventoryFull_() const {
+  return inventorySize_ >= Character::inventoryMaxSize_;
+}
+
+/* Only use if intenvtoryFull_ returned false! */
+int Character::findFirstFreeSlot_() const {
+  for (int i = 0; i < Character::inventoryMaxSize_; ++i) {
+    if (inventory_[i] == NULL)
       return i;
   }
   return 0;
 }
 
-bool Character::_materiasIndexOutOfRange(int index) const {
-  if (index < 0 || index >= Character::_maxNbrOfMaterias)
-    return true;
-  return false;
+/* Only use if intventoryFull_ returned false! */
+void Character::insertMateriaInFirstFreeSlot_(AMateria* m) {
+  inventory_[findFirstFreeSlot_()] = m;
 }
 
-void Character::_deleteExistingMaterias() {
-  for (int i = 0; i < Character::_maxNbrOfMaterias; ++i) {
-    delete _materias[i];
-    _materias[i] = NULL;
-  }
+bool Character::indexOutOfRangeForInventory_(int index) const {
+  if (index < 0 || index >= Character::inventoryMaxSize_)
+    return true;
+  return false;
 }

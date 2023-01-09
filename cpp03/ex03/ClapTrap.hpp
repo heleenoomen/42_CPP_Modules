@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:23:39 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 20:29:11 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 19:20:06 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,14 @@ class ClapTrap {
  protected:
   void noPointsLeft() const;
   void printPoints(unsigned int amount) const;
+  ClapTrap(std::string const& name, int hitPoints, int energyPoints,
+           int attackDamage);
 
  public:
   /* Constructors */
   ClapTrap();
   ClapTrap(ClapTrap const& src);
   ClapTrap(std::string const& name);
-  ClapTrap(std::string const& name, int hitPoints, int energyPoints,
-           int attackDamage);
-  ClapTrap(int hitPoints, int energyPoints, int attackDamage);
 
   /* Assginment operator overload */
   ClapTrap& operator=(ClapTrap const& rhs);

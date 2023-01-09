@@ -4,8 +4,6 @@
 #include <climits>
 #include <fstream>
 
-static char const* insertionOverloadLayout = Layout::greenBold;
-
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
 /* ************************************************************************** */
@@ -18,16 +16,9 @@ PresidentialPardonForm::PresidentialPardonForm()
   checkGrade();
 }
 
-/* Parametric constructors */
-PresidentialPardonForm::PresidentialPardonForm(std::string const& name)
-    : AForm(name, gradeRequiredToSign, gradeRequiredToExecute),
-      target_("default") {
-  std::cout << Layout::grey << "PresidentialPardonForm parametric constructor called\n" << Layout::reset;
-  checkGrade();
-}
-
-PresidentialPardonForm::PresidentialPardonForm(std::string const& name, std::string const& target)
-    : AForm(name, gradeRequiredToSign, gradeRequiredToExecute),
+/* Parametric constructor */
+PresidentialPardonForm::PresidentialPardonForm(std::string const& target)
+    : AForm("Presidential Pardon Form", gradeRequiredToSign, gradeRequiredToExecute),
       target_(target) {
   std::cout << Layout::grey << "PresidentialPardonForm parametric constructor called\n" << Layout::reset;
   checkGrade();

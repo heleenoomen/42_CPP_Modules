@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 11:12:11 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/08 16:55:57 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/06 18:03:00 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include "ClapTrap.hpp"
 
 class FragTrap : virtual public ClapTrap {
+ protected:
+  int _hitPoints;
+  int _attackDamage;
+  int _energyPoints;
+
  public:
   FragTrap();
   FragTrap(std::string const& name);

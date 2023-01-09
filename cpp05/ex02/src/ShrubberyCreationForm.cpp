@@ -4,8 +4,8 @@
 #include <climits>
 #include <fstream>
 
-static char const* insertionOverloadLayout = Layout::greenBold;
 static int const nbrOfTrees = 10;
+std::string const ShrubberyCreationForm::formName = "Shrubbery Creation Form";
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -13,22 +13,15 @@ static int const nbrOfTrees = 10;
 
 /* Default constructor */
 ShrubberyCreationForm::ShrubberyCreationForm()
-    : AForm("Default", gradeRequiredToSign, gradeRequiredToExecute),
+    : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_("default") {
   std::cout << Layout::grey << "ShrubberyCreationForm default constructor called\n" << Layout::reset;
   checkGrade();
 }
 
 /* Parametric constructors */
-ShrubberyCreationForm::ShrubberyCreationForm(std::string const& name)
-    : AForm(name, gradeRequiredToSign, gradeRequiredToExecute),
-      target_("default") {
-  std::cout << Layout::grey << "ShrubberyCreationForm parametric constructor called\n" << Layout::reset;
-  checkGrade();
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm(std::string const& name, std::string const& target)
-    : AForm(name, gradeRequiredToSign, gradeRequiredToExecute),
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const& target)
+    : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_(target) {
   std::cout << Layout::grey << "ShrubberyCreationForm parametric constructor called\n" << Layout::reset;
   checkGrade();

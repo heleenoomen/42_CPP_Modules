@@ -4,31 +4,22 @@
 #include <climits>
 #include <fstream>
 
-static char const* insertionOverloadLayout = Layout::greenBold;
-static int const nbrOfTrees = 10;
+std::string const RobotomyRequestForm::formName = "Robotomy Request";
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
 /* ************************************************************************** */
 
-/* Default constructor */
-RobotomyRequestForm::RobotomyRequestForm()
-    : AForm("Default", gradeRequiredToSign, gradeRequiredToExecute),
-      target_("default") {
-  std::cout << Layout::grey << "RobotomyRequestForm default constructor called\n" << Layout::reset;
-  checkGrade();
-}
-
 /* Parametric constructors */
-RobotomyRequestForm::RobotomyRequestForm(std::string const& name)
-    : AForm(name, gradeRequiredToSign, gradeRequiredToExecute),
-      target_("default") {
+RobotomyRequestForm::RobotomyRequestForm()
+    : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
+      target_("Default") {
   std::cout << Layout::grey << "RobotomyRequestForm parametric constructor called\n" << Layout::reset;
   checkGrade();
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string const& name, std::string const& target)
-    : AForm(name, gradeRequiredToSign, gradeRequiredToExecute),
+RobotomyRequestForm::RobotomyRequestForm(std::string const& target)
+    : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_(target) {
   std::cout << Layout::grey << "RobotomyRequestForm parametric constructor called\n" << Layout::reset;
   checkGrade();

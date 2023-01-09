@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:44:48 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 11:13:54 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/08 17:31:27 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iostream>
 
 /* Default constructor */
-WrongCat::WrongCat() : _type("WrongCat") {
+WrongCat::WrongCat() : type_("WrongCat") {
   std::cout << "WrongCat default constructor called" << std::endl;
 }
 
@@ -38,7 +38,7 @@ WrongCat::~WrongCat() {
 }
 
 /* Getter */
-std::string const& WrongCat::getType() const { return _type; }
+std::string const& WrongCat::getType() const { return type_; }
 
 /* Public method */
 void WrongCat::makeSound() const { std::cout << "Meow" << std::endl; }

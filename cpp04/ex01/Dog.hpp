@@ -20,7 +20,7 @@
 
 class Dog : public Animal {
  private:
-  Brain* _brain;
+  Brain* brain_;
 
  public:
   /* default constructor */
@@ -37,7 +37,7 @@ class Dog : public Animal {
 
   /* getter */
   std::string const& getIdea(int index) const;
-  
+
   /* setter */
   virtual void setIdea(int index, std::string const& idea);
 

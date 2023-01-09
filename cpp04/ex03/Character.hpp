@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:25:38 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/12 16:02:13 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/08 19:50:31 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,22 @@
 
 class Character : public ICharacter {
  private:
-  static int const _maxNbrOfMaterias = 4;
+  static int const inventoryMaxSize_ = 4;
 
   /* private attributes */
-  std::string _name;
-  AMateria* _materias[Character::_maxNbrOfMaterias];
-  int _nbrOfMaterias;
+  std::string name_;
+  AMateria* inventory_[Character::inventoryMaxSize_];
+  int inventorySize_;
 
   /* private helpers */
-  void _setAllMateriasToNull();
-  bool _inventoryIsFull() const;
-  void _insertMateriaInFirstFreeSlot(AMateria* m);
-  int _findFirstFreeSlot() const;
-  bool _materiasIndexOutOfRange(int index) const;
-  void _deleteExistingMaterias();
-  bool _materiaTypeDoesNotExist(AMateria *m);
+  void initializeInventory_();
+  bool inventoryFull_() const;
+  void deepCopyInventory_(Character const& src);
+  void copyIndividualMaterias(Character const& src);
+  void emptyInventory();
+  void insertMateriaInFirstFreeSlot_(AMateria* m);
+  int findFirstFreeSlot_() const;
+  bool indexOutOfRangeForInventory_(int index) const;
 
  public:
   /* Constructors */

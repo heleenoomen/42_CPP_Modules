@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 09:40:26 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/09 11:11:36 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/08 16:42:43 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class Animal {
  protected:
-  std::string _type;
+  std::string type_;
 
  public:
   /* default constructor */

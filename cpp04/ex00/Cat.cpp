@@ -16,24 +16,24 @@
 
 /* Default constructor */
 Cat::Cat() {
-  std::cout << "Cat default constructor called" << std::endl;
-  _type = "Cat";
+  std::cout << "Cat default constructor called\n";
+  type_ = "Cat";
 }
 
 /* Copy constructor */
 Cat::Cat(Cat const& src) : Animal(src) {
-  std::cout << "Cat copy constructor called" << std::endl;
+  std::cout << "Cat copy constructor called\n";
 }
 
 /* Copy assignment operator */
 Cat& Cat::operator=(Cat const& rhs) {
-  std::cout << "Cat copy assignment operator called" << std::endl;
+  std::cout << "Cat copy assignment operator called\n";
   Animal::operator=(rhs);
   return *this;
 }
 
 /* Destructor */
-Cat::~Cat() { std::cout << "Cat destructor called" << std::endl; }
+Cat::~Cat() { std::cout << "Cat destructor called\n"; }
 
 /* Public method */
-void Cat::makeSound() const { std::cout << "Meow" << std::endl; }
+void Cat::makeSound() const { std::cout << "Meow\n"; }

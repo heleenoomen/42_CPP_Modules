@@ -97,7 +97,7 @@ void shrubberyTests() {
     testInsertionOverloadBureaucrat("Bureaucrat Benji created. ", benji);
     Bureaucrat benjisSecretary("Benji's secretary", ShrubberyCreationForm::gradeRequiredToSign);
     testInsertionOverloadBureaucrat("Bureaucrat Benji's secretary created. ", benjisSecretary);
-    ShrubberyCreationForm newShrubForm("Shrubbery Plan 13b", "City Park 789");
+    ShrubberyCreationForm newShrubForm("City Park 789");
     testInsertionOverloadForm("Shrubbery Plan 13b created. ", newShrubForm);
     testExecuteForm(benji, newShrubForm);
     testSignForm(benjisSecretary, newShrubForm);
@@ -111,7 +111,7 @@ void robotomyTests() {
     testInsertionOverloadBureaucrat("Bureaucrat Joleen has been created. ", joleen);
     Bureaucrat chris("Chris", RobotomyRequestForm::gradeRequiredToSign - 3);
     testInsertionOverloadBureaucrat("Bureaucrat Chris has been creacted. ", chris);
-    RobotomyRequestForm robotizeForm("Robotomy 17Qa", "Android Prototype 07");
+    RobotomyRequestForm robotizeForm("Android Prototype 07");
     testInsertionOverloadForm("RobotomyRequestForm has been created", robotizeForm);
     testExecuteForm(joleen, robotizeForm);
     testSignForm(chris, robotizeForm);
@@ -125,7 +125,7 @@ void presidentialPardonTests() {
     testInsertionOverloadBureaucrat("Undersecretary Gustav created. ", undersec1);
     Bureaucrat technocrat("Technocrat Claude", PresidentialPardonForm::gradeRequiredToSign - 2);
     testInsertionOverloadBureaucrat("Technocrat Claude created. ", technocrat);
-    PresidentialPardonForm pardonForm("Case 43b: J. DeLuny", "Jacob DeLuny");
+    PresidentialPardonForm pardonForm("Jacob DeLuny");
     testInsertionOverloadForm("Presidential Pardon Form created. ", pardonForm);
     testExecuteForm(undersec1, pardonForm);
     testSignForm(technocrat, pardonForm);

@@ -1,0 +1,4 @@
+compile in gcc with -Wno-conversion flag to prevent implicit cast 
+when using accuracy (in modern versions of gcc)
+Good idea to use this when many calculations are involved, e.g. for
+3D rendering etc.

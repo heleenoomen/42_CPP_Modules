@@ -24,21 +24,13 @@ class PresidentialPardonForm : public AForm {
   std::string const target_;
 
  /* private methods */
-    /* a) helpers */
-  std::string toString(int value) const;
-  std::string pickRandomTreeFileName() const;
-
-    /* b) private methods */
-  void openTargetFile(std::ofstream& targetFile) const;
-  void openTreeFile(std::ifstream& treeFile) const;
-  void copyTreeFileToTargetFile(std::ifstream& treeFile, std::ofstream& targetFile) const;
   void executePresidentialPardonForm() const;
 
  public:
   /* default constructor */
   PresidentialPardonForm();
   /* parametric constructor */
-  PresidentialPardonForm(std::string const& name);
+  PresidentialPardonForm(std::string const& target);
   PresidentialPardonForm(std::string const& name, std::string const& target);
 
   /* copy constructor */
