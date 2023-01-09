@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:25:38 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 11:40:34 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 12:58:12 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "AMateria.hpp"
 
 #include <string>
+#include <iostream>
 
 class Character : public ICharacter {
  private:
@@ -60,5 +61,8 @@ class Character : public ICharacter {
   virtual void use(int idx, ICharacter& target);
   void printInventory() const;
 };
+
+/* Insertion overload operator */
+std::ostream& operator<<(std::ostream& o, Character const& c);
 
 #endif

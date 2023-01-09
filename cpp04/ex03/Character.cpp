@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:20:04 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 11:48:20 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 13:09:07 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,10 @@ void Character::emptyInventory() {
 }
 
 void Character::copyIndividualMaterias(Character const& src) {
-  for (int i = 0; i < inventoryMaxSize_; ++i)
-    inventory_[i] = src.inventory_[i]->clone();
+  for (int i = 0; i < src.inventoryMaxSize_; ++i) {
+    if (src.inventory_[i] != NULL)
+      inventory_[i] = src.inventory_[i]->clone();
+  }
 }
 
 void Character::deepCopyInventory_(Character const& src) {
@@ -147,4 +149,16 @@ bool Character::indexOutOfRangeForInventory_(int index) const {
   if (index < 0 || index >= Character::inventoryMaxSize_)
     return true;
   return false;
+}
+
+/* ************************************************************************** */
+/* Insertion operator                                                         */
+/* ************************************************************************** */
+
+std::ostream& operator<<(std::ostream& o, Character const& c) {
+  o << Layout::greenBold
+    << "Name: " << c.getName() << '\n';
+    c.printInventory();
+  o << Layout::reset << '\n';
+  return o;
 }

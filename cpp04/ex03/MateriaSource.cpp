@@ -30,7 +30,8 @@ MateriaSource::MateriaSource() : nbrOfMaterias_(0) {
 /* string constructor */
 MateriaSource::MateriaSource(std::string const& name)
     : name_(name), nbrOfMaterias_(0) {
-  std::cout << Layout::grey << "MateriaSource default constructor called\n"
+  std::cout << Layout::grey << "MateriaSource string constructor called for "
+            << name_ << "\n"
             << Layout::reset;
   _setAllMateriasToNull();
 }

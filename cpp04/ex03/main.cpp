@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 12:27:49 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 12:20:05 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 13:22:13 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ void printTestHeader(char const* testname) {
 }
 
 void printTestTrailer() {
-  // std::cout << Layout::brightYellow;
-  // printStars();
-  // std::cout << Layout::reset << "\n\n";
   std::cout << "\n";
 }
 
@@ -69,7 +66,7 @@ void printTestStepName(std::string const& message, std::string const& name) {
 
 MateriaSource* testCreateMateriaSource(std::string const& name) {
   printTestStepName("Construct MateriaSource", name);
-  return new MateriaSource();
+  return new MateriaSource(name);
 }
 
 /* ************************************************************************** */
@@ -171,50 +168,20 @@ void testLeaks() {
 /* ************************************************************************** */
 /* Tests                                                                      */
 /* ************************************************************************** */
-// void testAttackingBob() {
-//   printTestHeader("Test attacking Bob");
-//   MateriaSource* src = testCreateMateriaSource("src");
-//   testMateriaLearnIce(*src);
-//   testMateriaLearnCure(*src);
-//   Character* me = testCreateCharacter("me");
-//   AMateria* tmp = testCreateMateriaFromSource(*src, "ice");
-//   testEquipCharacter(*me, *tmp);
-//   tmp = testCreateMateriaFromSource(*src, "cure");
-//   testEquipCharacter(*me, *tmp);
-//   Character* bob = testCreateCharacter("bob");
-//   testUseMateria(*me, *bob, 0);
-//   testUseMateria(*me, *bob, 1);
-//   testUseUnexistingMateria(*me, *bob, 2);
-//   testUseUnexistingMateria(*me, *bob, 25);
-//   testUseUnexistingMateria(*me, *)
-//   testDeleteCharacter(*bob);
-//   testDeleteCharacter(*me);
-//   testDeleteMateriaSource(*src);
-//   testLeaks();
-//   printTestTrailer();
-// }
-
-void deepCopies() {
-  IMateriaSource* src = new MateriaSource();
-  src->learnMateria(new Ice());
-  src->learnMateria(new Cure());
-  ICharacter* me = new Character("me");
-  AMateria* tmp;
-  tmp = src->createMateria("ice");
-  me->equip(tmp);
-  tmp = src->createMateria("ice");
-  me->equip(tmp);
-  tmp = src->createMateria("cure");
-  me->equip(tmp);
-  // ICharacter* john = me;
-  delete me;
-  delete src;
-}
 
 void testEquipping(Character& c, AMateria& ice, AMateria& cure) {
   printTestHeader("Test equipping character");
+  testCharacterPrintInventory(c);
   testEquipCharacter(c, ice);
   testEquipCharacter(c, cure);
+  testCharacterPrintInventory(c);
+  printTestTrailer();
+}
+
+void testEquippingFirstFreeSlot(Character& c, AMateria& newMateria) {
+  printTestHeader("Test equipping character in first free slot");
+  testCharacterPrintInventory(c);
+  testEquipCharacter(c, newMateria);
   testCharacterPrintInventory(c);
   printTestTrailer();
 }
@@ -273,14 +240,30 @@ void testUnequipping(Character& c) {
 void testDeepCopyMateriaSource(MateriaSource& src) {
   printTestHeader("Test deep copy MateriaSource");
   MateriaSource* copy = testCreateMateriaSource("copy");
+  printTestStep("Print MateriaSource \"copy\"");
+  std::cout << *copy;
   printTestStep("Assign src to copy");
   *copy = src;
   printTestStep("Print MateriaSource \"src\"");
   std::cout << src;
-  printTestStep("Print MateriaSource \"copy\"");
+  printTestStep("Print MateriaSource after assigning \"copy\"");
   std::cout << *copy;
   testDeleteMateriaSource(*copy);
   printTestTrailer();
+}
+
+void testDeepCopyCharacter(Character& src) {
+  printTestHeader("Test deep copy Character");
+  Character* copy = testCreateCharacter("copy");
+  printTestStep("Print character \"copy\"");
+  std::cout << *copy;
+  printTestStep("Assign \"me\" to copy");
+  *copy = src;
+  printTestStep("Print character \"me\"");
+  std::cout << src;
+  printTestStep("Print character \"copy\" after assigning \"me\" to it");
+  std::cout << *copy;
+  testDeleteCharacter(*copy);
 }
 
 int main() {
@@ -301,7 +284,8 @@ int main() {
   printTestStep("Delete materia left on the ground by Character");
   delete cure;
   testDeepCopyMateriaSource(*src);
-  // testDeepCopyCharacter(*me);
+  testDeepCopyCharacter(*me);
+  testEquippingFirstFreeSlot(*me, *(new Cure));
   deleteClasses(*me, *bob, *src);
   testLeaks();
   return 0;
