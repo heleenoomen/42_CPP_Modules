@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 10:01:09 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 17:47:34 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:18:13 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ Cat* testDefaultConstructorCat(char const* varName) {
 }
 
 /* Copy Constructor Cat */
-Cat* testCopyConstructorCat(Cat& src, char const* varName) {
-  printTestStepName("Copy constructor for", varName);
+Cat* testCopyConstructorCat(Cat& src, char const* varName, char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Copy constructor for " << varName
+            << ", copying " << varNameSrc << '\n' << Layout::reset;
   return new Cat(src);
 }
 
@@ -130,8 +131,9 @@ Dog* testDefaultConstructorDog(char const* varName) {
 }
 
 /* Copy Constructor Dog */
-Dog* testCopyConstructorDog(Dog& src, char const* varName) {
-  printTestStepName("Copy constructor for", varName);
+Dog* testCopyConstructorDog(Dog& src, char const* varName, char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Copy constructor for " << varName
+            << ", copying " << varNameSrc << '\n' << Layout::reset;
   return new Dog(src);
 }
 
@@ -243,7 +245,7 @@ void testDeepCopiesDog() {
   testPrintAnimal(*dog2, "dog2");
   testDeleteAnimal(*dog1, "dog1");
   testDogPrintIdeasAfterDeletionSrc(*dog2, "dog2", "dog1");
-  Dog* dog3 = testCopyConstructorDog(*dog2, "dog3");
+  Dog* dog3 = testCopyConstructorDog(*dog2, "dog3", "dog2");
   testDeleteAnimal(*dog2, "dog2");
   testDogPrintIdeasAfterDeletionSrc(*dog3, "dog3", "dog2");
   testDeleteAnimal(*dog3, "dog3");
@@ -259,7 +261,7 @@ void testDeepCopiesCat() {
   testPrintAnimal(*cat2, "cat2");
   testDeleteAnimal(*cat1, "cat1");
   testCatPrintIdeasAfterDeletionSrc(*cat2, "cat2", "cat1");
-  Cat* cat3 = testCopyConstructorCat(*cat2, "cat3");
+  Cat* cat3 = testCopyConstructorCat(*cat2, "cat3", "cat2");
   testDeleteAnimal(*cat2, "cat2");
   testCatPrintIdeasAfterDeletionSrc(*cat3, "cat3", "cat2");
   testDeleteAnimal(*cat3, "cat3");

@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 12:27:49 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 18:04:38 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 19:50:44 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,22 @@ MateriaSource* testCreateMateriaSource(std::string const& name) {
 void testMateriaLearnIce(MateriaSource& src) {
   printTestStep("Let MateriaSource src learn materia \"Ice\"");
   src.learnMateria(new Ice());
+  printTestStep("Print MateriaSource");
+  std::cout << src;
 }
 
 void testMateriaLearnCure(MateriaSource& src) {
   printTestStep("Let MateriaSource src learn materia \"Cure\"");
   src.learnMateria(new Cure());
+  printTestStep("Print MateriaSource");
+  std::cout << src;
 }
 
 /* ************************************************************************** */
 /* Create Character                                                           */
 /* ************************************************************************** */
 Character* testCreateCharacter(std::string const& name) {
-  printTestStepName("Construct Character ", name);
+  printTestStepName("Create Character", name);
   return new Character(name);
 }
 
@@ -137,12 +141,12 @@ void testUseMateria(Character& actor, Character& target, int materiaNbr) {
 /* Test deletion                                                              */
 /* ************************************************************************** */
 void testDeleteCharacter(Character const& character) {
-  printTestStepName("Delete Character ", character.getName());
+  printTestStepName("Delete Character", character.getName());
   delete &character;
 }
 
 void testDeleteMateriaSource(MateriaSource const& src) {
-  printTestStepName("Delete MateriaSource ", src.getName());
+  printTestStepName("Delete MateriaSource", src.getName());
   delete &src;
 }
 
@@ -150,7 +154,7 @@ void testDeleteMateriaSource(MateriaSource const& src) {
 /* Test printing inventory of Character                                       */
 /* ************************************************************************** */
 void testCharacterPrintInventory(Character const& c) {
-  printTestStepName("Print inventory of Character ", c.getName());
+  printTestStepName("Print inventory of Character", c.getName());
   c.printInventory();
 }
 
@@ -234,31 +238,37 @@ void testUnequipping(Character& c) {
   c.printInventory();
 }
 
-void testDeepCopyMateriaSource(MateriaSource& src) {
+void testDeepCopyMateriaSource() {
   printTestHeader("Test deep copy MateriaSource");
+  MateriaSource* src1 = testCreateMateriaSource("src1");
+  printTestStep("Let MateriaSource src1 learn two materias of type \"ice\"");
+  src1->learnMateria(new Ice);
+  src1->learnMateria(new Ice);
+  printTestStep("Print MateriaSource src1");
+  std::cout << *src1;
   MateriaSource* copy = testCreateMateriaSource("copy");
-  printTestStep("Print MateriaSource \"copy\"");
-  std::cout << *copy;
-  printTestStep("Assign src to copy");
-  *copy = src;
-  printTestStep("Print MateriaSource \"src\"");
-  std::cout << src;
-  printTestStep("Print MateriaSource after assigning \"copy\"");
+  printTestStep("assign src1 to copy");
+  *copy = *src1;
+  testDeleteMateriaSource(*src1);
+  printTestStep("Print MateriaSource copy after src1 has been deleted");
   std::cout << *copy;
   testDeleteMateriaSource(*copy);
   printTestTrailer();
 }
 
-void testDeepCopyCharacter(Character& src) {
-  printTestHeader("Test deep copy Character");
+void testDeepCopyCharacter() {
+  printTestHeader("Test Deep Copy Character");
+  Character* louis = testCreateCharacter("louis");
+  printTestStep("Equip louis with two materia's of type cure");
+  louis->equip(new Cure);
+  louis->equip(new Cure);
+  printTestStep("Print Character louis");
+  std::cout << *louis;
   Character* copy = testCreateCharacter("copy");
-  printTestStep("Print character \"copy\"");
-  std::cout << *copy;
-  printTestStep("Assign \"me\" to copy");
-  *copy = src;
-  printTestStep("Print character \"me\"");
-  std::cout << src;
-  printTestStep("Print character \"copy\" after assigning \"me\" to it");
+  printTestStep("Assign louis to copy");
+  *copy = *louis;
+  testDeleteCharacter(*louis);
+  printTestStep("Print Character copy after louis has been deleted");
   std::cout << *copy;
   testDeleteCharacter(*copy);
 }
@@ -280,8 +290,8 @@ int main() {
   testUnequipping(*me);
   printTestStep("Delete materia left on the ground by Character");
   delete cure;
-  testDeepCopyMateriaSource(*src);
-  testDeepCopyCharacter(*me);
+  testDeepCopyMateriaSource();
+  testDeepCopyCharacter();
   testEquippingFirstFreeSlot(*me, *(new Cure));
   deleteClasses(*me, *bob, *src);
   testLeaks();

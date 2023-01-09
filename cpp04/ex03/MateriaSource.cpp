@@ -37,7 +37,7 @@ MateriaSource::MateriaSource(std::string const& name)
 }
 
 /* copy constructor */
-MateriaSource::MateriaSource(MateriaSource const& src) {
+MateriaSource::MateriaSource(MateriaSource const& src) : name_(src.name_) {
   std::cout << Layout::grey << "MateriaSource copy constructor called\n"
             << Layout::reset;
   _setAllMateriasToNull();
@@ -120,6 +120,6 @@ std::ostream& operator<<(std::ostream& o, MateriaSource const& m) {
   o << Layout::greenBold << "Name: " << m.getName() << "\n"
     << "Materias learned:\n";
   m.printMaterias();
-  o << '\n' << Layout::reset;
+  o << Layout::reset;
   return o;
 }

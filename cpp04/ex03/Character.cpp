@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:20:04 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 18:00:46 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 19:14:59 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,16 @@ Character::Character(std::string const& name)
 }
 
 /* Copy constructor */
-Character::Character(Character const& src) { *this = src; }
+Character::Character(Character const& src) : name_(src.name_) {
+  initializeInventory_();
+  *this = src;
+}
 
 /* Copy assignment operator */
 Character& Character::operator=(Character const& rhs) {
   std::cout << Layout::grey << "Character copy assignment operator called\n"
             << Layout::reset;
   if (this == &rhs) return *this;
-  name_ = rhs.name_;
   inventorySize_ = rhs.inventorySize_;
   deepCopyInventory_(rhs);
   return *this;
@@ -150,6 +152,6 @@ bool Character::indexOutOfRangeForInventory_(int index) const {
 std::ostream& operator<<(std::ostream& o, Character const& c) {
   o << Layout::greenBold << "Name: " << c.getName() << '\n';
   c.printInventory();
-  o << Layout::reset << '\n';
+  o << Layout::reset;
   return o;
 }

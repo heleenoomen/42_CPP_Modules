@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:25:38 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 18:01:06 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:26:01 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class Character : public ICharacter {
   static int const inventoryMaxSize_ = 4;
 
   /* private attributes */
-  std::string name_;
+  std::string const name_;
   AMateria* inventory_[Character::inventoryMaxSize_];
   int inventorySize_;
 
