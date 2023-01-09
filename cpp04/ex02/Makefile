@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/01/08 17:42:03 by hoomen           ###   ########.fr        #
+#    Updated: 2023/01/09 15:35:12 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
 SRC			=	Cat.cpp Dog.cpp AAnimal.cpp WrongAnimal.cpp WrongCat.cpp main.cpp\
-					Brain.cpp
+					Brain.cpp Layout.cpp
 
 ODIR		=	obj
 OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)

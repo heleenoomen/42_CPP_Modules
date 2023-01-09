@@ -14,6 +14,7 @@
 #define AANIMAL_HPP
 
 #include <string>
+#include <iostream>
 
 class AAnimal {
  protected:
@@ -42,5 +43,8 @@ class AAnimal {
   /* public method */
   virtual void makeSound() const = 0;
 };
+
+/* Insertion operator */
+std::ostream& operator<<(std::ostream& o, AAnimal const& a);
 
 #endif

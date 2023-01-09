@@ -6,11 +6,12 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:14:25 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/08 17:32:13 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 16:23:28 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Brain.hpp"
+#include "Layout.hpp"
 
 #include <iostream>
 
@@ -46,7 +47,9 @@ void Brain::setIdea(int index, std::string const& idea) {
 
 /* Public methods */
 void Brain::printIdeas() const {
+  std::cout << Layout::magenta;
   for (int i = 0; i < brainSize_; ++i) {
     if (ideas_[i] != "") std::cout << "Idea " << i << ": " << ideas_[i] << '\n';
   }
+  std::cout << Layout::reset;
 }
