@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:20:04 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/08 19:53:41 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 11:48:20 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,17 @@ void Character::use(int idx, ICharacter& target) {
   inventory_[idx]->use(target);
 }
 
+void Character::printInventory() const {
+  std::cout << Layout::magentaBold;
+  for (int i = 0; i < inventoryMaxSize_; ++i) {
+    std::cout << "* Inventory slot " << i << ": ";
+    if (inventory_[i] != NULL)
+      std::cout << inventory_[i]->getType() << " *\n";
+    else
+      std::cout << "EMPTY *\n";
+  }
+  std::cout << Layout::reset;
+}
 /* ************************************************************************** */
 /* Private methods                                                            */
 /* ************************************************************************** */

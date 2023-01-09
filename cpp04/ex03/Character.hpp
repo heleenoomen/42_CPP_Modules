@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:25:38 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/08 19:50:31 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 11:40:34 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ class Character : public ICharacter {
   virtual void equip(AMateria* m);
   virtual void unequip(int idx);
   virtual void use(int idx, ICharacter& target);
+  void printInventory() const;
 };
 
 #endif
