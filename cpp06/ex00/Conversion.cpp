@@ -61,20 +61,22 @@ std::string const& Conversion::getInput() const { return input_; }
 /* Private methods                                                            */
 /* ************************************************************************** */
 
-bool Conversion::isPseudoLiteral() const {
-  if (input_ == "+inf" || input_ == "-inf" || input_ == "nan") return true;
+bool Conversion::isPseudoLiteralFloat() const {
   if (input_ == "+inff" || input_ == "-inff" || input_ == "nanf") return true;
+  return false;
+}
+
+bool Conversion::isPseudoLiteralDouble() const {
+  if (input_ == "+inf" || input_ == "-inf" || input_ == "nan") return true;
   return false;
 }
 
 void Conversion::determineType() {
   if (input_.length() == 1 && !isdigit(input_[0]))
     type_ = charType;
-  else if (isPseudoLiteral())
-    type_ = pseudoLiteral;
-  else if (input_.find('f') != std::string::npos)
+  else if (input_.find('f') != std::string::npos || isPseudoLiteralFloat())
     type_ = floatType;
-  else if (input_.find('.') != std::string::npos)
+  else if (input_.find('.') != std::string::npos || isPseudoLiteralDouble())
     type_ = doubleType;
   else
     type_ = intType;
@@ -93,14 +95,12 @@ void Conversion::convertInt() const {
 
 void Conversion::convertFloat() const {}
 void Conversion::convertDouble() const {}
-void Conversion::convertPseudoLiteral() const {}
 
 void Conversion::launchConversionTable() {
   conversionTable_[charType] = &Conversion::convertChar;
   conversionTable_[intType] = &Conversion::convertInt;
   conversionTable_[floatType] = &Conversion::convertFloat;
   conversionTable_[doubleType] = &Conversion::convertDouble;
-  conversionTable_[pseudoLiteral] = &Conversion::convertPseudoLiteral;
 }
 
 /* ************************************************************************** */

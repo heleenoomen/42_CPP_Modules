@@ -20,13 +20,13 @@ class Conversion;
 
 typedef void (Conversion::*convertType)() const;
 
-enum InputType { charType, intType, floatType, doubleType, pseudoLiteral };
+enum InputType { charType, intType, floatType, doubleType};
 
 class Conversion {
  private:
   std::string const input_;
   int type_;
-  static int const nbrOfConversions = 5;
+  static int const nbrOfConversions = 4;
   
   convertType conversionTable_[nbrOfConversions];
 
@@ -34,11 +34,11 @@ class Conversion {
   void convertInt() const;
   void convertFloat() const;
   void convertDouble() const;
-  void convertPseudoLiteral() const;
 
   void launchConversionTable();
   void determineType();
-  bool isPseudoLiteral() const;
+  bool isPseudoLiteralFloat() const;
+  bool isPseudoLiteralDouble() const;
 
  public:
   /* default constructor */
