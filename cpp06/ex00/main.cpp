@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 14:34:04 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/08 15:03:05 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/10 21:49:48 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ int main(int argc, char **argv) {
     std::cerr << "Wrong arguments\n";
     return EXIT_FAILURE;
   }
-  Conversion conversion(argv[1]);
+  Conversion conv(argv[1]);
+  conv.convert();
 }

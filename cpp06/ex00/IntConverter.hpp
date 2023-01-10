@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Conversion.hpp                                        :+:      :+:    :+:   */
+/*   IntConverter.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,55 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONVERSION_HPP
-#define CONVERSION_HPP
+#ifndef INTCONVERTER_HPP
+#define INTCONVERTER_HPP
 
-#include <string>
+// #include <string>
+// #include <iostream>
 
-
-class Conversion;
-
-typedef void (Conversion::*convertType)() const;
-
-enum InputType { charType, intType, floatType, doubleType, pseudoLiteral };
-
-class Conversion {
+class IntConverter {
  private:
-  std::string const input_;
-  int type_;
-  static int const nbrOfConversions = 5;
-  
-  convertType conversionTable_[nbrOfConversions];
+  int intValue_;
 
-  void convertChar() const;
-  void convertInt() const;
-  void convertFloat() const;
-  void convertDouble() const;
-  void convertPseudoLiteral() const;
-
-  void launchConversionTable();
-  void determineType();
-  bool isPseudoLiteral() const;
+ /* private methods */
+  void printInt_() const;
+  void printChar_() const;
+  void printFloat_() const;
+  void printDouble_() const;
 
  public:
   /* default constructor */
-  Conversion();
-  Conversion(std::string const& input);
+  IntConverter(int i);
 
   /* copy constructor */
-  Conversion(Conversion const& src);
+  IntConverter(IntConverter const& src);
 
   /* copy assignment operator */
-  Conversion& operator=(Conversion const& rhs);
+  IntConverter& operator=(IntConverter const& rhs);
 
   /* default destructor */
-  ~Conversion();
+  ~IntConverter();
 
   /* getters */
-  std::string const& getInput() const;
+
+  /* setters */
+
+  /* exceptions */
 
   /* public methods */
-  void convert() const;
+  void printConversions() const;
 };
 
 #endif
