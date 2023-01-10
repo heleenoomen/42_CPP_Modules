@@ -16,10 +16,27 @@
 #include <string>
 // #include <iostream>
 
+class Conversion;
+
+enum InputType { charType, intType, floatType, doubleType };
+
+typedef void (Conversion::*convertType)() const;
+
 class Conversion {
  //private:
   std::string const input_;
-  std::string const inputType;
+  int type_;
+  convertType conversionTable_[4];
+
+  void convertChar() const;
+  void convertInt() const;
+  void convertFloat() const;
+  void convertDouble() const;
+
+  void launchConversionTable();
+  void determineType();
+  bool floatIsPseudoLiteral() const;
+  bool doubleIsPseudoLiteral() const;
 
  //protected:
 
@@ -41,6 +58,9 @@ class Conversion {
   std::string const& getInput() const;
 
   /* setters */
+
+  /* public methods */
+  void convert() const;
 };
 
 /* insertion operator */
