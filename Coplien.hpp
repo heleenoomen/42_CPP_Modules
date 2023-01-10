@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/21 17:49:46 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/10 22:01:08 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@
 // #include <iostream>
 
 class Coplien {
- //private:
+  // private:
 
- //protected:
+  // /* private methods*/
+
+  // protected:
+
+  // /* protected methods */
 
  public:
   /* default constructor */
@@ -37,6 +41,10 @@ class Coplien {
   /* getters */
 
   /* setters */
+
+  /* exceptions */
+
+  /* public methods */
 };
 
 /* insertion operator */
