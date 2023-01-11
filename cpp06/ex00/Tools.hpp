@@ -21,6 +21,7 @@ class Tools {
   /* symbolic constants */
   static char const endOfString = '\0';
   static char const base_ = 10;
+  static std::string const floatSuffix;
 
   /* private methods */
   static std::string intMaxToString();
@@ -31,10 +32,16 @@ class Tools {
   static void checkIntMin(long strtolResult,
                           std::string const& intputString);
   static void checkEndptr(char* strtolEndptr);
-  static void checkZero(long strtolResult,
-                        std::string const& intputString);
-  static void checkForInvalidInput(long strtolResult, char* endptr,
+  static void intCheckInvalidInput(long strtolResult, char* endptr,
                                    std::string const& intputString);
+  static void floatCheckInvalidInput(double strtofResult, char* endprt,
+                                     std::string const& inputString);
+  static void floatCheckEndptr(const char* endptr);
+  static void floatCheckInff(float strtofResult, std::string const& inputString);
+  static void floatCheckMinusInff(float strtofResult,
+                                  std::string const& inputString);
+  static void floatCheckInvalidInput(float strtofResult, char* endptr,
+                                   std::string const& inputString);
 
  public:
   /* default constructor */
@@ -58,7 +65,10 @@ class Tools {
   };
 
   /* public methods */
-  static int myStrtoi(std::string const& inputString);
+  static void checkInt(std::string const& inputString);
+  static void checkFloat(std::string const& inputString);
+  static double inf();
+  static float inff();
 };
 
 #endif

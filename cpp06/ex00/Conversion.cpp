@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "IntConverter.hpp"
+#include "CharConverter.hpp"
 #include "Tools.hpp"
 
 /* ************************************************************************** */
@@ -72,7 +73,7 @@ bool Conversion::isPseudoLiteralDouble() const {
 }
 
 void Conversion::determineType() {
-  if (input_.length() == 1 && !isdigit(input_[0]))
+  if (input_.length() <= 1 && !isdigit(input_[0]))
     type_ = charType;
   else if (input_.find('f') != std::string::npos || isPseudoLiteralFloat())
     type_ = floatType;
@@ -82,20 +83,22 @@ void Conversion::determineType() {
     type_ = intType;
 }
 
-void Conversion::convertChar() const {}
+void Conversion::convertChar() const {
+  CharConverter charconv(input_[0]);
+  charconv.printConversions();
+}
 
 void Conversion::convertInt() const {
   try {
-    IntConverter convInt(Tools::myStrtoi(input_));
-    convInt.printConversions();
+    Tools::checkInt(input_);
   } catch (std::exception& e) {
     std::cout << e.what();
   }
 }
 
+
 void Conversion::convertFloat() const {}
 void Conversion::convertDouble() const {}
-
 void Conversion::launchConversionTable() {
   conversionTable_[charType] = &Conversion::convertChar;
   conversionTable_[intType] = &Conversion::convertInt;

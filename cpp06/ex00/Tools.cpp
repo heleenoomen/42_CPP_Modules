@@ -1,9 +1,12 @@
 
 #include "Tools.hpp"
 
+#include <cfloat>
 #include <climits>
 #include <cstdlib>
 #include <iostream>
+
+std::string const Tools::floatSuffix = "f";
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -70,16 +73,14 @@ void Tools::checkOutOfBounds(long strtolResult) {
 }
 
 /* strtol can return INT_MAX also in case of overflow (if INT_MAX == LONG_MAX)*/
-void Tools::checkIntMax(long strtolResult,
-                        std::string const& inputString) {
+void Tools::checkIntMax(long strtolResult, std::string const& inputString) {
   if (strtolResult == INT_MAX && inputString != intMaxToString() &&
       inputString != "+" + intMaxToString())
     throw Tools::invalidInputException();
 }
 
 /* strtol can return INT_MIN also in case of overflow (if INT_MIN == LONG_MIN)*/
-void Tools::checkIntMin(long strtolResult,
-                        std::string const& inputString) {
+void Tools::checkIntMin(long strtolResult, std::string const& inputString) {
   if (strtolResult == INT_MIN && inputString != intMinToString())
     throw Tools::invalidInputException();
 }
@@ -90,19 +91,41 @@ void Tools::checkEndptr(char* strtolEndptr) {
   if (*strtolEndptr != endOfString) throw Tools::invalidInputException();
 }
 
-/* strtol also returns 0 in case of invalid input */
-void Tools::checkZero(long strtolResult, std::string const& inputString) {
-  if (strtolResult == 0 && inputString != "0")
-    throw Tools::invalidInputException();
-}
-
-void Tools::checkForInvalidInput(long strtolResult, char* endptr,
+void Tools::intCheckInvalidInput(long strtolResult, char* endptr,
                                  std::string const& inputString) {
-  checkZero(strtolResult, inputString);
   checkEndptr(endptr);
   checkOutOfBounds(strtolResult);
   checkIntMax(strtolResult, inputString);
   checkIntMin(strtolResult, inputString);
+}
+
+/* after the digits representing the float, there should be only "f". Otherwise,
+ * the string contains trailing non numeric characters and input is invalid */
+void Tools::floatCheckEndptr(const char* endptr) {
+  if (endptr != Tools::floatSuffix) throw Tools::invalidInputException();
+}
+
+/* strtof() returns inff also for strings representing huge value (HUGE_VALF
+ * does not exist in C++98) */
+void Tools::floatCheckInff(float strtofResult, std::string const& inputString) {
+  if (strtofResult == Tools::inf() && inputString != "inff" &&
+      inputString != "+inff")
+    throw Tools::invalidInputException();
+}
+
+/* strotf() returns -inff also for strings representing a huge negative value
+ * (HUGE_VALF does not exist in C++98) */
+void Tools::floatCheckMinusInff(float strtofResult,
+                                std::string const& inputString) {
+  if (strtofResult == strtof("-inff", NULL) && inputString != "-inff")
+    throw Tools::invalidInputException();
+}
+
+void Tools::floatCheckInvalidInput(float strtofResult, char* endptr,
+                                   std::string const& inputString) {
+  floatCheckEndptr(endptr);
+  floatCheckInff(strtofResult, inputString);
+  floatCheckMinusInff(strtofResult, inputString);
 }
 
 /* ************************************************************************** */
@@ -126,9 +149,22 @@ char const* Tools::invalidInputException::what() const throw() {
 
 /* we use strtol() because it is more robust than atoi() and allows us to
     detect invalid inputs */
-int Tools::myStrtoi(std::string const& inputString) {
+void Tools::checkInt(std::string const& inputString) {
   char* endptr;
   long strtolResult = strtol(inputString.c_str(), &endptr, base_);
-  checkForInvalidInput(strtolResult, endptr, inputString);
-  return static_cast<int>(strtolResult);
+  intCheckInvalidInput(strtolResult, endptr, inputString);
+}
+
+void Tools::myStrtof(std::string const& inputString) {
+  char* endptr;
+  float strtofResult = strtof(inputString.c_str(), &endptr);
+  floatCheckInvalidInput(strtofResult, endptr, inputString);
+}
+
+double Tools::inf() {
+  return std::numeric_limits<double>::infinity();
+}
+
+float Tools::inff() {
+  return std::numeric_limits<float>::infinity();
 }

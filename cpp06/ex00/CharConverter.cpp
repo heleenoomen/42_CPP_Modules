@@ -1,5 +1,5 @@
 
-#include "IntConverter.hpp"
+#include "CharConverter.hpp"
 
 #include <iostream>
 
@@ -8,52 +8,49 @@
 /* ************************************************************************** */
 
 /* Default constructor */
-IntConverter::IntConverter(int i) : intValue_(i) {}
+CharConverter::CharConverter(char c) : charValue_(c) {}
 
 /* Copy constructor */
-IntConverter::IntConverter(IntConverter const& src) { *this = src; }
+CharConverter::CharConverter(CharConverter const& src) { *this = src; }
 
 /* Copy assignment operator */
-IntConverter& IntConverter::operator=(IntConverter const& rhs) {
+CharConverter& CharConverter::operator=(CharConverter const& rhs) {
   if (this == &rhs) return *this;
-  intValue_ = rhs.intValue_;
+  charValue_ = rhs.charValue_;
   return *this;
 }
 
 /* Destructor */
-IntConverter::~IntConverter() {}
+CharConverter::~CharConverter() {}
 
 /* ************************************************************************** */
 /* Private methods                                                            */
 /* ************************************************************************** */
 
-void IntConverter::printChar_() const {
-  if (intValue_ < static_cast<int>(CHAR_MIN) ||
-      intValue_ > static_cast<int>(CHAR_MAX))
-    std::cout << "char: impossible\n";
-  else if (!isprint(intValue_))
-    std::cout << "char: non displayble\n";
+void CharConverter::printChar_() const {
+  if (!isprint(charValue_))
+    std::cout << "char: non displayable\n";
   else
-    std::cout << "char: " << static_cast<char>(intValue_);
+    std::cout << "char: " << charValue_ << '\n';
 }
 
-void IntConverter::printInt_() const {
-  std::cout << "int: " << intValue_ << '\n';
+void CharConverter::printInt_() const {
+  std::cout << "int: " << static_cast<int>(charValue_) << '\n';
 }
 
-void IntConverter::printFloat_() const {
-  std::cout << "float: " << static_cast<float>(intValue_) << ".0f\n";
+void CharConverter::printFloat_() const {
+  std::cout << "float: " << static_cast<float>(charValue_) << ".0f\n";
 }
 
-void IntConverter::printDouble_() const {
-  std::cout << "double: " << static_cast<double>(intValue_) << ".0\n";
+void CharConverter::printDouble_() const {
+  std::cout << "double: " << static_cast<double>(charValue_) << ".0\n";
 }
 
 /* ************************************************************************** */
 /* Public methods                                                             */
 /* ************************************************************************** */
 
-void IntConverter::printConversions() const {
+void CharConverter::printConversions() const {
   printChar_();
   printInt_();
   printFloat_();

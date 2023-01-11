@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/01/10 21:48:10 by hoomen           ###   ########.fr        #
+#    Updated: 2023/01/11 17:09:15 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CXXFLAGS	:=	-Wall -Werror -Wextra #-std=c++98
 
 DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
-SRC			=	Conversion.cpp main.cpp IntConverter.cpp Tools.cpp
+SRC			=	Conversion.cpp main.cpp IntConverter.cpp CharConverter.cpp Tools.cpp
 
 ODIR		=	obj
 OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)
