@@ -6,42 +6,24 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/21 17:49:46 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/10 22:01:08 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOOLS_HPP
 #define TOOLS_HPP
 
-#include <string>
+// #include <string>
 // #include <iostream>
 
 class Tools {
- private:
-  /* symbolic constants */
-  static char const endOfString = '\0';
-  static char const base_ = 10;
-  static std::string const floatSuffix;
+  // private:
 
-  /* private methods */
-  static std::string intMaxToString();
-  static std::string intMinToString();
-  static void checkOutOfBounds(long strtolResult);
-  static void checkIntMax(long strtolResult,
-                          std::string const& intputString);
-  static void checkIntMin(long strtolResult,
-                          std::string const& intputString);
-  static void checkEndptr(char* strtolEndptr);
-  static void intCheckInvalidInput(long strtolResult, char* endptr,
-                                   std::string const& intputString);
-  static void floatCheckInvalidInput(double strtofResult, char* endprt,
-                                     std::string const& inputString);
-  static void floatCheckEndptr(const char* endptr);
-  static void floatCheckInff(float strtofResult, std::string const& inputString);
-  static void floatCheckMinusInff(float strtofResult,
-                                  std::string const& inputString);
-  static void floatCheckInvalidInput(float strtofResult, char* endptr,
-                                   std::string const& inputString);
+  // /* private methods*/
+
+  // protected:
+
+  // /* protected methods */
 
  public:
   /* default constructor */
@@ -56,19 +38,22 @@ class Tools {
   /* default destructor */
   ~Tools();
 
+  /* getters */
+
+  /* setters */
+
   /* exceptions */
-  class invalidInputException : public std::exception {
-   public:
-    invalidInputException();
-    ~invalidInputException() throw();
-    char const* what() const throw();
-  };
 
   /* public methods */
-  static void checkInt(std::string const& inputString);
-  static void checkFloat(std::string const& inputString);
-  static double inf();
+  static bool isPseudoLiteralDouble(std::string const& s);
+  static bool isPseudoLiteralFloat(std::string const& s);
   static float inff();
+  static double inf();
+  static std::string intMaxString();
+  static std::string intMinString();
 };
+
+/* insertion operator */
+// std::ostream& operator<<(std::ostream& o, Tools const& cname);
 
 #endif

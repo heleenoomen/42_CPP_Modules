@@ -1,50 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   DoubleConverter.hpp                                        :+:      :+:    :+:   */
+/*   Converter.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/21 17:49:46 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/12 15:55:32 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOUBLECONVERTER_HPP
-#define DOUBLECONVERTER_HPP
+#ifndef CONVERTER_HPP
+#define CONVERTER_HPP
 
-// #include <string>
+#include <string>
 // #include <iostream>
 
-class DoubleConverter {
- private:
-  double doubleValue_;
+enum { charType, intType, floatType, doubleType };
 
- /* private methods */
-  double NaN() const;
-  double inf() const;
-  float inff() const;
+class Converter {
+ private:
+  std::string const inputString_;
+  int type_;
+  double value_;
+
+  // /* private methods*/
   bool charOverflow() const;
+  bool charImpossible() const;
   bool charNonDisplayable() const;
   bool intOverflow() const;
+  bool intImpossible() const;
   bool floatOverflow() const;
-  void printInt_() const;
+  bool floatImpossible() const;
   void printChar_() const;
+  void printInt_() const;
   void printFloat_() const;
   void printDouble_() const;
+  void printConversions_() const;
+
+  // protected:
+
+  // /* protected methods */
 
  public:
   /* default constructor */
-  DoubleConverter(char c);
+  Converter();
+  Converter(std::string const& inputString);
 
   /* copy constructor */
-  DoubleConverter(DoubleConverter const& src);
+  Converter(Converter const& src);
 
   /* copy assignment operator */
-  DoubleConverter& operator=(DoubleConverter const& rhs);
+  Converter& operator=(Converter const& rhs);
 
   /* default destructor */
-  ~DoubleConverter();
+  ~Converter();
 
   /* getters */
 
@@ -53,7 +63,10 @@ class DoubleConverter {
   /* exceptions */
 
   /* public methods */
-  void printConversions() const;
+  static void convertLiteral(std::string const& input);
 };
+
+/* insertion operator */
+// std::ostream& operator<<(std::ostream& o, Converter const& cname);
 
 #endif
