@@ -6,23 +6,24 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 21:05:45 by hoomen            #+#    #+#             */
-/*   Updated: 2022/12/12 12:30:07 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:04:56 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATERIASRC_HPP
 #define MATERIASRC_HPP
 
-#include "IMateriaSource.hpp"
-#include "AMateria.hpp"
-
 #include <string>
+
+#include "AMateria.hpp"
+#include "IMateriaSource.hpp"
 
 class MateriaSource : public IMateriaSource {
  private:
-  static int const _maxNbrOfMaterias = 4;
-  AMateria* _materias[MateriaSource::_maxNbrOfMaterias];
-  int _nbrOfAmaterias;
+  std::string const name_;
+  static int const maxNbrOfMaterias_ = 4;
+  AMateria* materias_[MateriaSource::maxNbrOfMaterias_];
+  int nbrOfMaterias_;
 
   /*private helpers */
   void _setAllMateriasToNull();
@@ -31,6 +32,7 @@ class MateriaSource : public IMateriaSource {
  public:
   /* constructor */
   MateriaSource();
+  MateriaSource(std::string const& name);
 
   /* copy constructor */
   MateriaSource(MateriaSource const&);
@@ -41,9 +43,15 @@ class MateriaSource : public IMateriaSource {
   /* destructor */
   virtual ~MateriaSource();
 
+  /* getter */
+  std::string const& getName() const;
+
   /* public methods*/
   virtual void learnMateria(AMateria*);
-  virtual AMateria* createMateria(std::string const& type);
+  virtual AMateria* createMateria(std::string const& type) const;
+  void printMaterias() const;
 };
 
+/* insertion operator */
+std::ostream& operator<<(std::ostream& o, MateriaSource const& m);
 #endif

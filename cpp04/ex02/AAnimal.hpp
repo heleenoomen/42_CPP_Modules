@@ -13,6 +13,7 @@
 #ifndef AANIMAL_HPP
 #define AANIMAL_HPP
 
+#include <iostream>
 #include <string>
 
 class AAnimal {
@@ -42,5 +43,8 @@ class AAnimal {
   /* public method */
   virtual void makeSound() const = 0;
 };
+
+/* Insertion operator */
+std::ostream& operator<<(std::ostream& o, AAnimal const& a);
 
 #endif

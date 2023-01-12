@@ -6,14 +6,15 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:20:04 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/08 19:53:41 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 19:14:59 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
-#include "Layout.hpp"
 
 #include <iostream>
+
+#include "Layout.hpp"
 
 static int const empty = 0;
 
@@ -22,21 +23,23 @@ static int const empty = 0;
 /* ************************************************************************** */
 
 /* Default constructor */
-Character::Character() : name_("Default"), inventorySize_(empty) { 
+Character::Character() : name_("Default"), inventorySize_(empty) {
   std::cout << Layout::grey << "Character default constructor called\n"
             << Layout::reset;
   initializeInventory_();
 }
 
 /* Parametric constructor */
-Character::Character(std::string const& name) : name_(name), inventorySize_(empty) {
+Character::Character(std::string const& name)
+    : name_(name), inventorySize_(empty) {
   std::cout << Layout::grey << "Character parametric constructor called\n"
             << Layout::reset;
   initializeInventory_();
 }
 
 /* Copy constructor */
-Character::Character(Character const& src) {
+Character::Character(Character const& src) : name_(src.name_) {
+  initializeInventory_();
   *this = src;
 }
 
@@ -44,9 +47,7 @@ Character::Character(Character const& src) {
 Character& Character::operator=(Character const& rhs) {
   std::cout << Layout::grey << "Character copy assignment operator called\n"
             << Layout::reset;
-  if (this == &rhs)
-    return *this;
-  name_ = rhs.name_;
+  if (this == &rhs) return *this;
   inventorySize_ = rhs.inventorySize_;
   deepCopyInventory_(rhs);
   return *this;
@@ -69,32 +70,39 @@ std::string const& Character::getName() const { return name_; }
 /* ************************************************************************** */
 
 void Character::equip(AMateria* m) {
-  if (m->typeDoesNotExist() || inventoryFull_())
-    return ;
+  if (m->typeDoesNotExist() || inventoryFull_()) return;
   insertMateriaInFirstFreeSlot_(m);
   ++inventorySize_;
 }
 
 void Character::unequip(int idx) {
-  if (indexOutOfRangeForInventory_(idx))
-    return ;
+  if (indexOutOfRangeForInventory_(idx)) return;
   inventory_[idx] = NULL;
   --inventorySize_;
 }
 
 void Character::use(int idx, ICharacter& target) {
-  if (indexOutOfRangeForInventory_(idx) || inventory_[idx] == NULL)
-    return ;
+  if (indexOutOfRangeForInventory_(idx) || inventory_[idx] == NULL) return;
   inventory_[idx]->use(target);
 }
 
+void Character::printInventory() const {
+  std::cout << Layout::magentaBold;
+  for (int i = 0; i < inventoryMaxSize_; ++i) {
+    std::cout << "* Inventory slot " << i << ": ";
+    if (inventory_[i] != NULL)
+      std::cout << inventory_[i]->getType() << " *\n";
+    else
+      std::cout << "EMPTY *\n";
+  }
+  std::cout << Layout::reset;
+}
 /* ************************************************************************** */
 /* Private methods                                                            */
 /* ************************************************************************** */
 
 void Character::initializeInventory_() {
-  for (int i = 0; i < Character::inventoryMaxSize_; ++i)
-    inventory_[i] = NULL;
+  for (int i = 0; i < Character::inventoryMaxSize_; ++i) inventory_[i] = NULL;
 }
 
 void Character::emptyInventory() {
@@ -105,8 +113,9 @@ void Character::emptyInventory() {
 }
 
 void Character::copyIndividualMaterias(Character const& src) {
-  for (int i = 0; i < inventoryMaxSize_; ++i)
-    inventory_[i] = src.inventory_[i]->clone();
+  for (int i = 0; i < src.inventoryMaxSize_; ++i) {
+    if (src.inventory_[i] != NULL) inventory_[i] = src.inventory_[i]->clone();
+  }
 }
 
 void Character::deepCopyInventory_(Character const& src) {
@@ -121,8 +130,7 @@ bool Character::inventoryFull_() const {
 /* Only use if intenvtoryFull_ returned false! */
 int Character::findFirstFreeSlot_() const {
   for (int i = 0; i < Character::inventoryMaxSize_; ++i) {
-    if (inventory_[i] == NULL)
-      return i;
+    if (inventory_[i] == NULL) return i;
   }
   return 0;
 }
@@ -133,7 +141,17 @@ void Character::insertMateriaInFirstFreeSlot_(AMateria* m) {
 }
 
 bool Character::indexOutOfRangeForInventory_(int index) const {
-  if (index < 0 || index >= Character::inventoryMaxSize_)
-    return true;
+  if (index < 0 || index >= Character::inventoryMaxSize_) return true;
   return false;
+}
+
+/* ************************************************************************** */
+/* Insertion operator                                                         */
+/* ************************************************************************** */
+
+std::ostream& operator<<(std::ostream& o, Character const& c) {
+  o << Layout::greenBold << "Name: " << c.getName() << '\n';
+  c.printInventory();
+  o << Layout::reset;
+  return o;
 }

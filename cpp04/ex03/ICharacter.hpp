@@ -6,21 +6,20 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:40:10 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/08 18:05:02 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:02:50 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ICHARACTER_HPP
 #define ICHARACTER_HPP
 
-#include "AMateria.hpp"
-
 #include <string>
+
+#include "AMateria.hpp"
 
 class AMateria;
 
-class ICharacter
-{
+class ICharacter {
  public:
   /* constructor */
   ICharacter();

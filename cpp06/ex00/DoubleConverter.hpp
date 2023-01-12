@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Layout.hpp                                        :+:      :+:    :+:   */
+/*   DoubleConverter.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,53 +10,50 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LAYOUT_HPP
-#define LAYOUT_HPP
+#ifndef DOUBLECONVERTER_HPP
+#define DOUBLECONVERTER_HPP
 
-/* Comment the following three lines on when redirecting output to a file to
-   avoid escape codes being printed: */
+// #include <string>
+// #include <iostream>
 
-// #ifndef redirect_to_file
-// #define redirect_to_file
-// #endif
+class DoubleConverter {
+ private:
+  double doubleValue_;
 
-class Layout {
+ /* private methods */
+  double NaN() const;
+  double inf() const;
+  float inff() const;
+  bool charOverflow() const;
+  bool charNonDisplayable() const;
+  bool intOverflow() const;
+  bool floatOverflow() const;
+  void printInt_() const;
+  void printChar_() const;
+  void printFloat_() const;
+  void printDouble_() const;
+
  public:
   /* default constructor */
-  Layout();
+  DoubleConverter(char c);
 
   /* copy constructor */
-  Layout(Layout const& src);
+  DoubleConverter(DoubleConverter const& src);
 
   /* copy assignment operator */
-  Layout& operator=(Layout const& rhs);
+  DoubleConverter& operator=(DoubleConverter const& rhs);
 
   /* default destructor */
-  ~Layout();
+  ~DoubleConverter();
 
-  /* symbolic constants */
-  static char const* greenBold;
-  static char const* green;
+  /* getters */
 
-  static char const* yellowBold;
-  static char const* yellow;
+  /* setters */
 
-  static char const* brightYellow;
+  /* exceptions */
 
-  static char const* redBold;
-
-  static char const* magentaBold;
-  static char const* magenta;
-
-  static char const* cyanBold;
-  static char const* cyanItalic;
-
-  static char const* grey;
-
-  static char const* reset;
-
-  static char const* emojiRobot;
-  static char const* emojiSkull;
+  /* public methods */
+  void printConversions() const;
 };
 
 #endif

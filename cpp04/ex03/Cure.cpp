@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cure.cpp                                            :+:      :+:    :+:   */
+/*   Cure.cpp                                            :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include "Cure.hpp"
-#include "Layout.hpp"
 
 #include <iostream>
+
+#include "Layout.hpp"
 
 Cure::Cure() : AMateria("cure") {
   std::cout << Layout::grey << "Cure default constructor called\n"
@@ -32,8 +33,8 @@ Cure& Cure::operator=(Cure const&) {
 }
 
 Cure::~Cure() {
-  std::cout << Layout::grey << "Cure destructor called\n" << Layout::reset
-            << Layout::reset;
+  std::cout << Layout::grey << "Cure destructor called\n"
+            << Layout::reset << Layout::reset;
 }
 
 AMateria* Cure::clone() const {
@@ -43,5 +44,6 @@ AMateria* Cure::clone() const {
 
 void Cure::use(ICharacter& target) {
   std::cout << Layout::magentaBold << "* heals " << target.getName()
-            << "\'s wounds *\n" << Layout::reset;
+            << "\'s wounds *\n"
+            << Layout::reset;
 }

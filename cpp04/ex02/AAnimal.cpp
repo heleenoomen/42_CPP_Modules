@@ -14,27 +14,29 @@
 
 #include <iostream>
 
+#include "Layout.hpp"
+
 /* Default constructor */
 AAnimal::AAnimal() : type_("") {
-  std::cout << "AAnimal default constructor called" << std::endl;
+  std::cout << "AAnimal default constructor called\n";
 }
 
 /* Copy constructor */
 AAnimal::AAnimal(AAnimal const& src) {
-  std::cout << "AAnimal copy constructor called" << std::endl;
+  std::cout << "AAnimal copy constructor called\n";
   *this = src;
 }
 
 /* Copy assignment operator */
 AAnimal& AAnimal::operator=(AAnimal const& rhs) {
-  std::cout << "AAnimal copy assignment operator called" << std::endl;
+  std::cout << "AAnimal copy assignment operator called\n";
   if (this == &rhs) return *this;
   type_ = rhs.getType();
   return *this;
 }
 
 /* Destructor */
-AAnimal::~AAnimal() { std::cout << "AAnimal destructor called" << std::endl; }
+AAnimal::~AAnimal() { std::cout << "AAnimal destructor called\n"; }
 
 /* Getters */
 std::string const& AAnimal::getType() const { return type_; }
@@ -51,4 +53,15 @@ void AAnimal::setIdea(int i, std::string const& idea) {
 }
 
 /* Public method */
-void AAnimal::makeSound() const { std::cout << "???" << std::endl; }
+void AAnimal::makeSound() const { std::cout << "???" << '\n'; }
+
+/* ************************************************************************** */
+/* Insertion operator                                                         */
+/* ************************************************************************** */
+
+std::ostream& operator<<(std::ostream& o, AAnimal const& a) {
+  o << Layout::green << "Type: " << a.getType() << ", sound: ";
+  a.makeSound();
+  o << Layout::reset;
+  return o;
+}

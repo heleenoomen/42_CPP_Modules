@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cure.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 19:42:19 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 18:01:28 by hoomen           ###   ########.fr       */
+/*   Created: 2023/01/08 14:34:04 by hoomen            #+#    #+#             */
+/*   Updated: 2023/01/12 07:53:45 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CURE_HPP
-#define CURE_HPP
+#include <iostream>
 
-#include "AMateria.hpp"
-#include "ICharacter.hpp"
+#include "Conversion.hpp"
 
-class Cure : public AMateria {
- public:
-  /* constructors */
-  Cure();
-
-  /* copy constructor */
-  Cure(Cure const& src);
-
-  /* assignment operator */
-  Cure& operator=(Cure const& rhs);
-
-  /* destructor */
-  ~Cure();
-
-  virtual AMateria* clone() const;
-  virtual void use(ICharacter& target);
-};
-
-#endif
+int main(int argc, char **argv) {
+  if (argc != 2) {
+    std::cerr << "Wrong arguments\n";
+    return EXIT_FAILURE;
+  }
+  Conversion conv(argv[1]);
+  conv.convert();
+}

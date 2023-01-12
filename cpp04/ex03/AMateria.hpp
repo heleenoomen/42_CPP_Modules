@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:35:43 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/08 19:46:16 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:00:35 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class AMateria {
  public:
   /* constructors */
   AMateria();
-  AMateria(std::string const & type);
+  AMateria(std::string const& type);
 
   /* copy constructor */
   AMateria(AMateria const& src);
@@ -38,7 +38,7 @@ class AMateria {
   virtual ~AMateria();
 
   /* getter */
-  std::string const & getType() const;
+  std::string const& getType() const;
   bool typeDoesNotExist() const;
 
   /* methods */

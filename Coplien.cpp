@@ -1,5 +1,6 @@
 
 #include "Coplien.hpp"
+
 #include <iostream>
 
 /* ************************************************************************** */
@@ -8,56 +9,59 @@
 
 /* Default constructor */
 Coplien::Coplien() {
-  std::cout << "\033[0;2m" << "Coplien default constructor called\033[0m\n";
+  std::cout << "\033[0;2m"
+            << "Coplien default constructor called\033[0m\n";
 }
 
 /* Copy constructor */
 Coplien::Coplien(Coplien const& src) {
-  std::cout << "\033[0;2m" << "Coplien copy constructor called\033[0m\n";
+  std::cout << "\033[0;2m"
+            << "Coplien copy constructor called\033[0m\n";
   *this = src;
 }
 
 /* Copy assignment operator */
 Coplien& Coplien::operator=(Coplien const& rhs) {
-  std::cout << "\033[0;2m" << "Coplien copy assignment operator called\033[0m\n";
-  if (this == &rhs)
-    return *this;
+  std::cout << "\033[0;2m"
+            << "Coplien copy assignment operator called\033[0m\n";
+  if (this == &rhs) return *this;
   /* assign values here */
   return *this;
 }
 
 /* Destructor */
 Coplien::~Coplien() {
-  std::cout << "\033[0;2m" << "Coplien destructor called\033[0m\n";
+  std::cout << "\033[0;2m"
+            << "Coplien destructor called\033[0m\n";
 }
 
 /* ************************************************************************** */
 /* Getters                                                                    */
 /* ************************************************************************** */
 
-
 /* ************************************************************************** */
 /* Setters                                                                    */
 /* ************************************************************************** */
-
-
-/* ************************************************************************** */
-/* Public methods                                                             */
-/* ************************************************************************** */
-
 
 /* ************************************************************************** */
 /* Private methods                                                            */
 /* ************************************************************************** */
 
+/* ************************************************************************** */
+/* Private methods                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/* Public methods                                                             */
+/* ************************************************************************** */
 
 /* ************************************************************************** */
 /* Insertion operator                                                         */
 /* ************************************************************************** */
 
-std::ostream& operator<<(std::ostream& o, Coplien const& cname) {
-  o << "\033[0;32m"
-    // << some info here
-    << "\033[0m";
-  return o;
-}
+// std::ostream& operator<<(std::ostream& o, Coplien const& cname) {
+//   o << "\033[0;32m"
+//     // << some info here
+//     << "\033[0m";
+//   return o;
+// }

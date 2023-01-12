@@ -6,221 +6,289 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 10:01:09 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/08 17:44:22 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/09 18:18:13 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <iomanip>
 #include <iostream>
 
 #include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "Layout.hpp"
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
-void test(AAnimal const& animal) {
-  std::cout << "Type: " << animal.getType() << ", sound: ";
-  animal.makeSound();
+/* ************************************************************************** */
+/* Print utils                                                                */
+/* ************************************************************************** */
+
+static int const testHeaderWidth = 56;
+
+void printStars() {
+  for (int i = 0; i < testHeaderWidth; ++i) std::cout << '*';
+}
+
+void printTestHeader(char const* testname) {
+  std::cout << Layout::brightYellow;
+  printStars();
+  std::cout << "\n";
+  std::cout << "* " << std::left << std::setw(testHeaderWidth - 3) << testname
+            << "*\n";
+  printStars();
+  std::cout << "\n" << Layout::reset;
+}
+
+void printTestTrailer() { std::cout << "\n"; }
+
+void printTestStep(std::string const& message) {
+  std::cout << Layout::cyanItalic << message << ":\n" << Layout::reset;
+}
+
+void printTestStepName(std::string const& message, std::string const& name) {
+  std::cout << Layout::cyanItalic << message << " " << name << ":\n"
+            << Layout::reset;
+}
+
+/* ************************************************************************** */
+/* Test utils animal                                                          */
+/* ************************************************************************** */
+
+/* Delete Animal */
+void testDeleteAnimal(AAnimal& a, char const* varName) {
+  printTestStepName("Delete", varName);
+  delete &a;
+}
+
+/* Print Animal */
+void testPrintAnimal(AAnimal& a, char const* varName) {
+  printTestStepName("Print", varName);
+  std::cout << a;
+}
+
+/* ************************************************************************** */
+/* Test utils cat                                                             */
+/* ************************************************************************** */
+
+/* Default Constructor Cat */
+Cat* testDefaultConstructorCat(char const* varName) {
+  printTestStepName("Default constructor for", varName);
+  return new Cat;
+}
+
+/* Copy Constructor Cat */
+Cat* testCopyConstructorCat(Cat& src, char const* varName, char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Copy constructor for " << varName
+            << ", copying " << varNameSrc << '\n' << Layout::reset;
+  return new Cat(src);
+}
+
+/* Copy Assignment Cat */
+void testCopyAssignmentCat(Cat& c, Cat& src, char const* varName,
+                           char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Copy assignment: " << varName << " = "
+            << varNameSrc << "\n"
+            << Layout::reset;
+  c = src;
+}
+/* Cat Brain */
+void setIdeasCat(Cat& cat) {
+  printTestStep("cat1 is getting some ideas...");
+  cat.setIdea(0, "Meeeow, I am a beautiful cat");
+  cat.setIdea(1, "Meeeow, gotta sleep");
+  cat.setIdea(
+      2, "Seems like my hoooooman left the kitchen, gotta steal cheese now");
+  cat.setIdea(3, "Caught a mouse for my hooman");
+  cat.setIdea(4,
+              "Let's be honest: hooooomans are pretty stupid, but you got "
+              "to love them");
+  cat.setIdea(5, "More food please!");
+}
+
+/* Print Ideas Cat*/
+void testCatPrintIdeas(Cat& c, char const* varName) {
+  printTestStepName("Print ideas of", varName);
+  c.printIdeas();
+}
+
+/* Print Ideas Cat after Deletion of Source */
+void testCatPrintIdeasAfterDeletionSrc(Cat& c, char const* varName,
+                                       char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Print ideas " << varName
+            << " after deletion of " << varNameSrc << "\n"
+            << Layout::reset;
+  c.printIdeas();
+}
+
+/* ************************************************************************** */
+/* Test utils dog                                                             */
+/* ************************************************************************** */
+/* Default Constructor Dog */
+Dog* testDefaultConstructorDog(char const* varName) {
+  printTestStepName("Default constructor for", varName);
+  return new Dog;
+}
+
+/* Copy Constructor Dog */
+Dog* testCopyConstructorDog(Dog& src, char const* varName, char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Copy constructor for " << varName
+            << ", copying " << varNameSrc << '\n' << Layout::reset;
+  return new Dog(src);
+}
+
+/* Copy Assignment Dog */
+void testCopyAssignmentDog(Dog& d, Dog& src, char const* varName,
+                           char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Copy assignment: " << varName << " = "
+            << varNameSrc << "\n"
+            << Layout::reset;
+  d = src;
+}
+/* Dog Brain */
+void setIdeasDog(Dog& d) {
+  printTestStep("Plant ideas in the brain of dog1");
+  d.setIdea(0, "I would really like a walk in the park");
+  d.setIdea(1, "Gotta sniff this");
+  d.setIdea(2, "Gotta catch that dove!");
+  d.setIdea(3, "I love my owner");
+  d.setIdea(4, "They trew a stick! This is great, run!");
+}
+
+/* Print Ideas Dog*/
+void testDogPrintIdeas(Dog& d, char const* varName) {
+  printTestStepName("Print ideas of", varName);
+  d.printIdeas();
+}
+
+/* Print Ideas Dog after Deletion of Source */
+void testDogPrintIdeasAfterDeletionSrc(Dog& d, char const* varName,
+                                       char const* varNameSrc) {
+  std::cout << Layout::cyanItalic << "Print ideas " << varName
+            << " after deletion of " << varNameSrc << "\n"
+            << Layout::reset;
+  d.printIdeas();
+}
+
+/* ************************************************************************** */
+/* Tests                                                                      */
+/* ************************************************************************** */
+
+void testAnimalInheritance() {
+  printTestStep("AAnimal* j = new Dog()");
+  const AAnimal* j = new Dog();
+  printTestStep("AAnimal* i = new Cat()");
+  const AAnimal* i = new Cat();
+
+  printTestStep("j->getType()");
+  std::cout << j->getType() << " \n";
+  printTestStep("i->getType()");
+  std::cout << i->getType() << " \n";
+  printTestStep("i->makeSound()");
+  i->makeSound();
+  printTestStep("j->makeSound()");
+  j->makeSound();
+
+  printTestStep("Delete Dog and Cat");
+  delete j;
+  delete i;
+}
+
+void testAnimalInheritanceWrongClasses() {
+  const WrongAnimal* wrongMeta = new WrongAnimal();
+  const WrongAnimal* wrongCat = new WrongCat();
+
+  std::cout << wrongCat->getType() << " " << std::endl;
+  wrongCat->makeSound();
+  wrongMeta->makeSound();
+
+  delete wrongMeta;
+  delete wrongCat;
+}
+
+void testCopying() {
+  printTestStep("Default constructor for dog1");
+  Dog dog1;
+  printTestStep("Print dog1");
+  std::cout << dog1;
+  printTestStep("Copy constructor for dog2, copy from dog1");
+  Dog dog2(dog1);
+  printTestStep("Print dog2");
+  std::cout << dog2;
+  printTestStep("Destructors");
+}
+
+void testDeletionCatDogViaPointerToAnimal() {
+  printTestStep(
+      "Construct an array of 6 animals: const AAnimal* animalArray[6]");
+  const AAnimal* animalArray[6];
+  printTestStep("Fill array with half Dogs, half Cats");
+  for (int i = 0; i < 2; ++i) animalArray[i] = new Dog;
+  for (int i = 2; i < 4; ++i) animalArray[i] = new Cat;
+  printTestStep("Print animals in array");
+  for (int i = 0; i < 4; ++i) {
+    std::cout << *animalArray[i];
+  }
+  printTestStep("Destroy Cat and Dog objects in array");
+  for (int i = 0; i < 4; ++i) {
+    delete animalArray[i];
+  }
+}
+
+void testDeepCopiesDog() {
+  Dog* dog1 = testDefaultConstructorDog("dog1");
+  testPrintAnimal(*dog1, "dog1");
+  setIdeasDog(*dog1);
+  testDogPrintIdeas(*dog1, "dog1");
+  Dog* dog2 = testDefaultConstructorDog("dog2");
+  testCopyAssignmentDog(*dog2, *dog1, "dog2", "dog1");
+  testPrintAnimal(*dog2, "dog2");
+  testDeleteAnimal(*dog1, "dog1");
+  testDogPrintIdeasAfterDeletionSrc(*dog2, "dog2", "dog1");
+  Dog* dog3 = testCopyConstructorDog(*dog2, "dog3", "dog2");
+  testDeleteAnimal(*dog2, "dog2");
+  testDogPrintIdeasAfterDeletionSrc(*dog3, "dog3", "dog2");
+  testDeleteAnimal(*dog3, "dog3");
+}
+
+void testDeepCopiesCat() {
+  Cat* cat1 = testDefaultConstructorCat("cat1");
+  testPrintAnimal(*cat1, "cat1");
+  setIdeasCat(*cat1);
+  testCatPrintIdeas(*cat1, "cat1");
+  Cat* cat2 = testDefaultConstructorCat("cat2");
+  testCopyAssignmentCat(*cat2, *cat1, "cat2", "cat1");
+  testPrintAnimal(*cat2, "cat2");
+  testDeleteAnimal(*cat1, "cat1");
+  testCatPrintIdeasAfterDeletionSrc(*cat2, "cat2", "cat1");
+  Cat* cat3 = testCopyConstructorCat(*cat2, "cat3", "cat2");
+  testDeleteAnimal(*cat2, "cat2");
+  testCatPrintIdeasAfterDeletionSrc(*cat3, "cat3", "cat2");
+  testDeleteAnimal(*cat3, "cat3");
+}
+
+void checkLeaks() {
+  std::cout.flush();
+  system("leaks animals");
+}
+
+typedef void (*test)();
+
+void testUnit(test t, char const* testHeader) {
+  printTestHeader(testHeader);
+  t();
+  printTestTrailer();
 }
 
 int main() {
-  std::cout << "\033[48:5:208m -----### TESTS FROM EX00 WITH ABSTRACT ANIMAL "
-               "CLASS ###-----\033[0m"
-            << std::endl;
-  std::cout << "\033[48:5:208m -----### TEST ANIMAL INHERITANCE (RIGHT "
-               "CLASSES) ###-----\033[0m"
-            << std::endl;
-  {
-    // const AAnimal* meta = new AAnimal();
-    const AAnimal* j = new Dog();
-    const AAnimal* i = new Cat();
-
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
-    i->makeSound();
-    j->makeSound();
-    // meta->makeSound();
-
-    // delete meta;
-    delete j;
-    delete i;
-    system("leaks animals");
-  }
-  std::cout << std::endl;
-  std::cout << "\033[48:5:208m -----### TEST ANIMAL INHERITANCE (WRONG "
-               "CLASSES) ###-----\033[0m"
-            << std::endl;
-  {
-    const WrongAnimal* wrongMeta = new WrongAnimal();
-    const WrongAnimal* wrongCat = new WrongCat();
-
-    std::cout << wrongCat->getType() << " " << std::endl;
-    wrongCat->makeSound();
-    wrongMeta->makeSound();
-
-    delete wrongMeta;
-    delete wrongCat;
-  }
-  std::cout << std::endl;
-  std::cout << "\033[48:5:208m -----### TEST COPYING ###-----\033[0m"
-            << std::endl;
-  {
-    std::cout << "\033[1;33m ---Default constructor (dog1)---\033[0m"
-              << std::endl;
-    Dog dog1;
-    std::cout << "\033[1;33m ---Dog1 type and sound---\033[0m" << std::endl;
-    std::cout << dog1.getType() << std::endl;
-    dog1.makeSound();
-    std::cout
-        << "\033[1;33m ---Copy constructor (dog2 copied from dog1)---\033[0m"
-        << std::endl;
-    Dog dog2(dog1);
-    std::cout << "\033[1;33m ---Dog2 type and sound---\033[0m" << std::endl;
-    std::cout << dog2.getType() << std::endl;
-    dog2.makeSound();
-    std::cout << "\033[1;33m ---Destructors---\033[0m" << std::endl;
-    system("leaks animals");
-  }
-  std::cout << "\033[48:5:208m -----### TESTS FROM EX01 WITH ABSTRACT ANIMAL "
-               "CLASS ###-----\033[0m"
-            << std::endl;
-  /* Test correct deletion Cat/Dog instances via pointer of parent class AAnimal
-   */
-  std::cout << "\033[48:5:208m -----### TEST CORRECT DELETION CAT/DOG VIA "
-               "POINTERS TO ANIMAL) ###-----\033[0m"
-            << std::endl;
-  {
-    std::cout << "\033[1;33m ---Declare array of Aninmal pointers---\033[0m"
-              << std::endl;
-    const AAnimal* animalArray[6];
-
-    std::cout << "\033[1;33m ---Construct Dogs and Cats---\033[0m" << std::endl;
-    for (int i = 0; i < 3; i++) animalArray[i] = new Dog;
-    for (int i = 3; i < 6; i++) animalArray[i] = new Cat;
-
-    std::cout << "\033[1;33m ---Test types and sounds---\033[0m" << std::endl;
-    for (int i = 0; i < 6; i++) {
-      std::cout << "Type: " << animalArray[i]->getType() << ". Sound: ";
-      animalArray[i]->makeSound();
-    }
-    std::cout << "\033[1;33m ---Destruct Cat and Dog objects---\033[0m"
-              << std::endl;
-    for (int i = 0; i < 6; i++) delete animalArray[i];
-    std::cout << std::endl;
-
-    std::cout << "\033[1;33m -----### CHECK LEAKS ###-----\033[0m" << std::endl;
-    system("leaks animals");
-  }
-  std::cout << std::endl;
-
-  /* Test deep copies */
-  std::cout << "\033[48:5:208m -----### TEST DEEP COPIES ###-----\033[0m"
-            << std::endl;
-  {
-    std::cout << "\033[1;33m ---Default constructor (dog1)---\033[0m"
-              << std::endl;
-    Dog* dog1 = new Dog;
-
-    std::cout << "\033[1;33m ---Test type and sound dog1---\033[0m"
-              << std::endl;
-    test(*dog1);
-
-    std::cout << "\033[1;33m ---Set ideas for dog1---\033[0m" << std::endl;
-    dog1->setIdea(0, "I would really like a walk in the park");
-    dog1->setIdea(1, "Gotta sniff this");
-    dog1->setIdea(2, "Gotta catch that dove!");
-    dog1->setIdea(3, "I love my owner");
-    dog1->setIdea(4, "They trew a stick! This is great, run!");
-    std::cout << "\033[1;33m ---Print ideas dog1---\033[0m" << std::endl;
-    dog1->printIdeas();
-
-    std::cout << "\033[1;33m ---Default constructor (dog2)---\033[0m"
-              << std::endl;
-    Dog* dog2 = new Dog();
-
-    std::cout << "\033[1;33m ---Test type and sound dog1---\033[0m"
-              << std::endl;
-    test(*dog1);
-
-    std::cout
-        << "\033[1;33m ---Copy assignment operator (dog2 = dog1)---\033[0m"
-        << std::endl;
-    *dog2 = *dog1;
-
-    std::cout << "\033[1;33m ---Test type and sound dog2---\033[0m"
-              << std::endl;
-    test(*dog2);
-
-    std::cout << "\033[1;33m ---Delete dog 1---\033[0m" << std::endl;
-    delete dog1;
-
-    std::cout << "\033[1;33m ---Print ideas dog2 after deletion dog 1---\033[0m"
-              << std::endl;
-    dog2->printIdeas();
-
-    std::cout
-        << "\033[1;33m ---Copy constructor (dog3 copied from dog2)---\033[0m"
-        << std::endl;
-    Dog* dog3 = new Dog(*dog2);
-
-    std::cout << "\033[1;33m ---Delete dog 2---\033[0m" << std::endl;
-    delete dog2;
-
-    std::cout
-        << "\033[1;33m ---Print ideas dog 3 after deletion dog 2---\033[0m"
-        << std::endl;
-    dog3->printIdeas();
-    std::cout << "\033[1;33m ---Test type and sound dog3---\033[0m"
-              << std::endl;
-    test(*dog3);
-    std::cout << "\033[1;33m ---Delete dog 3---\033[0m" << std::endl;
-    delete dog3;
-
-    std::cout << "\033[1;33m ---Default constructor cat1---\033[0m"
-              << std::endl;
-    Cat* cat1 = new Cat;
-    std::cout << "\033[1;33m ---Test type and sound cat1---\033[0m"
-              << std::endl;
-    test(*cat1);
-
-    std::cout << "\033[1;33m ---Set ideas for cat1---\033[0m" << std::endl;
-    cat1->setIdea(0, "Meeeow, I am a beautiful cat");
-    cat1->setIdea(1, "Meeeow, gotta sleep");
-    cat1->setIdea(2, "It is my hoooooooooman");
-    cat1->setIdea(3, "my hoooooman left the kitchen, gotta steal cheese now");
-    cat1->setIdea(4, "Caught a mouse for my hoooman");
-    cat1->setIdea(5,
-                  "Let's be honest: hooooomans are pretty stupid, but you got "
-                  "to love them");
-    cat1->setIdea(6, "More food please!");
-    std::cout << "\033[1;33m ---Print ideas cat1---\033[0m" << std::endl;
-    cat1->printIdeas();
-
-    std::cout
-        << "\033[1;33m ---Copy constructor (cat 2 copied from cat1)---\033[0m"
-        << std::endl;
-    Cat* cat2 = new Cat(*cat1);
-
-    std::cout << "\033[1;33m ---Delete cat1 object---\033[0m" << std::endl;
-    delete cat1;
-
-    std::cout << "\033[1;33m ---Print ideas cat2 after deletion cat1---\033[0m"
-              << std::endl;
-    cat2->printIdeas();
-    std::cout << "\033[1;33m ---Test type and sound cat2---\033[0m"
-              << std::endl;
-    test(*cat2);
-
-    std::cout << "\033[1;33m ---Delete cat2 object---\033[0m" << std::endl;
-    delete cat2;
-    std::cout << std::endl;
-
-    std::cout << "\033[1;33m -----### CHECK LEAKS ###-----\033[0m" << std::endl;
-    system("leaks animals");
-  }
-  std::cout << std::endl;
-
-  std::cout << "\033[48:5:208m -----### CHECK LEAKS ###-----\033[0m"
-            << std::endl;
-  system("leaks animals");
+  testUnit(&testAnimalInheritance,
+           "Test AAnimal Class Inheritance (Correct Classes)");
+  testUnit(&testAnimalInheritanceWrongClasses,
+           "Test Wrong Animal Class Inheritance");
+  testUnit(&testCopying, "Test Copying");
+  testUnit(&testDeletionCatDogViaPointerToAnimal,
+           "Test Deletion Cat/Dog Via Pointer To Animal");
+  testUnit(&testDeepCopiesDog, "Test Deep Copies Dog Class");
+  testUnit(&testDeepCopiesCat, "Test Deep Copies Cat Class");
+  testUnit(&checkLeaks, "Check leaks");
 }
