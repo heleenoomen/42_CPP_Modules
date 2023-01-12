@@ -57,13 +57,15 @@ bool Converter::charNonDisplayable() const {
 }
 
 bool Converter::charImpossible() const {
-  if (Tools::isPseudoLiteralDouble(inputString_)) return true;
+  if (value_ == Tools::quietNaN() || value_ == Tools::signalingNaN())
+    return true;
   if (charOverflow()) return true;
   return false;
 }
 
 bool Converter::intImpossible() const {
-  if (Tools::isPseudoLiteralDouble(inputString_)) return true;
+  if (value_ == Tools::quietNaN() || value_ == Tools::signalingNaN())
+    return true;
   if (intOverflow()) return true;
   return false;
 }
@@ -84,12 +86,18 @@ bool Converter::floatImpossible() const {
 }
 
 void Converter::printChar_() const {
-  if (charImpossible())
+  try {
+    char c = static_cast<char>(value_);
+    std::cout << "char: " << c << '\n';
+  } catch (std::exception& e) {
     std::cout << "char: impossible\n";
-  else if (charNonDisplayable())
-    std::cout << "char: non displayable\n";
-  else
-    std::cout << "char: " << static_cast<char>(value_) << '\n';
+  }
+  // if (charImpossible())
+  //   std::cout << "char: impossible\n";
+  // else if (charNonDisplayable())
+  //   std::cout << "char: non displayable\n";
+  // else
+  //   std::cout << "char: " << static_cast<char>(value_) << '\n';
 }
 
 void Converter::printInt_() const {
@@ -135,6 +143,6 @@ void Converter::convertLiteral(std::string const& inputString) {
     Converter c(inputString);
     c.printConversions_();
   } catch (std::exception& e) {
-    e.what();
+    std::cout << e.what();
   }
 }

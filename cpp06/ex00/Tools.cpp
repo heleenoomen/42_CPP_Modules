@@ -47,6 +47,11 @@ float Tools::inff() { return std::numeric_limits<float>::infinity(); }
 
 double Tools::inf() { return std::numeric_limits<double>::infinity(); }
 
+double Tools::signalingNaN() {
+  return std::numeric_limits<double>::signaling_NaN();
+}
+double Tools::quietNaN() { return std::numeric_limits<double>::quiet_NaN(); }
+
 std::string Tools::intMaxString() {
   std::string s;
   int intmax = INT_MAX;

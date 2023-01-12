@@ -13,7 +13,7 @@
 #ifndef TOOLS_HPP
 #define TOOLS_HPP
 
-// #include <string>
+#include <string>
 // #include <iostream>
 
 class Tools {
@@ -48,7 +48,9 @@ class Tools {
   static bool isPseudoLiteralDouble(std::string const& s);
   static bool isPseudoLiteralFloat(std::string const& s);
   static float inff();
+  static double signalingNaN();
   static double inf();
+  static double quietNaN();
   static std::string intMaxString();
   static std::string intMinString();
 };

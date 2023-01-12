@@ -16,9 +16,9 @@
 /* Default constructor */
 Checker::Checker() {}
 
-Checker::Checker(std::string const &inputString) : inputString_(inputString) {
+Checker::Checker(std::string const &inputString)
+    : type_(-1), inputString_(inputString) {
   launchTypeCheckerTable_();
-  defineType_();
 }
 
 /* Copy constructor */
@@ -50,7 +50,7 @@ void Checker::checkEndptr_(char *endptr) const {
   if (*endptr != '\0') throw InvalidInputException();
 }
 
-void Checker::checkEndptrFloat_(char *endptr) const {
+void Checker::checkEndptrFloat_(std::string const &endptr) const {
   if (endptr != "f") throw InvalidInputException();
 }
 
@@ -109,29 +109,30 @@ void Checker::checkDouble_() const {
   checkFalseInf_(strtodResult);
 }
 
-void Checker::performCheck_() const {
+void Checker::checkIfValid_() const {
   for (int i = 0; i < nbrOfTypes_; ++i) {
-    if (i == type_) *(this->typeCheckerTable_[i])();
+    if (i == type_) (this->*typeCheckerTable_[i])();
   }
 }
 
-void Checker::defineType_() {
+void Checker::determineType_() {
   if (inputString_.length() == 1 && !isdigit(inputString_[0]))
     type_ = charType;
   else if (Tools::isPseudoLiteralDouble(inputString_))
     type_ = doubleType;
-  else if (inputString_.find('f', std::string::npos))
+  else if (inputString_.find('f', 0) != std::string::npos)
     type_ = floatType;
-  else if (inputString_.find('.', std::string::npos) != std::string::npos)
+  else if (inputString_.find('.', 0) != std::string::npos)
     type_ = doubleType;
   else
     type_ = intType;
 }
 
 void Checker::launchTypeCheckerTable_() {
-  typeCheckerTable_[intType] = &checkInt_;
-  typeCheckerTable_[floatType] = &checkFloat_;
-  typeCheckerTable_[doubleType] = &checkDouble_;
+  typeCheckerTable_[types::charType] = NULL;
+  typeCheckerTable_[types::intType] = &Checker::checkInt_;
+  typeCheckerTable_[types::floatType] = &Checker::checkFloat_;
+  typeCheckerTable_[types::doubleType] = &Checker::checkDouble_;
 }
 
 /* ************************************************************************** */
@@ -155,5 +156,6 @@ char const *Checker::InvalidInputException::what() const throw() {
 
 void Checker::checkInput(std::string const &inputString) {
   Checker checker(inputString);
-  checker.performCheck_();
+  checker.determineType_();
+  checker.checkIfValid_();
 }

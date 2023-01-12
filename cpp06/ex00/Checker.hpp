@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/12 15:27:32 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/12 18:44:50 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 #include <string>
 // #include <iostream>
+class Checker;
 
-enum { charType, intType, floatType, doubleType };
+enum types { charType, intType, floatType, doubleType };
 
 typedef void (Checker::*typeChecker)() const;
 
@@ -30,7 +31,7 @@ class Checker {
 
   /* private methods*/
   void checkEndptr_(char* endptr) const;
-  void checkEndptrFloat_(char* endptr) const;
+  void checkEndptrFloat_(std::string const& endptr) const;
   void checkFalseInf_(double strtodResult) const;
   void checkFalseInff_(float strtofResult) const;
   void intCheckOverflow_(long strtolResult) const;
@@ -39,8 +40,8 @@ class Checker {
   void checkInt_() const;
   void checkFloat_() const;
   void checkDouble_() const;
-  void performCheck_() const;
-  void defineType_();
+  void checkIfValid_() const;
+  void determineType_();
   void launchTypeCheckerTable_();
 
   /* default constructor */
@@ -58,7 +59,7 @@ class Checker {
 
  public:
   /* exceptions */
-  class InvalidInputException : std::exception {
+  class InvalidInputException : public std::exception {
    public:
     InvalidInputException();
     ~InvalidInputException() throw();

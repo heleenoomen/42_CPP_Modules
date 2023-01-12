@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/12 15:55:32 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/12 18:21:42 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@
 #include <string>
 // #include <iostream>
 
-enum { charType, intType, floatType, doubleType };
 
 class Converter {
  private:
   std::string const inputString_;
-  int type_;
   double value_;
 
   // /* private methods*/
