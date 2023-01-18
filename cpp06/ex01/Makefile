@@ -6,11 +6,11 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/01/18 19:09:27 by hoomen           ###   ########.fr        #
+#    Updated: 2023/01/18 20:26:38 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	staticCast
+NAME		:=	reinterpretCast
 
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra #-std=c++98
