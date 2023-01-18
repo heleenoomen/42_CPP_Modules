@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/12 18:21:42 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/18 14:49:41 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,8 @@ class Converter {
 
   // /* private methods*/
   bool charOverflow() const;
-  bool charImpossible() const;
   bool charNonDisplayable() const;
   bool intOverflow() const;
-  bool intImpossible() const;
   bool floatOverflow() const;
   bool floatImpossible() const;
   void printChar_() const;
@@ -35,8 +33,7 @@ class Converter {
   void printFloat_() const;
   void printDouble_() const;
   void printConversions_() const;
-
-  // protected:
+  void printPseudoLiteralConversions_() const;
 
   // /* protected methods */
 

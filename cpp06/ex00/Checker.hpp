@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/12 18:44:50 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/18 12:54:57 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // #include <iostream>
 class Checker;
 
-enum types { charType, intType, floatType, doubleType };
+enum types { pseudoLiteral, charType, intType, floatType, doubleType };
 
 typedef void (Checker::*typeChecker)() const;
 
@@ -25,18 +25,20 @@ class Checker {
  private:
   int type_;
   std::string const inputString_;
-  static int const nbrOfTypes_ = 4;
+  static int const nbrOfTypes_ = 5;
   static int const baseTen_ = 10;
   typeChecker typeCheckerTable_[nbrOfTypes_];
 
   /* private methods*/
   void checkEndptr_(char* endptr) const;
   void checkEndptrFloat_(std::string const& endptr) const;
-  void checkFalseInf_(double strtodResult) const;
-  void checkFalseInff_(float strtofResult) const;
+  void doubleCheckOverflow_(double strtodResult) const;
+  void floatCheckOverflow_(float strtofResult) const;
   void intCheckOverflow_(long strtolResult) const;
   void checkFalseIntMin_(long strtolResult) const;
   void checkFalseIntMax_(long strtolResult) const;
+  void checkPseudoLiteral() const;
+  void checkChar() const;
   void checkInt_() const;
   void checkFloat_() const;
   void checkDouble_() const;

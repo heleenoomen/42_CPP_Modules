@@ -45,14 +45,13 @@ class Tools {
   /* exceptions */
 
   /* public methods */
-  static bool isPseudoLiteralDouble(std::string const& s);
-  static bool isPseudoLiteralFloat(std::string const& s);
+  static bool isPseudoLiteral(std::string const& s);
   static float inff();
-  static double signalingNaN();
   static double inf();
-  static double quietNaN();
   static std::string intMaxString();
   static std::string intMinString();
+
+  static int const nbrOfPseudoLiterals = 8;
 };
 
 /* insertion operator */

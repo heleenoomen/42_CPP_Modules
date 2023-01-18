@@ -1,10 +1,8 @@
 
 #include "Converter.hpp"
 
-#include <cfloat>
 #include <climits>
 #include <iostream>
-#include <limits>
 
 #include "Checker.hpp"
 #include "Tools.hpp"
@@ -18,7 +16,8 @@ Converter::Converter() {}
 
 /* String constructor */
 Converter::Converter(std::string const& inputString)
-    : inputString_(inputString), value_(strtod(inputString.c_str(), NULL)) {}
+    : inputString_(inputString), value_(strtod(inputString.c_str(), NULL)) {
+}
 
 /* Copy constructor */
 Converter::Converter(Converter const& src) { *this = src; }
@@ -56,20 +55,6 @@ bool Converter::charNonDisplayable() const {
   return false;
 }
 
-bool Converter::charImpossible() const {
-  if (value_ == Tools::quietNaN() || value_ == Tools::signalingNaN())
-    return true;
-  if (charOverflow()) return true;
-  return false;
-}
-
-bool Converter::intImpossible() const {
-  if (value_ == Tools::quietNaN() || value_ == Tools::signalingNaN())
-    return true;
-  if (intOverflow()) return true;
-  return false;
-}
-
 bool Converter::floatOverflow() const {
   if (strtof(inputString_.c_str(), NULL) == Tools::inff() &&
       value_ != Tools::inf())
@@ -86,22 +71,16 @@ bool Converter::floatImpossible() const {
 }
 
 void Converter::printChar_() const {
-  try {
-    char c = static_cast<char>(value_);
-    std::cout << "char: " << c << '\n';
-  } catch (std::exception& e) {
+  if (charOverflow())
     std::cout << "char: impossible\n";
-  }
-  // if (charImpossible())
-  //   std::cout << "char: impossible\n";
-  // else if (charNonDisplayable())
-  //   std::cout << "char: non displayable\n";
-  // else
-  //   std::cout << "char: " << static_cast<char>(value_) << '\n';
+  else if (charNonDisplayable())
+    std::cout << "char: non displayable\n";
+  else
+    std::cout << "char: " << static_cast<char>(value_) << '\n';
 }
 
 void Converter::printInt_() const {
-  if (intImpossible())
+  if (intOverflow())
     std::cout << "int: impossible\n";
   else
     std::cout << "int: " << static_cast<int>(value_) << '\n';
@@ -127,10 +106,21 @@ void Converter::printDouble_() const {
 }
 
 void Converter::printConversions_() const {
+  if (Tools::isPseudoLiteral(inputString_)) {
+    printPseudoLiteralConversions_();
+    return ;
+  }
   printChar_();
   printInt_();
   printFloat_();
   printDouble_();
+}
+
+void Converter::printPseudoLiteralConversions_() const {
+  std::cout << "char: impossible\n"
+               "int: impossible\n"
+               "float: " << static_cast<float>(value_) << "f\n"
+               "double: " << value_ << '\n';
 }
 
 /* ************************************************************************** */

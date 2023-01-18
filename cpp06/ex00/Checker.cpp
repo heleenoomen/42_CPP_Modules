@@ -70,19 +70,13 @@ void Checker::checkFalseIntMin_(long strtolResult) const {
     throw InvalidInputException();
 }
 
-void Checker::checkFalseInff_(float strtofresult) const {
-  if (strtofresult == Tools::inff() && inputString_ != "inff" &&
-      inputString_ != "+inff")
-    throw InvalidInputException();
-  if (strtofresult == -Tools::inff() && inputString_ != "-inff")
+void Checker::floatCheckOverflow_(float strtofresult) const {
+  if (strtofresult == Tools::inff() || strtofresult == -Tools::inff())
     throw InvalidInputException();
 }
 
-void Checker::checkFalseInf_(double strtodResult) const {
-  if (strtodResult == Tools::inf() && inputString_ != "inf" &&
-      inputString_ != "+inf")
-    throw InvalidInputException();
-  if (strtodResult == -Tools::inf() && inputString_ != "-inf")
+void Checker::doubleCheckOverflow_(double strtodResult) const {
+  if (strtodResult == Tools::inf() || strtodResult == -Tools::inf())
     throw InvalidInputException();
 }
 
@@ -99,14 +93,14 @@ void Checker::checkFloat_() const {
   char *endptr(NULL);
   float strtofResult(strtof(inputString_.c_str(), &endptr));
   checkEndptrFloat_(endptr);
-  checkFalseInff_(strtofResult);
+  floatCheckOverflow_(strtofResult);
 }
 
 void Checker::checkDouble_() const {
   char *endptr(NULL);
   double strtodResult(strtod(inputString_.c_str(), &endptr));
   checkEndptr_(endptr);
-  checkFalseInf_(strtodResult);
+  doubleCheckOverflow_(strtodResult);
 }
 
 void Checker::checkIfValid_() const {
@@ -116,11 +110,12 @@ void Checker::checkIfValid_() const {
 }
 
 void Checker::determineType_() {
-  if (inputString_.length() == 1 && !isdigit(inputString_[0]))
+  if (Tools::isPseudoLiteral(inputString_))
+    type_ = pseudoLiteral;
+  else if (inputString_.length() == 1 && !isdigit(inputString_[0]))
     type_ = charType;
-  else if (Tools::isPseudoLiteralDouble(inputString_))
-    type_ = doubleType;
-  else if (inputString_.find('f', 0) != std::string::npos)
+  else if (inputString_.find('f', 0) != std::string::npos &&
+           inputString_.find('.', 0) != std::string::npos)
     type_ = floatType;
   else if (inputString_.find('.', 0) != std::string::npos)
     type_ = doubleType;
@@ -128,11 +123,16 @@ void Checker::determineType_() {
     type_ = intType;
 }
 
+void Checker::checkChar() const { return; }
+
+void Checker::checkPseudoLiteral() const { return; }
+
 void Checker::launchTypeCheckerTable_() {
-  typeCheckerTable_[types::charType] = NULL;
-  typeCheckerTable_[types::intType] = &Checker::checkInt_;
-  typeCheckerTable_[types::floatType] = &Checker::checkFloat_;
-  typeCheckerTable_[types::doubleType] = &Checker::checkDouble_;
+  typeCheckerTable_[pseudoLiteral] = &Checker::checkPseudoLiteral;
+  typeCheckerTable_[charType] = &Checker::checkChar;
+  typeCheckerTable_[intType] = &Checker::checkInt_;
+  typeCheckerTable_[floatType] = &Checker::checkFloat_;
+  typeCheckerTable_[doubleType] = &Checker::checkDouble_;
 }
 
 /* ************************************************************************** */

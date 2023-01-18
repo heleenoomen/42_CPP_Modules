@@ -33,24 +33,20 @@ Tools::~Tools() {}
 /* Public methods                                                             */
 /* ************************************************************************** */
 
-bool Tools::isPseudoLiteralDouble(std::string const& s) {
-  if (s == "inf" || s == "+inf" || s == "-inf" || s == "nan") return true;
-  return false;
-}
-
-bool Tools::isPseudoLiteralFloat(std::string const& s) {
-  if (s == "inff" || s == "+inff" || s == "-inff" || s == "nanf") return true;
+bool Tools::isPseudoLiteral(std::string const& s) {
+  std::string pseudoLiterals[nbrOfPseudoLiterals] = {
+    "inf", "+inf", "-inf", "nan", "inff", "+inff", "-inff", "nanf"
+  };
+  for (int i = 0; i < nbrOfPseudoLiterals; ++i) {
+    if (s == pseudoLiterals[i])
+      return true;
+  }
   return false;
 }
 
 float Tools::inff() { return std::numeric_limits<float>::infinity(); }
 
 double Tools::inf() { return std::numeric_limits<double>::infinity(); }
-
-double Tools::signalingNaN() {
-  return std::numeric_limits<double>::signaling_NaN();
-}
-double Tools::quietNaN() { return std::numeric_limits<double>::quiet_NaN(); }
 
 std::string Tools::intMaxString() {
   std::string s;
