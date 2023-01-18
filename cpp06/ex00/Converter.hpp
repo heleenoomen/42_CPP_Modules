@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/18 14:49:41 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/18 16:39:18 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,43 @@
 #define CONVERTER_HPP
 
 #include <string>
-// #include <iostream>
 
+class Converter;
+
+enum types { pseudoLiteral, charType, intType, floatType, doubleType };
+
+typedef void (Converter::*check)() const;
 
 class Converter {
  private:
   std::string const inputString_;
   double value_;
+  char* endptrStrtod_;
+  bool hasDot_;
+  bool hasF_;
+  int type_;
+  static int const nbrOfTypes_ = 5;
+  static int const nbrOfPseudoliterals_ = 8;
+  check checkTable_[nbrOfTypes_];
 
-  // /* private methods*/
-  bool charOverflow() const;
-  bool charNonDisplayable() const;
-  bool intOverflow() const;
-  bool floatOverflow() const;
-  bool floatImpossible() const;
+  /* private methods*/
+  bool isPseudoliteral() const;
+  void determineType_();
+  void launchCheckTable_();
+  bool charNonDisplayable_() const;
+  bool charOverflow_() const;
+  bool intOverflow_() const;
+  bool floatOverflow_() const;
   void printChar_() const;
   void printInt_() const;
   void printFloat_() const;
   void printDouble_() const;
   void printConversions_() const;
-  void printPseudoLiteralConversions_() const;
-
-  // /* protected methods */
+  void empty_() const;
+  void checkInt_() const;
+  void checkDouble_() const;
+  void checkFloat_() const;
+  void checkInput_() const;
 
  public:
   /* default constructor */
@@ -56,6 +71,12 @@ class Converter {
   /* setters */
 
   /* exceptions */
+  class InvalidInputException : public std::exception {
+   public:
+    InvalidInputException();
+    ~InvalidInputException() throw();
+    char const* what() const throw();
+  };
 
   /* public methods */
   static void convertLiteral(std::string const& input);

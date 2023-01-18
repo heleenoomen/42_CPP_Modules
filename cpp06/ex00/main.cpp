@@ -8,8 +8,5 @@ int main(int argc, char **argv) {
     return EXIT_FAILURE;
   }
   Converter::convertLiteral(argv[1]);
-
-  // Converter c(argv[1]);
-  // c.printConversions_();
   return 0;
 }
