@@ -6,11 +6,11 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/01/19 17:42:51 by hoomen           ###   ########.fr        #
+#    Updated: 2023/01/19 19:38:22 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	iter
+NAME		:=	array
 
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra #-std=c++98
