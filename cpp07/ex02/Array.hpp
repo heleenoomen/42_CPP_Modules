@@ -18,17 +18,17 @@ class Array {
 
   Array(Array const& src) : array_(NULL), size_(0) { *this = src; }
 
-  Array operator=(Array const& rhs) {
+  Array& operator=(Array const& rhs) {
     if (this == &rhs) return *this;
     delete[] array_;
     array_ = new T[rhs.size_]();
     size_ = rhs.size_;
-    for (int i = 0; i < size_; ++i) array_[i] = rhs.array_[i];
+    for (unsigned int i = 0; i < size_; ++i) array_[i] = rhs.array_[i];
+    return *this;
   }
 
   T& operator[](unsigned int index) const {
-    if (index > size_) throw IndexOutOfRangeException();
-    ;
+    if (index >= size_) throw IndexOutOfRangeException();
     return array_[index];
   }
 
