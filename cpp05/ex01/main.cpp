@@ -1,9 +1,22 @@
-#include "Bureaucrat.hpp"
-#include "Form.hpp"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 10:36:09 by hoomen            #+#    #+#             */
+/*   Updated: 2023/01/20 10:37:53 by hoomen           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <iomanip>
 #include <iostream>
 #include <string>
+
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
+#include "Layout.hpp"
 
 /* ************************************************************************** */
 /* Print utils                                                                */
@@ -11,41 +24,24 @@
 
 static int const testHeaderWidth = 56;
 
-// #ifndef to_file
-// #define to_file
-// #endif
-
-#ifndef to_file
-static char const* redBold = "\033[31;1m";
-static char const* resetLayout = "\033[0m";
-static char const* cyanBold = "\033[36;1m";
-static char const* cyanItalic = "\033[36;3m";
-#else
-static char const* redBold = "";
-static char const* resetLayout = "";
-static char const* cyanBold = "";
-static char const* cyanItalic = "";
-#endif
-
 void printStars() {
-  for (int i = 0; i < testHeaderWidth; ++i)
-    std::cout << "*";
+  for (int i = 0; i < testHeaderWidth; ++i) std::cout << "*";
 }
 
 void printTestHeader(char const* testname) {
-  std::cout << cyanBold;
+  std::cout << Layout::cyanBold;
   printStars();
   std::cout << "\n";
-  std::cout << "* " << std::left << std::setw(testHeaderWidth - 3)
-            << testname << "*\n";
+  std::cout << "* " << std::left << std::setw(testHeaderWidth - 3) << testname
+            << "*\n";
   printStars();
-  std::cout << "\n" << resetLayout;
+  std::cout << "\n" << Layout::reset;
 }
 
 void printTestTrailer() {
-  std::cout << cyanBold;
+  std::cout << Layout::cyanBold;
   printStars();
-  std::cout << "\n\n\n" << resetLayout;
+  std::cout << "\n\n\n" << Layout::reset;
 }
 
 /* ************************************************************************** */
@@ -53,46 +49,34 @@ void printTestTrailer() {
 /* ************************************************************************** */
 
 void testInsertionOverloadForm(char const* message, Form const& f) {
-    std::cout << cyanItalic
-              << message
-              << "Print form:\n"
-              << resetLayout
-              << f 
-              << '\n';
+  std::cout << Layout::cyanItalic << message << "Print form:\n"
+            << Layout::reset << f << '\n';
 }
 
 void testInsertionOverloadBureaucrat(char const* message, Bureaucrat const& b) {
-  std::cout << cyanItalic
-            << message
-            << "Print bureaucrat:\n"
-            << resetLayout
-            << b 
-            << '\n';
+  std::cout << Layout::cyanItalic << message << "Print bureaucrat:\n"
+            << Layout::reset << b << '\n';
 }
 
 void testSignForm(Bureaucrat const& b, Form& f) {
-    std::cout << cyanItalic
-              << "Let bureaucrat " << b.getName()
-              << " try to sign " << f.getName() << ":\n"
-              << resetLayout;
-    b.signForm(f);
+  std::cout << Layout::cyanItalic << "Let bureaucrat " << b.getName()
+            << " try to sign " << f.getName() << ":\n"
+            << Layout::reset;
+  b.signForm(f);
 }
 
-void tryToConstructForm(char const* name, int gradeToExecute,\
-int gradeToSign) {
+void tryToConstructForm(char const* name, int gradeToExecute, int gradeToSign) {
   try {
     Form f(name, gradeToExecute, gradeToSign);
     testInsertionOverloadForm("Form created. ", f);
-  }     
-  catch(std::exception &e) {
-    std::cerr << redBold
-              << "Standard exception: " << e.what() << '\n'
-              << resetLayout;
+  } catch (std::exception& e) {
+    std::cerr << Layout::redBold << "Standard exception: " << e.what() << '\n'
+              << Layout::reset;
   }
 }
 
-void tryToSignForm(char const* bureacratName, int bureacratGrade,\
-char const* formName, int gradeToSign, int gradeToExecute) {
+void tryToSignForm(char const* bureacratName, int bureacratGrade,
+                   char const* formName, int gradeToSign, int gradeToExecute) {
   try {
     Bureaucrat b(bureacratName, bureacratGrade);
     testInsertionOverloadBureaucrat("Bureaucrat created. ", b);
@@ -100,18 +84,15 @@ char const* formName, int gradeToSign, int gradeToExecute) {
     testInsertionOverloadForm("Form created. ", f);
     testSignForm(b, f);
     testInsertionOverloadForm("", f);
-  }
-  catch(std::exception &e) {
-    std::cerr << redBold
-              << "Standard exception: " << e.what() << '\n'
-              << resetLayout;
+  } catch (std::exception& e) {
+    std::cerr << Layout::redBold << "Standard exception: " << e.what() << '\n'
+              << Layout::reset;
   }
 }
 
 /* ************************************************************************** */
 /* Tests                                                                      */
 /* ************************************************************************** */
-
 
 void constructFormWithValidGrades() {
   printTestHeader("Test construct form with valid grades");
@@ -142,7 +123,6 @@ void signWithoutRequiredGrade() {
 /* ************************************************************************** */
 
 int main() {
-
   constructFormWithValidGrades();
   constructFormWithInvalidGrades();
   signWithRequiredGrade();
