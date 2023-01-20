@@ -1,23 +1,9 @@
 
 #include "Form.hpp"
+#include "Layout.hpp"
 #include <iostream>
 
-// #ifndef to_file
-// #define to_file
-// #endif
-
-
-#ifndef to_file
-static char const* greenBold = "\033[32;1m";
-static char const* resetLayout = "\033[0m";
-static char const* grey = "\033[0;2m";
-#else
-static char const* greenBold = "";
-static char const* resetLayout = "";
-static char const* grey = "";
-#endif
-
-static char const* insertionOverloadLayout = greenBold;
+static char const* insertionOverloadLayout = Layout::greenBold;
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -29,7 +15,7 @@ Form::Form()
     signed_(false),
     gradeRequiredToSign_(1),
     gradeRequiredToExecute_(1) {
-  std::cout << grey << "Form default constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "Form default constructor called\n" << Layout::reset;
   gradeCheck();
 }
 
@@ -38,7 +24,7 @@ Form::Form(std::string const& name, int gradeToSign, int gradeToExecute)
     signed_(false),
     gradeRequiredToSign_(gradeToSign),
     gradeRequiredToExecute_(gradeToExecute) {
-  std::cout << grey << "Form parametric constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "Form parametric constructor called\n" << Layout::reset;
   gradeCheck();
 }
 
@@ -47,13 +33,13 @@ Form::Form(Form const& src)
   : name_(src.getName()),
     gradeRequiredToSign_(src.getGradeRequiredToSign()),
     gradeRequiredToExecute_(src.getGradeRequiredToExecute()) {
-  std::cout << grey << "Form copy constructor called\n" << resetLayout;
+  std::cout << Layout::grey << "Form copy constructor called\n" << Layout::reset;
   *this = src;
 }
 
 /* Copy assignment operator */
 Form& Form::operator=(Form const& rhs) {
-  std::cout << grey << "Form copy assignment operator called\n" << resetLayout;
+  std::cout << Layout::grey << "Form copy assignment operator called\n" << Layout::reset;
   if (this == &rhs)
     return *this;
   signed_ = rhs.isSigned();
@@ -62,7 +48,7 @@ Form& Form::operator=(Form const& rhs) {
 
 /* Destructor */
 Form::~Form() {
-  std::cout << grey << "Form destructor called\n" << resetLayout;
+  std::cout << Layout::grey << "Form destructor called\n" << Layout::reset;
 }
 
 /* ************************************************************************** */
@@ -138,23 +124,23 @@ const char* Form::GradeTooLowException::what() const throw() {
 }
 
 Form::GradeTooHighException::GradeTooHighException() {
-  std::cout << grey << "Form::GradeTooHighException default constructor\n" 
-            << " called\n" << resetLayout;
+  std::cout << Layout::grey << "Form::GradeTooHighException default constructor\n" 
+            << " called\n" << Layout::reset;
 }
 
 Form::GradeTooHighException::~GradeTooHighException() throw() {
-  std::cout << grey << "Form::GradeTooHighException default destructor"
-            << " called\n" << resetLayout;
+  std::cout << Layout::grey << "Form::GradeTooHighException default destructor"
+            << " called\n" << Layout::reset;
 }
 
 Form::GradeTooLowException::GradeTooLowException() {
-  std::cout << grey << "Form::GradeTooLowException default constructor"
-            << " called\n" << resetLayout;
+  std::cout << Layout::grey << "Form::GradeTooLowException default constructor"
+            << " called\n" << Layout::reset;
 }
 
 Form::GradeTooLowException::~GradeTooLowException() throw() {
-  std::cout << grey << "Form::GradeTooLowException default destructor"
-            << " called\n" << resetLayout;
+  std::cout << Layout::grey << "Form::GradeTooLowException default destructor"
+            << " called\n" << Layout::reset;
 }
 
 /* ************************************************************************** */
@@ -168,6 +154,6 @@ std::ostream& operator<<(std::ostream& o, Form const& f) {
   f.isSigned()? o << "yes\n": o << "no\n";
   o << "Grade required to sign: " << f.getGradeRequiredToSign() << ","
     << " Grade required to execute: " << f.getGradeRequiredToExecute()
-    << resetLayout;
+    << Layout::reset;
   return o;
 }
