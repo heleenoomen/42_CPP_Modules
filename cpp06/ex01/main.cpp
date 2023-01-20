@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:39:17 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/18 19:08:31 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/20 11:05:32 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ void printIntro() {
             << "Hey you! Welcome to the fabulous the world of\n\n"
             << Layout::magentaBold << "\t\t\tREINTERPRET CAST\n\n"
             << Layout::reset << Layout::cyanItalic << "You will love this.\n\n"
-            << "First off, we create a structure of type "
-            << Layout::cyan << "Data"
-            << Layout::cyanItalic << ".\nIt contains a "
-            << Layout::cyan << "char const* name"
-            << Layout::cyanItalic << ", say \"Nina\",\n"
-            << "and an " << Layout::cyan << "int age"
-            << Layout::cyanItalic << ", say 36.\n\n";
+            << "First off, we create a structure of type " << Layout::cyan
+            << "Data" << Layout::cyanItalic << ".\nIt contains a "
+            << Layout::cyan << "char const* name" << Layout::cyanItalic
+            << ", say \"Nina\",\n"
+            << "and an " << Layout::cyan << "int age" << Layout::cyanItalic
+            << ", say 36.\n\n";
 }
 
 void printStory0() {
@@ -48,14 +47,15 @@ void printStory1() {
 }
 
 void printStory2() {
-  std::cout
-      << Layout::cyanItalic << "Amazing! They are indeed the same.\n\n"
-      << "Now, let's go wild and deserialize our uintptr.\n"
-      << "This will reinterpret_cast our serializedPtr of type "
-      << Layout::cyan << "uintptr_t\n" << Layout::cyanItalic
-      << "into a pointer to " << Layout::cyan << "Data" << Layout::cyanItalic
-      << ". We will assign the result to a pointer to " << Layout::cyan
-      << "Data" << Layout::cyanItalic << ",\nwhich we will call data2.\n\n";
+  std::cout << Layout::cyanItalic << "Amazing! They are indeed the same.\n\n"
+            << "Now, let's go wild and deserialize our uintptr.\n"
+            << "This will reinterpret_cast our serializedPtr of type "
+            << Layout::cyan << "uintptr_t\n"
+            << Layout::cyanItalic << "into a pointer to " << Layout::cyan
+            << "Data" << Layout::cyanItalic
+            << ". We will assign the result to a pointer to " << Layout::cyan
+            << "Data" << Layout::cyanItalic
+            << ",\nwhich we will call data2.\n\n";
 }
 
 void printStory3() {
@@ -71,7 +71,8 @@ void printOutro() {
             << "A big thank you to the star of this show, the one and only\n\n"
             << Layout::magentaBold << "\t\t\tREINTERPRET CAST\n\n"
             << "\t\t\t    " << Layout::emojiStar << Layout::emojiStar
-            << Layout::emojiStar << "\n\n" << Layout::reset;
+            << Layout::emojiStar << "\n\n"
+            << Layout::reset;
   std::cout.flush();
 }
 
