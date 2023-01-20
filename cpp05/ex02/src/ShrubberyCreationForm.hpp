@@ -6,29 +6,30 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/05 17:55:35 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:20:57 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHRUBBERYCREATIONFORM_HPP
 #define SHRUBBERYCREATIONFORM_HPP
 
-#include "AForm.hpp"
-
-#include <string>
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <string>
+
+#include "AForm.hpp"
 
 class ShrubberyCreationForm : public AForm {
  private:
   std::string const target_;
-  
- /* private methods */
+
+  /* private methods */
   std::string toString(int value) const;
   std::string pickRandomTreeFileName() const;
   void openTargetFile(std::ofstream& targetFile) const;
   void openTreeFile(std::ifstream& treeFile) const;
-  void copyTreeFileToTargetFile(std::ifstream& treeFile, std::ofstream& targetFile) const;
+  void copyTreeFileToTargetFile(std::ifstream& treeFile,
+                                std::ofstream& targetFile) const;
   void executeShrubberyCreationForm() const;
 
  public:
@@ -54,7 +55,6 @@ class ShrubberyCreationForm : public AForm {
   static int const gradeRequiredToSign = 145;
   static int const gradeRequiredToExecute = 137;
   static std::string const formName;
-
 };
 
 #endif

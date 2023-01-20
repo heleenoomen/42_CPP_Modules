@@ -13,17 +13,17 @@
 #ifndef ROBOTOMYREQUESTFORM_HPP
 #define ROBOTOMYREQUESTFORM_HPP
 
-#include "AForm.hpp"
-
-#include <string>
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <string>
+
+#include "AForm.hpp"
 
 class RobotomyRequestForm : public AForm {
  private:
   std::string const target_;
 
- /* private methods */
+  /* private methods */
   void executeRobotomyRequestForm() const;
 
  public:
