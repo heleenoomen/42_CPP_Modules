@@ -1,12 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Base.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 11:21:53 by hoomen            #+#    #+#             */
+/*   Updated: 2023/01/20 11:21:54 by hoomen           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "Base.hpp"
 
 #include <cstdlib>
 #include <iostream>
+#include <exception>
 
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
+#include "Layout.hpp"
 
 /* Destructor */
 Base::~Base() {}

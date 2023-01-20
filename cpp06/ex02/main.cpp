@@ -1,23 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 11:21:39 by hoomen            #+#    #+#             */
+/*   Updated: 2023/01/20 11:21:41 by hoomen           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <iostream>
+
 #include "A.hpp"
 #include "B.hpp"
 #include "Base.hpp"
 #include "C.hpp"
 #include "Layout.hpp"
 
-#include <iostream>
-
 void printStars() {
   std::cout << "\n\t\t\t    ";
-  for (int i = 0; i < 3; ++i)
-    std::cout << Layout::emojiStar;
+  for (int i = 0; i < 3; ++i) std::cout << Layout::emojiStar;
   std::cout << std::endl;
 }
 
 int main() {
   printStars();
-  std::cout << Layout::magentaBold
-            << "\nConstruct objects of type A, B, and C and print their type:\n\n"
-            << Layout::reset;
+  std::cout
+      << Layout::magentaBold
+      << "\nConstruct objects of type A, B, and C and print their type:\n\n"
+      << Layout::reset;
   A a;
   Base base;
   std::cout << '\t';

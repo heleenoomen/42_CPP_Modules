@@ -21,10 +21,6 @@
 // #endif
 
 class Layout {
- //private:
-
- //protected:
-
  public:
   /* default constructor */
   Layout();
@@ -37,10 +33,6 @@ class Layout {
 
   /* default destructor */
   ~Layout();
-
-  /* getters */
-
-  /* setters */
 
   /* symbolic constants */
   static char const* greenBold;
@@ -67,7 +59,6 @@ class Layout {
   static char const* emojiRobot;
   static char const* emojiSkull;
   static char const* emojiStar;
-
 };
 
 #endif
