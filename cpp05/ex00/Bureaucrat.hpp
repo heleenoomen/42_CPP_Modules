@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:17:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/02 13:34:02 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:04:05 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,9 @@ class Bureaucrat {
   static int const maximumGrade = 1;
 };
 
-
 std::ostream& operator<<(std::ostream& o, Bureaucrat const& Bureaucrat);
 
 #endif
 
-/* NB: throw() means that a function will never throw exceptions 
+/* NB: throw() means that a function will never throw exceptions
  https://en.cppreference.com/w/cpp/language/noexcept_spec */

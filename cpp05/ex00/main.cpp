@@ -6,13 +6,13 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 18:54:45 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/02 13:49:38 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:04:22 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
-
 #include <iostream>
+
+#include "Bureaucrat.hpp"
 
 /* ************************************************************************** */
 /* Printing headers                                                           */
@@ -38,8 +38,7 @@ void testInsertionOverload() {
 /* Test Promotions & Degradations: Printing utils                             */
 /* ************************************************************************** */
 
-void printInfoBefore(Bureaucrat& bureaucrat, std::string action) 
-{
+void printInfoBefore(Bureaucrat& bureaucrat, std::string action) {
   std::cout << "This is our bureaucrat at the start:\n\n";
   std::cout << "\t" << bureaucrat << "\n\n";
   std::cout << "Try to " << action << " " << bureaucrat.getName() << ":\n";
@@ -54,28 +53,26 @@ void printInfoAfter(Bureaucrat& bureaucrat) {
 /*  Test Promotions & degradations: General test frames                       */
 /* ************************************************************************** */
 
-void testPromotions(std::string name, int actualGrade)
-{
+void testPromotions(std::string name, int actualGrade) {
   Bureaucrat bureaucrat(name, actualGrade);
   printInfoBefore(bureaucrat, "promote");
   try {
-    bureaucrat.promote(); }
-  catch(std::exception& e) {
-      std::cerr << "\033[1;31m" << "Standard exception: "
-                << e.what() << "\033[0m\n";
-    }
+    bureaucrat.promote();
+  } catch (std::exception& e) {
+    std::cerr << "\033[1;31m"
+              << "Standard exception: " << e.what() << "\033[0m\n";
+  }
   printInfoAfter(bureaucrat);
 }
 
-void testDegradations(std::string name, int actualGrade)
-{
+void testDegradations(std::string name, int actualGrade) {
   Bureaucrat bureaucrat(name, actualGrade);
   printInfoBefore(bureaucrat, "degrade");
   try {
-    bureaucrat.degrade(); }
-  catch(std::exception& e) {
-    std::cerr << "\033[1;31m" << "Standard exception: "
-              << e.what() << "\033[0m\n";
+    bureaucrat.degrade();
+  } catch (std::exception& e) {
+    std::cerr << "\033[1;31m"
+              << "Standard exception: " << e.what() << "\033[0m\n";
   }
   printInfoAfter(bureaucrat);
 }
@@ -117,28 +114,27 @@ void testMaximumDegradation() {
 void testCreateBureaucratWithInvalidGrade() {
   printTestHeader("Test creating a bureaucrat with invalid initial grade (1)");
   try {
-    std::cout << "We will try to create a bureaucrat named Barry, with the invalid "
-              << "initial grade of 151:\n";
+    std::cout
+        << "We will try to create a bureaucrat named Barry, with the invalid "
+        << "initial grade of 151:\n";
     Bureaucrat b("Barry", 151);
-  }
-  catch(std::exception& e) {
-    std::cerr << "\033[31;1m" << "Standard exception: "
-              << e.what() << '\n'
+  } catch (std::exception& e) {
+    std::cerr << "\033[31;1m"
+              << "Standard exception: " << e.what() << '\n'
               << "\033[0m";
   }
   std::cout << '\n';
   printTestHeader("Test creating a bureaucrat with invalid initial grade (2)");
   try {
-    std::cout << "We will try to create a bureaucrat named Barry, with the invalid "
-              << "initial grade of -16:\n";
+    std::cout
+        << "We will try to create a bureaucrat named Barry, with the invalid "
+        << "initial grade of -16:\n";
     Bureaucrat b("Barry", -16);
-  }
-  catch(std::exception& e) {
-    std::cerr << "\033[31;1m" << "Standard exception: "
-              << e.what() << '\n'
+  } catch (std::exception& e) {
+    std::cerr << "\033[31;1m"
+              << "Standard exception: " << e.what() << '\n'
               << "\033[0m";
   }
-  
 }
 
 /* ************************************************************************** */
@@ -188,7 +184,6 @@ void testCopyAssignmentOperator() {
   printTestStep("barry3 to std::cout");
   std::cout << barry3 << "\n";
 }
-
 
 int main() {
   testInsertionOverload();
