@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 10:29:37 by hoomen            #+#    #+#             */
+/*   Updated: 2023/01/20 10:29:38 by hoomen           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
@@ -123,7 +135,7 @@ void shrubberyTestsWithIntern() {
 }
 
 void robotomyTestsWithIntern() {
-  testFormsWithIntern(RobotomyRequestForm::formName, "Prototyp sed14a.1");
+  testFormsWithIntern(RobotomyRequestForm::formName, "Prototype sed14a.1");
 }
 
 void pardonTestsWithIntern() {

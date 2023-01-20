@@ -13,23 +13,20 @@
 #ifndef INTERN_HPP
 #define INTERN_HPP
 
-#include "AForm.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
-
 #include <string>
+
+#include "AForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 // #include <iostream>
-
-
 
 class Intern {
  private:
-
-	typedef struct formProductionTable {
-		std::string	formName;
-		AForm* (Intern::*productionMethod)(std::string const& target) const;
-	} formProductionTable;
+  typedef struct formProductionTable {
+    std::string formName;
+    AForm* (Intern::*productionMethod)(std::string const& target) const;
+  } formProductionTable;
 
   static int const nbrOfExistingForms = 3;
 
@@ -41,7 +38,7 @@ class Intern {
   AForm* produceForm(std::string const& name, std::string const& target) const;
 
   void launchFormTable();
- //protected:
+  // protected:
 
  public:
   /* default constructor */
@@ -61,10 +58,10 @@ class Intern {
 
   // /* exceptions */
   class FormDoesNotExistException : public std::exception {
-    public:
-     FormDoesNotExistException();
-     ~FormDoesNotExistException() throw();
-     virtual const char* what() const throw();
+   public:
+    FormDoesNotExistException();
+    ~FormDoesNotExistException() throw();
+    virtual const char* what() const throw();
   };
 };
 

@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Intern.cpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/20 10:29:05 by hoomen            #+#    #+#             */
+/*   Updated: 2023/01/20 10:29:11 by hoomen           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "Intern.hpp"
-#include "Layout.hpp"
+
 #include <iostream>
+
+#include "Layout.hpp"
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -9,21 +22,23 @@
 
 /* Default constructor */
 Intern::Intern() {
-  std::cout << Layout::grey << "Intern default constructor called\n" << Layout::reset;
+  std::cout << Layout::grey << "Intern default constructor called\n"
+            << Layout::reset;
   launchFormTable();
 }
 
 /* Copy constructor */
 Intern::Intern(Intern const& src) {
-  std::cout << Layout::grey << "Intern copy constructor called\n" << Layout::reset;
+  std::cout << Layout::grey << "Intern copy constructor called\n"
+            << Layout::reset;
   *this = src;
 }
 
 /* Copy assignment operator */
 Intern& Intern::operator=(Intern const& rhs) {
-  std::cout << Layout::grey << "Intern copy assignment operator called\n" << Layout::reset;
-  if (this == &rhs)
-    return *this;
+  std::cout << Layout::grey << "Intern copy assignment operator called\n"
+            << Layout::reset;
+  if (this == &rhs) return *this;
   return *this;
 }
 
@@ -36,18 +51,17 @@ Intern::~Intern() {
 /* Public methods                                                             */
 /* ************************************************************************** */
 
-AForm* Intern::makeForm(std::string const& formName, std::string const& target) const {
+AForm* Intern::makeForm(std::string const& formName,
+                        std::string const& target) const {
   try {
     AForm* newForm = produceForm(formName, target);
-    std::cout << Layout::greenBold
-              << formName << " was produced succesfully by intern\n"
+    std::cout << Layout::greenBold << formName
+              << " was produced succesfully by intern\n"
               << Layout::reset;
     return newForm;
-  }
-  catch (Intern::FormDoesNotExistException& e) {
-    std::cerr << Layout::redBold
-              << formName << " could not be produced because: "
-              << e.what() << '\n'
+  } catch (Intern::FormDoesNotExistException& e) {
+    std::cerr << Layout::redBold << formName
+              << " could not be produced because: " << e.what() << '\n'
               << Layout::reset;
     throw;
     return NULL;
@@ -73,10 +87,11 @@ AForm* Intern::makePresidentialPardonForm(std::string const& target) const {
   return newForm;
 }
 
-AForm* Intern::produceForm(std::string const& formName, std::string const& target) const {
+AForm* Intern::produceForm(std::string const& formName,
+                           std::string const& target) const {
   for (int i = 0; i < nbrOfExistingForms; ++i)
     if (table[i].formName == formName) {
-       return (this->*table[i].productionMethod)(target);
+      return (this->*table[i].productionMethod)(target);
     }
   throw(Intern::FormDoesNotExistException());
 }
