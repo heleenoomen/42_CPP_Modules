@@ -6,35 +6,36 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/05 19:00:18 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:34:38 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHRUBBERYCREATIONFORM_HPP
 #define SHRUBBERYCREATIONFORM_HPP
 
-#include "AForm.hpp"
-
-#include <string>
-#include <iostream>
 #include <fstream>
+#include <iostream>
+#include <string>
+
+#include "AForm.hpp"
 
 class ShrubberyCreationForm : public AForm {
  private:
   std::string const target_;
 
- /* private methods */
-    /* a) helpers */
+  /* private methods */
+  /* a) helpers */
   std::string toString(int value) const;
   std::string pickRandomTreeFileName() const;
 
-    /* b) private methods */
+  /* b) private methods */
   void openTargetFile(std::ofstream& targetFile) const;
   void openTreeFile(std::ifstream& treeFile) const;
-  void copyTreeFileToTargetFile(std::ifstream& treeFile, std::ofstream& targetFile) const;
+  void copyTreeFileToTargetFile(std::ifstream& treeFile,
+                                std::ofstream& targetFile) const;
   void executeShrubberyCreationForm() const;
 
-    /* c) return copy */
+  /* c) return copy */
   AForm* newForm() const;
 
  public:

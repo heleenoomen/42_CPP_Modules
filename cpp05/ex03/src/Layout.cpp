@@ -6,11 +6,12 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:29:27 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 10:29:32 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:31:57 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Layout.hpp"
+
 #include <iostream>
 
 /* ************************************************************************** */
@@ -50,27 +51,21 @@ char const* Layout::reset = "";
 char const* Layout::emojiRobot = "\U0001F916";
 char const* Layout::emojiSkull = "\U0001F480";
 
-
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
 /* ************************************************************************** */
 
 /* Default constructor */
-Layout::Layout() {
-}
+Layout::Layout() {}
 
 /* Copy constructor */
-Layout::Layout(Layout const& src) {
-  *this = src;
-}
+Layout::Layout(Layout const& src) { *this = src; }
 
 /* Copy assignment operator */
 Layout& Layout::operator=(Layout const& rhs) {
-  if (this == &rhs)
-    return *this;
+  if (this == &rhs) return *this;
   return *this;
 }
 
 /* Destructor */
-Layout::~Layout() {
-}
+Layout::~Layout() {}

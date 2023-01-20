@@ -6,15 +6,17 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:29:41 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 10:29:42 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/20 10:33:06 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PresidentialPardonForm.hpp"
-#include "Layout.hpp"
-#include <cstdlib>
+
 #include <climits>
+#include <cstdlib>
 #include <fstream>
+
+#include "Layout.hpp"
 
 std::string const PresidentialPardonForm::formName = "Presidential Pardon";
 
@@ -26,7 +28,9 @@ std::string const PresidentialPardonForm::formName = "Presidential Pardon";
 PresidentialPardonForm::PresidentialPardonForm()
     : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_("default") {
-  std::cout << Layout::grey << "PresidentialPardonForm default constructor called\n" << Layout::reset;
+  std::cout << Layout::grey
+            << "PresidentialPardonForm default constructor called\n"
+            << Layout::reset;
   checkGrade();
 }
 
@@ -34,30 +38,38 @@ PresidentialPardonForm::PresidentialPardonForm()
 PresidentialPardonForm::PresidentialPardonForm(std::string const& target)
     : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_(target) {
-  std::cout << Layout::grey << "PresidentialPardonForm parametric constructor called\n" << Layout::reset;
+  std::cout << Layout::grey
+            << "PresidentialPardonForm parametric constructor called\n"
+            << Layout::reset;
   checkGrade();
 }
 
 /* Copy constructor */
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const& src)
+PresidentialPardonForm::PresidentialPardonForm(
+    PresidentialPardonForm const& src)
     : AForm(src.getName(), gradeRequiredToSign, gradeRequiredToExecute),
       target_(src.target_) {
-  std::cout << Layout::grey << "PresidentialPardonForm copy constructor called\n" << Layout::reset;
+  std::cout << Layout::grey
+            << "PresidentialPardonForm copy constructor called\n"
+            << Layout::reset;
   *this = src;
 }
 
 /* Copy assignment operator */
-PresidentialPardonForm& PresidentialPardonForm::operator=(PresidentialPardonForm const& rhs) {
-  std::cout << Layout::grey << "PresidentialPardonForm copy assignment operator called\n" << Layout::reset;
-  if (this == &rhs)
-    return *this;
+PresidentialPardonForm& PresidentialPardonForm::operator=(
+    PresidentialPardonForm const& rhs) {
+  std::cout << Layout::grey
+            << "PresidentialPardonForm copy assignment operator called\n"
+            << Layout::reset;
+  if (this == &rhs) return *this;
   AForm::operator=(rhs);
   return *this;
 }
 
 /* Destructor */
 PresidentialPardonForm::~PresidentialPardonForm() {
-  std::cout << Layout::grey << "PresidentialPardonForm destructor called\n" << Layout::reset;
+  std::cout << Layout::grey << "PresidentialPardonForm destructor called\n"
+            << Layout::reset;
 }
 
 /* ************************************************************************** */
@@ -74,8 +86,8 @@ void PresidentialPardonForm::execute(Bureaucrat const& b) const {
 /* ************************************************************************** */
 
 void PresidentialPardonForm::executePresidentialPardonForm() const {
-  std::cout << Layout::brightYellow
-            << target_ << " has been pardoned by Zaphod Beeblebrox\n"
+  std::cout << Layout::brightYellow << target_
+            << " has been pardoned by Zaphod Beeblebrox\n"
             << Layout::reset;
 }
 
