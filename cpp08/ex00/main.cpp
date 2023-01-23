@@ -12,12 +12,12 @@ int main() {
   v.push_back(58);
 
   try {
-    std::cout << *easyfind(v, -3) << '\n';
+    std::cout << *easy::easyfind(v, -3) << '\n';
   } catch (std::exception& e) {
     std::cout << e.what() << '\n';
   }
   try {
-    std::cout << *easyfind(v, -27) << '\n';
+    std::cout << *easy::easyfind(v, -27) << '\n';
   } catch (std::exception& e) {
     std::cout << e.what() << '\n';
   }
