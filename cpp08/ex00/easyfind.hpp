@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <exception>
 
-namespace easy {
 class NoOcurrenceFound : public std::exception {
  public:
   char const* what() const throw() { return "No occurrence found"; }
@@ -13,4 +12,3 @@ typename T::iterator easyfind(T& container, int nbr) {
   if (ret == container.end()) throw NoOcurrenceFound();
   return ret;
 }
-};  // namespace easy
