@@ -14,7 +14,12 @@ int main() {
   try {
     std::cout << *easyfind(v, -3) << '\n';
   } catch (std::exception& e) {
-    std::cerr << e.what() << '\n';
+    std::cout << e.what() << '\n';
+  }
+  try {
+    std::cout << *easyfind(v, -27) << '\n';
+  } catch (std::exception& e) {
+    std::cout << e.what() << '\n';
   }
   return 0;
 }
