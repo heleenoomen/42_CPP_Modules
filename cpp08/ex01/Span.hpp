@@ -1,4 +1,5 @@
 #include <exception>
+#include <iostream>
 #include <vector>
 
 class Span {
@@ -28,6 +29,7 @@ class Span {
                  std::vector<int>::iterator const& last);
   int shortestSpan();
   int longestSpan();
+  std::vector<int> const& getElements() const;
 
   /* Exceptions */
   class SpanFullException : public std::exception {
@@ -40,3 +42,5 @@ class Span {
     char const* what() const throw();
   };
 };
+
+std::ostream& operator<<(std::ostream& o, Span const& s);

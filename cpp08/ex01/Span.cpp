@@ -15,6 +15,7 @@ Span::Span(Span const& src) : elements_(std::vector<int>(0)), N_(0) {
 }
 
 Span& Span::operator=(Span const& rhs) {
+  if (this == &rhs) return *this;
   elements_ = rhs.elements_;
   N_ = rhs.N_;
   sorted_ = rhs.sorted_;
@@ -30,7 +31,7 @@ void Span::sortElements_() {
 }
 
 char const* Span::SpanFullException::what() const throw() {
-  return "Cannot add object: Insufficient space";
+  return "Cannot add object: Span is full";
 }
 
 char const* Span::NoSpanFoundException::what() const throw() {
@@ -45,7 +46,10 @@ void Span::addNumber(int nbr) {
 
 void Span::addNumber(std::vector<int>::iterator const& begin,
                      std::vector<int>::iterator const& end) {
-  for (std::vector<int>::iterator it = begin; it != end; ++it) addNumber(*it);
+  if (std::distance(begin, end) + elements_.size() > N_)
+    throw SpanFullException();
+  elements_.insert(elements_.end(), begin, end);
+  sorted_ = false;
 }
 
 int Span::shortestSpan() {
@@ -64,4 +68,14 @@ int Span::longestSpan() {
   if (sorted_) return elements_.back() - elements_.front();
   return *std::max_element(elements_.begin(), elements_.end()) -
          *std::min_element(elements_.begin(), elements_.end());
+}
+
+std::vector<int> const& Span::getElements() const { return elements_; }
+
+std::ostream& operator<<(std::ostream& o, Span const& s) {
+  std::vector<int> elements = s.getElements();
+  for (std::vector<int>::iterator it = elements.begin(); it != elements.end();
+       ++it)
+    o << *it << '\n';
+  return o;
 }
