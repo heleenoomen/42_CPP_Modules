@@ -30,17 +30,22 @@ void Span::sortElements_() {
 }
 
 char const* Span::SpanFullException::what() const throw() {
-  return "Cannot add number: No space left in span";
+  return "Cannot add object: Insufficient space";
 }
 
 char const* Span::NoSpanFoundException::what() const throw() {
-  return "Cannot find any span: Too few numbers";
+  return "Cannot find any span: Too few elements";
 }
 
 void Span::addNumber(int nbr) {
   if (elements_.size() == N_) throw SpanFullException();
   elements_.push_back(nbr);
   sorted_ = false;
+}
+
+void Span::addNumber(std::vector<int>::iterator const& begin,
+                     std::vector<int>::iterator const& end) {
+  for (std::vector<int>::iterator it = begin; it != end; ++it) addNumber(*it);
 }
 
 int Span::shortestSpan() {
