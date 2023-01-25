@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:02:08 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 11:02:10 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/25 13:13:47 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ Converter::Converter(std::string const& inputString)
       hasDot_(inputString_.find('.', 0) != std::string::npos),
       hasF_(inputString_.find('f', 0) != std::string::npos) {
   determineType_();
+  if (type_ == charType) value_ = static_cast<int>(inputString[0]);
   launchCheckTable_();
 }
 
@@ -106,11 +107,12 @@ bool Converter::isPseudoliteral() const {
 }
 
 void Converter::determineType_() {
-  if (inputString_ == "" || isspace(inputString_[0]))
+  if (inputString_ == "")
     throw InvalidInputException();
   else if (isPseudoliteral())
     type_ = pseudoLiteral;
-  else if (inputString_.length() == 1 && isprint(inputString_[0]))
+  else if (inputString_.length() == 1 && isprint(inputString_[0]) &&
+           !isdigit(inputString_[0]))
     type_ = charType;
   else if (hasDot_ && hasF_)
     type_ = floatType;
