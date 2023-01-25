@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/18 17:39:17 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 11:05:32 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/25 11:38:59 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void printStory0() {
 void printStory1() {
   std::cout
       << Layout::cyanItalic
-      << "If all is well, the address of nina's structure should be the\n"
+      << "If all is well, the value of our newly createdd uintptr_t should be the\n"
       << "same as the address of our data structure. Let's print them!\n\n";
 }
 
@@ -51,7 +51,7 @@ void printStory2() {
             << "Now, let's go wild and deserialize our uintptr.\n"
             << "This will reinterpret_cast our serializedPtr of type "
             << Layout::cyan << "uintptr_t\n"
-            << Layout::cyanItalic << "into a pointer to " << Layout::cyan
+            << Layout::cyanItalic << "back into a pointer to " << Layout::cyan
             << "Data" << Layout::cyanItalic
             << ". We will assign the result to a pointer to " << Layout::cyan
             << "Data" << Layout::cyanItalic
