@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:02:08 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/25 13:13:47 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/25 13:41:19 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 /* Default constructor */
 Converter::Converter()
     : inputString_(""),
-      value_(strtod(inputString_.c_str(), &endptrStrtod_)),
+      value_(0),
       hasDot_(false),
       hasF_(false),
       type_(intType) {
@@ -38,7 +38,7 @@ Converter::Converter(std::string const& inputString)
       hasDot_(inputString_.find('.', 0) != std::string::npos),
       hasF_(inputString_.find('f', 0) != std::string::npos) {
   determineType_();
-  if (type_ == charType) value_ = static_cast<int>(inputString[0]);
+  determineValue_();
   launchCheckTable_();
 }
 
@@ -95,7 +95,7 @@ void Converter::checkInput_() const {
     if (i == type_) (this->*checkTable_[i])();
 }
 
-/* DETERMINE TYPE */
+/* DETERMINE TYPE & VALUE */
 
 bool Converter::isPseudoliteral() const {
   const char* pseudoliterals[nbrOfPseudoliterals_] = {
@@ -120,6 +120,13 @@ void Converter::determineType_() {
     type_ = doubleType;
   else
     type_ = intType;
+}
+
+void Converter::determineValue_() {
+  if (type_ == charType)
+    value_ = static_cast<int>(inputString_[0]);
+  else
+    value_ = strtod(inputString_.c_str(), &endptrStrtod_);
 }
 
 /* OVERFLOW & NON DISPLAYABLE */

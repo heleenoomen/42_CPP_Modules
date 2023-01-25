@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/18 16:39:18 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/25 13:38:44 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ class Converter {
   /* private methods*/
   bool isPseudoliteral() const;
   void determineType_();
+  void determineValue_();
   void launchCheckTable_();
   bool charNonDisplayable_() const;
   bool charOverflow_() const;
