@@ -21,9 +21,9 @@
 // #endif
 
 class Layout {
- //private:
+  // private:
 
- //protected:
+  // protected:
 
  public:
   /* default constructor */
@@ -68,7 +68,6 @@ class Layout {
   static char const* emojiRobot;
   static char const* emojiSkull;
   static char const* emojiStar;
-
 };
 
 #endif

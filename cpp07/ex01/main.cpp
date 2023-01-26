@@ -30,12 +30,12 @@ void printTestWithTemplate() {
 
 void printTestWithStringManip() {
   std::cout << '\n';
-  std::cout << Layout::green << "Test " << Layout::cyanBold << "iter"
-            << Layout::green
-            << " strToUpper() function on:\n"
-            << "std::string s[5] = {\"Hello you!\", \"Coca-Cola\", \"Love C++\",\n"
-            << "\"Sunny days\", \"Please Go to 4aBxl16$\"}\n\n"
-            << Layout::brightYellow; 
+  std::cout
+      << Layout::green << "Test " << Layout::cyanBold << "iter" << Layout::green
+      << " strToUpper() function on:\n"
+      << "std::string s[5] = {\"Hello you!\", \"Coca-Cola\", \"Love C++\",\n"
+      << "\"Sunny days\", \"Please Go to 4aBxl16$\"}\n\n"
+      << Layout::brightYellow;
 }
 
 void timesTwo(int& value) { value *= 2; }
@@ -54,9 +54,8 @@ void testWithNormalFunction() {
 
 void testWithStringManip() {
   printTestWithStringManip();
-  std::string s[5] = {
-    "Hello you!", "Coca-Cola", "Love C++", "Sunny days",
-    "Please Go to 4aBxl16$"};
+  std::string s[5] = {"Hello you!", "Coca-Cola", "Love C++", "Sunny days",
+                      "Please Go to 4aBxl16$"};
   iter<std::string>(s, 5, &strToUpper);
   std::cout << Layout::brightYellow;
   for (int i = 0; i < 5; ++i) std::cout << '\t' << s[i] << '\n';

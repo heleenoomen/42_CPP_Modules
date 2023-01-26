@@ -1,5 +1,6 @@
 
 #include "Layout.hpp"
+
 #include <iostream>
 
 /* ************************************************************************** */
@@ -44,27 +45,21 @@ char const* Layout::emojiRobot = "\U0001F916";
 char const* Layout::emojiSkull = "\U0001F480";
 char const* Layout::emojiStar = "\u2B50";
 
-
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
 /* ************************************************************************** */
 
 /* Default constructor */
-Layout::Layout() {
-}
+Layout::Layout() {}
 
 /* Copy constructor */
-Layout::Layout(Layout const& src) {
-  *this = src;
-}
+Layout::Layout(Layout const& src) { *this = src; }
 
 /* Copy assignment operator */
 Layout& Layout::operator=(Layout const& rhs) {
-  if (this == &rhs)
-    return *this;
+  if (this == &rhs) return *this;
   return *this;
 }
 
 /* Destructor */
-Layout::~Layout() {
-}
+Layout::~Layout() {}
