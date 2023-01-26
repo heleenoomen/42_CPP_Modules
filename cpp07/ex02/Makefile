@@ -6,14 +6,14 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/01/19 19:38:22 by hoomen           ###   ########.fr        #
+#    Updated: 2023/01/26 18:56:18 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	array
 
 CXX			:=	c++
-CXXFLAGS	:=	-Wall -Werror -Wextra #-std=c++98
+CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 
 DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 

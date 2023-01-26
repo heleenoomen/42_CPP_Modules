@@ -2,7 +2,7 @@
 #define ITER_H
 
 template<typename T>
-void testTemplate(T& a) { a *= 2; }
+void testTemplate(T& a) { a *= 3; }
 
 template<typename Array, typename FuncPointer>
 void iter(Array* array, int arraySize, FuncPointer functionPointer) {

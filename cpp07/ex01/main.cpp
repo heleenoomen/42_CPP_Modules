@@ -48,7 +48,7 @@ void strToUpper(std::string& s) {
 void testWithNormalFunction() {
   printTestTimesTwo();
   int array[5] = {1, 3, 5, 6, 9};
-  iter(array, 5, &timesTwo);
+  iter<int>(array, 5, &timesTwo);
   for (int i = 0; i < 5; ++i) std::cout << '\t' << array[i] << '\n';
 }
 
@@ -57,7 +57,7 @@ void testWithStringManip() {
   std::string s[5] = {
     "Hello you!", "Coca-Cola", "Love C++", "Sunny days",
     "Please Go to 4aBxl16$"};
-  iter(s, 5, &strToUpper);
+  iter<std::string>(s, 5, &strToUpper);
   std::cout << Layout::brightYellow;
   for (int i = 0; i < 5; ++i) std::cout << '\t' << s[i] << '\n';
 }
@@ -65,7 +65,7 @@ void testWithStringManip() {
 void testWithTemplate() {
   printTestWithTemplate();
   float arrayF[5] = {3.2f, 5.8f, 7.0f, 18.4f, 47.33f};
-  iter(arrayF, 5, &testTemplate<float>);
+  iter<float>(arrayF, 5, &testTemplate<float>);
   std::cout << Layout::brightYellow;
   for (int i = 0; i < 5; ++i) std::cout << '\t' << arrayF[i] << '\n';
 }

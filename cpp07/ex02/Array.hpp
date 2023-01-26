@@ -27,7 +27,7 @@ class Array {
     return *this;
   }
 
-  T& operator[](unsigned int index) const {
+  T& operator[](unsigned int index) {
     if (index >= size_) throw IndexOutOfRangeException();
     return array_[index];
   }
