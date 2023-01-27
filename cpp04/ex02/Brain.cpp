@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 13:14:25 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 17:52:10 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:54:44 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <iostream>
 
-#include "Layout.hpp"
+#include "layout.hpp"
 
 /* Default constructor */
 Brain::Brain() { std::cout << "Brain default constructor called" << std::endl; }
@@ -48,9 +48,9 @@ void Brain::setIdea(int index, std::string const& idea) {
 
 /* Public methods */
 void Brain::printIdeas() const {
-  std::cout << Layout::magenta;
+  std::cout << layout::magenta;
   for (int i = 0; i < brainSize_; ++i) {
     if (ideas_[i] != "") std::cout << "Idea " << i << ": " << ideas_[i] << '\n';
   }
-  std::cout << Layout::reset;
+  std::cout << layout::reset;
 }

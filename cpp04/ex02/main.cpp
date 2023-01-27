@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 10:01:09 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 18:18:13 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:55:50 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "Layout.hpp"
+#include "layout.hpp"
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
@@ -31,24 +31,24 @@ void printStars() {
 }
 
 void printTestHeader(char const* testname) {
-  std::cout << Layout::brightYellow;
+  std::cout << layout::brightYellow;
   printStars();
   std::cout << "\n";
   std::cout << "* " << std::left << std::setw(testHeaderWidth - 3) << testname
             << "*\n";
   printStars();
-  std::cout << "\n" << Layout::reset;
+  std::cout << "\n" << layout::reset;
 }
 
 void printTestTrailer() { std::cout << "\n"; }
 
 void printTestStep(std::string const& message) {
-  std::cout << Layout::cyanItalic << message << ":\n" << Layout::reset;
+  std::cout << layout::cyanItalic << message << ":\n" << layout::reset;
 }
 
 void printTestStepName(std::string const& message, std::string const& name) {
-  std::cout << Layout::cyanItalic << message << " " << name << ":\n"
-            << Layout::reset;
+  std::cout << layout::cyanItalic << message << " " << name << ":\n"
+            << layout::reset;
 }
 
 /* ************************************************************************** */
@@ -79,17 +79,17 @@ Cat* testDefaultConstructorCat(char const* varName) {
 
 /* Copy Constructor Cat */
 Cat* testCopyConstructorCat(Cat& src, char const* varName, char const* varNameSrc) {
-  std::cout << Layout::cyanItalic << "Copy constructor for " << varName
-            << ", copying " << varNameSrc << '\n' << Layout::reset;
+  std::cout << layout::cyanItalic << "Copy constructor for " << varName
+            << ", copying " << varNameSrc << '\n' << layout::reset;
   return new Cat(src);
 }
 
 /* Copy Assignment Cat */
 void testCopyAssignmentCat(Cat& c, Cat& src, char const* varName,
                            char const* varNameSrc) {
-  std::cout << Layout::cyanItalic << "Copy assignment: " << varName << " = "
+  std::cout << layout::cyanItalic << "Copy assignment: " << varName << " = "
             << varNameSrc << "\n"
-            << Layout::reset;
+            << layout::reset;
   c = src;
 }
 /* Cat Brain */
@@ -115,9 +115,9 @@ void testCatPrintIdeas(Cat& c, char const* varName) {
 /* Print Ideas Cat after Deletion of Source */
 void testCatPrintIdeasAfterDeletionSrc(Cat& c, char const* varName,
                                        char const* varNameSrc) {
-  std::cout << Layout::cyanItalic << "Print ideas " << varName
+  std::cout << layout::cyanItalic << "Print ideas " << varName
             << " after deletion of " << varNameSrc << "\n"
-            << Layout::reset;
+            << layout::reset;
   c.printIdeas();
 }
 
@@ -132,17 +132,17 @@ Dog* testDefaultConstructorDog(char const* varName) {
 
 /* Copy Constructor Dog */
 Dog* testCopyConstructorDog(Dog& src, char const* varName, char const* varNameSrc) {
-  std::cout << Layout::cyanItalic << "Copy constructor for " << varName
-            << ", copying " << varNameSrc << '\n' << Layout::reset;
+  std::cout << layout::cyanItalic << "Copy constructor for " << varName
+            << ", copying " << varNameSrc << '\n' << layout::reset;
   return new Dog(src);
 }
 
 /* Copy Assignment Dog */
 void testCopyAssignmentDog(Dog& d, Dog& src, char const* varName,
                            char const* varNameSrc) {
-  std::cout << Layout::cyanItalic << "Copy assignment: " << varName << " = "
+  std::cout << layout::cyanItalic << "Copy assignment: " << varName << " = "
             << varNameSrc << "\n"
-            << Layout::reset;
+            << layout::reset;
   d = src;
 }
 /* Dog Brain */
@@ -164,9 +164,9 @@ void testDogPrintIdeas(Dog& d, char const* varName) {
 /* Print Ideas Dog after Deletion of Source */
 void testDogPrintIdeasAfterDeletionSrc(Dog& d, char const* varName,
                                        char const* varNameSrc) {
-  std::cout << Layout::cyanItalic << "Print ideas " << varName
+  std::cout << layout::cyanItalic << "Print ideas " << varName
             << " after deletion of " << varNameSrc << "\n"
-            << Layout::reset;
+            << layout::reset;
   d.printIdeas();
 }
 

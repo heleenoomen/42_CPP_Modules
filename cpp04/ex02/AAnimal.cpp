@@ -14,7 +14,7 @@
 
 #include <iostream>
 
-#include "Layout.hpp"
+#include "layout.hpp"
 
 /* Default constructor */
 AAnimal::AAnimal() : type_("") {
@@ -60,8 +60,8 @@ void AAnimal::makeSound() const { std::cout << "???" << '\n'; }
 /* ************************************************************************** */
 
 std::ostream& operator<<(std::ostream& o, AAnimal const& a) {
-  o << Layout::green << "Type: " << a.getType() << ", sound: ";
+  o << layout::green << "Type: " << a.getType() << ", sound: ";
   a.makeSound();
-  o << Layout::reset;
+  o << layout::reset;
   return o;
 }
