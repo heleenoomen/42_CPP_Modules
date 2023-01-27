@@ -6,15 +6,15 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:35:33 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 10:35:39 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 20:43:34 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
-#include "Layout.hpp"
+#include "layout.hpp"
 #include <iostream>
 
-static char const* insertionOverloadLayout = Layout::greenBold;
+static char const* insertionOverloadlayout = layout::greenBold;
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -26,7 +26,7 @@ Form::Form()
     signed_(false),
     gradeRequiredToSign_(1),
     gradeRequiredToExecute_(1) {
-  std::cout << Layout::grey << "Form default constructor called\n" << Layout::reset;
+  std::cout << layout::grey << "Form default constructor called\n" << layout::reset;
   gradeCheck();
 }
 
@@ -35,7 +35,7 @@ Form::Form(std::string const& name, int gradeToSign, int gradeToExecute)
     signed_(false),
     gradeRequiredToSign_(gradeToSign),
     gradeRequiredToExecute_(gradeToExecute) {
-  std::cout << Layout::grey << "Form parametric constructor called\n" << Layout::reset;
+  std::cout << layout::grey << "Form parametric constructor called\n" << layout::reset;
   gradeCheck();
 }
 
@@ -44,13 +44,13 @@ Form::Form(Form const& src)
   : name_(src.getName()),
     gradeRequiredToSign_(src.getGradeRequiredToSign()),
     gradeRequiredToExecute_(src.getGradeRequiredToExecute()) {
-  std::cout << Layout::grey << "Form copy constructor called\n" << Layout::reset;
+  std::cout << layout::grey << "Form copy constructor called\n" << layout::reset;
   *this = src;
 }
 
 /* Copy assignment operator */
 Form& Form::operator=(Form const& rhs) {
-  std::cout << Layout::grey << "Form copy assignment operator called\n" << Layout::reset;
+  std::cout << layout::grey << "Form copy assignment operator called\n" << layout::reset;
   if (this == &rhs)
     return *this;
   signed_ = rhs.isSigned();
@@ -59,7 +59,7 @@ Form& Form::operator=(Form const& rhs) {
 
 /* Destructor */
 Form::~Form() {
-  std::cout << Layout::grey << "Form destructor called\n" << Layout::reset;
+  std::cout << layout::grey << "Form destructor called\n" << layout::reset;
 }
 
 /* ************************************************************************** */
@@ -135,23 +135,23 @@ const char* Form::GradeTooLowException::what() const throw() {
 }
 
 Form::GradeTooHighException::GradeTooHighException() {
-  std::cout << Layout::grey << "Form::GradeTooHighException default constructor\n" 
-            << " called\n" << Layout::reset;
+  std::cout << layout::grey << "Form::GradeTooHighException default constructor\n" 
+            << " called\n" << layout::reset;
 }
 
 Form::GradeTooHighException::~GradeTooHighException() throw() {
-  std::cout << Layout::grey << "Form::GradeTooHighException default destructor"
-            << " called\n" << Layout::reset;
+  std::cout << layout::grey << "Form::GradeTooHighException default destructor"
+            << " called\n" << layout::reset;
 }
 
 Form::GradeTooLowException::GradeTooLowException() {
-  std::cout << Layout::grey << "Form::GradeTooLowException default constructor"
-            << " called\n" << Layout::reset;
+  std::cout << layout::grey << "Form::GradeTooLowException default constructor"
+            << " called\n" << layout::reset;
 }
 
 Form::GradeTooLowException::~GradeTooLowException() throw() {
-  std::cout << Layout::grey << "Form::GradeTooLowException default destructor"
-            << " called\n" << Layout::reset;
+  std::cout << layout::grey << "Form::GradeTooLowException default destructor"
+            << " called\n" << layout::reset;
 }
 
 /* ************************************************************************** */
@@ -159,12 +159,12 @@ Form::GradeTooLowException::~GradeTooLowException() throw() {
 /* ************************************************************************** */
 
 std::ostream& operator<<(std::ostream& o, Form const& f) {
-  o << insertionOverloadLayout
+  o << insertionOverloadlayout
     << "Form: " << f.getName() << ", "
     << "Signed: ";
   f.isSigned()? o << "yes\n": o << "no\n";
   o << "Grade required to sign: " << f.getGradeRequiredToSign() << ","
     << " Grade required to execute: " << f.getGradeRequiredToExecute()
-    << Layout::reset;
+    << layout::reset;
   return o;
 }

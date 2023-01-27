@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:36:09 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 10:37:53 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 20:42:47 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
-#include "Layout.hpp"
+#include "layout.hpp"
 
 /* ************************************************************************** */
 /* Print utils                                                                */
@@ -29,19 +29,19 @@ void printStars() {
 }
 
 void printTestHeader(char const* testname) {
-  std::cout << Layout::cyanBold;
+  std::cout << layout::cyanBold;
   printStars();
   std::cout << "\n";
   std::cout << "* " << std::left << std::setw(testHeaderWidth - 3) << testname
             << "*\n";
   printStars();
-  std::cout << "\n" << Layout::reset;
+  std::cout << "\n" << layout::reset;
 }
 
 void printTestTrailer() {
-  std::cout << Layout::cyanBold;
+  std::cout << layout::cyanBold;
   printStars();
-  std::cout << "\n\n\n" << Layout::reset;
+  std::cout << "\n\n\n" << layout::reset;
 }
 
 /* ************************************************************************** */
@@ -49,19 +49,19 @@ void printTestTrailer() {
 /* ************************************************************************** */
 
 void testInsertionOverloadForm(char const* message, Form const& f) {
-  std::cout << Layout::cyanItalic << message << "Print form:\n"
-            << Layout::reset << f << '\n';
+  std::cout << layout::cyanItalic << message << "Print form:\n"
+            << layout::reset << f << '\n';
 }
 
 void testInsertionOverloadBureaucrat(char const* message, Bureaucrat const& b) {
-  std::cout << Layout::cyanItalic << message << "Print bureaucrat:\n"
-            << Layout::reset << b << '\n';
+  std::cout << layout::cyanItalic << message << "Print bureaucrat:\n"
+            << layout::reset << b << '\n';
 }
 
 void testSignForm(Bureaucrat const& b, Form& f) {
-  std::cout << Layout::cyanItalic << "Let bureaucrat " << b.getName()
+  std::cout << layout::cyanItalic << "Let bureaucrat " << b.getName()
             << " try to sign " << f.getName() << ":\n"
-            << Layout::reset;
+            << layout::reset;
   b.signForm(f);
 }
 
@@ -70,8 +70,8 @@ void tryToConstructForm(char const* name, int gradeToExecute, int gradeToSign) {
     Form f(name, gradeToExecute, gradeToSign);
     testInsertionOverloadForm("Form created. ", f);
   } catch (std::exception& e) {
-    std::cerr << Layout::redBold << "Standard exception: " << e.what() << '\n'
-              << Layout::reset;
+    std::cerr << layout::redBold << "Standard exception: " << e.what() << '\n'
+              << layout::reset;
   }
 }
 
@@ -85,8 +85,8 @@ void tryToSignForm(char const* bureacratName, int bureacratGrade,
     testSignForm(b, f);
     testInsertionOverloadForm("", f);
   } catch (std::exception& e) {
-    std::cerr << Layout::redBold << "Standard exception: " << e.what() << '\n'
-              << Layout::reset;
+    std::cerr << layout::redBold << "Standard exception: " << e.what() << '\n'
+              << layout::reset;
   }
 }
 
