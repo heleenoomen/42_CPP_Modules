@@ -32,6 +32,11 @@ class Array {
     return array_[index];
   }
 
+  T const& operator[](unsigned int index) const {
+    if (index >= size_) throw IndexOutOfRangeException();
+    return array_[index];
+  }
+
   ~Array() { delete[] array_; }
 
   unsigned int size() const { return size_; };
