@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:29:37 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 10:32:32 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 21:06:31 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include "Intern.hpp"
-#include "Layout.hpp"
+#include "layout.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
@@ -38,19 +38,19 @@ void printStars() {
 }
 
 void printTestHeader(char const* testname) {
-  std::cout << Layout::cyanBold;
+  std::cout << layout::cyanBold;
   printStars();
   std::cout << "\n";
   std::cout << "* " << std::left << std::setw(testHeaderWidth - 3) << testname
             << "*\n";
   printStars();
-  std::cout << "\n" << Layout::reset;
+  std::cout << "\n" << layout::reset;
 }
 
 void printTestTrailer() {
-  std::cout << Layout::cyanBold;
+  std::cout << layout::cyanBold;
   printStars();
-  std::cout << "\n\n\n" << Layout::reset;
+  std::cout << "\n\n\n" << layout::reset;
 }
 
 /* ************************************************************************** */
@@ -58,44 +58,44 @@ void printTestTrailer() {
 /* ************************************************************************** */
 
 void testInsertionOverloadForm(AForm const& f) {
-  std::cout << Layout::cyanItalic << "Print form:\n"
-            << Layout::reset << f << '\n';
+  std::cout << layout::cyanItalic << "Print form:\n"
+            << layout::reset << f << '\n';
 }
 
 void testInsertionOverloadBureaucrat(char const* message, Bureaucrat const& b) {
-  std::cout << Layout::cyanItalic << message << "Print bureaucrat:\n"
-            << Layout::reset << b << '\n';
+  std::cout << layout::cyanItalic << message << "Print bureaucrat:\n"
+            << layout::reset << b << '\n';
 }
 
 void testSignForm(Bureaucrat const& b, AForm& f) {
-  std::cout << Layout::cyanItalic << "Let bureaucrat " << b.getName()
+  std::cout << layout::cyanItalic << "Let bureaucrat " << b.getName()
             << " try to sign " << f.getName() << ":\n"
-            << Layout::reset;
+            << layout::reset;
   b.signForm(f);
 }
 
 void testExecuteForm(Bureaucrat const& b, AForm& f) {
-  std::cout << Layout::cyanItalic << "Let bureaucrat " << b.getName()
+  std::cout << layout::cyanItalic << "Let bureaucrat " << b.getName()
             << " try to execute " << f.getName() << ":\n"
-            << Layout::reset;
+            << layout::reset;
   b.executeForm(f);
 }
 
 AForm* testInternCreateForm(std::string const& formName,
                             std::string const& target) {
   Intern i;
-  std::cout << Layout::cyanItalic << "An intern was created. "
+  std::cout << layout::cyanItalic << "An intern was created. "
             << "Let intern try to create form \"" << formName << "\""
             << " with target " << target << ":\n"
-            << Layout::reset;
+            << layout::reset;
   AForm* form = i.makeForm(formName, target);
   testInsertionOverloadForm(*form);
   return form;
 }
 
 void standardExceptionHandler(std::exception& e) {
-  std::cerr << Layout::redBold << "Standard exception: " << e.what() << '\n'
-            << Layout::reset;
+  std::cerr << layout::redBold << "Standard exception: " << e.what() << '\n'
+            << layout::reset;
 }
 
 /* ************************************************************************** */
@@ -159,7 +159,7 @@ int main() {
   testUnit(&robotomyTestsWithIntern, "Test Robotomy Form With Intern");
   testUnit(&pardonTestsWithIntern, "Test Presidential Pardon Form With Intern");
   testUnit(&nonExistingFormTest, "Test Non Existing Form With Intern");
-  std::cout << Layout::reset;
+  std::cout << layout::reset;
   system("leaks bureaucrats");
   return 0;
 }

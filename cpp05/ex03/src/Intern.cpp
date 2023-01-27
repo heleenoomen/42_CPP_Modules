@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:29:05 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 10:29:11 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 21:06:22 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <iostream>
 
-#include "Layout.hpp"
+#include "layout.hpp"
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -22,29 +22,29 @@
 
 /* Default constructor */
 Intern::Intern() {
-  std::cout << Layout::grey << "Intern default constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Intern default constructor called\n"
+            << layout::reset;
   launchFormTable();
 }
 
 /* Copy constructor */
 Intern::Intern(Intern const& src) {
-  std::cout << Layout::grey << "Intern copy constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Intern copy constructor called\n"
+            << layout::reset;
   *this = src;
 }
 
 /* Copy assignment operator */
 Intern& Intern::operator=(Intern const& rhs) {
-  std::cout << Layout::grey << "Intern copy assignment operator called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Intern copy assignment operator called\n"
+            << layout::reset;
   if (this == &rhs) return *this;
   return *this;
 }
 
 /* Destructor */
 Intern::~Intern() {
-  std::cout << Layout::grey << "Intern destructor called\n" << Layout::reset;
+  std::cout << layout::grey << "Intern destructor called\n" << layout::reset;
 }
 
 /* ************************************************************************** */
@@ -55,14 +55,14 @@ AForm* Intern::makeForm(std::string const& formName,
                         std::string const& target) const {
   try {
     AForm* newForm = produceForm(formName, target);
-    std::cout << Layout::greenBold << formName
+    std::cout << layout::greenBold << formName
               << " was produced succesfully by intern\n"
-              << Layout::reset;
+              << layout::reset;
     return newForm;
   } catch (Intern::FormDoesNotExistException& e) {
-    std::cerr << Layout::redBold << formName
+    std::cerr << layout::redBold << formName
               << " could not be produced because: " << e.what() << '\n'
-              << Layout::reset;
+              << layout::reset;
     throw;
     return NULL;
   }
@@ -110,15 +110,15 @@ void Intern::launchFormTable() {
 /* ************************************************************************** */
 
 Intern::FormDoesNotExistException::FormDoesNotExistException() {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "Intern::FormDoesNtExistException default constructor called\n"
-            << Layout::reset;
+            << layout::reset;
 }
 
 Intern::FormDoesNotExistException::~FormDoesNotExistException() throw() {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "Intern::FormDoesNtExistException destructor called\n"
-            << Layout::reset;
+            << layout::reset;
 }
 
 const char* Intern::FormDoesNotExistException::what() const throw() {
