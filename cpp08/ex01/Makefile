@@ -6,11 +6,11 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/01/24 11:47:17 by hoomen           ###   ########.fr        #
+#    Updated: 2023/01/27 15:33:12 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	whatever
+NAME		:=	span
 
 CXX			:=	c++
 CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
