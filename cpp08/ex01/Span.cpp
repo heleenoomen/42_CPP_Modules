@@ -90,11 +90,11 @@ int Span::shortestSpan() {
   std::vector<int> result;
   std::adjacent_difference(elements_.begin(), elements_.end(),
                            std::back_inserter(result));
-  result.erase(result.begin()); // 1st elem of result not relevant, see above
+  result.erase(result.begin());  // 1st elem of result not relevant, see above
   int (*intAbs)(int) = &std::abs;
   std::transform(result.begin(), result.end(), result.begin(), intAbs);
   return *std::min_element(result.begin(), result.end());
-} 
+}
 
 int Span::longestSpan() const {
   if (elements_.size() < 2) throw NoSpanFoundException();
@@ -104,7 +104,6 @@ int Span::longestSpan() const {
 }
 
 std::vector<int> const& Span::getElements() const { return elements_; }
-
 
 /* ************************************************************************** */
 /* Insertion operator overload                                                */

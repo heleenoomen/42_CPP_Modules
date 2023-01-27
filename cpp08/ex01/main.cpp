@@ -1,10 +1,10 @@
 #include <algorithm>
-#include <vector>
-#include <iostream>
 #include <ctime>
+#include <iostream>
+#include <vector>
 
-#include "Span.hpp"
 #include "Layout.hpp"
+#include "Span.hpp"
 
 static unsigned int const range = 526176599;
 
@@ -43,9 +43,8 @@ void manyNbrsWithoutDuplicates() {
 }
 
 void subjectPDF() {
-  std::cout << Layout::cyanBold
-            << "Test from subject PDF:"
-            << Layout::reset << std::endl;
+  std::cout << Layout::cyanBold << "Test from subject PDF:" << Layout::reset
+            << std::endl;
   Span sp = Span(5);
   sp.addNumber(6);
   sp.addNumber(3);
@@ -58,8 +57,7 @@ void subjectPDF() {
 
 void addTooManyNbrs() {
   std::cout << Layout::cyanBold
-            << "Test adding too many numbers:"
-            << Layout::reset << std::endl;
+            << "Test adding too many numbers:" << Layout::reset << std::endl;
   Span sp(10);
   try {
     for (int i = 0; i < 11; ++i) sp.addNumber(i * 3);
@@ -70,8 +68,7 @@ void addTooManyNbrs() {
 
 void unsortedNbrs() {
   std::cout << Layout::cyanBold
-            << "Test with unsorted numbers:"
-            << Layout::reset << std::endl;
+            << "Test with unsorted numbers:" << Layout::reset << std::endl;
   Span sp(8);
   sp.addNumber(-9);
   sp.addNumber(3);
@@ -86,9 +83,8 @@ void unsortedNbrs() {
 }
 
 void sortedNbrs() {
-  std::cout << Layout::cyanBold
-            << "Test with sorted numbers:"
-            << Layout::reset << std::endl;
+  std::cout << Layout::cyanBold << "Test with sorted numbers:" << Layout::reset
+            << std::endl;
   Span sp(8);
   sp.addNumber(-9);
   sp.addNumber(2);
