@@ -52,18 +52,22 @@ void Span::addNumber(std::vector<int>::iterator const& begin,
   sorted_ = false;
 }
 
+/* NB erase first element from result because of how std::adjacent_difference
+   works, see https://cplusplus.com/reference/numeric/adjacent_difference/
+ */
 int Span::shortestSpan() {
   if (elements_.size() < 2) throw NoSpanFoundException();
   sortElements_();
-  std::vector<int> tmp;
+  std::vector<int> result;
   std::adjacent_difference(elements_.begin(), elements_.end(),
-                           std::back_inserter(tmp));
+                           std::back_inserter(result));
+  result.erase(result.begin());
   int (*intAbs)(int) = &std::abs;
-  std::transform(tmp.begin(), tmp.end(), tmp.begin(), intAbs);
-  return *std::min_element(tmp.begin(), tmp.end());
+  std::transform(result.begin(), result.end(), result.begin(), intAbs);
+  return *std::min_element(result.begin(), result.end());
 }
 
-int Span::longestSpan() {
+int Span::longestSpan() const {
   if (elements_.size() < 2) throw NoSpanFoundException();
   if (sorted_) return elements_.back() - elements_.front();
   return *std::max_element(elements_.begin(), elements_.end()) -

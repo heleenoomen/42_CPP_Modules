@@ -1,11 +1,44 @@
 #include <algorithm>
-#include <cstdlib>
+#include <vector>
 #include <iostream>
 #include <set>
+#include <cstdlib>
+#include <ctime>
 
 #include "Span.hpp"
+#include "Layout.hpp"
+
+void manyNbrsWithDuplicates() {
+  std::cout << Layout::cyanBold
+            << "Test a span with many nbrs, including duplicates:"
+            << Layout::reset << std::endl;
+  unsigned int size = 100000;
+  Span sp(size);
+  srand(time(NULL));
+  for (unsigned int i = 0; i < size; i++) sp.addNumber(rand() % 526176599);
+  std::cout << sp.longestSpan() << std::endl;
+  std::cout << sp.shortestSpan() << std::endl;
+}
+
+void manyNbrsWithoutDuplicates() {
+  std::cout << Layout::cyanBold
+            << "Test a span with many nbrs, without duplicates:"
+            << Layout::reset << std::endl;
+  unsigned int size = 21000;
+  std::vector<int> v;
+  for (unsigned int i = 0; i < size; ++i) v.push_back(rand() % 526176599);
+  std::sort(v.begin(), v.end());
+  v.erase(std::unique(v.begin(), v.end()), v.end());
+  Span sp(v.size());
+  for (unsigned int i = 0; i < v.size(); ++i) sp.addNumber(v[i]);
+  std::cout << sp.longestSpan() << std::endl;
+  std::cout << sp.shortestSpan() << std::endl;
+}
 
 void subjectPDF() {
+  std::cout << Layout::cyanBold
+            << "Test from subject PDF:"
+            << Layout::reset << std::endl;
   Span sp = Span(5);
   sp.addNumber(6);
   sp.addNumber(3);
@@ -17,6 +50,9 @@ void subjectPDF() {
 }
 
 void addTooManyNbrs() {
+  std::cout << Layout::cyanBold
+            << "Test adding to many numbers:"
+            << Layout::reset << std::endl;
   Span sp(10);
   try {
     for (int i = 0; i < 11; ++i) sp.addNumber(i * 3);
@@ -26,6 +62,9 @@ void addTooManyNbrs() {
 }
 
 void unsortedNbrs() {
+  std::cout << Layout::cyanBold
+            << "Test with unsorted numbers:"
+            << Layout::reset << std::endl;
   Span sp(8);
   sp.addNumber(-9);
   sp.addNumber(3);
@@ -40,6 +79,9 @@ void unsortedNbrs() {
 }
 
 void sortedNbrs() {
+  std::cout << Layout::cyanBold
+            << "Test with sorted numbers:"
+            << Layout::reset << std::endl;
   Span sp(8);
   sp.addNumber(-9);
   sp.addNumber(2);
@@ -54,6 +96,9 @@ void sortedNbrs() {
 }
 
 void tooFewElements() {
+  std::cout << Layout::cyanBold
+            << "Test finding spans with insufficent elements in Span object:"
+            << Layout::reset << std::endl;
   Span sp(8);
   try {
     std::cout << sp.longestSpan() << std::endl;
@@ -76,5 +121,7 @@ int main() {
   unsortedNbrs();
   sortedNbrs();
   tooFewElements();
+  manyNbrsWithDuplicates();
+  manyNbrsWithoutDuplicates();
   return 0;
 }
