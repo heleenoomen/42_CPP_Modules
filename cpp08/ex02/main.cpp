@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:29:53 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/25 17:39:23 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 15:32:40 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,6 @@ int main() {
   testCopyConstructor();
   testCopyAssignment();
   testCopyAssignmentVectorStack();
-  system("leaks whatever");
+  system("leaks mutantstack");
   return 0;
 }
