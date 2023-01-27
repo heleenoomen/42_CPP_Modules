@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:21:53 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 11:21:54 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 21:13:12 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
-#include "Layout.hpp"
+#include "layout.hpp"
 
 /* Destructor */
 Base::~Base() {}

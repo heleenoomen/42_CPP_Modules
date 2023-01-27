@@ -13,52 +13,39 @@
 #ifndef LAYOUT_HPP
 #define LAYOUT_HPP
 
-/* Comment the following three lines on when redirecting output to a file to
-   avoid escape codes being printed: */
+/* layout namespace for easy color printing. Define redirect_to_file if
+   recirecting output to log file in order not to print escape codes
+*/
 
 // #ifndef redirect_to_file
 // #define redirect_to_file
 // #endif
 
-class Layout {
- public:
-  /* default constructor */
-  Layout();
+namespace layout {
+  extern char const* greenBold;
+  extern char const* green;
 
-  /* copy constructor */
-  Layout(Layout const& src);
+  extern char const* yellowBold;
+  extern char const* yellow;
 
-  /* copy assignment operator */
-  Layout& operator=(Layout const& rhs);
+  extern char const* brightYellow;
 
-  /* default destructor */
-  ~Layout();
+  extern char const* redBold;
 
-  /* symbolic constants */
-  static char const* greenBold;
-  static char const* green;
+  extern char const* magentaBold;
+  extern char const* magenta;
 
-  static char const* yellowBold;
-  static char const* yellow;
+  extern char const* cyanBold;
+  extern char const* cyanItalic;
+  extern char const* cyan;
 
-  static char const* brightYellow;
+  extern char const* grey;
 
-  static char const* redBold;
+  extern char const* reset;
 
-  static char const* magentaBold;
-  static char const* magenta;
-
-  static char const* cyanBold;
-  static char const* cyanItalic;
-  static char const* cyan;
-
-  static char const* grey;
-
-  static char const* reset;
-
-  static char const* emojiRobot;
-  static char const* emojiSkull;
-  static char const* emojiStar;
-};
+  extern char const* emojiRobot;
+  extern char const* emojiSkull;
+  extern char const* emojiStar;
+}
 
 #endif

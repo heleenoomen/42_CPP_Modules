@@ -13,8 +13,9 @@
 #ifndef LAYOUT_HPP
 #define LAYOUT_HPP
 
-/* Comment the following three lines on when redirecting output to a file to
-   avoid escape codes being printed: */
+/* layout namespace for easy color printing. Define redirect_to_file if
+   recirecting output to log file in order not to print escape codes
+*/
 
 // #ifndef redirect_to_file
 // #define redirect_to_file
