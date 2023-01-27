@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Layout.hpp                                        :+:      :+:    :+:   */
+/*   layout.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,7 +19,7 @@
 // #define redirect_to_file
 // #endif
 
-namespace Layout {
+namespace layout {
 #ifndef redirect_to_file
 static char const* greenBold = "\033[32;1m";
 static char const* green = "\033[32;22m";
@@ -52,6 +52,6 @@ static char const* reset = "";
 static char const* emojiRobot = "\U0001F916";
 static char const* emojiSkull = "\U0001F480";
 static char const* emojiStar = "\u2B50";
-};  // namespace Layout
+};  // namespace layout
 
 #endif
