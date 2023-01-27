@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/01/18 20:26:38 by hoomen           ###   ########.fr        #
+#    Updated: 2023/01/27 21:12:09 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CXXFLAGS	:=	-Wall -Werror -Wextra #-std=c++98
 
 DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
-SRC			=	Serializer.cpp Layout.cpp main.cpp
+SRC			=	Serializer.cpp layout.cpp main.cpp
 
 ODIR		=	obj
 OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)
