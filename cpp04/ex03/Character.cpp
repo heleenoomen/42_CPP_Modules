@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 20:20:04 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 19:14:59 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:58:39 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <iostream>
 
-#include "Layout.hpp"
+#include "layout.hpp"
 
 static int const empty = 0;
 
@@ -24,16 +24,16 @@ static int const empty = 0;
 
 /* Default constructor */
 Character::Character() : name_("Default"), inventorySize_(empty) {
-  std::cout << Layout::grey << "Character default constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Character default constructor called\n"
+            << layout::reset;
   initializeInventory_();
 }
 
 /* Parametric constructor */
 Character::Character(std::string const& name)
     : name_(name), inventorySize_(empty) {
-  std::cout << Layout::grey << "Character parametric constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Character parametric constructor called\n"
+            << layout::reset;
   initializeInventory_();
 }
 
@@ -45,8 +45,8 @@ Character::Character(Character const& src) : name_(src.name_) {
 
 /* Copy assignment operator */
 Character& Character::operator=(Character const& rhs) {
-  std::cout << Layout::grey << "Character copy assignment operator called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Character copy assignment operator called\n"
+            << layout::reset;
   if (this == &rhs) return *this;
   inventorySize_ = rhs.inventorySize_;
   deepCopyInventory_(rhs);
@@ -55,7 +55,7 @@ Character& Character::operator=(Character const& rhs) {
 
 /* Destructor */
 Character::~Character() {
-  std::cout << Layout::grey << "Character destructor called\n" << Layout::reset;
+  std::cout << layout::grey << "Character destructor called\n" << layout::reset;
   emptyInventory();
 }
 
@@ -87,7 +87,7 @@ void Character::use(int idx, ICharacter& target) {
 }
 
 void Character::printInventory() const {
-  std::cout << Layout::magentaBold;
+  std::cout << layout::magentaBold;
   for (int i = 0; i < inventoryMaxSize_; ++i) {
     std::cout << "* Inventory slot " << i << ": ";
     if (inventory_[i] != NULL)
@@ -95,7 +95,7 @@ void Character::printInventory() const {
     else
       std::cout << "EMPTY *\n";
   }
-  std::cout << Layout::reset;
+  std::cout << layout::reset;
 }
 /* ************************************************************************** */
 /* Private methods                                                            */
@@ -150,8 +150,8 @@ bool Character::indexOutOfRangeForInventory_(int index) const {
 /* ************************************************************************** */
 
 std::ostream& operator<<(std::ostream& o, Character const& c) {
-  o << Layout::greenBold << "Name: " << c.getName() << '\n';
+  o << layout::greenBold << "Name: " << c.getName() << '\n';
   c.printInventory();
-  o << Layout::reset;
+  o << layout::reset;
   return o;
 }

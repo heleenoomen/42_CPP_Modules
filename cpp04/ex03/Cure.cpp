@@ -14,27 +14,27 @@
 
 #include <iostream>
 
-#include "Layout.hpp"
+#include "layout.hpp"
 
 Cure::Cure() : AMateria("cure") {
-  std::cout << Layout::grey << "Cure default constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Cure default constructor called\n"
+            << layout::reset;
 }
 
 Cure::Cure(Cure const& src) : AMateria(src) {
-  std::cout << Layout::grey << "Cure copy constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Cure copy constructor called\n"
+            << layout::reset;
 }
 
 Cure& Cure::operator=(Cure const&) {
-  std::cout << Layout::grey << "Cure copy assignment operator called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Cure copy assignment operator called\n"
+            << layout::reset;
   return *this;
 }
 
 Cure::~Cure() {
-  std::cout << Layout::grey << "Cure destructor called\n"
-            << Layout::reset << Layout::reset;
+  std::cout << layout::grey << "Cure destructor called\n"
+            << layout::reset << layout::reset;
 }
 
 AMateria* Cure::clone() const {
@@ -43,7 +43,7 @@ AMateria* Cure::clone() const {
 }
 
 void Cure::use(ICharacter& target) {
-  std::cout << Layout::magentaBold << "* heals " << target.getName()
+  std::cout << layout::magentaBold << "* heals " << target.getName()
             << "\'s wounds *\n"
-            << Layout::reset;
+            << layout::reset;
 }

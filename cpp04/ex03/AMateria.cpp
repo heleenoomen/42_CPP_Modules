@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:43:31 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 18:00:30 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:58:33 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,31 @@
 
 #include <iostream>
 
-#include "Layout.hpp"
+#include "layout.hpp"
 
 /* Default constructor */
 AMateria::AMateria() {
-  std::cout << Layout::grey << "AMateria default contstructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "AMateria default contstructor called\n"
+            << layout::reset;
 }
 
 /* Parametric constructor */
 AMateria::AMateria(std::string const& type) : type_(type) {
-  std::cout << Layout::grey << "AMateria parametric contstructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "AMateria parametric contstructor called\n"
+            << layout::reset;
 }
 
 /* Copy constructor */
 AMateria::AMateria(AMateria const& src) {
-  std::cout << Layout::grey << "AMateria copy constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "AMateria copy constructor called\n"
+            << layout::reset;
   *this = src;
 }
 
 /* Copy assignment operator */
 AMateria& AMateria::operator=(AMateria const& rhs) {
-  std::cout << Layout::grey << "AMateria copy assignment operator called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "AMateria copy assignment operator called\n"
+            << layout::reset;
   if (this == &rhs) return *this;
   type_ = rhs.getType();
   return *this;
@@ -46,7 +46,7 @@ AMateria& AMateria::operator=(AMateria const& rhs) {
 
 /* Destructor */
 AMateria::~AMateria() {
-  std::cout << Layout::grey << "AMateria destructor called\n" << Layout::reset;
+  std::cout << layout::grey << "AMateria destructor called\n" << layout::reset;
 }
 
 /* Getter */

@@ -14,7 +14,7 @@
 
 #include <iostream>
 
-#include "Layout.hpp"
+#include "layout.hpp"
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -22,24 +22,24 @@
 
 /* default constructor */
 MateriaSource::MateriaSource() : nbrOfMaterias_(0) {
-  std::cout << Layout::grey << "MateriaSource default constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "MateriaSource default constructor called\n"
+            << layout::reset;
   _setAllMateriasToNull();
 }
 
 /* string constructor */
 MateriaSource::MateriaSource(std::string const& name)
     : name_(name), nbrOfMaterias_(0) {
-  std::cout << Layout::grey << "MateriaSource string constructor called for "
+  std::cout << layout::grey << "MateriaSource string constructor called for "
             << name_ << "\n"
-            << Layout::reset;
+            << layout::reset;
   _setAllMateriasToNull();
 }
 
 /* copy constructor */
 MateriaSource::MateriaSource(MateriaSource const& src) : name_(src.name_) {
-  std::cout << Layout::grey << "MateriaSource copy constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "MateriaSource copy constructor called\n"
+            << layout::reset;
   _setAllMateriasToNull();
   *this = src;
 }
@@ -56,8 +56,8 @@ MateriaSource& MateriaSource::operator=(MateriaSource const& src) {
 
 /* destructor */
 MateriaSource::~MateriaSource() {
-  std::cout << Layout::grey << "MateriaSource destructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "MateriaSource destructor called\n"
+            << layout::reset;
   _deleteAllMaterias();
 }
 
@@ -117,9 +117,9 @@ void MateriaSource::_deleteAllMaterias() {
 /* ************************************************************************** */
 
 std::ostream& operator<<(std::ostream& o, MateriaSource const& m) {
-  o << Layout::greenBold << "Name: " << m.getName() << "\n"
+  o << layout::greenBold << "Name: " << m.getName() << "\n"
     << "Materias learned:\n";
   m.printMaterias();
-  o << Layout::reset;
+  o << layout::reset;
   return o;
 }

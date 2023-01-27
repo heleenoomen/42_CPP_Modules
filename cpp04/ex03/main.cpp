@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 12:27:49 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 19:50:44 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:59:09 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "ICharacter.hpp"
 #include "IMateriaSource.hpp"
 #include "Ice.hpp"
-#include "Layout.hpp"
+#include "layout.hpp"
 #include "MateriaSource.hpp"
 
 /* ************************************************************************** */
@@ -38,24 +38,24 @@ void printStars() {
 }
 
 void printTestHeader(char const* testname) {
-  std::cout << Layout::brightYellow;
+  std::cout << layout::brightYellow;
   printStars();
   std::cout << "\n";
   std::cout << "* " << std::left << std::setw(testHeaderWidth - 3) << testname
             << "*\n";
   printStars();
-  std::cout << "\n" << Layout::reset;
+  std::cout << "\n" << layout::reset;
 }
 
 void printTestTrailer() { std::cout << "\n"; }
 
 void printTestStep(std::string const& message) {
-  std::cout << Layout::cyanItalic << message << ":\n" << Layout::reset;
+  std::cout << layout::cyanItalic << message << ":\n" << layout::reset;
 }
 
 void printTestStepName(std::string const& message, std::string const& name) {
-  std::cout << Layout::cyanItalic << message << " \"" << name << "\":\n"
-            << Layout::reset;
+  std::cout << layout::cyanItalic << message << " \"" << name << "\":\n"
+            << layout::reset;
 }
 
 /* ************************************************************************** */
@@ -97,9 +97,9 @@ Character* testCreateCharacter(std::string const& name) {
 /* ************************************************************************** */
 void printTestCreateMateriaFromSource(MateriaSource const& src,
                                       std::string const& materiaType) {
-  std::cout << Layout::cyanItalic << "Create Materia of type " << materiaType
+  std::cout << layout::cyanItalic << "Create Materia of type " << materiaType
             << " from " << src.getName() << ":\n"
-            << Layout::reset;
+            << layout::reset;
 }
 
 AMateria* testCreateMateriaFromSource(MateriaSource const& src,
@@ -112,9 +112,9 @@ AMateria* testCreateMateriaFromSource(MateriaSource const& src,
 /* Equip Character                                                            */
 /* ************************************************************************** */
 void printTestEquipCharacter(Character& c, AMateria& m) {
-  std::cout << Layout::cyanItalic << "Equip character " << c.getName()
+  std::cout << layout::cyanItalic << "Equip character " << c.getName()
             << " with " << m.getType() << ":\n"
-            << Layout::reset;
+            << layout::reset;
 }
 
 void testEquipCharacter(Character& c, AMateria& m) {
@@ -126,10 +126,10 @@ void testEquipCharacter(Character& c, AMateria& m) {
 /* use Materia                                                                */
 /* ************************************************************************** */
 void printTestUseMateria(Character& actor, Character& target, int materiaNbr) {
-  std::cout << Layout::cyanItalic << "Let " << actor.getName()
+  std::cout << layout::cyanItalic << "Let " << actor.getName()
             << " try to attack " << target.getName() << " with Materia nr "
             << materiaNbr << " in inventory:\n"
-            << Layout::reset;
+            << layout::reset;
 }
 
 void testUseMateria(Character& actor, Character& target, int materiaNbr) {
@@ -231,9 +231,9 @@ void testOverequipping(Character& me) {
 
 void testUnequipping(Character& c) {
   printTestHeader("Test unequipping");
-  std::cout << Layout::cyanItalic << c.getName() << " leaves materia " << 1
+  std::cout << layout::cyanItalic << c.getName() << " leaves materia " << 1
             << " on the floor:\n"
-            << Layout::reset;
+            << layout::reset;
   c.unequip(1);
   c.printInventory();
 }

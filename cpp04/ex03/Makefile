@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/01/08 20:06:54 by hoomen           ###   ########.fr        #
+#    Updated: 2023/01/27 16:59:24 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
 SRC			=	AMateria.cpp Character.cpp Cure.cpp Ice.cpp ICharacter.cpp\
-					IMateriaSource.cpp MateriaSource.cpp main.cpp Layout.cpp
+					IMateriaSource.cpp MateriaSource.cpp main.cpp
 
 ODIR		=	obj
 OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)

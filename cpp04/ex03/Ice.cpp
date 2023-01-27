@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 19:56:26 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/09 18:01:53 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 16:58:50 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 #include <iostream>
 
-#include "Layout.hpp"
+#include "layout.hpp"
 
 Ice::Ice() : AMateria("ice") {
-  std::cout << Layout::grey << "Ice default constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Ice default constructor called\n"
+            << layout::reset;
 }
 
 Ice::Ice(Ice const& src) : AMateria(src) {
-  std::cout << Layout::grey << "Ice copy constructor called\n" << Layout::reset;
+  std::cout << layout::grey << "Ice copy constructor called\n" << layout::reset;
 }
 
 Ice& Ice::operator=(Ice const&) {
-  std::cout << Layout::grey << "Ice copy assignment operator called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Ice copy assignment operator called\n"
+            << layout::reset;
   return *this;
 }
 
 Ice::~Ice() {
-  std::cout << Layout::grey << "Ice destructor called\n" << Layout::reset;
+  std::cout << layout::grey << "Ice destructor called\n" << layout::reset;
 }
 
 AMateria* Ice::clone() const {
@@ -41,7 +41,7 @@ AMateria* Ice::clone() const {
 }
 
 void Ice::use(ICharacter& target) {
-  std::cout << Layout::magentaBold << "* shoots an ice bolt at "
+  std::cout << layout::magentaBold << "* shoots an ice bolt at "
             << target.getName() << " *\n"
-            << Layout::reset;
+            << layout::reset;
 }
