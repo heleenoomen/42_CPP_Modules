@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Layout.hpp                                        :+:      :+:    :+:   */
+/*   layout.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -20,43 +20,23 @@
 // #define redirect_to_file
 // #endif
 
-class Layout {
- public:
-  /* default constructor */
-  Layout();
+namespace layout {
+extern char const* greenBold;
+extern char const* green;
+extern char const* yellowBold; 
+extern char const* yellow;
+extern char const* brightYellow;
+extern char const* redBold;
+extern char const* magentaBold;
+extern char const* magenta;
+extern char const* cyanBold;
+extern char const* cyanItalic;
+extern char const* grey;
+extern char const* reset;
 
-  /* copy constructor */
-  Layout(Layout const& src);
-
-  /* copy assignment operator */
-  Layout& operator=(Layout const& rhs);
-
-  /* default destructor */
-  ~Layout();
-
-  /* symbolic constants */
-  static char const* greenBold;
-  static char const* green;
-
-  static char const* yellowBold;
-  static char const* yellow;
-
-  static char const* brightYellow;
-
-  static char const* redBold;
-
-  static char const* magentaBold;
-  static char const* magenta;
-
-  static char const* cyanBold;
-  static char const* cyanItalic;
-
-  static char const* grey;
-
-  static char const* reset;
-
-  static char const* emojiRobot;
-  static char const* emojiSkull;
-};
+/* emoji's */
+extern char const* emojiRobot;
+extern char const* emojiSkull;
+}
 
 #endif

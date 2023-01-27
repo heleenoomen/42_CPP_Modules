@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:39:29 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 10:39:31 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 21:03:36 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <cstdlib>
 #include <fstream>
 
-#include "Layout.hpp"
+#include "layout.hpp"
 
 static int const nbrOfTrees = 10;
 std::string const ShrubberyCreationForm::formName = "Shrubbery Creation Form";
@@ -29,9 +29,9 @@ std::string const ShrubberyCreationForm::formName = "Shrubbery Creation Form";
 ShrubberyCreationForm::ShrubberyCreationForm()
     : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_("default") {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "ShrubberyCreationForm default constructor called\n"
-            << Layout::reset;
+            << layout::reset;
   checkGrade();
 }
 
@@ -39,9 +39,9 @@ ShrubberyCreationForm::ShrubberyCreationForm()
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const& target)
     : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_(target) {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "ShrubberyCreationForm parametric constructor called\n"
-            << Layout::reset;
+            << layout::reset;
   checkGrade();
 }
 
@@ -49,17 +49,17 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string const& target)
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const& src)
     : AForm(src.getName(), gradeRequiredToSign, gradeRequiredToExecute),
       target_(src.target_) {
-  std::cout << Layout::grey << "ShrubberyCreationForm copy constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "ShrubberyCreationForm copy constructor called\n"
+            << layout::reset;
   *this = src;
 }
 
 /* Copy assignment operator */
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(
     ShrubberyCreationForm const& rhs) {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "ShrubberyCreationForm copy assignment operator called\n"
-            << Layout::reset;
+            << layout::reset;
   if (this == &rhs) return *this;
   AForm::operator=(rhs);
   return *this;
@@ -67,8 +67,8 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(
 
 /* Destructor */
 ShrubberyCreationForm::~ShrubberyCreationForm() {
-  std::cout << Layout::grey << "ShrubberyCreationForm destructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "ShrubberyCreationForm destructor called\n"
+            << layout::reset;
 }
 
 /* ************************************************************************** */

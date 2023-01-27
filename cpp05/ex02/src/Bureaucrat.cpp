@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:26:22 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 10:18:28 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 21:03:15 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,39 @@
 
 #include <iostream>
 
-#include "Layout.hpp"
+#include "layout.hpp"
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
 /* ************************************************************************** */
 
 Bureaucrat::Bureaucrat() : name_("Unnamed"), grade_(150) {
-  std::cout << Layout::grey << "Bureaucrat default constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Bureaucrat default constructor called\n"
+            << layout::reset;
 }
 
 Bureaucrat::Bureaucrat(std::string const& name, int grade)
     : name_(name), grade_(grade) {
-  std::cout << Layout::grey << "Bureaucrat parametric constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Bureaucrat parametric constructor called\n"
+            << layout::reset;
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const& src) : name_(src.getName()) {
-  std::cout << Layout::grey << "Bureaucrat copy constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Bureaucrat copy constructor called\n"
+            << layout::reset;
   *this = src;
 }
 
 Bureaucrat& Bureaucrat::operator=(Bureaucrat const& rhs) {
-  std::cout << Layout::grey << "Bureaucrat copy assignment operator called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Bureaucrat copy assignment operator called\n"
+            << layout::reset;
   grade_ = rhs.getGrade();
   return *this;
 }
 
 Bureaucrat::~Bureaucrat() {
-  std::cout << Layout::grey << "Bureaucrat destructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "Bureaucrat destructor called\n"
+            << layout::reset;
 }
 
 /* ************************************************************************** */
@@ -88,27 +88,27 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() {
 }
 
 Bureaucrat::GradeTooHighException::GradeTooHighException() {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "Bureaucrat::GradeTooHighException default constructor\n"
-            << Layout::reset;
+            << layout::reset;
 }
 
 Bureaucrat::GradeTooHighException::~GradeTooHighException() throw() {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "Bureaucrat::GradeTooHighException default destructor\n"
-            << Layout::reset;
+            << layout::reset;
 }
 
 Bureaucrat::GradeTooLowException::GradeTooLowException() {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "Bureaucrat::GradeTooLowException default constructor\n"
-            << Layout::reset;
+            << layout::reset;
 }
 
 Bureaucrat::GradeTooLowException::~GradeTooLowException() throw() {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "Bureaucrat::GradeTooLowException default destructor\n"
-            << Layout::reset;
+            << layout::reset;
 }
 
 /* ************************************************************************** */
@@ -118,26 +118,26 @@ Bureaucrat::GradeTooLowException::~GradeTooLowException() throw() {
 void Bureaucrat::signForm(AForm& form) const {
   try {
     form.beSigned(*this);
-    std::cout << Layout::greenBold << name_ << " signed \"" << form.getName()
+    std::cout << layout::greenBold << name_ << " signed \"" << form.getName()
               << "\"\n"
-              << Layout::reset;
+              << layout::reset;
   } catch (std::exception& e) {
-    std::cout << Layout::redBold << name_ << " couldn't sign \""
+    std::cout << layout::redBold << name_ << " couldn't sign \""
               << form.getName() << "\" because: " << e.what() << '\n'
-              << Layout::reset;
+              << layout::reset;
   }
 }
 
 void Bureaucrat::executeForm(AForm const& form) const {
   try {
     form.execute(*this);
-    std::cout << Layout::greenBold << name_ << " executed \"" << form.getName()
+    std::cout << layout::greenBold << name_ << " executed \"" << form.getName()
               << "\"\n"
-              << Layout::reset;
+              << layout::reset;
   } catch (std::exception& e) {
-    std::cout << Layout::redBold << name_ << " couldn't execute \""
+    std::cout << layout::redBold << name_ << " couldn't execute \""
               << form.getName() << "\" because: " << e.what() << '\n'
-              << Layout::reset;
+              << layout::reset;
   }
 }
 
@@ -146,7 +146,7 @@ void Bureaucrat::executeForm(AForm const& form) const {
 /* ************************************************************************** */
 
 std::ostream& operator<<(std::ostream& o, Bureaucrat const& bureaucrat) {
-  o << Layout::greenBold << bureaucrat.getName() << ", bureaucrat grade "
-    << bureaucrat.getGrade() << Layout::reset;
+  o << layout::greenBold << bureaucrat.getName() << ", bureaucrat grade "
+    << bureaucrat.getGrade() << layout::reset;
   return o;
 }

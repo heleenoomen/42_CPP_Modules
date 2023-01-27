@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:39:21 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 10:39:23 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/01/27 21:03:29 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <cstdlib>
 #include <fstream>
 
-#include "Layout.hpp"
+#include "layout.hpp"
 
 std::string const RobotomyRequestForm::formName = "Robotomy Request";
 
@@ -28,18 +28,18 @@ std::string const RobotomyRequestForm::formName = "Robotomy Request";
 RobotomyRequestForm::RobotomyRequestForm()
     : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_("Default") {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "RobotomyRequestForm parametric constructor called\n"
-            << Layout::reset;
+            << layout::reset;
   checkGrade();
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string const& target)
     : AForm(formName, gradeRequiredToSign, gradeRequiredToExecute),
       target_(target) {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "RobotomyRequestForm parametric constructor called\n"
-            << Layout::reset;
+            << layout::reset;
   checkGrade();
 }
 
@@ -47,17 +47,17 @@ RobotomyRequestForm::RobotomyRequestForm(std::string const& target)
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const& src)
     : AForm(src.getName(), gradeRequiredToSign, gradeRequiredToExecute),
       target_(src.target_) {
-  std::cout << Layout::grey << "RobotomyRequestForm copy constructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "RobotomyRequestForm copy constructor called\n"
+            << layout::reset;
   *this = src;
 }
 
 /* Copy assignment operator */
 RobotomyRequestForm& RobotomyRequestForm::operator=(
     RobotomyRequestForm const& rhs) {
-  std::cout << Layout::grey
+  std::cout << layout::grey
             << "RobotomyRequestForm copy assignment operator called\n"
-            << Layout::reset;
+            << layout::reset;
   if (this == &rhs) return *this;
   AForm::operator=(rhs);
   return *this;
@@ -65,8 +65,8 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(
 
 /* Destructor */
 RobotomyRequestForm::~RobotomyRequestForm() {
-  std::cout << Layout::grey << "RobotomyRequestForm destructor called\n"
-            << Layout::reset;
+  std::cout << layout::grey << "RobotomyRequestForm destructor called\n"
+            << layout::reset;
 }
 
 /* ************************************************************************** */
@@ -85,16 +85,16 @@ void RobotomyRequestForm::execute(Bureaucrat const& b) const {
 /* std::rand() is a poor quality PRNG. In c++11, the best option would be to
    use the mersenne twister and seed it with the system clock */
 void RobotomyRequestForm::executeRobotomyRequestForm() const {
-  std::cout << Layout::magenta << "Robotomy of " << target_
+  std::cout << layout::magenta << "Robotomy of " << target_
             << " in process... Random drilling noises: "
             << " #$%&((^$@!@@##$&\n"
-            << Layout::reset;
+            << layout::reset;
   if (std::rand() % 2)
-    std::cout << Layout::emojiRobot << " " << Layout::green << target_
+    std::cout << layout::emojiRobot << " " << layout::green << target_
               << " has been robotomized succesfully\n"
-              << Layout::reset;
+              << layout::reset;
   else
-    std::cout << Layout::emojiSkull << " " << Layout::yellow << "Robotomy of "
+    std::cout << layout::emojiSkull << " " << layout::yellow << "Robotomy of "
               << target_ << " failed\n"
-              << Layout::reset;
+              << layout::reset;
 }
