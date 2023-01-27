@@ -1,21 +1,28 @@
 #include <algorithm>
 #include <vector>
 #include <iostream>
-#include <set>
-#include <cstdlib>
 #include <ctime>
 
 #include "Span.hpp"
 #include "Layout.hpp"
 
+static unsigned int const range = 526176599;
+
+int getRandNbr(int seed) {
+  for (int i = 0; i < seed % 100; ++i) rand();
+  int randNbr = rand() % range;
+  int sign = rand() % 2;
+  return sign ? randNbr : -randNbr;
+}
+
 void manyNbrsWithDuplicates() {
   std::cout << Layout::cyanBold
-            << "Test a span with many nbrs, including duplicates:"
+            << "Test a span with many nbrs, span may include duplicates:"
             << Layout::reset << std::endl;
   unsigned int size = 100000;
   Span sp(size);
   srand(time(NULL));
-  for (unsigned int i = 0; i < size; i++) sp.addNumber(rand() % 526176599);
+  for (unsigned int i = 0; i < size; i++) sp.addNumber(getRandNbr(rand()));
   std::cout << sp.longestSpan() << std::endl;
   std::cout << sp.shortestSpan() << std::endl;
 }
@@ -26,7 +33,7 @@ void manyNbrsWithoutDuplicates() {
             << Layout::reset << std::endl;
   unsigned int size = 21000;
   std::vector<int> v;
-  for (unsigned int i = 0; i < size; ++i) v.push_back(rand() % 526176599);
+  for (unsigned int i = 0; i < size; ++i) v.push_back(getRandNbr(rand()));
   std::sort(v.begin(), v.end());
   v.erase(std::unique(v.begin(), v.end()), v.end());
   Span sp(v.size());
@@ -51,7 +58,7 @@ void subjectPDF() {
 
 void addTooManyNbrs() {
   std::cout << Layout::cyanBold
-            << "Test adding to many numbers:"
+            << "Test adding too many numbers:"
             << Layout::reset << std::endl;
   Span sp(10);
   try {
