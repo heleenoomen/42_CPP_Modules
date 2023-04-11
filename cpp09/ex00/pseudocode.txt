@@ -1,0 +1,7 @@
+* load database into a std::map<std::string, float>
+* key = date, string = value
+
+* go line by line throug input file
+* search the map using upper_bound to find the last value that is not greater than the date
+* calculate the value
+* print
