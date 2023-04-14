@@ -1,6 +1,7 @@
 
 #include "DatabaseParser.hpp"
 
+#include <iostream>
 #include <sstream>
 
 #include "tools.hpp"
@@ -10,11 +11,12 @@
 /* ************************************************************************** */
 
 /* Default constructor */
-DatabaseParser::DatabaseParser() : database_(NULL) {}
+DatabaseParser::DatabaseParser() : database_(NULL), databasePath_(NULL) {}
 
 /* Constructor */
-DatabaseParser::DatabaseParser(std::map<std::string, float>* db)
-    : database_(db) {}
+DatabaseParser::DatabaseParser(std::map<std::string, float>* db,
+                               char const* dbPath)
+    : database_(db), databasePath_(dbPath) {}
 
 /* Copy constructor */
 DatabaseParser::DatabaseParser(DatabaseParser const& src) { *this = src; }
@@ -23,6 +25,7 @@ DatabaseParser::DatabaseParser(DatabaseParser const& src) { *this = src; }
 DatabaseParser& DatabaseParser::operator=(DatabaseParser const& rhs) {
   if (this == &rhs) return *this;
   database_ = rhs.database_;
+  databasePath_ = rhs.databasePath_;
   return *this;
 }
 
@@ -30,8 +33,21 @@ DatabaseParser& DatabaseParser::operator=(DatabaseParser const& rhs) {
 DatabaseParser::~DatabaseParser() {}
 
 /* ************************************************************************** */
+/* Exceptions                                                                 */
+/* ************************************************************************** */
+
+DatabaseParser::invalidLine::invalidLine() {}
+
+DatabaseParser::invalidLine::~invalidLine() throw() {}
+
+const char* DatabaseParser::invalidLine::what() const throw() {
+  return "Warning: Database contains invalid lines!\n";
+}
+
+/* ************************************************************************** */
 /* Private methods                                                            */
 /* ************************************************************************** */
+
 void DatabaseParser::skipFirstLine(std::ifstream& ifs) const {
   std::string firstLine;
   ifs >> firstLine;
@@ -54,10 +70,15 @@ std::string DatabaseParser::extractDate(std::string& line,
 float DatabaseParser::extractExchangeRate(std::string& line,
                                           size_t commaPosition) const {
   std::stringstream exchangeRateSs(line.substr(commaPosition + 1));
-  float exchangeRate;
-  exchangeRateSs >> exchangeRate;
-  if (exchangeRate < 0) throw invalidLine();
-  return exchangeRate;
+  try {
+    float exchangeRate = tools::stringToFloat(line);
+    if (exchangeRate < 0) throw invalidLine();
+    return exchangeRate;
+  } catch (tools::invalidFloat) {
+    throw invalidLine();
+  } catch (tools::badStringStream) {
+    throw std::runtime_error("Unable to read from database");
+  }
 }
 
 void DatabaseParser::parseLine(std::string& line,
@@ -72,23 +93,12 @@ void DatabaseParser::parseData(std::ifstream& ifs) {
   for (std::string line; ifs >> line;) {
     try {
       parseLine(line, pair);
-    } catch (DatabaseParser::invalidLine& e) {
+    } catch (DatabaseParser::invalidLine& e) {  // ignore invalid lines
       continue;
     }
     database_->insert(pair);
   }
   if (ifs.bad()) throw std::runtime_error("Unable to read from database");
-}
-
-/* ************************************************************************** */
-/* Exceptions                                                                 */
-/* ************************************************************************** */
-DatabaseParser::invalidLine::invalidLine() {}
-
-DatabaseParser::invalidLine::~invalidLine() throw() {}
-
-const char* DatabaseParser::invalidLine::what() const throw() {
-  return "Warning: Database contains invalid lines!";
 }
 
 /* ************************************************************************** */

@@ -21,23 +21,12 @@
 
 class BitcoinExchange {
  private:
-  char* inputFile_;
-  std::map<std::string, int> database_;
+  const char* inputFile_;
   const char* dbFile_ = "cpp_09/data.csv";
+  std::map<std::string, float> database_;
 
   /* default constructor */
   BitcoinExchange();
-
-  /* private methods */
-  bool isValidDate(std::string& date);
-  void loadDatabase();
-  void dbParseLine(std::string& line, std::pair<std::string, float>& pair);
-  void dbCheckDate(std::string& date);
-  void dbCheckValue(float value);
-
- public:
-  /* constructors */
-  BitcoinExchange(char* inputFile);
 
   /* copy constructor */
   BitcoinExchange(BitcoinExchange const& src);
@@ -45,8 +34,17 @@ class BitcoinExchange {
   /* copy assignment operator */
   BitcoinExchange& operator=(BitcoinExchange const& rhs);
 
+  /* private methods */
+
+ public:
+  /* constructors */
+  BitcoinExchange(const char* inputFile);
+
   /* default destructor */
   ~BitcoinExchange();
+
+  /* public methods */
+  void run();
 
   /* exceptions */
   class FileException : std::exception {

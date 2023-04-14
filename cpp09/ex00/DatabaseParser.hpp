@@ -22,25 +22,22 @@
 class DatabaseParser {
  private:
   std::map<std::string, float>* database_;
-  char const* databasePath_ = "cpp_09/data.csv";
-  std::ifstream ifs{databasePath_};
+  char const* databasePath_;
 
   /* default constructor */
   DatabaseParser();
 
   /* private methods*/
-  void skipFirstLine(std::ifstream& ifs) const;
-  void parseLine(std::string& line, std::pair<std::string, float>& pair) const;
-  void parseData(std::ifstream& ifs);
   size_t findCommaPosition(std::string& line) const;
   std::string extractDate(std::string& line, size_t commaPosition) const;
   float extractExchangeRate(std::string& line, size_t commaPosition) const;
-  void checkDate(std::string& date);
-  void checkValue(float value);
+  void parseLine(std::string& line, std::pair<std::string, float>& pair) const;
+  void parseData(std::ifstream& ifs);
+  void skipFirstLine(std::ifstream& ifs) const;
 
  public:
   /* constructor */
-  DatabaseParser(std::map<std::string, float>* db);
+  DatabaseParser(std::map<std::string, float>* db, char const* dbPath);
 
   /* copy constructor */
   DatabaseParser(DatabaseParser const& src);
