@@ -1,6 +1,8 @@
 #include "tools.hpp"
 
 #include <ctime>
+#include <fstream>
+#include <iostream>
 #include <sstream>
 #include <stdexcept>
 
@@ -18,8 +20,7 @@ bool tools::isValidDate(std::string& date) {
   return false;  // trailing characters other than whitespace present
 }
 
-float tools::stringToFloat(std::string& s) {
-  std::stringstream ss(s);
+float tools::stringStreamToFloat(std::stringstream& ss) {
   ss.exceptions(std::stringstream::badbit);
   float f;
   ss >> f;
@@ -28,6 +29,24 @@ float tools::stringToFloat(std::string& s) {
   ss >> trailingChars;
   if (!ss.fail() && !ss.eof()) throw invalidFloat();
   return f;
+}
+
+void tools::skipLine(std::ifstream& ifs) {
+  std::string line;
+  std::getline(ifs, line);
+  if (ifs.eof()) return;
+  if (ifs.bad() | ifs.fail())
+    throw std::runtime_error("unable to read from file");
+}
+
+void tools::printDatabase(std::map<std::string, float>& database) {
+  typedef std::map<std::string, float>::iterator databaseIter;
+  databaseIter begin = database.begin();
+  databaseIter end = database.end();
+  std::cout << "date,exchange_rate\n";
+  for (databaseIter it = begin; it != end; ++it) {
+    std::cout << it->first << "," << it->second << '\n';
+  }
 }
 
 tools::invalidFloat::invalidFloat() {}

@@ -112,7 +112,7 @@ void Converter::lookupConversion() {
   if (firstGreater == beginDatabase)
     throw noBitcoinsYet();
   else
-    lookupDate = firstGreater--;
+    lookupDate = --firstGreater;
   exchangeRate_ = lookupDate->second;
 }
 
@@ -134,8 +134,9 @@ void Converter::readline(std::ifstream& ifs) {
 
 void Converter::convert() {
   std::ifstream ifs(inputFile_);
-  if (!ifs) throw std::runtime_error("cannot open file");
+  if (!ifs) throw std::runtime_error("could not open file");
   ifs.exceptions(std::ifstream::badbit);
+  tools::skipLine(ifs);  // skip the header line
   while (!ifs.eof()) {
     try {
       readline(ifs);

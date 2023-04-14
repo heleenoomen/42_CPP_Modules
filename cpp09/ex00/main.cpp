@@ -3,10 +3,11 @@
 #include "BitcoinExchange.hpp"
 
 int main(int argc, char** argv) {
-  if (argc != 2) {
-    std::cerr << "Error: Wrong arguments\n";
-    return 1;
-  }
+  // if (argc != 2) {
+  //   std::cerr << "Error: Wrong arguments\n";
+  //   return 1;
+  // }
+  (void)argc;
   try {
     BitcoinExchange btc(argv[1]);
     btc.run();

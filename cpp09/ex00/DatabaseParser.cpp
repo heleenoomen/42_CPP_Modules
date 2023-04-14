@@ -68,9 +68,9 @@ std::string DatabaseParser::extractDate(std::string& line,
 
 float DatabaseParser::extractExchangeRate(std::string& line,
                                           size_t commaPosition) const {
-  std::stringstream exchangeRateSs(line.substr(commaPosition + 1));
+  std::stringstream exchangeRateStream(line.substr(commaPosition + 1));
   try {
-    float exchangeRate = tools::stringToFloat(line);
+    float exchangeRate = tools::stringStreamToFloat(exchangeRateStream);
     if (exchangeRate < 0) throw invalidLine();
     return exchangeRate;
   } catch (tools::invalidFloat& e) {
@@ -103,8 +103,9 @@ void DatabaseParser::parseData(std::ifstream& ifs) {
 
 void DatabaseParser::parse() {
   std::ifstream ifs(databasePath_);
-  ifs.exceptions(std::ifstream::badbit);
   if (!ifs) throw std::runtime_error("Unable to open database");
-  skipFirstLine(ifs);
+  ifs.exceptions(std::ios::badbit);
+  tools::skipLine(ifs);  // skip the header line
   parseData(ifs);
+  // tools::printDatabase(*database_);
 }

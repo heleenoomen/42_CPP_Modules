@@ -25,20 +25,11 @@ BitcoinExchange::BitcoinExchange(BitcoinExchange const& src) { *this = src; }
 /* Copy assignment operator */
 BitcoinExchange& BitcoinExchange::operator=(BitcoinExchange const& rhs) {
   if (this == &rhs) return *this;
-  /* assign values here */
   return *this;
 }
 
 /* Destructor */
 BitcoinExchange::~BitcoinExchange() {}
-
-/* ************************************************************************** */
-/* Exceptions                                                                 */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/* Private methods                                                            */
-/* ************************************************************************** */
 
 /* ************************************************************************** */
 /* Public methods                                                             */
