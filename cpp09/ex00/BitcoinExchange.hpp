@@ -11,8 +11,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COPLIEN_HPP
-#define COPLIEN_HPP
+#ifndef BITCOINEXCHANGE_HPP
+#define BITCOINEXCHANGE_HPP
 
 #include <iostream>
 #include <map>
@@ -22,7 +22,7 @@
 class BitcoinExchange {
  private:
   const char* inputFile_;
-  const char* dbFile_ = "cpp_09/data.csv";
+  const char* dbFile_;
   std::map<std::string, float> database_;
 
   /* default constructor */
@@ -47,33 +47,6 @@ class BitcoinExchange {
   void run();
 
   /* exceptions */
-  class FileException : std::exception {
-   public:
-    FileException();
-    ~FileException() throw();
-    virtual const char* what() const throw();
-  };
-
-  class NegativeNumberException : std::exception {
-   public:
-    NegativeNumberException();
-    ~NegativeNumberException() throw();
-    virtual const char* what() const throw();
-  };
-
-  class BadInput : std::exception {
-   public:
-    BadInput();
-    ~BadInput();
-    virtual const char* what() const throw();
-  };
-
-  class NumTooLargeException : std::exception {
-   public:
-    NumTooLargeException();
-    ~NumTooLargeException();
-    virtual const char* what() const throw();
-  };
 };
 
 #endif

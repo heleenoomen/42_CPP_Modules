@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/04/14 13:25:32 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/04/14 15:08:02 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #define CONVERTER_HPP
 
 #include <map>
+#include <sstream>
 #include <string>
-// #include <iostream>
 
 class Converter {
  private:
@@ -24,9 +24,8 @@ class Converter {
   std::string line_;
   std::string date_;
   std::string separator_;
-  std::string const correct_separator_{";"};
-  std::string valueStr_;
   float value_;
+  float exchangeRate_;
 
   /* default constructor */
   Converter();
@@ -39,13 +38,20 @@ class Converter {
 
   /* private methods */
   void parseLine();
-  void extractItemsFromLine();
-  void extractItem(std::stringstream& linestream, std::string& item);
+  void extractFromLine();
   void checkDate();
   void checkSeparator();
   void checkValue();
-  void convertValue();
+  void checkTrailingCharacters(std::stringstream& linestream);
+  void lookupConversion();
   void printResult();
+
+  template <typename T>
+  void extract(std::stringstream& linestream, T& type) {
+    linestream >> type;
+    if (linestream.fail()) throw badInput();
+    if (linestream.bad()) throw std::runtime_error("unable to read file");
+  }
 
  public:
   /* constructor */
@@ -62,17 +68,31 @@ class Converter {
     virtual char const* what() const throw();
   };
 
-  class negativeNumber : std::exception {
+  class inputError : std::exception {
+   public:
+    inputError();
+    ~inputError() throw();
+    virtual char const* what() const throw();
+  };
+
+  class negativeNumber : inputError {
    public:
     negativeNumber();
     ~negativeNumber() throw();
     virtual char const* what() const throw();
   };
 
-  class numberTooLarge : std::exception {
+  class numberTooLarge : inputError {
    public:
     numberTooLarge();
     ~numberTooLarge() throw();
+    virtual char const* what() const throw();
+  };
+
+  class noBitcoinsYet : std::exception {
+   public:
+    noBitcoinsYet();
+    ~noBitcoinsYet() throw();
     virtual char const* what() const throw();
   };
 

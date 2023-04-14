@@ -10,7 +10,6 @@
 bool tools::isValidDate(std::string& date) {
   struct tm time;
   const char* format = "%Y-%m-%d";
-  char* ptr;
   char* endOfdate = strptime(date.c_str(), format, &time);
   if (endOfdate != NULL && !*endOfdate) return true;
   return false;

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 
+#include "constants.hpp"
 #include "tools.hpp"
 
 /* ************************************************************************** */
@@ -23,7 +24,10 @@ Converter::Converter(Converter const& src) : inputFile_(src.inputFile_) {
 }
 
 /* Copy assignment operator */
-Converter& Converter::operator=(Converter const& rhs) { return *this; }
+Converter& Converter::operator=(Converter const& rhs) {
+  if (this == &rhs) return *this;
+  return *this;
+}
 
 /* Destructor */
 Converter::~Converter() {}
@@ -32,21 +36,51 @@ Converter::~Converter() {}
 /* Exceptions                                                                 */
 /* ************************************************************************** */
 
+Converter::badInput::badInput() {}
+Converter::badInput::~badInput() throw() {}
+char const* Converter::badInput::what() const throw() { return "bad input"; }
+
+Converter::inputError::inputError() {}
+Converter::inputError::~inputError() throw() {}
+char const* Converter::inputError::what() const throw() {
+  return "input error";
+}
+
+Converter::negativeNumber::negativeNumber() {}
+Converter::negativeNumber::~negativeNumber() throw() {}
+char const* Converter::negativeNumber::what() const throw() {
+  return "not a positive number";
+}
+
+Converter::noBitcoinsYet::noBitcoinsYet() {}
+Converter::noBitcoinsYet::~noBitcoinsYet() throw() {}
+char const* Converter::noBitcoinsYet::what() const throw() {
+  return "no bitcoins yet";
+}
+
+Converter::numberTooLarge::numberTooLarge() {}
+Converter::numberTooLarge::~numberTooLarge() throw() {}
+char const* Converter::numberTooLarge::what() const throw() {
+  return "too large a number";
+}
+
 /* ************************************************************************** */
 /* Private methods                                                            */
 /* ************************************************************************** */
-void Converter::extractItem(std::stringstream& linestream, std::string& item) {
-  linestream >> item;
-  if (linestream.fail()) throw badInput();
-  if (linestream.bad()) throw std::runtime_error("Unable to read file");
+
+void Converter::checkTrailingCharacters(std::stringstream& linestream) {
+  std::string trailingChars;
+  linestream >> trailingChars;
+  if (!linestream.fail() || !linestream.eof()) throw badInput();
+  if (linestream.bad()) throw std::runtime_error("cannot read file");
 }
 
-void Converter::extractItemsFromLine() {
+void Converter::extractFromLine() {
   std::stringstream linestream(line_);
-  extractItem(linestream, date_);
-  extractItem(linestream, separator_);
-  extractItem(linestream, valueStr_);
-  if (linestream.eof()) throw badInput();
+  extract<std::string>(linestream, date_);
+  extract<std::string>(linestream, separator_);
+  extract<float>(linestream, value_);
+  checkTrailingCharacters(linestream);
 }
 
 void Converter::checkDate() {
@@ -54,39 +88,36 @@ void Converter::checkDate() {
 }
 
 void Converter::checkSeparator() {
-  if (separator_ != correct_separator_) throw badInput();
+  if (separator_ != constants::allowedSeparator) throw badInput();
 }
 
 void Converter::checkValue() {
-  try {
-    value_ = tools::stringToFloat(valueStr_);
-  } catch (tools::badStringStream()) {
-    throw std::runtime_error("Unable to read file");
-  } catch (tools::invalidFloat()) {
-    throw badInput();
-  }
   if (value_ < 0) throw negativeNumber();
   if (value_ > 999) throw numberTooLarge();
 }
 
 void Converter::parseLine() {
-  extractItemsFromLine();
+  extractFromLine();
   checkDate();
   checkSeparator();
   checkValue();
 }
 
-void Converter::convertValue() {
+void Converter::lookupConversion() {
   std::map<std::string, float>::iterator firstGreater =
       database_->upper_bound(date_);
   std::map<std::string, float>::iterator beginDatabase = database_->begin();
   std::map<std::string, float>::iterator lookupDate;
   if (firstGreater == beginDatabase)
-    lookupDate = beginDatabase;
+    throw noBitcoinsYet();
   else
     lookupDate = firstGreater--;
-  float exchangeRate = lookupDate->second;
-  value_ *= exchangeRate;
+  exchangeRate_ = lookupDate->second;
+}
+
+void Converter::printResult() {
+  std::cout << date_ << " => " << value_ << " = " << value_ * exchangeRate_
+            << '\n';
 }
 
 /* ************************************************************************** */
@@ -95,12 +126,20 @@ void Converter::convertValue() {
 
 void Converter::convert() {
   std::ifstream ifs(inputFile_);
-  if (!ifs) throw std::runtime_error("Unable to open inputfile");
+  if (!ifs) throw std::runtime_error("cannot open file");
   while (!ifs.eof()) {
-    std::getline(ifs, line_);
-    if (ifs.bad() | ifs.fail()) throw std::runtime_error("Unable to read file");
-    parseLine();
-    convertValue();
-    printResult();
+    try {
+      std::getline(ifs, line_);
+      if (ifs.bad() | ifs.fail()) throw std::runtime_error("cannot read file");
+      parseLine();
+      lookupConversion();
+      printResult();
+    } catch (badInput& e) {
+      std::cerr << "Error: " << e.what() << " => " << line_ << '\n';
+    } catch (inputError& e) {
+      std::cerr << e.what() << '\n';
+    } catch (noBitcoinsYet& e) {
+      std::cerr << "Error: " << e.what() << date_ << '\n';
+    }
   }
 }

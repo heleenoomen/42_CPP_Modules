@@ -74,9 +74,9 @@ float DatabaseParser::extractExchangeRate(std::string& line,
     float exchangeRate = tools::stringToFloat(line);
     if (exchangeRate < 0) throw invalidLine();
     return exchangeRate;
-  } catch (tools::invalidFloat) {
+  } catch (tools::invalidFloat& e) {
     throw invalidLine();
-  } catch (tools::badStringStream) {
+  } catch (tools::badStringStream& e) {
     throw std::runtime_error("Unable to read from database");
   }
 }

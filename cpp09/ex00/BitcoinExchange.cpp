@@ -5,17 +5,19 @@
 
 #include "Converter.hpp"
 #include "DatabaseParser.hpp"
+#include "constants.hpp"
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
 /* ************************************************************************** */
 
 /* Default constructor */
-BitcoinExchange::BitcoinExchange() {}
+BitcoinExchange::BitcoinExchange()
+    : inputFile_(NULL), dbFile_(constants::databaseFile) {}
 
 /* Constructor */
 BitcoinExchange::BitcoinExchange(char const* inputFile)
-    : inputFile_(inputFile) {}
+    : inputFile_(inputFile), dbFile_(constants::databaseFile) {}
 
 /* Copy constructor */
 BitcoinExchange::BitcoinExchange(BitcoinExchange const& src) { *this = src; }
