@@ -1,14 +1,18 @@
 #include <iostream>
 
-// #include "BitcoinExchange.hpp"
+#include "BitcoinExchange.hpp"
 
-// int main(int argc, char** argv) {
-//   try {
-//     BitcoinExchange btc(argv[1]);
-//   } catch (std::exception& e) {
-//     e.what();
-//   }
-// }
-#include "DatabaseParser.hpp"
-#include "tools.hpp"
-int main() { return 0; }
+int main(int argc, char** argv) {
+  if (argc != 2) {
+    std::cerr << "Error: Wrong arguments\n";
+    return 1;
+  }
+  try {
+    BitcoinExchange btc(argv[1]);
+    btc.run();
+  } catch (std::exception& e) {
+    std::cerr << "Error: " << e.what() << '\n';
+    return 2;
+  }
+  return 0;
+}

@@ -51,7 +51,6 @@ const char* DatabaseParser::invalidLine::what() const throw() {
 void DatabaseParser::skipFirstLine(std::ifstream& ifs) const {
   std::string firstLine;
   ifs >> firstLine;
-  if (ifs.bad()) throw std::runtime_error("Unable to read from database");
 }
 
 size_t DatabaseParser::findCommaPosition(std::string& line) const {
@@ -76,8 +75,6 @@ float DatabaseParser::extractExchangeRate(std::string& line,
     return exchangeRate;
   } catch (tools::invalidFloat& e) {
     throw invalidLine();
-  } catch (tools::badStringStream& e) {
-    throw std::runtime_error("Unable to read from database");
   }
 }
 
@@ -98,7 +95,6 @@ void DatabaseParser::parseData(std::ifstream& ifs) {
     }
     database_->insert(pair);
   }
-  if (ifs.bad()) throw std::runtime_error("Unable to read from database");
 }
 
 /* ************************************************************************** */
@@ -107,6 +103,7 @@ void DatabaseParser::parseData(std::ifstream& ifs) {
 
 void DatabaseParser::parse() {
   std::ifstream ifs(databasePath_);
+  ifs.exceptions(std::ifstream::badbit);
   if (!ifs) throw std::runtime_error("Unable to open database");
   skipFirstLine(ifs);
   parseData(ifs);

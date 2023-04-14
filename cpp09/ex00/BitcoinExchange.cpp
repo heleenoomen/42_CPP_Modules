@@ -47,4 +47,6 @@ BitcoinExchange::~BitcoinExchange() {}
 void BitcoinExchange::run() {
   DatabaseParser dbParser(&database_, dbFile_);
   dbParser.parse();
+  Converter converter(inputFile_, &database_);
+  converter.convert();
 }

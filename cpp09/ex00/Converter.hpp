@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/04/14 15:29:38 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/04/14 16:11:52 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ class Converter {
 
   /* private methods */
   void parseLine();
+  void readline(std::ifstream& ifs);
   void extractFromLine();
   void checkDate();
   void checkSeparator();
@@ -45,6 +46,7 @@ class Converter {
   void checkTrailingCharacters(std::stringstream& linestream);
   void lookupConversion();
   void printResult();
+  void handleExceptions();
 
   template <typename T>
   void extract(std::stringstream& linestream, T& type) {
@@ -68,21 +70,14 @@ class Converter {
     virtual char const* what() const throw();
   };
 
-  class inputError : std::exception {
-   public:
-    inputError();
-    ~inputError() throw();
-    virtual char const* what() const throw();
-  };
-
-  class negativeNumber : inputError {
+  class negativeNumber : std::exception {
    public:
     negativeNumber();
     ~negativeNumber() throw();
     virtual char const* what() const throw();
   };
 
-  class numberTooLarge : inputError {
+  class numberTooLarge : std::exception {
    public:
     numberTooLarge();
     ~numberTooLarge() throw();

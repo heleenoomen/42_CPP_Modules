@@ -17,20 +17,16 @@ bool tools::isValidDate(std::string& date) {
 
 float tools::stringToFloat(std::string& s) {
   std::stringstream ss(s);
+  ss.exceptions(std::stringstream::badbit);
   float f;
   ss >> f;
-  if (ss.bad()) throw badStringStream();
   if (ss.fail()) throw invalidFloat();
-  if (!ss.eof()) throw invalidFloat();
+  std::string trailingChars;
+  ss >> f;
+  if (!ss.fail() && !ss.eof()) throw invalidFloat();
   return f;
 }
 
 tools::invalidFloat::invalidFloat() {}
 tools::invalidFloat::~invalidFloat() throw() {}
 const char* tools::invalidFloat::what() const throw() { return "Bad input"; }
-
-tools::badStringStream::badStringStream() {}
-tools::badStringStream::~badStringStream() throw() {}
-const char* tools::badStringStream::what() const throw() {
-  return "Unable to convert float: Bad string stream";
-}

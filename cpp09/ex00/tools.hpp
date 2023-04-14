@@ -14,12 +14,6 @@ class invalidFloat : std::exception {
   virtual char const* what() const throw();
 };
 
-class badStringStream : std::exception {
- public:
-  badStringStream();
-  ~badStringStream() throw();
-  virtual const char* what() const throw();
-};
 }  // namespace tools
 
 #endif
