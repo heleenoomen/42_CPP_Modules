@@ -45,10 +45,13 @@ void BitcoinExchange::dbParseLine(std::string& line,
 void BitcoinExchange::loadDatabase() {
   std::ifstream ist(dbFile_);
   if (!ist) throw std::runtime_error("Unable to open database");
+  std::string firstLine;
+  ist >> firstLine;
   std::pair<std::string, float> pair;
   for (std::string line; ist >> line;) {
     dbParseLine(line, pair);
     if ((database_.insert(pair)).second == false)
       throw std::runtime_error("Database corrupted");
   }
+  if (ist.bad()) throw std::runtime_error("Unable to read database");
 }
