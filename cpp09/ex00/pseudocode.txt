@@ -1,7 +1,8 @@
 * load database into a std::map<std::string, float>
-* key = date, string = value
+* key = date (string), value = exchange rate (float)
 
 * go line by line throug input file
-* search the map using upper_bound to find the last value that is not greater than the date
+* search the map using upper_bound to find the first key greater than the date we are searching for
+* move the iterator one step back, get the corresponding value (exchange rate)
 * calculate the value
 * print
