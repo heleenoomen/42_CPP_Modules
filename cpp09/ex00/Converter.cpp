@@ -16,7 +16,9 @@
 Converter::Converter() : inputFile_(NULL) {}
 
 /* Constructor */
-Converter::Converter(char const* inputFile) : inputFile_(inputFile) {}
+Converter::Converter(char const* inputFile,
+                     std::map<std::string, float>* database)
+    : inputFile_(inputFile), database_(database) {}
 
 /* Copy constructor */
 Converter::Converter(Converter const& src) : inputFile_(src.inputFile_) {
