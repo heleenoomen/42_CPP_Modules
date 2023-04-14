@@ -11,7 +11,6 @@ class invalidFloat : std::exception {
  public:
   invalidFloat();
   ~invalidFloat() throw();
-  virtual char const* what() const throw();
 };
 
 }  // namespace tools

@@ -32,4 +32,3 @@ float tools::stringToFloat(std::string& s) {
 
 tools::invalidFloat::invalidFloat() {}
 tools::invalidFloat::~invalidFloat() throw() {}
-const char* tools::invalidFloat::what() const throw() { return "Bad input"; }
