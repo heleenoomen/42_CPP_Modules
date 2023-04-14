@@ -22,7 +22,7 @@ float tools::stringToFloat(std::string& s) {
   ss >> f;
   if (ss.fail()) throw invalidFloat();
   std::string trailingChars;
-  ss >> f;
+  ss >> trailingChars;
   if (!ss.fail() && !ss.eof()) throw invalidFloat();
   return f;
 }
