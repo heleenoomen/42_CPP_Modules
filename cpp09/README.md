@@ -1,4 +1,4 @@
-# CPP Module 09 - Standard Template Library Containers
+# CPP Module 09 - STL Containers
 
 My solutions for Module 09 - Work in progress!
 
