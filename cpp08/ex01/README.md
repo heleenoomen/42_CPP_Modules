@@ -16,3 +16,5 @@
 > Of course, you will write your own tests and they will be way more thorough than the
 > ones below. Test your Span at least with a minimum of 10 000 numbers. More would be
 > even better.
+>
+> your code will comply with the <b>C++98</b> standard.
