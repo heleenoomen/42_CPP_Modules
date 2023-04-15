@@ -80,8 +80,9 @@ void Span::addNumber(std::vector<int>::iterator const& begin,
   sorted_ = false;
 }
 
-/* Erase first element of result vector bcs the 1st element will
-   just be the first value from elements_, NOT a differential value. See:
+/* Use adjacent_difference. Erase first element of resulting vector bcs
+   the 1st element will just be the first value from elements_, NOT a 
+   differential value. See:
    https://cplusplus.com/reference/numeric/adjacent_difference/
  */
 int Span::shortestSpan() {
