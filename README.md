@@ -4,6 +4,7 @@ Introduction to C++ at 42 Heilbronn
 
 <b>exercises</b> and <b>small projects</b>, exploring:
 * operator overloading
+* I/O streams
 * inheritance
 * polymorphism
 * exeption handling
