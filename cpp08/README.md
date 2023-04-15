@@ -1,4 +1,4 @@
-# CPP Module 08 - Standard Template Library & Algorithm library
+# CPP Module 08 - Standard Template & Algorithm libraries
 
 My solutions for Module 08.
 
