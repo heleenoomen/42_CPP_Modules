@@ -1,4 +1,4 @@
-# CPP Module 04 - Polymorphism, virtual functions & abstract classes
+# CPP Module 04 - Polymorphism
 
 My solutions for Module 04.
 
