@@ -2,4 +2,4 @@
 
 My solutions for Module 02.
 
-👉 Description of the tasks: en.subject.pdf
+👉 Description of the tasks: <b>en.subject.pdf</b>
