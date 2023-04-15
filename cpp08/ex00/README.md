@@ -1,7 +1,7 @@
-# CPP Module 08 - Standard Template & Algorithm libraries<b>
+## Easyfind with STL & Algorithm
 ### Exercise 00:
 
-> <i>Write a function template easyfind that accepts a type T. It takes two parameters.
+> <i>Write a function template <b>easyfind</b> that accepts a type T. It takes two parameters.
 > The first one has type T and the second one is an integer.<br>
 > 
 > Assuming T is a container of integers, this function has to find the first occurrence
