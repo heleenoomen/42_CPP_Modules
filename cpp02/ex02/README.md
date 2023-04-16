@@ -6,6 +6,7 @@
 > * The 4 increment/decrement (pre-increment and post-increment, pre-decrement and
 post-decrement) operators, that will increase or decrease the fixed-point value from
 the smallest representable ϵ such as 1 + ϵ > 1.
+>
 > Add these four public overloaded member functions to your class:
 > * A static member function </i>`min`<i> that takes as parameters two references on fixed-point
 numbers, and returns a reference to the smallest one.
