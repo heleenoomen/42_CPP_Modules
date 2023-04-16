@@ -24,4 +24,4 @@ SWITCH it off.
 >
 > Give the name `harlFilter` to your executable.
 >
-> You must use the switch statement in this exercise
+> You must use the switch statement in this exercise.
