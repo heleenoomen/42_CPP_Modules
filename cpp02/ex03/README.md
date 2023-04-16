@@ -17,10 +17,10 @@ It initializes x and y with those parameters.
 >   * A copy constructor.
 >   * A copy assignment operator overload.
 >   * A destructor.
->   * Anything else useful.
+>   * Anything else useful.<br>
 > To conclude, implement the following function in the appropriate file:
 >
->       </i>`bool bsp( Point const a, Point const b, Point const c, Point const point);`<i>
+> </i>`bool bsp( Point const a, Point const b, Point const c, Point const point);`<i>
 >
 > * a, b, c: The vertices of our beloved triangle.
 > * point: The point to check.
