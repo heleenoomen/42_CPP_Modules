@@ -20,7 +20,7 @@ It initializes x and y with those parameters.
 >   * Anything else useful.
 > To conclude, implement the following function in the appropriate file:
 >
-> </i>`bool bsp( Point const a, Point const b, Point const c, Point const point);`<i>
+>    </i>`bool bsp( Point const a, Point const b, Point const c, Point const point);`<i>
 >
 > * a, b, c: The vertices of our beloved triangle.
 > * point: The point to check.
