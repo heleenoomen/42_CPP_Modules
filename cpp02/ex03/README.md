@@ -18,8 +18,8 @@ It initializes x and y with those parameters.
 >   * A copy assignment operator overload.
 >   * A destructor.
 >   * Anything else useful.
-> To conclude, implement the following function in the appropriate file:<br>
-> </i>`bool bsp( Point const a, Point const b, Point const c, Point const point);`<i>
+> To conclude, implement the following function in the appropriate file:<br><br>
+> </i>`bool bsp( Point const a, Point const b, Point const c, Point const point);`<i><br>
 > * a, b, c: The vertices of our beloved triangle.
 > * point: The point to check.
 > * Returns: True if the point is inside the triangle. False otherwise.
