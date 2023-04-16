@@ -11,6 +11,6 @@ zombies, giving each one of them the name passed as parameter. The function retu
 pointer to the first zombie.
 >
 > Implement your own tests to ensure your `zombieHorde()` function works as expected.
-Try to call announce() for each one of the zombies.
+Try to call `announce()` for each one of the zombies.
 >
 > Don’t forget to <b>delete</b> all the zombies and check for <b>memory leaks</b>.</i>
