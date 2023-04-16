@@ -1,4 +1,4 @@
-## Fixed Point Numbers Class in Orthodox Canonical Form (1)
+## Fixed Point Numbers Class in Orthodox Canonical Form (2)
 ### Exercise 01:
 > <i>The previous exercise was a good start but our class is pretty useless. It can only
 represent the value 0.0.
@@ -17,7 +17,7 @@ that converts the fixed-point value to an integer value.
 And add the following function to the <b>Fixed</b> class files:
 > * An overload of the insertion («) operator that inserts a floating-point representation
 of the fixed-point number into the output stream object passed as parameter.
-Running this code:
+Running this code:</i>
 #include <iostream>
 int main( void ) {
 Fixed a;
@@ -35,7 +35,7 @@ std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 return 0;
 }
-Should output something similar to:
+<i>Should output something similar to:</i>
 $> ./a.out
 Default constructor called
 Int constructor called
