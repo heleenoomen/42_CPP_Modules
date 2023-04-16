@@ -1,6 +1,6 @@
 ## Filestreams
-### Exercise 04: Create Your Own Sed
-> Create a program that takes three parameters in the following order: a filename and
+### Exercise 04: Find and Replace
+> <i>Create a program that takes three parameters in the following order: a filename and
 two strings, `s1` and `s2`.
 >
 > It will open the file `<filename>` and copies its content into a new file
@@ -10,4 +10,4 @@ the member functions of the class `std::string` are allowed, except `replace`. U
 wisely!
 >
 > Of course, handle unexpected inputs and errors. You have to create and turn in your
-own tests to ensure your program works as expected.
+own tests to ensure your program works as expected.</i>
