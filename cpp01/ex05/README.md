@@ -1,4 +1,4 @@
-## Lookup Table with Function Pointers
+## Lookup Table
 ### Exercise 05:
 > <i>Do you know Harl? We all do, do we? In case you don’t, find below the kind of
 comments Harl makes. They are classified by levels:
