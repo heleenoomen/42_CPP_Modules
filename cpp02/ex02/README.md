@@ -7,13 +7,13 @@
 post-decrement) operators, that will increase or decrease the fixed-point value from
 the smallest representable ϵ such as 1 + ϵ > 1.
 > Add these four public overloaded member functions to your class:
-> * A static member function `min` that takes as parameters two references on fixed-point
+> * A static member function </i>`min`<i> that takes as parameters two references on fixed-point
 numbers, and returns a reference to the smallest one.
-> * A static member function `min` that takes as parameters two references to <b>constant</b>
+> * A static member function </i>`min`<i> that takes as parameters two references to <b>constant</b>
 fixed-point numbers, and returns a reference to the smallest one.
-> * A static member function `max` that takes as parameters two references on fixed-point
+> * A static member function </i>`max`<i> that takes as parameters two references on fixed-point
 numbers, and returns a reference to the greatest one.
-> * A static member function `max` that takes as parameters two references to <b>constant</b>
+> * A static member function </i>`max`<i> that takes as parameters two references to <b>constant</b>
 fixed-point numbers, and returns a reference to the greatest one.
 >
 > It’s up to you to test every feature of your class. However, running the code below:</i>
