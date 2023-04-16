@@ -1,4 +1,4 @@
-## Fixed Point Type (2)
+## Functional Fixed Point Type
 ### Exercise 01:
 > <i>The previous exercise was a good start but our class is pretty useless. It can only
 represent the value 0.0.
@@ -10,9 +10,9 @@ initialized to 8 like in exercise 00.
 > * A constructor that takes a constant <b>floating-point number</b> as a parameter.
 It converts it to the corresponding fixed-point value. The fractional bits value is
 initialized to 8 like in exercise 00.
-> * A member function </i>`float toFloat( void ) const;`<i>
+> * A member function </i>`float toFloat( void ) const;`
 that converts the fixed-point value to a floating-point value.
-> * A member function </i>`int toInt( void ) const;`<i>
+> * A member function </i>`int toInt( void ) const;`
 that converts the fixed-point value to an integer value.
 And add the following function to the <b>Fixed</b> class files:
 > * An overload of the insertion («) operator that inserts a floating-point representation
