@@ -23,6 +23,7 @@ things. You have to create a <b>Harl</b> class with the following private member
 > * `void info( void );`
 > * `void warning( void );`
 > * `void error( void );`
+>
 > <b>Harl</b> also has a public member function that calls the four member functions above
 depending on the level passed as parameter:
 >
