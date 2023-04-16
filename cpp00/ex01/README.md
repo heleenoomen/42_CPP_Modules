@@ -30,7 +30,7 @@ darkest secret. A saved contact can’t have empty fields.
 >   * Then, prompt the user again for the index of the entry to display. If the index
 > is out of range or wrong, define a relevant behavior. Otherwise, display the
 > contact information, one field per line.
-> * EXIT
+> * EXIT:
 >   * The program quits and the contacts are lost forever!
 > * Any other input is discarded.
 
