@@ -1,7 +1,7 @@
 ## Memory Allocation: Stack vs Heap
 ### Exercise 00:
 
-> First, implement a <b>Zombie</b> class. It has a string private attribute `name`.<br>
+> <i>First, implement a <b>Zombie</b> class. It has a string private attribute `name`.<br>
 Add a member function `void announce( void );` to the Zombie class. Zombies
 announce themselves as follows:
 >
@@ -28,4 +28,4 @@ It creates a zombie, name it, and the zombie announces itself.
 it’s better to allocate the zombies on the stack or heap.
 >
 > Zombies must be destroyed when you don’t need them anymore. The destructor must
-print a message with the name of the zombie for debugging purposes.
+print a message with the name of the zombie for debugging purposes.</i>
