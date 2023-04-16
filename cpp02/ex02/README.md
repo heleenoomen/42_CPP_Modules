@@ -19,17 +19,18 @@ fixed-point numbers, and returns a reference to the greatest one.
 > It’s up to you to test every feature of your class. However, running the code below:</i>
 > ```
 > #include <iostream>
+>
 > int main( void ) {
-> Fixed a;
-> Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-> std::cout << a << std::endl;
-> std::cout << ++a << std::endl;
-> std::cout << a << std::endl;
-> std::cout << a++ << std::endl;
-> std::cout << a << std::endl;
-> std::cout << b << std::endl;
-> std::cout << Fixed::max( a, b ) << std::endl;
-> return 0;
+>    Fixed a;
+>    Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+>    std::cout << a << std::endl;
+>    std::cout << ++a << std::endl;
+>    std::cout << a << std::endl;
+>    std::cout << a++ << std::endl;
+>    std::cout << a << std::endl;
+>    std::cout << b << std::endl;
+>    std::cout << Fixed::max( a, b ) << std::endl;
+>    return 0;
 > }
 > ```
 > <i>Should output something like (for greater readability, the constructor/destructor messages are removed in the example below):</i>
