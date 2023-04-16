@@ -11,13 +11,15 @@ messages from this level and above. For example:
 > [ WARNING ]
 > I think I deserve to have some extra bacon for free.
 > I've been coming for years whereas you started working here since last month.
+>
 > [ ERROR ]
 > This is unacceptable, I want to speak to the manager now.
+>
 > $> ./harlFilter "I am not sure how tired I am today..."
 > [ Probably complaining about insignificant problems ]
 > ```
 >
->Although there are several ways to deal with Harl, one of the most effective is to
+> Although there are several ways to deal with Harl, one of the most effective is to
 SWITCH it off.
 >
 > Give the name `harlFilter` to your executable.
