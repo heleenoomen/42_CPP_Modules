@@ -1,5 +1,5 @@
 ## Filestreams
-### Exercise 04: Find and Replace
+### Exercise 04:
 > <i>Create a program that takes three parameters in the following order: a filename and
 two strings, `s1` and `s2`.
 >
