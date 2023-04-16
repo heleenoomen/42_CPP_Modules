@@ -7,15 +7,15 @@ system to filter what Harl says depending on the log levels you want to listen t
 messages from this level and above. For example:
 >
 > ```
-$> ./harlFilter "WARNING"
-[ WARNING ]
-I think I deserve to have some extra bacon for free.
-I've been coming for years whereas you started working here since last month.
-[ ERROR ]
-This is unacceptable, I want to speak to the manager now.
-$> ./harlFilter "I am not sure how tired I am today..."
-[ Probably complaining about insignificant problems ]
-```
+> $> ./harlFilter "WARNING"
+> [ WARNING ]
+> I think I deserve to have some extra bacon for free.
+> I've been coming for years whereas you started working here since last month.
+> [ ERROR ]
+> This is unacceptable, I want to speak to the manager now.
+> $> ./harlFilter "I am not sure how tired I am today..."
+> [ Probably complaining about insignificant problems ]
+> ```
 >
 >Although there are several ways to deal with Harl, one of the most effective is to
 SWITCH it off.
