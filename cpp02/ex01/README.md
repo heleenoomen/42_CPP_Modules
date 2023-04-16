@@ -1,4 +1,4 @@
-## Floating-Point & Fixed-Point
+## Fixed-Point Class with operator overloading
 ### Exercise 01:
 > <i>The previous exercise was a good start but our class is pretty useless. It can only
 represent the value 0.0.
