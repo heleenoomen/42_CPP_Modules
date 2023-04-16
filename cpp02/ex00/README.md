@@ -1,4 +1,4 @@
-## Orthodox Canonical Form
+## Orthodox Canonical Form 
 ### Exercise 00:
 > Create a class in Orthodox Canonical Form that represents a fixed-point number:
 > * Private members:
