@@ -1,4 +1,4 @@
-## Fixed Point Numbers Class in Orthodox Canonical Form (2)
+## Fixed Point Class (2)
 ### Exercise 01:
 > <i>The previous exercise was a good start but our class is pretty useless. It can only
 represent the value 0.0.
