@@ -32,7 +32,3 @@ darkest secret. A saved contact can’t have empty fields.
 > contact information, one field per line.
 > * EXIT:
 >   * The program quits and the contacts are lost forever!
-> * Any other input is discarded.
-
-Once a command has been correctly executed, the program waits for another one. It
-stops when the user inputs EXIT.</i>
