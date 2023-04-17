@@ -1,13 +1,18 @@
-read input cin >> string
+open a string stream with argv[1]
+
+read input sstream >> string until endof sstream
   if input is number
     put number on stack
-    continue reading input
   else if input is operator
-    calculate, store result in private 'result' variable
-    empty stack
-    continue reading input
+    check if stack size >= 2, if not throw exception (invalid input)
+    pop 1 number from stack and save value as n1
+    pop 1 number form stack and save value as n2
+    perform operation on n2, n1
   else
     throw an exception (invalid input -> Error) and exit
+  continue reading input
 
-read input
-  
+end of input:
+  check if stack size is equal to 1, if not throw exception (invalid input)
+
+print the last number the is left on the stack

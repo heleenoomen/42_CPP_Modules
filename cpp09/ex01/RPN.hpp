@@ -13,35 +13,33 @@
 #ifndef RPN_HPP
 #define RPN_HPP
 
-// #include <string>
-// #include <iostream>
 #include <deque>
 #include <sstream>
 #include <stack>
 
 class RPN {
  private:
-  typedef struct OperatorLookup {
-    char const operator_;
-    void (RPN::*operatorOverload)(void) const;
-  } OperatorLookup;
-
   char const* input_;
-  std::string token_;
-  int result_;
-  std::stack<int> numbers_;
-  OperatorLookup const operatorLookup[4];
-  char const operators_[4] = {'+', '-', '*', '/'};
-  char operator_;
-  int const numberOfOperators_ = 4;
+  std::stack<int> stack_;
+  static int const numberOfOperators_ = 4;
 
-  /* private methods*/
+  typedef struct Operations {
+    char symbol;
+    int (RPN::*func)(int n1, int n2);
+  } Operations;
 
-  void processInput();
-  bool isOperator();
-  int strToInt() const;
-  void putOnStack();
-  void performOperation();
+  Operations operations_[numberOfOperators_];
+  void initLookupTable();
+  int add(int n1, int n2);
+  int subtract(int n1, int n2);
+  int multiplicate(int n1, int n2);
+  int divide(int n1, int n2);
+
+  int popNumber();
+  bool isOperator(std::string& token);
+  int strToInt(std::string& token) const;
+  void performOperation(char symbol);
+  int processInput();
 
   /* default constructor */
   RPN();
@@ -60,18 +58,15 @@ class RPN {
   ~RPN();
 
   /* exceptions */
-  class invalidInputExecption : std::exception {
+  class invalidInputException : public std::exception {
    public:
-    invalidInputExecption();
-    ~invalidInputExecption() throw();
-    char const* what() const throw();
+    invalidInputException();
+    ~invalidInputException() throw();
+    virtual char const* what() const throw();
   };
 
   /* public methods */
   void calculate();
 };
-
-/* insertion operator */
-// std::ostream& operator<<(std::ostream& o, RPN const& cname);
 
 #endif
