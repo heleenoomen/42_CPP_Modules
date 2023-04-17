@@ -1,0 +1,13 @@
+read input cin >> string
+  if input is number
+    put number on stack
+    continue reading input
+  else if input is operator
+    calculate, store result in private 'result' variable
+    empty stack
+    continue reading input
+  else
+    throw an exception (invalid input -> Error) and exit
+
+read input
+  
