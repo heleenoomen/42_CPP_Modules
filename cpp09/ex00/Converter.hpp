@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/04/14 16:11:52 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/04/17 15:47:19 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,5 @@ class Converter {
   /* public methods */
   void convert();
 };
-
-/* insertion operator */
-// std::ostream& operator<<(std::ostream& o, Converter const& cname);
 
 #endif

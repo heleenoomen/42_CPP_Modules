@@ -34,8 +34,6 @@ class BitcoinExchange {
   /* copy assignment operator */
   BitcoinExchange& operator=(BitcoinExchange const& rhs);
 
-  /* private methods */
-
  public:
   /* constructors */
   BitcoinExchange(const char* inputFile);
@@ -45,8 +43,6 @@ class BitcoinExchange {
 
   /* public methods */
   void run();
-
-  /* exceptions */
 };
 
 #endif
