@@ -26,6 +26,10 @@ class MergeInsertion {
   /* private methods*/
   MergeInsertion();
   void makePairs();
+  void sortPairs();
+  void makeMainChain();
+  void insertPending();
+  void insertOddElement();
 
  public:
   /* default constructor */
