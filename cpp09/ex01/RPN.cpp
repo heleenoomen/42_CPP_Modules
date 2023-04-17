@@ -6,7 +6,7 @@
 /* Orthodox canonical form                                                    */
 /* ************************************************************************** */
 
-/* Default constructor (private) */
+/* Default constructor (inaccessible) */
 RPN::RPN() : input_(NULL) { initLookupTable(); }
 
 /* Constructor */
@@ -41,6 +41,18 @@ char const* RPN::invalidInputException::what() const throw() {
 /* Private methods                                                            */
 /* ************************************************************************** */
 
+/* operator-functions */
+
+int RPN::add(int n1, int n2) const { return n2 + n1; }
+
+int RPN::subtract(int n1, int n2) const { return n2 - n1; }
+
+int RPN::multiplicate(int n1, int n2) const { return n2 * n1; }
+
+int RPN::divide(int n1, int n2) const { return n2 / n1; }
+
+/* helper functions */
+
 void RPN::initLookupTable() {
   operations_[0].symbol= '+';
   operations_[0].func = &RPN::add;
@@ -50,13 +62,6 @@ void RPN::initLookupTable() {
   operations_[2].func = &RPN::multiplicate;
   operations_[3].symbol= '/';
   operations_[3].func = &RPN::divide;
-}
-
-bool RPN::isOperator(std::string& token) {
-  if (token.size() != 1) return false;
-  for (int i = 0; i < numberOfOperators_; ++i)
-    if (token[0] == operations_[i].symbol) return true;
-  return false;
 }
 
 int RPN::strToInt(std::string& token) const {
@@ -70,6 +75,13 @@ int RPN::strToInt(std::string& token) const {
   if (!tokenS.fail() || !tokenS.eof()) throw invalidInputException();
   if (integer > 9 || integer < 0) throw invalidInputException();
   return integer;
+}
+
+bool RPN::isOperator(std::string& token) const {
+  if (token.size() != 1) return false;
+  for (int i = 0; i < numberOfOperators_; ++i)
+    if (token[0] == operations_[i].symbol) return true;
+  return false;
 }
 
 int RPN::popNumber() {
@@ -87,14 +99,6 @@ void RPN::performOperation(char symbol) {
         stack_.push((this->*operations_[i].func)(n1, n2));
   }
 }
-
-int RPN::add(int n1, int n2) { return n2 + n1; }
-
-int RPN::subtract(int n1, int n2) { return n2 - n1; }
-
-int RPN::multiplicate(int n1, int n2) { return n2 * n1; }
-
-int RPN::divide(int n1, int n2) { return n2 / n1; }
 
 int RPN::processInput() {
   std::stringstream tokenStream(input_);

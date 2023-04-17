@@ -21,23 +21,27 @@ class RPN {
  private:
   char const* input_;
   std::stack<int> stack_;
-  static int const numberOfOperators_ = 4;
 
+  /* lookup table for different operations + - / * */
   typedef struct Operations {
     char symbol;
-    int (RPN::*func)(int n1, int n2);
+    int (RPN::*func)(int n1, int n2) const;
   } Operations;
 
+  static int const numberOfOperators_ = 4;
   Operations operations_[numberOfOperators_];
-  void initLookupTable();
-  int add(int n1, int n2);
-  int subtract(int n1, int n2);
-  int multiplicate(int n1, int n2);
-  int divide(int n1, int n2);
 
-  int popNumber();
-  bool isOperator(std::string& token);
+  /* operator-functions */
+  int add(int n1, int n2) const;
+  int subtract(int n1, int n2) const;
+  int multiplicate(int n1, int n2) const;
+  int divide(int n1, int n2) const;
+
+  /* helper functions */
+  void initLookupTable();
+  bool isOperator(std::string& token) const;
   int strToInt(std::string& token) const;
+  int popNumber();
   void performOperation(char symbol);
   int processInput();
 
