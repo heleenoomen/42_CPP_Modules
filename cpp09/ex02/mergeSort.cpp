@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include "tools.hpp"
 
 typedef std::vector<int>::iterator vecIt;
 
@@ -41,23 +42,29 @@ std::vector<int> mergeSort(std::vector<int> v) {
   return merge(mergeSort(left), mergeSort(right));
 }
 
-int main() {
+int main(int argc, char** argv) {
   std::vector<int> v;
+  for (int i = 1; i < argc; ++i) {
+    std::string n = std::string(argv[i]);
+    int nb = tools::strToInt(n);
+    v.push_back(nb);
+  }
 
-  v.push_back(7);
-  v.push_back(9);
-  v.push_back(3);
-  v.push_back(8);
-  v.push_back(4);
-  v.push_back(5);
-  v.push_back(2);
-  v.push_back(1);
-  v.push_back(6);
-  v.push_back(-3);
+  // v.push_back(7);
+  // v.push_back(9);
+  // v.push_back(3);
+  // v.push_back(8);
+  // v.push_back(4);
+  // v.push_back(5);
+  // v.push_back(2);
+  // v.push_back(1);
+  // v.push_back(6);
+  // v.push_back(-3);
 
   std::cout << "Unsorted vector: ";
   printVector(v);
   std::vector<int> sorted = mergeSort(v);
+  v = mergeSort(v);
   std::cout << "Sorted vector: ";
   printVector(sorted);
   // std::vector<int> sorted = mergeSort(v);

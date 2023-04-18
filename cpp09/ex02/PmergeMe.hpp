@@ -50,6 +50,7 @@ class PmergeMe {
   /* exceptions */
 
   /* public methods */
+  void run();
 };
 
 /* insertion operator */

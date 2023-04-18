@@ -24,17 +24,22 @@ class MergeInsertion {
   std::vector<std::pair<int, int> > pairs_;
   std::vector<int> mainChain_;
   typedef std::vector<std::pair<int, int> > vecPairs;
+  typedef vecPairs::iterator pairsIt;
+  typedef std::vector<int>::iterator vecIt;
 
   /* private methods*/
   MergeInsertion();
   void sortPair(std::pair<int, int>& p);
   void makePairs();
-  vecPairs merge(vecPairs& p);
-  vecPairs sortPairs(vecPairs& p);
+  vecPairs merge(vecPairs left, vecPairs right);
+  vecPairs sortPairs(vecPairs p);
+  vecIt binSearch(int i, vecIt left, vecIt right);
   void makeMainChain();
+  int insertInMainChain(int jacobsthal, int indexShift);
   void insertPending();
-  void insertOddElement();
 
+  void printPairs();
+  void printMainChain();
  public:
   /* default constructor */
   MergeInsertion(std::vector<int> v);
