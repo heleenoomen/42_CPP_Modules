@@ -16,17 +16,21 @@
 // #include <string>
 // #include <iostream>
 #include <vector>
+#include <utility>
 
 class MergeInsertion {
  private:
   std::vector<int> sequence_;
   std::vector<std::pair<int, int> > pairs_;
   std::vector<int> mainChain_;
+  typedef std::vector<std::pair<int, int> > vecPairs;
 
   /* private methods*/
   MergeInsertion();
+  void sortPair(std::pair<int, int>& p);
   void makePairs();
-  void sortPairs();
+  vecPairs merge(vecPairs& p);
+  vecPairs sortPairs(vecPairs& p);
   void makeMainChain();
   void insertPending();
   void insertOddElement();
