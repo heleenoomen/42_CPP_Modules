@@ -121,51 +121,51 @@ MergeInsertion::vecIt MergeInsertion::binSearch(int i,
     return binSearch(i, begin + mid, end);
 }
 
-int MergeInsertion::insertInMainChain(int jacobsthal, int indexShift) {
-  if (static_cast<size_t>(jacobsthal) > pairs_.size()) return 0;
-  int index = jacobsthal - 1;
-  int nbr = pairs_[index].second;
-  MergeInsertion::vecIt pos = binSearch(nbr, mainChain_.begin(), mainChain_.begin() + index + indexShift );
-  mainChain_.insert(pos, nbr);
-  return 1;
-}
+// int MergeInsertion::insertInMainChain(int jacobsthal, int indexShift) {
+//   if (static_cast<size_t>(jacobsthal) > pairs_.size()) return 0;
+//   int index = jacobsthal - 1;
+//   int nbr = pairs_[index].second;
+//   MergeInsertion::vecIt pos = binSearch(nbr, mainChain_.begin(), mainChain_.begin() + index + indexShift );
+//   mainChain_.insert(pos, nbr);
+//   return 1;
+// }
 
-void MergeInsertion::insertPending() {
-  // for (MergeInsertion::pairsIt it = pairs_.begin(); it != pairs_.end(); ++it) {
-  //   int nbr = it->second;
-  //   std::vector<int>::iterator pos = binSearch(nbr, mainChain_.begin(), mainChain_.end());
-  //   mainChain_.insert(pos, nbr);
-  // }
-  // if (mainChain_.front() == -1) mainChain_.erase(mainChain_.begin());
-  // int prevJacobsthal = 1;
-  // int n = 4;
-  // int leftToInsert = pairs_.size();
-  // int endPosMainChain = 
-  // while (leftToInsert) {
-  //   int jacobsthal = tools::jacobsthal(n);
-  //   if (jacobsthal < pairs_.size()) {
-  //     MergeInsertion::vecIt pos = binSearch(pairs_[jacobsthal - 1].second, mainChain_.begin(), mainChain_.end());
-  //     mainChain_.insert(pos, nbr);
-  //   }
-  //   for (int i = jacobsthal - 2; i > prevJacobsthal - 1; --i) {
-  //     MergeInsertion::vecIt pos = binSearch(pairs_[i].second, mainChain_.begin(), mainChain_.end());
-  //     mainChain_.insert(pos, pairs_[i]);
-  //   }
-  // }
-  mainChain_.insert(mainChain_.begin(), pairs_.front().second);
-  int previousJacobsthal = 1; // the 3th element of the Jacobsthal sequence is 1
-  int n = 4; // we start at the 4th. element of the Jacobsthal sequence
-  int leftToInsert = pairs_.size();
-  int indexShift = 1;
-  while (leftToInsert) {
-    int jacobsthal = tools::Jacobsthal(n);
-    leftToInsert = insertInMainChain(jacobsthal); // -1 to get the index
-    for (int i = jacobsthal; i > previousJacobsthal; --i)
-      leftToInsert = insertInMainChain(i); // -1 to get the index
-    previousJacobsthal = jacobsthal;
-    ++n;
-  }
-}
+// void MergeInsertion::insertPending() {
+//   // for (MergeInsertion::pairsIt it = pairs_.begin(); it != pairs_.end(); ++it) {
+//   //   int nbr = it->second;
+//   //   std::vector<int>::iterator pos = binSearch(nbr, mainChain_.begin(), mainChain_.end());
+//   //   mainChain_.insert(pos, nbr);
+//   // }
+//   // if (mainChain_.front() == -1) mainChain_.erase(mainChain_.begin());
+//   // int prevJacobsthal = 1;
+//   // int n = 4;
+//   // int leftToInsert = pairs_.size();
+//   // int endPosMainChain = 
+//   // while (leftToInsert) {
+//   //   int jacobsthal = tools::jacobsthal(n);
+//   //   if (jacobsthal < pairs_.size()) {
+//   //     MergeInsertion::vecIt pos = binSearch(pairs_[jacobsthal - 1].second, mainChain_.begin(), mainChain_.end());
+//   //     mainChain_.insert(pos, nbr);
+//   //   }
+//   //   for (int i = jacobsthal - 2; i > prevJacobsthal - 1; --i) {
+//   //     MergeInsertion::vecIt pos = binSearch(pairs_[i].second, mainChain_.begin(), mainChain_.end());
+//   //     mainChain_.insert(pos, pairs_[i]);
+//   //   }
+//   // }
+//   mainChain_.insert(mainChain_.begin(), pairs_.front().second);
+//   int previousJacobsthal = 1; // the 3th element of the Jacobsthal sequence is 1
+//   int n = 4; // we start at the 4th. element of the Jacobsthal sequence
+//   int leftToInsert = pairs_.size();
+//   int indexShift = 1;
+//   while (leftToInsert) {
+//     int jacobsthal = tools::Jacobsthal(n);
+//     leftToInsert = insertInMainChain(jacobsthal); // -1 to get the index
+//     for (int i = jacobsthal; i > previousJacobsthal; --i)
+//       leftToInsert = insertInMainChain(i); // -1 to get the index
+//     previousJacobsthal = jacobsthal;
+//     ++n;
+//   }
+// }
 
 
 
