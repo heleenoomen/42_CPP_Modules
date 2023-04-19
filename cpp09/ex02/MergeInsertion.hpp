@@ -21,6 +21,8 @@ class MergeInsertion {
   std::vector<int> sequence_;
   std::vector<std::pair<int, int> > pairs_;
   std::vector<int> mainChain_;
+  std::vector<int> pend_;
+
   typedef std::vector<std::pair<int, int> > vecPairs;
   typedef vecPairs::iterator pairsIt;
   typedef std::vector<int>::iterator vecIt;
@@ -31,7 +33,7 @@ class MergeInsertion {
   void makePairs();
   vecPairs merge(vecPairs left, vecPairs right) const;
   vecPairs sortPairs(vecPairs p) const;
-  void makeMainChain();
+  void makeChains();
   void printPairs();
   void printMainChain();
 

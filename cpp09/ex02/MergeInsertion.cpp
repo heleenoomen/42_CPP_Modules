@@ -6,6 +6,7 @@
 
 #include "Insert.hpp"
 #include "tools.hpp"
+#include "mergeSortPairs.hpp"
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -101,9 +102,10 @@ MergeInsertion::vecPairs MergeInsertion::sortPairs(vecPairs pairs) const {
   return merge(sortPairs(left), sortPairs(right));
 }
 
-void MergeInsertion::makeMainChain() {
+void MergeInsertion::makeChains() {
   for (MergeInsertion::pairsIt it = pairs_.begin(); it != pairs_.end(); ++it) {
-    mainChain_.push_back((*it).first);
+    mainChain_.push_back(it->first);
+    pend_.push_back(it->second);
   }
 }
 
@@ -114,8 +116,11 @@ void MergeInsertion::makeMainChain() {
 void MergeInsertion::sort() {
 
   makePairs();
-  pairs_ = sortPairs(pairs_);
-  makeMainChain();
+  pairs_ = mergeSortPairs<MergeInsertion::vecPairs>(pairs_);
+  // pairs_ = sortPairs(pairs_);
+  // printPairs();
+  // exit(0);
+  makeChains();
   Insert i(&mainChain_, &pairs_);
   i.insertPending();
   printMainChain();
