@@ -21,8 +21,7 @@ Insert::Insert(std::vector<int>& mainChain, Insert::pairVec& pairs)
       nbPending_(mainChain.size()),
       mainChain_(mainChain),
       pairs_(pairs),
-      rangeBegin_(mainChain.begin()),
-      rangeEnd_(mainChain.begin() + 1) {}
+      indexNextA(0) {}
 
 /* Copy constructor */
 Insert::Insert(Insert const& src)
@@ -38,8 +37,7 @@ Insert& Insert::operator=(Insert const& rhs) {
   previousJacobsthalNb_ = rhs.previousJacobsthalNb_;
   JacobsthalNb_ = rhs.JacobsthalNb_;
   nbPending_ = rhs.nbPending_;
-  rangeBegin_ = rhs.rangeBegin_;
-  rangeEnd_ = rhs.rangeEnd_;
+  indexNextA = rhs.indexNextA;
   return *this;
 }
 
@@ -50,59 +48,104 @@ Insert::~Insert() {}
 /* Private methods                                                            */
 /* ************************************************************************** */
 
+Insert::vecIt Insert::binSearch(int i, Insert::vecIt begin, Insert::vecIt end) {
+  if (end - begin == 1) {
+    if (i <= *begin) return begin;
+    return end;
+  }
+  if (end == begin) return begin;
+  int mid = (end - begin) / 2;
+  if (i <= *(begin + mid))
+    return binSearch(i, begin, begin + mid);
+  else
+    return binSearch(i, begin + mid, end);
+}
+
 void Insert::insertInMainChain(int elementNbr) {
   int elemIndex = elementNbr - 1;
-  Insert::vecIt pos = binSearch(elemIndex, rangeBegin_, rangeEnd_);
-  mainChain_.insert(pos, elementNbr);
+  // std::cout << "Insert pairs_[" << elemIndex << "] = " << pairs_[elemIndex].second << "\n";
+  // std::cout << "mainChain_.begin() = " << *(mainChain_.begin()) << std::endl;
+  // std::cout << "mainChain_.begin() + nextA = " << *(mainChain_.begin() + indexNextA) << std::endl;
+  Insert::vecIt pos = binSearch(pairs_[elemIndex].second, mainChain_.begin(), mainChain_.begin() + indexNextA);
+  // std::cout << "pos = " << pos - mainChain_.begin() << "\n";
+  mainChain_.insert(pos, pairs_[elemIndex].second);
   nbPending_--;
 }
 
 void Insert::insertNonJacobsthal(int element) {
-  if (static_cast<size_t>(elementNbr) > pairs_.size()) return;
+  // std::cout << "INSERT NON JT\n";
+  if (static_cast<size_t>(element) > pairs_.size()) return;
   insertInMainChain(element);
-  ++addedNonJacobsthal_;
+  // ++addedNonJacobsthal_;
+  indexNextA++;
 }
 
 void Insert::insertJacobsthal(int element) {
-  if (static_cast<size_t>(elementNbr) > pairs_.size()) return;
+  // std::cout << "INSERT JT\n";
+  // printClass();
+  if (static_cast<size_t>(element) > pairs_.size()) return;
   insertInMainChain(element);
-  ++rangeEnd_;
+  ++indexNextA;
 }
 
-/*
-1) insert the pending element with the the next Jacobsthal number.
-2) Add the pending elements between the Jacobsthal and the previous Jacobsthal
-in descending order.
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
->>> The pending elements will thus be inserted as follows:        <<<
->>> *1, *3, 2, *5, 4, *11, 10, 9, 8, 7, 6, *21, 20, 19, 18, etc.  <<<
->>> (The nbrs marked with asterisk belong to Jacobsthal sequence) <<<
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-3) Move the pointer to the next a-nbr accordingly after every insertion
-*/
-void Insert::insertPending() {
-  while (nbPending_) {
-    JacobsthalNb_ = tools::Jacobsthal(n_);
-    n_++;
-    insertInMainChain(JacobsthalNb_);
-    for (int i = JacobsthalNb_ - 1; i > previousJacobsthalNb_ && nbPending_; --i)
-      insertInMainChain(i);
-    rangeEnd_ += addedNonJacobsthal_;
-    addedNonJacobsthal_ = 0;
-  }
-}
 
 /* ************************************************************************** */
 /* Public methods                                                             */
 /* ************************************************************************** */
 
+/*
+1) insert the pending element with the the next Jacobsthal number.
+2) Add the pending elements between the Jacobsthal and the previous Jacobsthal
+in descending order.
+   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+   >>> The pending elements will thus be inserted as follows:        <<<
+   >>> *1, *3, 2, *5, 4, *11, 10, 9, 8, 7, 6, *21, 20, 19, 18, etc.  <<<
+   >>> (The nbrs marked with asterisk belong to Jacobsthal sequence) <<<
+   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+*/
+void Insert::insertPending() {
+  while (nbPending_) {
+    JacobsthalNb_ = tools::Jacobsthal(n_);
+    n_++;
+    insertJacobsthal(JacobsthalNb_);
+    for (int i = JacobsthalNb_ - 1; i > previousJacobsthalNb_ && nbPending_; --i)
+      insertNonJacobsthal(i);
+    //indexNextA += addedNonJacobsthal_;
+    //addedNonJacobsthal_ = 0;
+    previousJacobsthalNb_ = JacobsthalNb_;
+    ++indexNextA;
+  }
+}
+
 /* ************************************************************************** */
 /* Insertion operator                                                         */
 /* ************************************************************************** */
 
-// std::ostream& operator<<(std::ostream& o, Insert const& cname) {
-//   o << "\033[0;32m"
-//     // << some info here
-//     << "\033[0m";
-//   return o;
-// }
+void Insert::printMainChain() {
+  std::cout << "mainChain =\t\t";
+  for (Insert::vecIt it = mainChain_.begin(); it != mainChain_.end();
+       ++it)
+    std::cout << *it << " ";
+  std::cout << std::endl;
+}
+
+void Insert::printPairs() {
+  std::cout << "pairs =\t\t\t";
+  for (Insert::pairsIt it = pairs_.begin(); it != pairs_.end(); ++it)
+    std::cout << it->first << "/" << it->second << " ";
+  std::cout << std::endl;
+}
+
+void Insert::printClass() {
+  std::cout << "-----------------------------------\n";
+  std::cout << "n_=\t\t\t" << n_ << '\n';
+  std::cout << "addedNonJacobsthal_ =\t" << addedNonJacobsthal_ << '\n';
+  std::cout << "previousJacobsthal_ =\t" << previousJacobsthalNb_ << '\n';
+  std::cout << "Jacobsthal=\t\t" << JacobsthalNb_ << '\n';
+  std::cout << "nbPending_ =\t\t" << nbPending_ << '\n';
+  printMainChain();
+  printPairs();
+  std::cout << "index next a =\t\t" << indexNextA << '\n';
+  std::cout << "-----------------------------------\n";
+  std::cout << std::endl;
+}

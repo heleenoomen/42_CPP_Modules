@@ -33,10 +33,10 @@ class MergeInsertion {
   void makePairs();
   vecPairs merge(vecPairs left, vecPairs right);
   vecPairs sortPairs(vecPairs p);
-  vecIt binSearch(int i, vecIt left, vecIt right);
+  // vecIt binSearch(int i, vecIt left, vecIt right);
   void makeMainChain();
-  int insertInMainChain(int jacobsthal, int indexShift);
-  void insertPending();
+  // int insertInMainChain(int jacobsthal, int indexShift);
+  // void insertPending();
 
   void printPairs();
   void printMainChain();
@@ -54,7 +54,6 @@ class MergeInsertion {
   ~MergeInsertion();
 
   /* getters */
-
   /* setters */
 
   /* exceptions */

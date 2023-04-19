@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Insert.hpp                                        :+:      :+:    :+:   */
+/*   Insert2.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/10 22:01:08 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/04/19 17:30:32 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,44 +18,44 @@
 #include <utility>
 // #include <iostream>
 
-class Insert {
+class Insert2 {
   typedef std::vector<int>::iterator vecIt;
   typedef std::vector<std::pair<int, int> > pairVec;
   typedef pairVec::iterator pairsIt;
 
  private:
   static int const jacobsThalStartAt = 2;
-  int n_;
-  int addedNonJacobsthal_;
-  int previousJacobsthalNb_;
-  int JacobsthalNb_;
-  int nbPending_;
-  std::vector<int>& mainChain_;
-  pairVec& pairs_;
-  int indexNextA;
-  /* private methods*/
+  int n_; /* nth element of Jacobsthal Sequence */
+  int previousJacobsthalNb_; /* previous Jacobsthal Number */
+  int JacobsthalNb_; /* current Jacobsthal Number */
+  int nbPending_; /* number of elements pending */
+  std::vector<int>* mainChain_;
+  pairVec* pairs_; /* vector of a-b pairs; a >= b for every pair & pairs are sorted based on a */
+  int AShift_;
+
+  void insertNextJacobsthal();
+  void insertSkipped();
 
  public:
   /* default constructor */
+  Insert2();
   /* constructor */
-  Insert(std::vector<int>& mainChain, pairVec& pairs);
-  // Insert();
+  Insert2(std::vector<int>* mainChain, pairVec* pairs);
+  // Insert2();
   vecIt binSearch(int i, vecIt begin, vecIt end);
   void insertPending();
   void insertInMainChain(int elementNbr);
-  void insertJacobsthal(int elementNbr);
-  void insertNonJacobsthal(int elementNbr);
   void printMainChain();
   void printPairs();
 
   /* copy constructor */
-  Insert(Insert const& src);
+  Insert2(Insert2 const& src);
 
   /* copy assignment operator */
-  Insert& operator=(Insert const& rhs);
+  Insert2& operator=(Insert2 const& rhs);
 
   /* default destructor */
-  ~Insert();
+  ~Insert2();
 
   /* getters */
 
@@ -68,6 +68,6 @@ class Insert {
 };
 
 /* insertion operator */
-std::ostream& operator<<(std::ostream& o, Insert const& cname);
+std::ostream& operator<<(std::ostream& o, Insert2 const& cname);
 
 #endif

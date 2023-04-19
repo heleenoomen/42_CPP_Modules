@@ -1,0 +1,17 @@
+PmergeMe:
+  for all arguments in argument in argument vector:
+    * add each argument to vector of ints v_
+    * add each argument to list of ints l_
+  
+  * call SortVector
+  * call SortList
+
+SortVector: (takes v_ from PmergeMe)
+  Contains: (pending_(v_), mainChain_)
+  SortPairs:
+    * make a vector of pairs of integers pairs_ out of v_
+    * sort each pair so that first >= second
+    * sort pairs_ based on first elements
+    * put all first elements in mainChain_ vector
+    * put all second elements in pending_ vector
+
