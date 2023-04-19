@@ -4,7 +4,7 @@
 #include <iostream>
 #include <utility>
 
-#include "Insert2.hpp"
+#include "Insert.hpp"
 #include "tools.hpp"
 
 /* ************************************************************************** */
@@ -119,7 +119,7 @@ void MergeInsertion::sort() {
   // printPairs();
   makeMainChain();
   // printMainChain();
-  Insert2 i(&mainChain_, &pairs_);
+  Insert i(&mainChain_, &pairs_);
   i.insertPending();
   printMainChain();
 }

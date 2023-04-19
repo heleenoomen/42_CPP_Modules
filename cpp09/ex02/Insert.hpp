@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/10 22:01:08 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/04/19 17:38:37 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,29 @@ class Insert {
 
  private:
   static int const jacobsThalStartAt = 2;
-  int n_;
-  int addedNonJacobsthal_;
-  int previousJacobsthalNb_;
-  int JacobsthalNb_;
-  int nbPending_;
-  std::vector<int>& mainChain_;
-  pairVec& pairs_;
-  int indexNextA;
-  /* private methods*/
+  int n_; /* nth element of Jacobsthal Sequence */
+  int previousJacobsthalNb_; /* previous Jacobsthal Number */
+  int JacobsthalNb_; /* current Jacobsthal Number */
+  int nbPending_; /* number of elements pending */
+  std::vector<int>* mainChain_;
+  pairVec* pairs_; /* vector of a-b pairs; a >= b for every pair & pairs are sorted based on a */
+  int AShift_; /* in the beginning, every a in mainChain_ is at the same index as
+  every b in pairs_. Everytime we insert an element in mainChain_, the index of the corresponding a
+  shifts one place to the right in relation to the index of b */
+
+  /* default constructor */
+  Insert();
+
+  /* private methods */
+  void insertNextJacobsthal();
+  void insertSkipped();
 
  public:
-  /* default constructor */
   /* constructor */
-  Insert(std::vector<int>& mainChain, pairVec& pairs);
-  // Insert();
+  Insert(std::vector<int>* mainChain, pairVec* pairs);
   vecIt binSearch(int i, vecIt begin, vecIt end);
   void insertPending();
   void insertInMainChain(int elementNbr);
-  void insertJacobsthal(int elementNbr);
-  void insertNonJacobsthal(int elementNbr);
   void printMainChain();
   void printPairs();
 

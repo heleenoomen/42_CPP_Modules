@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/04/19 17:07:19 by hoomen           ###   ########.fr        #
+#    Updated: 2023/04/19 18:27:55 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CXXFLAGS	:=	-Wall -Werror -Wextra -std=c++98
 
 DEPFLAGS	=	-MT $@ -MMD -MP -MF $(DDIR)/$*.d
 
-SRC			=	main.cpp MergeInsertion.cpp PmergeMe.cpp tools.cpp Insert2.cpp
+SRC			=	main.cpp MergeInsertion.cpp PmergeMe.cpp tools.cpp Insert.cpp
 
 ODIR		=	obj
 OBJ			=	$(SRC:%.cpp=$(ODIR)/%.o)
@@ -40,7 +40,8 @@ $(ODIR) :
 $(DDIR) :
 	mkdir $@
 
-all : $(NAME)
+all :
+	${MAKE} $(NAME) -j
 
 clean :
 	$(RM) -r $(DDIR) $(ODIR)

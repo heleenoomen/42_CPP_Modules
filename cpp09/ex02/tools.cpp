@@ -9,6 +9,7 @@ int tools::strToInt(std::string& s) {
   std::string leftOvers;
   sS >> leftOvers;
   if (!sS.fail() || !sS.eof()) throw invalidInputException();
+  if (integer < 0) throw invalidInputException();
   return integer;
 }
 

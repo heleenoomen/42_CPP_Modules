@@ -10,23 +10,21 @@
 /* ************************************************************************** */
 
 /* Default constructor */
-// Insert::Insert() {}
+Insert::Insert() {}
 
 /* Parametric constructor */
-Insert::Insert(std::vector<int>& mainChain, Insert::pairVec& pairs)
-    : n_(jacobsThalStartAt),
-      addedNonJacobsthal_(0),
-      previousJacobsthalNb_(1),
+Insert::Insert(std::vector<int>* mainChain, Insert::pairVec* pairs)
+    : n_(1),
+      previousJacobsthalNb_(0),
       JacobsthalNb_(0),
-      nbPending_(mainChain.size()),
+      nbPending_(mainChain->size()),
       mainChain_(mainChain),
       pairs_(pairs),
-      indexNextA(0) {}
+      AShift_(0) {}
 
 /* Copy constructor */
 Insert::Insert(Insert const& src)
-    : mainChain_(src.mainChain_),
-      pairs_(src.pairs_) {
+    : mainChain_(src.mainChain_), pairs_(src.pairs_) {
   *this = src;
 }
 
@@ -37,7 +35,7 @@ Insert& Insert::operator=(Insert const& rhs) {
   previousJacobsthalNb_ = rhs.previousJacobsthalNb_;
   JacobsthalNb_ = rhs.JacobsthalNb_;
   nbPending_ = rhs.nbPending_;
-  indexNextA = rhs.indexNextA;
+  AShift_ = rhs.AShift_;
   return *this;
 }
 
@@ -48,7 +46,10 @@ Insert::~Insert() {}
 /* Private methods                                                            */
 /* ************************************************************************** */
 
-Insert::vecIt Insert::binSearch(int i, Insert::vecIt begin, Insert::vecIt end) {
+/* binary search to find the position between begin and end where we have to 
+insert integer i. */
+Insert::vecIt Insert::binSearch(int i, Insert::vecIt begin,
+                                  Insert::vecIt end) {
   if (end - begin == 1) {
     if (i <= *begin) return begin;
     return end;
@@ -62,58 +63,39 @@ Insert::vecIt Insert::binSearch(int i, Insert::vecIt begin, Insert::vecIt end) {
 }
 
 void Insert::insertInMainChain(int elementNbr) {
-  int elemIndex = elementNbr - 1;
-  // std::cout << "Insert pairs_[" << elemIndex << "] = " << pairs_[elemIndex].second << "\n";
-  // std::cout << "mainChain_.begin() = " << *(mainChain_.begin()) << std::endl;
-  // std::cout << "mainChain_.begin() + nextA = " << *(mainChain_.begin() + indexNextA) << std::endl;
-  Insert::vecIt pos = binSearch(pairs_[elemIndex].second, mainChain_.begin(), mainChain_.begin() + indexNextA);
-  // std::cout << "pos = " << pos - mainChain_.begin() << "\n";
-  mainChain_.insert(pos, pairs_[elemIndex].second);
+  if (static_cast<size_t>(elementNbr) > pairs_->size()) return;
+  int elemIndex = elementNbr - 1; /* get the index based of the nth element of pending_ */
+  int correspondingA = elemIndex + AShift_; /* get the corresponding element in main_ */
+  
+  Insert::vecIt pos =
+      binSearch((*pairs_)[elemIndex].second, mainChain_->begin(),
+                mainChain_->begin() + correspondingA);
+  mainChain_->insert(pos, (*pairs_)[elemIndex].second);
   nbPending_--;
+  AShift_++;
 }
 
-void Insert::insertNonJacobsthal(int element) {
-  // std::cout << "INSERT NON JT\n";
-  if (static_cast<size_t>(element) > pairs_.size()) return;
-  insertInMainChain(element);
-  // ++addedNonJacobsthal_;
-  indexNextA++;
+void Insert::insertSkipped() {
+  for (int i = JacobsthalNb_ - 1; i > previousJacobsthalNb_ && nbPending_; --i)
+    insertInMainChain(i);
 }
 
-void Insert::insertJacobsthal(int element) {
-  // std::cout << "INSERT JT\n";
-  // printClass();
-  if (static_cast<size_t>(element) > pairs_.size()) return;
-  insertInMainChain(element);
-  ++indexNextA;
+void Insert::insertNextJacobsthal() {
+  previousJacobsthalNb_ = JacobsthalNb_;
+  JacobsthalNb_ = tools::Jacobsthal(++n_);
+  insertInMainChain(JacobsthalNb_);
 }
-
 
 /* ************************************************************************** */
 /* Public methods                                                             */
 /* ************************************************************************** */
 
-/*
-1) insert the pending element with the the next Jacobsthal number.
-2) Add the pending elements between the Jacobsthal and the previous Jacobsthal
-in descending order.
-   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-   >>> The pending elements will thus be inserted as follows:        <<<
-   >>> *1, *3, 2, *5, 4, *11, 10, 9, 8, 7, 6, *21, 20, 19, 18, etc.  <<<
-   >>> (The nbrs marked with asterisk belong to Jacobsthal sequence) <<<
-   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-*/
+/* Start inserting
+ */
 void Insert::insertPending() {
   while (nbPending_) {
-    JacobsthalNb_ = tools::Jacobsthal(n_);
-    n_++;
-    insertJacobsthal(JacobsthalNb_);
-    for (int i = JacobsthalNb_ - 1; i > previousJacobsthalNb_ && nbPending_; --i)
-      insertNonJacobsthal(i);
-    //indexNextA += addedNonJacobsthal_;
-    //addedNonJacobsthal_ = 0;
-    previousJacobsthalNb_ = JacobsthalNb_;
-    ++indexNextA;
+    insertNextJacobsthal();
+    insertSkipped();
   }
 }
 
@@ -123,15 +105,14 @@ void Insert::insertPending() {
 
 void Insert::printMainChain() {
   std::cout << "mainChain =\t\t";
-  for (Insert::vecIt it = mainChain_.begin(); it != mainChain_.end();
-       ++it)
+  for (Insert::vecIt it = mainChain_->begin(); it != mainChain_->end(); ++it)
     std::cout << *it << " ";
   std::cout << std::endl;
 }
 
 void Insert::printPairs() {
   std::cout << "pairs =\t\t\t";
-  for (Insert::pairsIt it = pairs_.begin(); it != pairs_.end(); ++it)
+  for (Insert::pairsIt it = pairs_->begin(); it != pairs_->end(); ++it)
     std::cout << it->first << "/" << it->second << " ";
   std::cout << std::endl;
 }
@@ -139,13 +120,12 @@ void Insert::printPairs() {
 void Insert::printClass() {
   std::cout << "-----------------------------------\n";
   std::cout << "n_=\t\t\t" << n_ << '\n';
-  std::cout << "addedNonJacobsthal_ =\t" << addedNonJacobsthal_ << '\n';
   std::cout << "previousJacobsthal_ =\t" << previousJacobsthalNb_ << '\n';
   std::cout << "Jacobsthal=\t\t" << JacobsthalNb_ << '\n';
   std::cout << "nbPending_ =\t\t" << nbPending_ << '\n';
   printMainChain();
   printPairs();
-  std::cout << "index next a =\t\t" << indexNextA << '\n';
+  std::cout << "AShift_ =\t\t" << AShift_ << '\n';
   std::cout << "-----------------------------------\n";
   std::cout << std::endl;
 }
