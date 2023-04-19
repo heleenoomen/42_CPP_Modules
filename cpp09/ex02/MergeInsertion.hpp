@@ -13,8 +13,6 @@
 #ifndef MERGEINSERTION_HPP
 #define MERGEINSERTION_HPP
 
-// #include <string>
-// #include <iostream>
 #include <vector>
 #include <utility>
 
@@ -31,15 +29,12 @@ class MergeInsertion {
   MergeInsertion();
   void sortPair(std::pair<int, int>& p);
   void makePairs();
-  vecPairs merge(vecPairs left, vecPairs right);
-  vecPairs sortPairs(vecPairs p);
-  // vecIt binSearch(int i, vecIt left, vecIt right);
+  vecPairs merge(vecPairs left, vecPairs right) const;
+  vecPairs sortPairs(vecPairs p) const;
   void makeMainChain();
-  // int insertInMainChain(int jacobsthal, int indexShift);
-  // void insertPending();
-
   void printPairs();
   void printMainChain();
+
  public:
   /* default constructor */
   MergeInsertion(std::vector<int> v);
@@ -53,16 +48,8 @@ class MergeInsertion {
   /* default destructor */
   ~MergeInsertion();
 
-  /* getters */
-  /* setters */
-
-  /* exceptions */
-
   /* public methods */
   void sort();
 };
-
-/* insertion operator */
-// std::ostream& operator<<(std::ostream& o, MergeInsertion const& cname);
 
 #endif

@@ -71,7 +71,7 @@ void MergeInsertion::makePairs() {
   }
 }
 
-MergeInsertion::vecPairs MergeInsertion::merge(vecPairs left, vecPairs right) {
+MergeInsertion::vecPairs MergeInsertion::merge(vecPairs left, vecPairs right) const {
   MergeInsertion::vecPairs sorted;
   while (left.size() && right.size()) {
     if (left.front().first < right.front().first) {
@@ -93,7 +93,7 @@ MergeInsertion::vecPairs MergeInsertion::merge(vecPairs left, vecPairs right) {
   return sorted;
 }
 
-MergeInsertion::vecPairs MergeInsertion::sortPairs(vecPairs pairs) {
+MergeInsertion::vecPairs MergeInsertion::sortPairs(vecPairs pairs) const {
   if (pairs.size() == 1) return pairs;
   int mid = pairs.size() / 2;
   MergeInsertion::vecPairs left(pairs.begin(), pairs.begin() + mid);
@@ -114,11 +114,8 @@ void MergeInsertion::makeMainChain() {
 void MergeInsertion::sort() {
 
   makePairs();
-  // printPairs();
   pairs_ = sortPairs(pairs_);
-  // printPairs();
   makeMainChain();
-  // printMainChain();
   Insert i(&mainChain_, &pairs_);
   i.insertPending();
   printMainChain();
