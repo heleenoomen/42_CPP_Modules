@@ -6,7 +6,7 @@
 #    By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/26 23:28:55 by hoomen            #+#    #+#              #
-#    Updated: 2023/04/19 18:27:55 by hoomen           ###   ########.fr        #
+#    Updated: 2023/04/19 18:41:02 by hoomen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,7 @@ $(ODIR) :
 $(DDIR) :
 	mkdir $@
 
-all :
-	${MAKE} $(NAME) -j
+all : $(NAME)
 
 clean :
 	$(RM) -r $(DDIR) $(ODIR)
