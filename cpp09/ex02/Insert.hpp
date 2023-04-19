@@ -26,6 +26,7 @@ class Insert {
  private:
   static int const jacobsThalStartAt = 3;
   int n_;
+  int addedNonJacobsthal_;
   int previousJacobsthalNb_;
   int JacobsthalNb_;
   int nbPending_;
@@ -45,6 +46,8 @@ class Insert {
   vecIt binSearch(int i, vecIt begin, vecIt end);
   void insertPending(std::vector<int>& mainChain, pairVec& pairs);
   void insertInMainChain(int elementNbr);
+  void insertJacobsthal(int elementNbr);
+  void insertNonJacobsthal(int elementNbr);
 
   /* copy constructor */
   Insert(Insert const& src);

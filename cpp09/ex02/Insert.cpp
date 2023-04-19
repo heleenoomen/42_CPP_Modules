@@ -15,6 +15,7 @@
 /* Parametric constructor */
 Insert::Insert(std::vector<int>& mainChain, Insert::pairVec& pairs)
     : n_(jacobsThalStartAt),
+      addedNonJacobsthal_(0),
       previousJacobsthalNb_(1),
       JacobsthalNb_(0),
       nbPending_(mainChain.size()),
@@ -50,25 +51,44 @@ Insert::~Insert() {}
 /* ************************************************************************** */
 
 void Insert::insertInMainChain(int elementNbr) {
-  if (static_cast<size_t>(elementNbr) > pairs_.size()) return;
   int elemIndex = elementNbr - 1;
   Insert::vecIt pos = binSearch(elemIndex, rangeBegin_, rangeEnd_);
   mainChain_.insert(pos, elementNbr);
-  rangeEnd_++;
   nbPending_--;
 }
 
-/* insert the pending element with the the next Jacobsthal number. Then add the
-pending elements between the Jacobsthal and the previous Jacobsthal in
-descending order, so that the pending elements will be inserted as follows:
-*1, *3, 2, *5, 4, *11, 10, 9, 8, 7, 6, *21, 20, 19, 18, etc. */
+void Insert::insertNonJacobsthal(int element) {
+  if (static_cast<size_t>(elementNbr) > pairs_.size()) return;
+  insertInMainChain(element);
+  ++addedNonJacobsthal_;
+}
+
+void Insert::insertJacobsthal(int element) {
+  if (static_cast<size_t>(elementNbr) > pairs_.size()) return;
+  insertInMainChain(element);
+  ++rangeEnd_;
+}
+
+/*
+1) insert the pending element with the the next Jacobsthal number.
+2) Add the pending elements between the Jacobsthal and the previous Jacobsthal
+in descending order.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+>>> The pending elements will thus be inserted as follows:        <<<
+>>> *1, *3, 2, *5, 4, *11, 10, 9, 8, 7, 6, *21, 20, 19, 18, etc.  <<<
+>>> (The nbrs marked with asterisk belong to Jacobsthal sequence) <<<
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+3) Move the pointer to the next a-nbr accordingly after every insertion
+*/
 void Insert::insertPending() {
   while (nbPending_) {
     JacobsthalNb_ = tools::Jacobsthal(n_);
     n_++;
     insertInMainChain(JacobsthalNb_);
-    for (int i = JacobsthalNb_ - 1; i > previousJacobsthalNb_; --i)
+    for (int i = JacobsthalNb_ - 1; i > previousJacobsthalNb_ && nbPending_; --i)
       insertInMainChain(i);
+    rangeEnd_ += addedNonJacobsthal_;
+    addedNonJacobsthal_ = 0;
   }
 }
 
