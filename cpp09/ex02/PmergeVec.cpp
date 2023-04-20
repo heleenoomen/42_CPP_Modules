@@ -13,23 +13,23 @@
 /* ************************************************************************** */
 
 /* Default constructor */
-PmergeVec::MergeInsertion() {}
+PmergeVec::PmergeVec() {}
 
 /* Parametric contstructor */
-PmergeVec::MergeInsertion(std::vector<int> v) : sequence_(v) {}
+PmergeVec::PmergeVec(std::vector<int> v) : sequence_(v) {}
 
 /* Copy constructor */
-PmergeVec::MergeInsertion(MergeInsertion const& src) { *this = src; }
+PmergeVec::PmergeVec(PmergeVec const& src) { *this = src; }
 
 /* Copy assignment operator */
-PmergeVec& MergeInsertion::operator=(MergeInsertion const& rhs) {
+PmergeVec& PmergeVec::operator=(PmergeVec const& rhs) {
   if (this == &rhs) return *this;
   /* assign values here */
   return *this;
 }
 
 /* Destructor */
-PmergeVec::~MergeInsertion() {}
+PmergeVec::~PmergeVec() {}
 
 /* ************************************************************************** */
 /* Private methods                                                            */

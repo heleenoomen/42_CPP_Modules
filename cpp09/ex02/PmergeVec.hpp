@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MergeInsertion.hpp                                        :+:      :+:    :+:   */
+/*   PmergeVec.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MERGEINSERTION_HPP
-#define MERGEINSERTION_HPP
+#ifndef PMERGEVEC_HPP
+#define PMERGEVEC_HPP
 
 #include <vector>
 #include <utility>
 
-class MergeInsertion {
+class PmergeVec {
   /* typedefs */
   typedef std::vector<std::pair<int, int> > vecPairs;
   typedef vecPairs::iterator pairsIt;
@@ -30,7 +30,7 @@ class MergeInsertion {
   std::vector<int> BChain;
 
   /* default constructor (inaccessible) */
-  MergeInsertion();
+  PmergeVec();
 
   /* private methods */
   void addOddElement();
@@ -43,16 +43,16 @@ class MergeInsertion {
 
  public:
   /* default constructor */
-  MergeInsertion(std::vector<int> v);
+  PmergeVec(std::vector<int> v);
 
   /* copy constructor */
-  MergeInsertion(MergeInsertion const& src);
+  PmergeVec(PmergeVec const& src);
 
   /* copy assignment operator */
-  MergeInsertion& operator=(MergeInsertion const& rhs);
+  PmergeVec& operator=(PmergeVec const& rhs);
 
   /* default destructor */
-  ~MergeInsertion();
+  ~PmergeVec();
 
   /* public methods */
   void sort();

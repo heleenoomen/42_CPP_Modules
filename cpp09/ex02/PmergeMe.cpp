@@ -1,6 +1,7 @@
 
 #include "PmergeMe.hpp"
-#include "MergeInsertion.hpp"
+#include "PmergeVec.hpp"
+#include "PmergeList.hpp"
 #include "tools.hpp"
 
 #include <iostream>
@@ -41,6 +42,8 @@ PmergeMe::~PmergeMe() {}
 /* ************************************************************************** */
 
 void PmergeMe::run() {
-  MergeInsertion merge(v_);
-  merge.sort();
+  PmergeVec pmv(v_);
+  pmv.sort();
+  // PmergeList pml(l_);
+  // pml.sort();
 }

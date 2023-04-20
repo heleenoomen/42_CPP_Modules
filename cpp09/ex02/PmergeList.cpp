@@ -1,5 +1,5 @@
 
-#include "PmergeVec.hpp"
+#include "PmergeList.hpp"
 
 #include <iostream>
 #include <utility>
@@ -13,46 +13,46 @@
 /* ************************************************************************** */
 
 /* Default constructor */
-PmergeVec::MergeInsertion() {}
+PmergeList::PmergeList() {}
 
 /* Parametric contstructor */
-PmergeVec::MergeInsertion(std::vector<int> v) : sequence_(v) {}
+PmergeList::PmergeList(std::list<int> v) : sequence_(v) {}
 
 /* Copy constructor */
-PmergeVec::MergeInsertion(MergeInsertion const& src) { *this = src; }
+PmergeList::PmergeList(PmergeList const& src) { *this = src; }
 
 /* Copy assignment operator */
-PmergeVec& MergeInsertion::operator=(MergeInsertion const& rhs) {
+PmergeList& PmergeList::operator=(PmergeList const& rhs) {
   if (this == &rhs) return *this;
   /* assign values here */
   return *this;
 }
 
 /* Destructor */
-PmergeVec::~MergeInsertion() {}
+PmergeList::~PmergeList() {}
 
 /* ************************************************************************** */
 /* Private methods                                                            */
 /* ************************************************************************** */
 
 /* make one dummy pair if nbr of elements in the sequence is odd */
-void PmergeVec::addOddElement() {
+void PmergeList::addOddElement() {
   if (sequence_.size() % 2) {
     std::pair<int, int> odd(sequence_.back(), -1);
     pairs_.push_back(odd);
   }
 }
 
-void PmergeVec::makePairs() {
-  for (PmergeVec::vecIt it = sequence_.begin(); it + 1 < sequence_.end(); it += 2) {
+void PmergeList::makePairs() {
+  for (PmergeList::listIt it = sequence_.begin(); it + 1 < sequence_.end(); it += 2) {
     std::pair<int, int> p = tools::makeSortedPair(*it, *(it + 1));
     pairs_.push_back(p);
   }
   addOddElement();
 }
 
-void PmergeVec::makeChains() {
-  for (PmergeVec::pairsIt it = pairs_.begin(); it != pairs_.end(); ++it) {
+void PmergeList::makeChains() {
+  for (PmergeList::pairsIt it = pairs_.begin(); it != pairs_.end(); ++it) {
     AChain_.push_back(it->first);
     BChain.push_back(it->second);
   }
@@ -62,11 +62,11 @@ void PmergeVec::makeChains() {
 /* Public methods                                                             */
 /* ************************************************************************** */
 
-void PmergeVec::sort() {
+void PmergeList::sort() {
   makePairs();
-  pairs_ = tools::mergeSortPairs<PmergeVec::vecPairs>(pairs_);
+  pairs_ = tools::mergeSortPairs<PmergeList::listPairs>(pairs_);
   makeChains();
-  MergeChains<std::vector<int> > m(&AChain_, &BChain);
+  MergeChains<std::list<int> > m(&AChain_, &BChain);
   m.insertPending();
   printMainChain();
 }
@@ -75,17 +75,17 @@ void PmergeVec::sort() {
 /* Insertion operator                                                         */
 /* ************************************************************************** */
 
-void PmergeVec::printMainChain() {
+void PmergeList::printMainChain() {
   std::cout << "AChain_: ";
-  for (PmergeVec::vecIt it = AChain_.begin(); it != AChain_.end();
+  for (PmergeList::listIt it = AChain_.begin(); it != AChain_.end();
        ++it)
     std::cout << *it << " ";
   std::cout << std::endl;
 }
 
-void PmergeVec::printPairs() {
+void PmergeList::printPairs() {
   std::cout << "pairs_: ";
-  for (PmergeVec::pairsIt it = pairs_.begin(); it != pairs_.end(); ++it)
+  for (PmergeList::pairsIt it = pairs_.begin(); it != pairs_.end(); ++it)
     std::cout << it->first << "/" << it->second << " ";
   std::cout << std::endl;
 }

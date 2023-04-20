@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PmergeMe.hpp                                        :+:      :+:    :+:   */
+/*   PmergeList.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,35 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PMERGEME_HPP
-#define PMERGEME_HPP
+#ifndef PMERGELIST_HPP
+#define PMERGELIST_HPP
 
-// #include <string>
-// #include <iostream>
-#include <vector>
 #include <list>
+#include <utility>
 
-class PmergeMe {
+class PmergeList {
+  /* typedefs */
+  typedef std::list<std::pair<int, int> > listPairs;
+  typedef listPairs::iterator pairsIt;
+  typedef std::list<int>::iterator listIt;
+
  private:
-  std::vector<int> v_;
-  std::list<int> l_;
+  /* private attributes */
+  std::list<int> sequence_;
+  std::list<std::pair<int, int> > pairs_;
+  std::list<int> AChain_;
+  std::list<int> BChain;
+
+  /* default constructor (inaccessible) */
+  PmergeList();
+
+  /* private methods */
+  void addOddElement();
+  void makePairs();
+  void makeChains();
+
+  /* debugging tools */
+  void printPairs();
+  void printMainChain();
 
  public:
   /* default constructor */
-  PmergeMe();
-  PmergeMe(int argc, char** argv);
+  PmergeList(std::list<int> v);
 
   /* copy constructor */
-  PmergeMe(PmergeMe const& src);
+  PmergeList(PmergeList const& src);
 
   /* copy assignment operator */
-  PmergeMe& operator=(PmergeMe const& rhs);
+  PmergeList& operator=(PmergeList const& rhs);
 
   /* default destructor */
-  ~PmergeMe();
+  ~PmergeList();
 
   /* public methods */
-  void run();
+  void sort();
 };
 
 #endif
