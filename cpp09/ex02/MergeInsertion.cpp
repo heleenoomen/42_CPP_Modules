@@ -66,7 +66,7 @@ void MergeInsertion::sort() {
   makePairs();
   pairs_ = tools::mergeSortPairs<MergeInsertion::vecPairs>(pairs_);
   makeChains();
-  Insert i(&mainChain_, &pend_);
+  Insert<std::vector<int> > i(&mainChain_, &pend_);
   i.insertPending();
   printMainChain();
 }
