@@ -22,11 +22,11 @@
     At the start, for every index i, AChain_[i] forms a pair with BChain_[i] so
     that AChain_[i] >= BChain_[i]
 
-    We merge the two chains by inserting elements from BChain_ into AChain.
+    We merge the two chains by inserting elements from BChain_ into AChain_.
     We know that every B is smaller than or equal to its corresponding A, so
     that BChain_[i] should be inserted somewhere in the range AChain_[0] - AChain_[i]
 
-    However, as we go inserting, the index where the corresponding A is, shifts 
+    However, as we go inserting, the index where the corresponding A is shifts 
     to the right, so that for the nth element we insert:
       BChain_[i] corresponds to AChain_[i + n]
     We store n in the parameter AShift_.
@@ -38,7 +38,7 @@
       the previous Jacobsthal number) in descending order.
     The order of insertion will thus be like this:
       *1, *3, 2, *5, 4, *11, 10, 9, 8, 7, 6, *21, 20, 19, 18, 17, etc.
-    (numbers marked with a * are part of the Jacobsthal sequence) 
+    (numbers marked with a * belong to the Jacobsthal sequence) 
 */
 
 template<typename Container>
