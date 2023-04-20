@@ -53,8 +53,8 @@ void MergeInsertion::makePairs() {
 
 void MergeInsertion::makeChains() {
   for (MergeInsertion::pairsIt it = pairs_.begin(); it != pairs_.end(); ++it) {
-    mainChain_.push_back(it->first);
-    pend_.push_back(it->second);
+    AChain_.push_back(it->first);
+    BChain.push_back(it->second);
   }
 }
 
@@ -66,7 +66,7 @@ void MergeInsertion::sort() {
   makePairs();
   pairs_ = tools::mergeSortPairs<MergeInsertion::vecPairs>(pairs_);
   makeChains();
-  MergeChains<std::vector<int> > m(&mainChain_, &pend_);
+  MergeChains<std::vector<int> > m(&AChain_, &BChain);
   m.insertPending();
   printMainChain();
 }
@@ -76,8 +76,8 @@ void MergeInsertion::sort() {
 /* ************************************************************************** */
 
 void MergeInsertion::printMainChain() {
-  std::cout << "mainChain_: ";
-  for (MergeInsertion::vecIt it = mainChain_.begin(); it != mainChain_.end();
+  std::cout << "AChain_: ";
+  for (MergeInsertion::vecIt it = AChain_.begin(); it != AChain_.end();
        ++it)
     std::cout << *it << " ";
   std::cout << std::endl;

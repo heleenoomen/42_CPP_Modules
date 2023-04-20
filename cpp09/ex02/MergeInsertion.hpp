@@ -26,8 +26,8 @@ class MergeInsertion {
   /* private attributes */
   std::vector<int> sequence_;
   std::vector<std::pair<int, int> > pairs_;
-  std::vector<int> mainChain_;
-  std::vector<int> pend_;
+  std::vector<int> AChain_;
+  std::vector<int> BChain;
 
   /* default constructor (inaccessible) */
   MergeInsertion();

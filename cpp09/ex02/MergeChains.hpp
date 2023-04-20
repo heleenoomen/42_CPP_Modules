@@ -19,12 +19,12 @@
     AChain_ -> contains all A numbers, sorted
     BChain_ -> contains all B numbers, unsorted 
     
-    At the start, for every index i, AChain_[i] forms a pair with BChain[i] so
-    that AChain_[i] >= BChain[i]
+    At the start, for every index i, AChain_[i] forms a pair with BChain_[i] so
+    that AChain_[i] >= BChain_[i]
 
     We merge the two chains by inserting elements from BChain into AChain.
-    We know that every B is smaller or equal than its corresponding A, so that
-    BChain[i] should be inserted somewhere in the range AChain_[0] - AChain_[i]
+    We know that every B is smaller than or equal to its corresponding A, so
+    that BChain[i] should be inserted somewhere in the range AChain_[0] - AChain_[i]
 
     However, as we go inserting, the index where the corresponding A is, shifts 
     to the right, so that for the nth element we insert:
@@ -33,11 +33,12 @@
 
     We insert in the following order:
       * insert nth element of BChain, where n is the next number in the
-        Jacobsthal sequenc
-      * insert the skipped elements in descending order.
-    The order of insertion will thus look like this:
+        Jacobsthal sequence
+      * insert the skipped elements in (between the current Jacobsthal number and
+      the previous Jacobsthal number) in descending order.
+    The order of insertion will thus be like this:
       *1, *3, 2, *5, 4, *11, 10, 9, 8, 7, 6, *21, 20, 19, 18, 17, etc.
-    (the numbers marked with a * are part of the Jacobsthal sequence) 
+    (numbers marked with a * are part of the Jacobsthal sequence) 
 */
 
 template<typename Container>
@@ -73,7 +74,7 @@ class MergeChains {
   range range_;
 
   /* default constructor (inaccessible) */
-  MergeChains() : AChain_(NULL), BChain(NULL) {}
+  MergeChains() : MergeChains<Container>(NULL, NULL) {}
 
   /* insert the nth element of BChain in AChain, where n is the next Jacobsthal
   number */
@@ -90,14 +91,13 @@ class MergeChains {
       insertInMainChain(i);
   }
 
-  /* find the B Number for the nth element in BChain, where n is the next
-  Jacobsthal number*/
+  /* find the B Number for the nth element in BChain */
   int findNb(int elemNb) {
     int indexB = elemNb - 1;
     return (*BChain)[indexB];
   }
 
-  /* set the Range for binary search in AChain for inserting the next element
+  /* set the Range for binary search in AChain to insert the next element
   from B */
   void setRange(int elemNb) {
     int indexB = elemNb - 1;
@@ -106,6 +106,9 @@ class MergeChains {
     range_.max = AChain_->begin() + indexA;
   }
 
+  /* insert the nth element of B into A. First find the number to insert,
+  find the range where to perform binary search, perform binary search and 
+  insert the number. Update the number of pending elemens & the AShift_ */
   void insertInMainChain(int elemNb) {
     if (static_cast<size_t>(elemNb) > BChain->size()) return;
     int bNb = findNb(elemNb);
@@ -146,6 +149,11 @@ class MergeChains {
   ~MergeChains() {}
 
   /* public methods */
+  /* as long as there are elements pending, insert first the nth number of
+  BChain where n is the next Jaconbsthal number. Then insert the skipped elements
+  between the current Jacobsthal number and the previous Jacobsthal number, so 
+  that the order of insertion is: *1, *3, 2, *5, 4, *11, 10, 9, 8, etc. (As
+  described at the top of this file)*/
   void insertPending() {
     while (nbPend_) {
       insertNextJacobsthal();
