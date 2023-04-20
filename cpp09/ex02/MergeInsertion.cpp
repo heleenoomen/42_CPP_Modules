@@ -6,7 +6,6 @@
 
 #include "MergeChains.hpp"
 #include "tools.hpp"
-// #include "mergeSortPairs.hpp"
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -54,7 +53,7 @@ void MergeInsertion::makePairs() {
 void MergeInsertion::makeChains() {
   for (MergeInsertion::pairsIt it = pairs_.begin(); it != pairs_.end(); ++it) {
     AChain_.push_back(it->first);
-    BChain.push_back(it->second);
+    BChain_.push_back(it->second);
   }
 }
 
@@ -66,7 +65,7 @@ void MergeInsertion::sort() {
   makePairs();
   pairs_ = tools::mergeSortPairs<MergeInsertion::vecPairs>(pairs_);
   makeChains();
-  MergeChains<std::vector<int> > m(&AChain_, &BChain);
+  MergeChains<std::vector<int> > m(&AChain_, &BChain_);
   m.insertPending();
   printMainChain();
 }
