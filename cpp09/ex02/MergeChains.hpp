@@ -135,6 +135,7 @@ class MergeChains {
       : AChain_(src.AChain_), BChain_(src.BChain_) {
     *this = src;
   }
+
   /* copy assignment operator */
   MergeChains& operator=(MergeChains const& rhs) {
     if (this == &rhs) return *this;
@@ -145,6 +146,7 @@ class MergeChains {
     AShift_ = rhs.AShift_;
     return *this;
   }
+  
   /* default destructor */
   ~MergeChains() {}
 
