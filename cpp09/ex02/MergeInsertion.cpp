@@ -4,7 +4,7 @@
 #include <iostream>
 #include <utility>
 
-#include "Insert.hpp"
+#include "MergeChains.hpp"
 #include "tools.hpp"
 // #include "mergeSortPairs.hpp"
 
@@ -66,8 +66,8 @@ void MergeInsertion::sort() {
   makePairs();
   pairs_ = tools::mergeSortPairs<MergeInsertion::vecPairs>(pairs_);
   makeChains();
-  Insert<std::vector<int> > i(&mainChain_, &pend_);
-  i.insertPending();
+  MergeChains<std::vector<int> > m(&mainChain_, &pend_);
+  m.insertPending();
   printMainChain();
 }
 
