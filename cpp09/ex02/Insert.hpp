@@ -24,32 +24,28 @@ class Insert {
   typedef pairVec::iterator pairsIt;
 
  private:
-  static int const jacobsThalStartAt = 2;
   int n_; /* nth element of Jacobsthal Sequence */
   int previousJacobsthalNb_; /* previous Jacobsthal Number */
   int JacobsthalNb_; /* current Jacobsthal Number */
   int nbPending_; /* number of elements pending */
   std::vector<int>* mainChain_;
-  pairVec* pairs_; /* vector of a-b pairs; a >= b for every pair & pairs are sorted based on a */
+  std::vector<int>* pend_;
+  // pairVec* pairs_; /* vector of a-b pairs; a >= b for every pair & pairs are sorted based on a */
   int AShift_; /* in the beginning, every a in mainChain_ is at the same index as
   every b in pairs_. Everytime we insert an element in mainChain_, the index of the corresponding a
   shifts one place to the right in relation to the index of b */
 
-  /* default constructor */
+  /* default constructor (inaccessible) */
   Insert();
 
   /* private methods */
   void insertNextJacobsthal();
   void insertSkipped();
+  void insertInMainChain(int elementNbr);
 
  public:
   /* constructor */
-  Insert(std::vector<int>* mainChain, pairVec* pairs);
-  vecIt binSearch(int i, vecIt begin, vecIt end);
-  void insertPending();
-  void insertInMainChain(int elementNbr);
-  void printMainChain();
-  void printPairs();
+  Insert(std::vector<int>* mainChain, std::vector<int>* pend);
 
   /* copy constructor */
   Insert(Insert const& src);
@@ -60,17 +56,13 @@ class Insert {
   /* default destructor */
   ~Insert();
 
-  /* getters */
-
-  /* setters */
-
-  /* exceptions */
-
   /* public methods */
+  void insertPending();
+
+  /* debugging*/
+  void printMainChain();
+  void printPairs();
   void printClass();
 };
-
-/* insertion operator */
-std::ostream& operator<<(std::ostream& o, Insert const& cname);
 
 #endif

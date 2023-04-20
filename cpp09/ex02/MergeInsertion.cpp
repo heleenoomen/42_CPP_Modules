@@ -6,7 +6,7 @@
 
 #include "Insert.hpp"
 #include "tools.hpp"
-#include "mergeSortPairs.hpp"
+// #include "mergeSortPairs.hpp"
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -32,74 +32,23 @@ MergeInsertion& MergeInsertion::operator=(MergeInsertion const& rhs) {
 MergeInsertion::~MergeInsertion() {}
 
 /* ************************************************************************** */
-/* Getters                                                                    */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/* Setters                                                                    */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
 /* Private methods                                                            */
 /* ************************************************************************** */
 
-/* ************************************************************************** */
-/* Private methods                                                            */
-/* ************************************************************************** */
-
-void MergeInsertion::sortPair(std::pair<int, int>& p) {
-  if (p.first < p.second) {
-    int swap = p.first;
-    p.first = p.second;
-    p.second = swap;
+/* make one dummy pair if nbr of elements in the sequence is odd */
+void MergeInsertion::addOddElement() {
+  if (sequence_.size() % 2) {
+    std::pair<int, int> odd(sequence_.back(), -1);
+    pairs_.push_back(odd);
   }
 }
 
 void MergeInsertion::makePairs() {
-  typedef std::vector<int>::iterator vectIt;
-  std::pair<int, int> p;
-  for (vectIt it = sequence_.begin(); it + 1 < sequence_.end(); it += 2) {
-    p.first = *it;
-    p.second = *(it + 1);
-    sortPair(p);
-    // std::cout << "Pair: " << p.first << " " << p.second << "\n";
+  for (MergeInsertion::vecIt it = sequence_.begin(); it + 1 < sequence_.end(); it += 2) {
+    std::pair<int, int> p = tools::makeSortedPair(*it, *(it + 1));
     pairs_.push_back(p);
   }
-  if (sequence_.size() % 2) { /* make one dummy pair if nbr of elems is odd */
-    p.first = sequence_.back();
-    p.second = -1;
-    pairs_.push_back(p);
-  }
-}
-
-MergeInsertion::vecPairs MergeInsertion::merge(vecPairs left, vecPairs right) const {
-  MergeInsertion::vecPairs sorted;
-  while (left.size() && right.size()) {
-    if (left.front().first < right.front().first) {
-      sorted.push_back(left.front());
-      left.erase(left.begin());
-    } else {
-      sorted.push_back(right.front());
-      right.erase(right.begin());
-    }
-  }
-  while (left.size()) {
-    sorted.push_back(left.front());
-    left.erase(left.begin());
-  }
-  while (right.size()) {
-    sorted.push_back(right.front());
-    right.erase(right.begin());
-  }
-  return sorted;
-}
-
-MergeInsertion::vecPairs MergeInsertion::sortPairs(vecPairs pairs) const {
-  if (pairs.size() == 1) return pairs;
-  int mid = pairs.size() / 2;
-  MergeInsertion::vecPairs left(pairs.begin(), pairs.begin() + mid);
-  MergeInsertion::vecPairs right(pairs.begin() + mid, pairs.end());
-  return merge(sortPairs(left), sortPairs(right));
+  addOddElement();
 }
 
 void MergeInsertion::makeChains() {
@@ -114,14 +63,10 @@ void MergeInsertion::makeChains() {
 /* ************************************************************************** */
 
 void MergeInsertion::sort() {
-
   makePairs();
-  pairs_ = mergeSortPairs<MergeInsertion::vecPairs>(pairs_);
-  // pairs_ = sortPairs(pairs_);
-  // printPairs();
-  // exit(0);
+  pairs_ = tools::mergeSortPairs<MergeInsertion::vecPairs>(pairs_);
   makeChains();
-  Insert i(&mainChain_, &pairs_);
+  Insert i(&mainChain_, &pend_);
   i.insertPending();
   printMainChain();
 }

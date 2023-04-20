@@ -17,23 +17,27 @@
 #include <utility>
 
 class MergeInsertion {
+  /* typedefs */
+  typedef std::vector<std::pair<int, int> > vecPairs;
+  typedef vecPairs::iterator pairsIt;
+  typedef std::vector<int>::iterator vecIt;
+
  private:
+  /* private attributes */
   std::vector<int> sequence_;
   std::vector<std::pair<int, int> > pairs_;
   std::vector<int> mainChain_;
   std::vector<int> pend_;
 
-  typedef std::vector<std::pair<int, int> > vecPairs;
-  typedef vecPairs::iterator pairsIt;
-  typedef std::vector<int>::iterator vecIt;
-
-  /* private methods*/
+  /* default constructor (inaccessible) */
   MergeInsertion();
-  void sortPair(std::pair<int, int>& p);
+
+  /* private methods */
+  void addOddElement();
   void makePairs();
-  vecPairs merge(vecPairs left, vecPairs right) const;
-  vecPairs sortPairs(vecPairs p) const;
   void makeChains();
+
+  /* debugging tools */
   void printPairs();
   void printMainChain();
 

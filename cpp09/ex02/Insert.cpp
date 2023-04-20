@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "tools.hpp"
+// #include "binaryInsertion.hpp"
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -13,18 +14,18 @@
 Insert::Insert() {}
 
 /* Parametric constructor */
-Insert::Insert(std::vector<int>* mainChain, Insert::pairVec* pairs)
+Insert::Insert(std::vector<int>* mainChain, std::vector<int>* pend)
     : n_(1),
       previousJacobsthalNb_(0),
       JacobsthalNb_(0),
       nbPending_(mainChain->size()),
       mainChain_(mainChain),
-      pairs_(pairs),
+      pend_(pend),
       AShift_(0) {}
 
 /* Copy constructor */
 Insert::Insert(Insert const& src)
-    : mainChain_(src.mainChain_), pairs_(src.pairs_) {
+    : mainChain_(src.mainChain_), pend_(src.pend_) {
   *this = src;
 }
 
@@ -46,33 +47,17 @@ Insert::~Insert() {}
 /* Private methods                                                            */
 /* ************************************************************************** */
 
-/* binary search to find the position between begin and end where we have to 
-insert integer i. */
-Insert::vecIt Insert::binSearch(int i, Insert::vecIt begin,
-                                  Insert::vecIt end) {
-  if (end - begin == 1) {
-    if (i <= *begin) return begin;
-    return end;
-  }
-  if (end == begin) return begin;
-  int mid = (end - begin) / 2;
-  if (i <= *(begin + mid))
-    return binSearch(i, begin, begin + mid);
-  else
-    return binSearch(i, begin + mid, end);
-}
-
 void Insert::insertInMainChain(int elementNbr) {
-  if (static_cast<size_t>(elementNbr) > pairs_->size()) return;
+  if (static_cast<size_t>(elementNbr) > pend_->size()) return;
   int elemIndex = elementNbr - 1; /* get the index based of the nth element of pending_ */
   int correspondingA = elemIndex + AShift_; /* get the corresponding element in main_ */
   
   Insert::vecIt pos =
-      binSearch((*pairs_)[elemIndex].second, mainChain_->begin(),
+      tools::binSearch<Insert::vecIt>((*pend_)[elemIndex], mainChain_->begin(),
                 mainChain_->begin() + correspondingA);
-  mainChain_->insert(pos, (*pairs_)[elemIndex].second);
-  nbPending_--;
-  AShift_++;
+  mainChain_->insert(pos, (*pend_)[elemIndex]);
+  --nbPending_;
+  ++AShift_;
 }
 
 void Insert::insertSkipped() {
@@ -90,8 +75,6 @@ void Insert::insertNextJacobsthal() {
 /* Public methods                                                             */
 /* ************************************************************************** */
 
-/* Start inserting
- */
 void Insert::insertPending() {
   while (nbPending_) {
     insertNextJacobsthal();
@@ -110,13 +93,6 @@ void Insert::printMainChain() {
   std::cout << std::endl;
 }
 
-void Insert::printPairs() {
-  std::cout << "pairs =\t\t\t";
-  for (Insert::pairsIt it = pairs_->begin(); it != pairs_->end(); ++it)
-    std::cout << it->first << "/" << it->second << " ";
-  std::cout << std::endl;
-}
-
 void Insert::printClass() {
   std::cout << "-----------------------------------\n";
   std::cout << "n_=\t\t\t" << n_ << '\n';
@@ -124,7 +100,7 @@ void Insert::printClass() {
   std::cout << "Jacobsthal=\t\t" << JacobsthalNb_ << '\n';
   std::cout << "nbPending_ =\t\t" << nbPending_ << '\n';
   printMainChain();
-  printPairs();
+  // printPairs();
   std::cout << "AShift_ =\t\t" << AShift_ << '\n';
   std::cout << "-----------------------------------\n";
   std::cout << std::endl;

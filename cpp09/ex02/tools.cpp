@@ -19,6 +19,13 @@ int tools::Jacobsthal(int n) {
   return Jacobsthal(n - 1) + 2 * Jacobsthal(n - 2);
 }
 
+std::pair<int, int> tools::makeSortedPair(int n1, int n2) {
+  std::pair<int, int> p;
+  p.first = n1 >= n2 ? n1 : n2;
+  p.second = n2 <= n1 ? n2 : n1;
+  return p;
+}
+
 tools::invalidInputException::invalidInputException() {}
 
 tools::invalidInputException::~invalidInputException() throw() {}
