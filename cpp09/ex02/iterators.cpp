@@ -5,6 +5,7 @@ template<typename I>
 void merge(I leftBegin, I leftEnd, I rightBegin, I rightEnd, I dest) {
   // std::vector<int> d;
   // int size = 0;
+  I d = leftBegin;
   while (leftBegin != leftEnd && rightBegin != rightEnd) {
     *dest = *leftBegin >= *rightBegin ? *leftBegin : *rightBegin;
     // int nb = *leftBegin >= *rightBegin ? *leftBegin : *rightBegin;
