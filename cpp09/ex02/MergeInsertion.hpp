@@ -27,7 +27,7 @@ class MergeInsertion {
   std::vector<int> sequence_;
   std::vector<std::pair<int, int> > pairs_;
   std::vector<int> AChain_;
-  std::vector<int> BChain;
+  std::vector<int> BChain_;
 
   /* default constructor (inaccessible) */
   MergeInsertion();

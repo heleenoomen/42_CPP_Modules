@@ -4,6 +4,8 @@
 #include <sstream>
 #include <string>
 #include <utility>
+#include <algorithm>
+#include <iterator>
 
 namespace tools {
   int strToInt(std::string& token);
@@ -47,14 +49,8 @@ namespace tools {
         right.erase(right.begin());
       }
     }
-    while (left.size()) {
-      sorted.push_back(left.front());
-      left.erase(left.begin());
-    }
-    while (right.size()) {
-      sorted.push_back(right.front());
-      right.erase(right.begin());
-    }
+    std::copy(left.begin(), left.end(), std::back_inserter(sorted));
+    std::copy(right.begin(), right.end(), std::back_inserter(sorted));
     return sorted;
   }
 
