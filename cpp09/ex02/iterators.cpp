@@ -26,13 +26,9 @@ template <typename I>
 void sortV(I begin, I end, I dest) {
   if (end - begin < 2) return;
   int mid = (end - begin) / 2;
-  I leftBegin = begin;
-  I leftEnd = begin + mid;
-  I rightBegin = begin + mid;
-  I rightEnd = end;
-  sortV(leftBegin, leftEnd, dest);
-  sortV(rightBegin, rightEnd, dest + mid);
-  merge(leftBegin, leftEnd, rightBegin, rightEnd, dest);
+  sortV(begin, begin + mid, dest);
+  sortV(begin + mid, end, dest);
+  merge(begin, begin + mid, begin + mid, end, dest);
 }
 
 int main() {
