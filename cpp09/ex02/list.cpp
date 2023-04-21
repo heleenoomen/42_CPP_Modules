@@ -13,6 +13,6 @@ int main() {
   // std::list<int>::iterator it = l.begin();
   // std::advance(it, 2);
   // std::cout << *it << '\n';
-  std::cout << std::distance(l.begin(), l.end()) << '\n';
+  std::cout << std::distance(l.begin(), l.begin()) << '\n';
   // if (std::distance(l.end(), l.begin()) >= 0) std::cout << "valid\n";
 }
