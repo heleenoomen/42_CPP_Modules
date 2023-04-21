@@ -1,10 +1,11 @@
 
 #include "PmergeMe.hpp"
-#include "MergeInsertion.hpp"
-#include "tools.hpp"
 
 #include <iostream>
 #include <utility>
+
+#include "MergeInsertion.hpp"
+#include "tools.hpp"
 
 /* ************************************************************************** */
 /* Orthodox canonical form                                                    */
@@ -15,11 +16,12 @@ PmergeMe::PmergeMe() {}
 
 /* Parametric constructor */
 PmergeMe::PmergeMe(int argc, char** argv) {
-  for (int i = 1; i < argc; ++i) {
-    std::string arg(argv[i]);
-    int nbr = tools::strToInt(arg);
-    v_.push_back(nbr);
-    l_.push_back(nbr);
+  for (; argv != NULL; argv += 2) {
+    std::pair<int, int> p =
+        std::make_pair(pme::strtoi(*argv), pme::strtoi(*(argv + 1)));
+    if (p.first < p.second) std::swap(p.first, p.second);
+    v_.push_back(p);
+    l_.push_back(p);
   }
 }
 
@@ -41,6 +43,7 @@ PmergeMe::~PmergeMe() {}
 /* ************************************************************************** */
 
 void PmergeMe::run() {
+  makeChains(v_);
   MergeInsertion merge(v_);
   merge.sort();
 }

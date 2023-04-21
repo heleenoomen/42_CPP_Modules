@@ -1,5 +1,5 @@
-#ifndef TOOLS_HPP
-#define TOOLS_HPP
+#ifndef PME_HPP
+#define PME_HPP
 
 #include <algorithm>
 #include <iterator>
@@ -7,8 +7,8 @@
 #include <string>
 #include <utility>
 
-namespace tools {
-int strToInt(std::string& token);
+namespace pme {
+int strtoi(char const* token);
 
 int Jacobsthal(int n);
 
@@ -66,6 +66,7 @@ Container mergeSortPairs(Container& pairs) {
   return merge<Container>(mergeSortPairs<Container>(left),
                           mergeSortPairs<Container>(right));
 }
-};  // namespace tools
+
+};  // namespace pme
 
 #endif

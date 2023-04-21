@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MergeChains.hpp                                        :+:      :+:    :+:
+/*   chainMe.hpp                                        :+:      :+:    :+:
  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
@@ -11,14 +11,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MERGECHAINS_HPP
-#define MERGECHAINS_HPP
+#ifndef CHAINME_HPP
+#define CHAINME_HPP
 
-#include "tools.hpp"
+#include "pme.hpp"
 
-/* We have two containers of integers:
+/* We have already made two containers of integers:
     AChain_ -> contains all A numbers, sorted
     BChain_ -> contains all B numbers, unsorted
+
+    Goal is to merge BChain_ into AChain_ so that we obtain one sorted
+    container of integers, AChain_.
 
     At the start, for every index i, AChain_[i] forms a pair with BChain_[i] so
     that AChain_[i] >= BChain_[i]
@@ -26,9 +29,9 @@
     We merge the two chains by inserting elements from BChain_ into AChain_.
     We know that every B is smaller than or equal to its corresponding A, so
     that BChain_[i] should be inserted somewhere in the range AChain_[0] -
-   AChain_[i]
+   AChain_[i].
 
-    However, as we go inserting, the index where the corresponding A is shifts
+    However, as we insert, the index of all following As shift
     to the right, so that for the nth element we insert:
       BChain_[i] corresponds to AChain_[i + n]
     We store n in the parameter AShift_.
@@ -36,7 +39,7 @@
     We insert in the following order:
       * insert nth element of BChain_, where n is the next number in the
         Jacobsthal sequence
-      * insert the skipped elements in (between the current Jacobsthal number
+      * insert the skipped elements (between the current Jacobsthal number
    and the previous Jacobsthal number) in descending order. The order of
    insertion will thus be like this: *1, *3, 2, *5, 4, *11, 10, 9, 8, 7, 6, *21,
    20, 19, 18, 17, etc. (numbers marked with a * belong to the Jacobsthal
@@ -44,29 +47,72 @@
 */
 
 template <typename Container>
-class MergeChains {
+class chainMe {
   typedef typename Container::iterator iterator;
   typedef struct range {
     iterator min;
     iterator max;
   } range;
 
+ public:
+  /* public methods */
+  /* as long as there are elements pending, insert first the nth number of
+  BChain_ where n is the next Jaconbsthal number. Then insert the skipped
+  elements between the current Jacobsthal number and the previous Jacobsthal
+  number, so that the order of insertion is: *1, *3, 2, *5, 4, *11, 10, 9, 8,
+  etc. (As described at the top of this file)*/
+  static void insertPending() {
+    while (nbPend_) {
+      insertNextJacobsthal();
+      insertSkipped();
+    }
+  }
+
+  /* constructor */
+  chainMe(Container* mainChain, Container* pend)
+      : n_(1),
+        prevJacobsth_(0),
+        jacobsth_(0),
+        nbPend_(mainChain->size()),
+        AChain_(mainChain),
+        BChain_(pend),
+        AShift_(0) {}
+
+  /* copy constructor */
+  chainMe(chainMe const& src) : AChain_(src.AChain_), BChain_(src.BChain_) {
+    *this = src;
+  }
+
+  /* copy assignment operator */
+  chainMe& operator=(chainMe const& rhs) {
+    if (this == &rhs) return *this;
+    n_ = rhs.n_;
+    prevJacobsth_ = rhs.prevJacobsth_;
+    jacobsth_ = rhs.jacobsth_;
+    nbPend_ = rhs.nbPend_;
+    AShift_ = rhs.AShift_;
+    return *this;
+  }
+
+  /* destructor */
+  ~chainMe() {}
+
  private:
+  /* Chains of integers */
+  Container* AChain_;
+  Container* BChain_;
+
   /* nth element of Jacobsthal Sequence */
   int n_;
 
   /* previous Jacobsthal Number */
-  int prevJacobsthNb_;
+  int prevJacobsth_;
 
   /* current Jacobsthal Number */
-  int JacobsthalNb_;
+  int jacobsth_;
 
   /* number of elements pending */
   int nbPend_;
-
-  /* Chains of integers */
-  Container* AChain_;
-  Container* BChain_;
 
   /* Keep track of difference in index of each B in BChain_ and the
   corresponding A in AChain */
@@ -76,20 +122,20 @@ class MergeChains {
   range range_;
 
   /* default constructor (inaccessible) */
-  MergeChains() : AChain_(NULL), BChain_(NULL) {}
+  chainMe() : AChain_(NULL), BChain_(NULL) {}
 
   /* insert the nth element of BChain_ in AChain, where n is the next Jacobsthal
   number */
   void insertNextJacobsthal() {
-    prevJacobsthNb_ = JacobsthalNb_;
-    JacobsthalNb_ = tools::Jacobsthal(++n_);
-    insertInMainChain(JacobsthalNb_);
+    prevJacobsth_ = jacobsth_;
+    jacobsth_ = pme::Jacobsthal(++n_);
+    insertInMainChain(jacobsth_);
   }
 
   /* insert the skipped elements in BChain_, i.e. the elements n ... m, where
   n is the current Jacobsthal number and m the previous Jacobsthal number */
   void insertSkipped() {
-    for (int i = JacobsthalNb_ - 1; i > prevJacobsthNb_ && nbPend_; --i)
+    for (int i = jacobsth_ - 1; i > prevJacobsth_ && nbPend_; --i)
       insertInMainChain(i);
   }
 
@@ -99,7 +145,6 @@ class MergeChains {
     iterator it = BChain_->begin();
     std::advance(it, indexB);
     return *it;
-    // return (*BChain_)[indexB];
   }
 
   /* set the Range for binary search in AChain to insert the next element
@@ -119,55 +164,13 @@ class MergeChains {
     if (static_cast<size_t>(elemNb) > BChain_->size()) return;
     int bNb = findNb(elemNb);
     setRange(elemNb);
-    iterator pos = tools::binSearch<iterator>(bNb, range_.min, range_.max);
+    iterator pos = pme::binSearch<iterator>(bNb, range_.min, range_.max);
     AChain_->insert(pos, bNb);
     --nbPend_;
     ++AShift_;
   }
 
  public:
-  /* constructor */
-  MergeChains(Container* mainChain, Container* pend)
-      : n_(1),
-        prevJacobsthNb_(0),
-        JacobsthalNb_(0),
-        nbPend_(mainChain->size()),
-        AChain_(mainChain),
-        BChain_(pend),
-        AShift_(0) {}
-
-  /* copy constructor */
-  MergeChains(MergeChains const& src)
-      : AChain_(src.AChain_), BChain_(src.BChain_) {
-    *this = src;
-  }
-
-  /* copy assignment operator */
-  MergeChains& operator=(MergeChains const& rhs) {
-    if (this == &rhs) return *this;
-    n_ = rhs.n_;
-    prevJacobsthNb_ = rhs.prevJacobsthNb_;
-    JacobsthalNb_ = rhs.JacobsthalNb_;
-    nbPend_ = rhs.nbPend_;
-    AShift_ = rhs.AShift_;
-    return *this;
-  }
-
-  /* default destructor */
-  ~MergeChains() {}
-
-  /* public methods */
-  /* as long as there are elements pending, insert first the nth number of
-  BChain_ where n is the next Jaconbsthal number. Then insert the skipped
-  elements between the current Jacobsthal number and the previous Jacobsthal
-  number, so that the order of insertion is: *1, *3, 2, *5, 4, *11, 10, 9, 8,
-  etc. (As described at the top of this file)*/
-  void insertPending() {
-    while (nbPend_) {
-      insertNextJacobsthal();
-      insertSkipped();
-    }
-  }
 };
 
 #endif

@@ -1,6 +1,6 @@
-#include "tools.hpp"
+#include "pme.hpp"
 
-int tools::strToInt(std::string& s) {
+int pme::strtoi(char const* s) {
   int integer;
   std::stringstream sS(s);
   sS.exceptions(std::ios::badbit);
@@ -13,23 +13,21 @@ int tools::strToInt(std::string& s) {
   return integer;
 }
 
-int tools::Jacobsthal(int n) {
+int pme::Jacobsthal(int n) {
   if (n == 0) return 0;
   if (n == 1) return 1;
   return Jacobsthal(n - 1) + 2 * Jacobsthal(n - 2);
 }
 
-std::pair<int, int> tools::sortedPair(int n1, int n2) {
+std::pair<int, int> pme::sortedPair(int n1, int n2) {
   std::pair<int, int> p;
   p.first = n1 >= n2 ? n1 : n2;
   p.second = n2 <= n1 ? n2 : n1;
   return p;
 }
 
-tools::invalidInputException::invalidInputException() {}
+pme::invalidInputException::invalidInputException() {}
 
-tools::invalidInputException::~invalidInputException() throw() {}
+pme::invalidInputException::~invalidInputException() throw() {}
 
-char const* tools::invalidInputException::what() const throw() {
-  return "Error";
-}
+char const* pme::invalidInputException::what() const throw() { return "Error"; }
