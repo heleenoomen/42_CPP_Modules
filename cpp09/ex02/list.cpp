@@ -1,15 +1,18 @@
+#include <algorithm>
 #include <iostream>
-#include <vector>
+#include <list>
 
 int main() {
-  std::vector<int> l;
+  std::list<int> l;
   l.push_back(2);
   l.push_back(-4);
   l.push_back(3);
   l.push_back(5);
   l.push_back(1);
 
-  std::vector<int>::iterator it = l.begin();
-  std::advance(it, 2);
-  std::cout << *it << '\n';
+  // std::list<int>::iterator it = l.begin();
+  // std::advance(it, 2);
+  // std::cout << *it << '\n';
+  std::cout << std::distance(l.begin(), l.end()) << '\n';
+  // if (std::distance(l.end(), l.begin()) >= 0) std::cout << "valid\n";
 }
