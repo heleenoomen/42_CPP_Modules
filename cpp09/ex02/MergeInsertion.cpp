@@ -34,20 +34,22 @@ MergeInsertion::~MergeInsertion() {}
 /* Private methods                                                            */
 /* ************************************************************************** */
 
-/* make one dummy pair if nbr of elements in the sequence is odd */
-void MergeInsertion::addOddElement() {
-  if (sequence_.size() % 2) {
-    std::pair<int, int> odd(sequence_.back(), -1);
-    pairs_.push_back(odd);
-  }
-}
+// /* make one dummy pair if nbr of elements in the sequence is odd */
+// void MergeInsertion::addOddElement() {
+//   if (sequence_.size() % 2) {
+//     pairs_.push_back(std::make_pair(sequence_.back(), -1));
+//   }
+// }
 
 void MergeInsertion::makePairs() {
-  for (MergeInsertion::vecIt it = sequence_.begin(); it + 1 < sequence_.end(); it += 2) {
-    std::pair<int, int> p = tools::makeSortedPair(*it, *(it + 1));
+  for (MergeInsertion::vecIt it = sequence_.begin(); it + 1 < sequence_.end();
+       it += 2) {
+    std::pair<int, int> p = std::make_pair(*it, *(it + 1));
+    if (p.first < p.second) std::swap(p.first, p.second);
     pairs_.push_back(p);
   }
-  addOddElement();
+  if (sequence_.size() % 2)
+    pairs_.push_back(std::make_pair(sequence_.back(), -1));
 }
 
 void MergeInsertion::makeChains() {
@@ -76,8 +78,7 @@ void MergeInsertion::sort() {
 
 void MergeInsertion::printMainChain() {
   std::cout << "AChain_: ";
-  for (MergeInsertion::vecIt it = AChain_.begin(); it != AChain_.end();
-       ++it)
+  for (MergeInsertion::vecIt it = AChain_.begin(); it != AChain_.end(); ++it)
     std::cout << *it << " ";
   std::cout << std::endl;
 }

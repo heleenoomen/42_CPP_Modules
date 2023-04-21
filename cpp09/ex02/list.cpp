@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <list>
+#include <utility>
 
 int main() {
   std::list<int> l;
@@ -15,4 +16,9 @@ int main() {
   // std::cout << *it << '\n';
   std::cout << std::distance(l.begin(), l.begin()) << '\n';
   // if (std::distance(l.end(), l.begin()) >= 0) std::cout << "valid\n";
+  std::pair<int, int> p;
+  p.first = 1;
+  p.second = 2;
+  std::swap(p.first, p.second);
+  std::cout << p.first << " " << p.second << '\n';
 }

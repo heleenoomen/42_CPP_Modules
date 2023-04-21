@@ -19,7 +19,7 @@ class invalidInputException : public std::exception {
   virtual char const* what() const throw();
 };
 
-std::pair<int, int> makeSortedPair(int n1, int n2);
+std::pair<int, int> sortedPair(int n1, int n2);
 
 /* binary search */
 template <typename Iterator>
