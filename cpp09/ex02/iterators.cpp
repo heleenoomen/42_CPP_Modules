@@ -8,7 +8,7 @@ void merge(I leftBegin, I leftEnd, I rightBegin, I rightEnd, I dest) {
   I dCpy = dest;
   int size = (leftEnd - leftBegin) + (rightEnd - rightBegin);
   while (leftBegin != leftEnd && rightBegin != rightEnd) {
-    if (*leftBegin <= *rightBegin) {
+    if (leftBegin->first <= rightBegin->first) {
       *dest = *leftBegin;
       ++leftBegin;
     } else {
@@ -32,17 +32,17 @@ void sortV(I begin, I end, I dest) {
 }
 
 int main() {
-  std::vector<int> v;
-  v.push_back(3);
-  v.push_back(9);
-  v.push_back(1);
-  v.push_back(17);
-  v.push_back(8);
-  v.push_back(2);
+  std::vector<std::pair<int, int> > v;
+  v.push_back(std::make_pair(3, 0));
+  v.push_back(std::make_pair(9, 0));
+  v.push_back(std::make_pair(1, 0));
+  v.push_back(std::make_pair(17, 0));
+  v.push_back(std::make_pair(8, 0));
+  v.push_back(std::make_pair(2, 0));
 
-  typedef std::vector<int>::iterator iterator;
-  std::vector<int> d(v.size());
+  typedef std::vector<std::pair<int, int> >::iterator iterator;
+  std::vector<std::pair<int, int> > d(v.size());
   sortV<iterator>(v.begin(), v.end(), d.begin());
-  for (int i = 0; i < v.size(); ++i) std::cout << v[i] << " ";
-  std::cout << "\n";
+  for (int i = 0; i < v.size(); ++i)
+    std::cout << v[i].first << "/" << v[i].second << '\n';
 }
