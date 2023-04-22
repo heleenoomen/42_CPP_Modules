@@ -22,13 +22,19 @@
 #include "pme.hpp"
 
 /* PmergeMe template
- * Parse argument vector into a container of pairs of integers
- * Make sure for any pair first >= second
- * Sort the pairs in this container based on the first element
- * Split this container of pairs in two containers of integers:
- *   AChain_ will contain all first elements (bigger of each pair)
- *   BChain_ will contain all second elements (smaller of each pair)
- * Merge BChain_ into AChain_.
+ * Carry out Merge Insertion Sort / Ford-Johnson Algorithm on a list of
+ * unsorted, positive integers. To do this, carry out the following steps:
+ *  1) Group arguments into pairs of integers:
+ *      {argv[1], argv[2]}, {argv[3],argv[4]}, etc.
+ *  2) For every pair, make sure that first >= second.
+ *  3) Store the pairs in a container of pairs of integers.
+ *  4) Sort the pairs in this container based on the first element, using merge
+ *    sort.
+ *  5) Split the container into two containers of integers:
+ *        AChain_ will contain all first elements and will thus be sorted.
+ *        BChain_ will contain all second elements and will be unsorted.
+ *  6) Merge BChain_ into AChain_, using the Jacobsthal sequence to decide which
+ *    index of BChain_ to insert next.
  */
 
 template <typename Cont, typename ContPairs>
@@ -87,8 +93,8 @@ class PmergeMe {
     m.insertPending();
   }
 
-  /* After BChain_ is merged into AChain, check for the -1 dummy at the front of
-   * AChain_ and remove it if it exist. */
+  /* After BChain_ is merged into AChain_, check for the -1 dummy at the front
+   * of AChain_ and remove it if existing. */
   void rmDummy() {
     if (AChain_.front() == -1) AChain_.erase(AChain_.begin());
   }
