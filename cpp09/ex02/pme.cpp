@@ -1,6 +1,6 @@
 #include "pme.hpp"
 
-int pme::strtoi(char const* s) {
+int pme::stoi(char const* s) {
   int integer;
   std::stringstream sS(s);
   sS.exceptions(std::ios::badbit);

@@ -23,8 +23,8 @@
     Goal is to merge BChain_ into AChain_ so that we obtain one sorted
     container of integers, AChain_.
 
-    At the start, for every index i, AChain_[i] forms a pair with BChain_[i] so
-    that AChain_[i] >= BChain_[i]
+    Both chains are so build that, at the start, for every index i, AChain_[i]
+   forms a pair with BChain_[i] so that AChain_[i] >= BChain_[i]
 
     We merge the two chains by inserting elements from BChain_ into AChain_.
     We know that every B is smaller than or equal to its corresponding A, so
@@ -61,7 +61,7 @@ class chainMe {
   elements between the current Jacobsthal number and the previous Jacobsthal
   number, so that the order of insertion is: *1, *3, 2, *5, 4, *11, 10, 9, 8,
   etc. (As described at the top of this file)*/
-  static void insertPending() {
+  void insertPending() {
     while (nbPend_) {
       insertNextJacobsthal();
       insertSkipped();
@@ -70,12 +70,12 @@ class chainMe {
 
   /* constructor */
   chainMe(Container* mainChain, Container* pend)
-      : n_(1),
+      : AChain_(mainChain),
+        BChain_(pend),
+        n_(1),
         prevJacobsth_(0),
         jacobsth_(0),
         nbPend_(mainChain->size()),
-        AChain_(mainChain),
-        BChain_(pend),
         AShift_(0) {}
 
   /* copy constructor */
@@ -169,8 +169,6 @@ class chainMe {
     --nbPend_;
     ++AShift_;
   }
-
- public:
 };
 
 #endif

@@ -1,8 +1,15 @@
-#include "MergeInsertion.hpp"
+#include <deque>
+#include <list>
+#include <stack>
+#include <utility>
+
 #include "PmergeMe.hpp"
+#include "pme.hpp"
 
 int main(int argc, char** argv) {
-  PmergeMe pm(argc, argv);
-  pm.run();
+  typedef std::list<int> vectInts;
+  typedef std::list<std::pair<int, int> > vectPairs;
+  PmergeMe<vectInts, vectPairs> m(argc, argv);
+  m.run();
   return 0;
 }
