@@ -47,7 +47,7 @@
 */
 
 template <typename Container>
-class chainMe {
+class MergeAB {
   typedef typename Container::iterator iterator;
   typedef struct range {
     iterator min;
@@ -69,7 +69,7 @@ class chainMe {
   }
 
   /* constructor */
-  chainMe(Container* mainChain, Container* pend)
+  MergeAB(Container* mainChain, Container* pend)
       : AChain_(mainChain),
         BChain_(pend),
         n_(1),
@@ -79,12 +79,12 @@ class chainMe {
         AShift_(0) {}
 
   /* copy constructor */
-  chainMe(chainMe const& src) : AChain_(src.AChain_), BChain_(src.BChain_) {
+  MergeAB(MergeAB const& src) : AChain_(src.AChain_), BChain_(src.BChain_) {
     *this = src;
   }
 
   /* copy assignment operator */
-  chainMe& operator=(chainMe const& rhs) {
+  MergeAB& operator=(MergeAB const& rhs) {
     if (this == &rhs) return *this;
     n_ = rhs.n_;
     prevJacobsth_ = rhs.prevJacobsth_;
@@ -95,7 +95,7 @@ class chainMe {
   }
 
   /* destructor */
-  ~chainMe() {}
+  ~MergeAB() {}
 
  private:
   /* Chains of integers */
@@ -122,7 +122,7 @@ class chainMe {
   range range_;
 
   /* default constructor (inaccessible) */
-  chainMe() : AChain_(NULL), BChain_(NULL) {}
+  MergeAB() : AChain_(NULL), BChain_(NULL) {}
 
   /* insert the nth element of BChain_ in AChain, where n is the next Jacobsthal
   number */
@@ -161,7 +161,9 @@ class chainMe {
   find the range where to perform binary search, perform binary search and
   insert the number. Update the number of pending elemens & the AShift_ */
   void insertInMainChain(int elemNb) {
-    if (static_cast<size_t>(elemNb) > BChain_->size()) return;
+    if (static_cast<size_t>(elemNb) > BChain_->size()) {
+      return;
+    }
     int bNb = findNb(elemNb);
     setRange(elemNb);
     iterator pos = pme::binSearch<iterator>(bNb, range_.min, range_.max);

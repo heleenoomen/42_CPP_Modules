@@ -18,8 +18,18 @@
 #include <utility>
 #include <vector>
 
-#include "chainMe.hpp"
+#include "mergeAB.hpp"
 #include "pme.hpp"
+
+/* PmergeMe template
+ * Parse argument vector into a container of pairs of integers
+ * Make sure for any pair first >= second
+ * Sort the pairs in this container based on the first element
+ * Split this container of pairs in two containers of integers:
+ *   AChain_ will contain all first elements (bigger of each pair)
+ *   BChain_ will contain all second elements (smaller of each pair)
+ * Merge BChain_ into AChain_.
+ */
 
 template <typename Cont, typename ContPairs>
 class PmergeMe {
@@ -27,7 +37,42 @@ class PmergeMe {
   ContPairs pairs_;
   Cont AChain_;
   Cont BChain_;
+  int argc_;
+  char** argv_;
 
+  /* Group the input arguments into pairs of integers:
+      {argv[1], argv[2]}, {argv[3], argv[4]}, etc.
+  Sort each pair so that first >= second.
+  Store the pairs in the pairs_ container.
+  If the number of arguments is odd, add a dummy pair consisting of the last
+  argument and -1.
+  Use pme::stoi to convert c-strings to integers. It will throw
+  an exception if the input is not a positive integer. */
+  void groupIntoPairs() {
+    for (int i = 1; i + 1 < argc_; i += 2) {
+      std::pair<int, int> p =
+          std::make_pair(pme::stoi(argv_[i]), pme::stoi(argv_[i + 1]));
+      if (p.first < p.second) std::swap(p.first, p.second);
+      pairs_.push_back(p);
+    }
+    if (!(argc_ % 2))
+      pairs_.push_back(std::make_pair(pme::stoi(argv_[argc_ - 1]), -1));
+  }
+
+  /* sort all pairs in the container based on the first element of each pair.
+   * Call pme::sortPairs() to carry out a recursive merge sort with iterators.
+   * Preallocate a big enough temporary container for the sorting. */
+  void sortPairsByFirstElem() {
+    ContPairs tmp(pairs_.size());
+    pme::sortPairs(pairs_.begin(), pairs_.end(), tmp.begin());
+  }
+
+  /* Split the sorted container of pairs into two seperate containers of
+  integers: AChain_, which will contain the first (biggest) element of each pair
+  and will be fully sorted, and BChain_, which will contain the second
+  (smallest) element of each pair and will not be sorted. The pairs will now
+  exist at the same index of their respective chains, so
+  that for every index i, BChain[i] <= AChain[i] */
   void makeChains() {
     for (typename ContPairs::iterator it = pairs_.begin(); it != pairs_.end();
          ++it) {
@@ -36,48 +81,26 @@ class PmergeMe {
     }
   }
 
-  void sortPairsByFirstElem() {
-    ContPairs tmp(pairs_.size());
-    pme::sortPairs(pairs_.begin(), pairs_.end(), tmp.begin());
-  }
-
+  /* merge BChain into AChain with the help of MergeAB */
   void mergeChains() {
-    chainMe<Cont> m(&AChain_, &BChain_);
+    MergeAB<Cont> m(&AChain_, &BChain_);
     m.insertPending();
   }
 
+  /* After BChain_ is merged into AChain, check for the -1 dummy at the front of
+   * AChain_ and remove it if it exist. */
   void rmDummy() {
     if (AChain_.front() == -1) AChain_.erase(AChain_.begin());
   }
 
- public:
-  /* default constructor */
+  /* Default constructor (inaccessible) */
   PmergeMe() {}
 
-  /* parametric constructor */
-  /* Make a container of pairs of integers out of the input arguments in argv.
-  Every pair consists of argv[n] and argv[n + 1]. Every pair is sorted
-  immediately, so that first >= second. If the number of arguments in argv is
-  odd, a dummy pair is added, consisting of the last argument in argv and -1.
-  Since our program only handles sequences of positive numbers, we use -1 as a
-  dummy. pme::strtoi converts string to integer and throws an exception if the
-  argument is not a number or if the number obtained is negative.
-   */
-  PmergeMe(int argc, char** argv) {
-    for (int i = 1; i + 1 < argc; i += 2) {
-      std::pair<int, int> p =
-          std::make_pair(pme::stoi(argv[i]), pme::stoi(argv[i + 1]));
-      if (p.first < p.second) std::swap(p.first, p.second);
-      pairs_.push_back(p);
-    }
-    if (!(argc % 2))
-      pairs_.push_back(std::make_pair(pme::stoi(argv[argc - 1]), -1));
-  }
+ public:
+  PmergeMe(int argc, char** argv) : argc_(argc), argv_(argv) {}
 
-  /* copy constructor */
   PmergeMe(PmergeMe const& src) { *this = src; }
 
-  /* copy assignment operator */
   PmergeMe& operator=(PmergeMe const& rhs) {
     if (this == &rhs) return *this;
     pairs_ = rhs.pairs_;
@@ -86,34 +109,21 @@ class PmergeMe {
     return *this;
   }
 
-  /* destructor */
   ~PmergeMe() {}
 
-  /* public methods */
   void run() {
+    groupIntoPairs();
     sortPairsByFirstElem();
     makeChains();
     mergeChains();
     rmDummy();
-    printAChain();
+    // printAChain();
   }
-
-  // void printPairs() {
-  //   for (typename ContPairs::iterator it = pairs_.begin(); it !=
-  //   pairs_.end();
-  //        ++it)
-  //     std::cout << it->first << "/" << it->second << "\n";
-  // }
-
-  // void printPair(std::pair<int, int>& p) {
-  //   std::cout << "Pair: " << p.first << ", " << p.second << '\n';
-  // }
 
   void printAChain() {
     for (typename Cont::iterator it = AChain_.begin(); it != AChain_.end();
          ++it)
       std::cout << *it << " ";
-    std::cout << "\n";
   }
 };
 

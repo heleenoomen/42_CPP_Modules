@@ -1,5 +1,8 @@
 #include "pme.hpp"
 
+/* convert a c-string to integer. Throw an exception if there is
+no number to convert, if there are trailing characters or
+- for this project - if the resulting integer is negative */
 int pme::stoi(char const* s) {
   int integer;
   std::stringstream sS(s);
@@ -13,17 +16,11 @@ int pme::stoi(char const* s) {
   return integer;
 }
 
+/* return the nth number of the Jacobsthal sequence */
 int pme::Jacobsthal(int n) {
   if (n == 0) return 0;
   if (n == 1) return 1;
   return Jacobsthal(n - 1) + 2 * Jacobsthal(n - 2);
-}
-
-std::pair<int, int> pme::sortedPair(int n1, int n2) {
-  std::pair<int, int> p;
-  p.first = n1 >= n2 ? n1 : n2;
-  p.second = n2 <= n1 ? n2 : n1;
-  return p;
 }
 
 pme::invalidInputException::invalidInputException() {}

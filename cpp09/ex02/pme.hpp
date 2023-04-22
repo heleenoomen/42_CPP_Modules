@@ -7,6 +7,11 @@
 #include <string>
 #include <utility>
 
+/* Tools for PmergeMe program: string to int, find nth Jacobsthal number,
+exception class for any invalid input. Templates for binary search and merge
+sort
+*/
+
 namespace pme {
 int stoi(char const* token);
 
@@ -18,8 +23,6 @@ class invalidInputException : public std::exception {
   ~invalidInputException() throw();
   virtual char const* what() const throw();
 };
-
-std::pair<int, int> sortedPair(int n1, int n2);
 
 /* binary search with iterators: search a container of integers recursively */
 template <typename Iterator>
@@ -40,45 +43,46 @@ Iterator binSearch(int i, Iterator begin, Iterator end) {
 
 /* merge sort (merge part) for container of pairs, using iterators:
 sort left and right based on the first element of each pair. Use the
-preallocated tmp container for temporary storage. Then, copy all elements to
+preallocated tmp container ordering. Then, copy all elements from tmp to
 leftBegin, so that they will be in their final place in the original container.
 We use std::distance and std::advance instead of arithmetic operators so that
 the template can also handle lists.
 */
 template <typename I>
-void merge(I leftBegin, I leftEnd, I rightBegin, I rightEnd, I dest) {
+void merge(I leftBegin, I leftEnd, I rightBegin, I rightEnd, I const dest) {
   I lBCpy = leftBegin;
   I dCpy = dest;
   int size =
       std::distance(leftBegin, leftEnd) + std::distance(rightBegin, rightEnd);
   while (leftBegin != leftEnd && rightBegin != rightEnd) {
     if (leftBegin->first <= rightBegin->first) {
-      *dest = *leftBegin;
+      *dCpy = *leftBegin;
       ++leftBegin;
     } else {
-      *dest = *rightBegin;
+      *dCpy = *rightBegin;
       ++rightBegin;
     }
-    ++dest;
+    ++dCpy;
   }
-  std::copy(leftBegin, leftEnd, dest);
-  std::copy(rightBegin, rightEnd, dest);
-  I dCpyEnd = dCpy;
+  std::copy(leftBegin, leftEnd, dCpy);
+  std::copy(rightBegin, rightEnd, dCpy);
+  I dCpyEnd = dest;
   std::advance(dCpyEnd, size);
-  std::copy(dCpy, dCpyEnd, lBCpy);
+  std::copy(dest, dCpyEnd, lBCpy);
 }
 
 /* merge sort for container of pairs, using iterators:
-divide the container, sort left, sort right, then merge.
-tmp is the beginning of a preallocated container of the same type and size, used
-throughout the sorting to rearrange elements. This template can also handle
-lists (which is why we use std::advance and std::distance istead of arithmetic
-operators.)
+divide the container recursively in halves until it consists of 1 pair, then
+merge halves. tmp is the beginning of a preallocated container of the same type
+and size, used throughout the sorting to rearrange elements. This template can
+also handle lists (which is why we use std::advance and std::distance istead of
+arithmetic operators.)
 */
 template <typename Iterator>
-void sortPairs(Iterator begin, Iterator end, Iterator tmp) {
-  if (std::distance(begin, end) < 2) return;
-  int mid = std::distance(begin, end) / 2;
+void sortPairs(Iterator begin, Iterator end, Iterator const tmp) {
+  int size = std::distance(begin, end);
+  if (size < 2) return;
+  int mid = size / 2;
   Iterator midI = begin;
   std::advance(midI, mid);
   sortPairs(begin, midI, tmp);
