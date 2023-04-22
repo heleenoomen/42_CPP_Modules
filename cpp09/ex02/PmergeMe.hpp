@@ -112,6 +112,8 @@ class PmergeMe {
     pairs_ = rhs.pairs_;
     AChain_ = rhs.AChain_;
     BChain_ = rhs.BChain_;
+    argc_ = rhs.argc_;
+    argv_ = rhs.argv_;
     return *this;
   }
 
