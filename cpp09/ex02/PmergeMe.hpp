@@ -34,7 +34,7 @@
  *        AChain_ will contain all first elements and will thus be sorted.
  *        BChain_ will contain all second elements and will be unsorted.
  *  6) Merge BChain_ into AChain_, using the Jacobsthal sequence to decide which
- *    index of BChain_ to insert next.
+ *    of the Bs in BChain_ to insert next.
  */
 
 template <typename Cont, typename ContPairs>
