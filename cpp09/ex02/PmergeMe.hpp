@@ -125,7 +125,6 @@ class PmergeMe {
     makeChains();
     mergeChains();
     rmDummy();
-    // printAChain();
   }
 
   void printAChain() {
