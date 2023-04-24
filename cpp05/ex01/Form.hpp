@@ -42,7 +42,7 @@ class Form {
   /* copy assignment operator */
   Form& operator=(Form const& rhs);
 
-  /* default destructor */
+  /* destructor */
   ~Form();
 
   /* getters */

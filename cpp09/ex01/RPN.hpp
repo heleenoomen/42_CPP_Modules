@@ -58,7 +58,7 @@ class RPN {
   /* copy assignment operator */
   RPN& operator=(RPN const& rhs);
 
-  /* default destructor */
+  /* destructor */
   ~RPN();
 
   /* exceptions */

@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 10:34:38 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/04/24 19:44:36 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ class ShrubberyCreationForm : public AForm {
   /* copy assignment operator */
   ShrubberyCreationForm& operator=(ShrubberyCreationForm const& rhs);
 
-  /* default destructor */
+  /* destructor */
   ~ShrubberyCreationForm();
 
   /* public methods */

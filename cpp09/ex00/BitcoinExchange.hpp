@@ -38,7 +38,7 @@ class BitcoinExchange {
   /* constructors */
   BitcoinExchange(const char* inputFile);
 
-  /* default destructor */
+  /* destructor */
   ~BitcoinExchange();
 
   /* public methods */

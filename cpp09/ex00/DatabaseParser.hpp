@@ -45,7 +45,7 @@ class DatabaseParser {
   /* copy assignment operator */
   DatabaseParser& operator=(DatabaseParser const& rhs);
 
-  /* default destructor */
+  /* destructor */
   ~DatabaseParser();
 
   /* public methods */

@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/04/17 15:47:19 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/04/24 19:44:36 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ class Converter {
   /* constructor */
   Converter(char const* inputFile, std::map<std::string, float>* database);
 
-  /* default destructor */
+  /* destructor */
   ~Converter();
 
   /* exceptions */

@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/10 22:01:08 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/04/24 19:44:36 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class Coplien {
   /* copy assignment operator */
   Coplien& operator=(Coplien const& rhs);
 
-  /* default destructor */
+  /* destructor */
   ~Coplien();
 
   /* getters */

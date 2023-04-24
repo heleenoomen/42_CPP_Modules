@@ -47,7 +47,7 @@ class AForm {
   /* copy assignment operator */
   AForm& operator=(AForm const& rhs);
 
-  /* default destructor */
+  /* destructor */
   virtual ~AForm();
 
   /* getters */

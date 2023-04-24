@@ -38,7 +38,7 @@ class RobotomyRequestForm : public AForm {
   /* copy assignment operator */
   RobotomyRequestForm& operator=(RobotomyRequestForm const& rhs);
 
-  /* default destructor */
+  /* destructor */
   ~RobotomyRequestForm();
 
   /* public methods */

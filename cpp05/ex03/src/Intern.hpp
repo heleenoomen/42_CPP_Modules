@@ -50,7 +50,7 @@ class Intern {
   /* copy assignment operator */
   Intern& operator=(Intern const& rhs);
 
-  /* default destructor */
+  /* destructor */
   ~Intern();
 
   /* public methods */

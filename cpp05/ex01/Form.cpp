@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 10:35:33 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/27 20:43:34 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/04/24 19:44:36 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ Form::GradeTooHighException::GradeTooHighException() {
 }
 
 Form::GradeTooHighException::~GradeTooHighException() throw() {
-  std::cout << layout::grey << "Form::GradeTooHighException default destructor"
+  std::cout << layout::grey << "Form::GradeTooHighException destructor"
             << " called\n" << layout::reset;
 }
 
@@ -150,7 +150,7 @@ Form::GradeTooLowException::GradeTooLowException() {
 }
 
 Form::GradeTooLowException::~GradeTooLowException() throw() {
-  std::cout << layout::grey << "Form::GradeTooLowException default destructor"
+  std::cout << layout::grey << "Form::GradeTooLowException destructor"
             << " called\n" << layout::reset;
 }
 

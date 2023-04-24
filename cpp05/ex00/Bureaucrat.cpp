@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 16:26:22 by hoomen            #+#    #+#             */
-/*   Updated: 2023/01/20 10:05:09 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/04/24 19:44:36 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ Bureaucrat::GradeTooHighException::GradeTooHighException() {
 }
 
 Bureaucrat::GradeTooHighException::~GradeTooHighException() throw() {
-  std::cout << "\033[0;2mBureaucrat::GradeTooHighException default destructor"
+  std::cout << "\033[0;2mBureaucrat::GradeTooHighException destructor"
             << "called\033[0m\n";
 }
 
@@ -105,7 +105,7 @@ Bureaucrat::GradeTooLowException::GradeTooLowException() {
 }
 
 Bureaucrat::GradeTooLowException::~GradeTooLowException() throw() {
-  std::cout << "\033[0;2mBureaucrat::GradeTooLowException default destructor"
+  std::cout << "\033[0;2mBureaucrat::GradeTooLowException destructor"
             << "called\033[0m\n";
 }
 

@@ -39,7 +39,7 @@ class PresidentialPardonForm : public AForm {
   /* copy assignment operator */
   PresidentialPardonForm& operator=(PresidentialPardonForm const& rhs);
 
-  /* default destructor */
+  /* destructor */
   ~PresidentialPardonForm();
 
   /* public methods */
