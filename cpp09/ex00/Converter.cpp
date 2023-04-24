@@ -88,9 +88,9 @@ void Converter::checkTrailingCharacters(std::stringstream& linestream) {
 void Converter::extractFromLine() {
   std::stringstream linestream(line_);
   linestream.exceptions(std::ios::badbit);
-  extract<std::string>(linestream, date_);
-  extract<std::string>(linestream, separator_);
-  extract<float>(linestream, value_);
+  tokenize<std::string>(linestream, date_);
+  tokenize<std::string>(linestream, separator_);
+  tokenize<float>(linestream, value_);
   checkTrailingCharacters(linestream);
 }
 

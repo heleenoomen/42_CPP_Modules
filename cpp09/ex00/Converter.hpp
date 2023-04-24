@@ -6,7 +6,7 @@
 /*   By: hoomen <hoomen@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 20:45:14 by hoomen            #+#    #+#             */
-/*   Updated: 2023/04/24 19:44:36 by hoomen           ###   ########.fr       */
+/*   Updated: 2023/04/24 19:59:54 by hoomen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,9 @@ class Converter {
   void checkTrailingCharacters(std::stringstream& linestream);
   void lookupConversion();
   void printResult();
-  void handleExceptions();
 
   template <typename T>
-  void extract(std::stringstream& linestream, T& type) {
+  void tokenize(std::stringstream& linestream, T& type) {
     linestream >> type;
     if (linestream.fail()) throw badInput();
     if (linestream.bad()) throw std::runtime_error("unable to read file");
